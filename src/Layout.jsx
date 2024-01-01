@@ -8,7 +8,7 @@ export default function LayOut() {
 
 
 
-    
+
     return (
         <div className="flex flex-col">
             <header className="flex w-screen h-28 flex-row justify-between items-center shadow-md bg-white">
@@ -24,12 +24,12 @@ export default function LayOut() {
             </header>
             <Outlet />
             <footer className="bg-neutral-800 w-full shadow-md flex flex-col justify-center text-white h-52">
-                <div className="flex space-x-6 justify-center pt-0">
-                    <FaSquareInstagram className="text-4xl"/>
-                    <FaFacebook className="text-4xl"/>
-                    <FaSquareTwitter className="text-4xl"/>
-                    <FaLinkedin className="text-4xl"/>
-                    <FaYoutube className="text-4xl"/>
+                <div className="flex space-x-6 justify-center pt-0 cursor-pointer text-4xl">
+                    <FaSquareInstagram />
+                    <FaFacebook />
+                    <FaSquareTwitter />
+                    <FaLinkedin />
+                    <FaYoutube />
                 </div>
                 <div className="flex space-x-14 justify-center pt-6 text-white">
                     <NavLink to="/" >Home</NavLink>
@@ -39,7 +39,7 @@ export default function LayOut() {
                     <NavLink>Our Team</NavLink>
                 </div>
                 <div className="flex justify-center pt-6">
-                    <p className="text-white align-bottom">Copyright &copy;2024 Designed By MANISH</p>
+                    <p className="text-white align-bottom">Copyright &copy;2024 Designed By <i>MANISH</i></p>
                 </div>
             </footer>
         </div>
