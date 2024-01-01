@@ -7,19 +7,17 @@ import { FaSquareInstagram, FaFacebook, FaSquareTwitter, FaLinkedin, FaYoutube }
 export default function LayOut() {
 
 
-
-
     return (
         <div className="flex flex-col">
-            <header className="flex w-screen h-28 flex-row justify-between items-center shadow-md bg-white">
+            <header className="flex w-full h-16 flex-row justify-between items-center shadow-md bg-white">
                 <NavLink to="/">
-                    <img src="/LogoImage.jpg" alt="logo" className="p-3 h-24 object-content ml-20 rounded-2xl" />
+                    <img src="/LogoImage.jpg" alt="logo" className="p-3 h-20 object-content ml-20 rounded-2xl" />
                 </NavLink>
                 <nav className="flex flex-row space-x-20 mr-20">
-                    <NavLink to="/" className="hover:font-bold hover:underline">Home</NavLink>
-                    <NavLink to="about" className="hover:font-bold hover:underline">About</NavLink>
-                    <NavLink to="contact" className="hover:font-bold hover:underline">Contact Us</NavLink>
-                    <NavLink to="account" className="hover:font-bold hover:underline">Account</NavLink>
+                    <NavLink to="/" end className={({isActive}) => (isActive ? "underline font-bold" : null)}>Home</NavLink>
+                    <NavLink to="about" className={({isActive}) => (isActive ? "underline font-bold" : null)}>About</NavLink>
+                    <NavLink to="contact" className={({isActive}) => (isActive ? "underline font-bold" : null)}>Contact Us</NavLink>
+                    <NavLink to="account?form=login" className={({isActive}) => (isActive ? "underline font-bold" : null)}>Account</NavLink>
                 </nav>
             </header>
             <Outlet />
