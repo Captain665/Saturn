@@ -10,13 +10,13 @@ export default function Signup() {
                 <label htmlFor="number">Mobile Number</label>
                 <input type="number" placeholder="Mobile Number" required name="number" id="number" className="border-2 rounded-lg h-10 pl-2 outline-none" /><br />
                 <label htmlFor="email">Email</label>
-                <input type="email" name="email" id="email" required placeholder="Email Id" className="border rounded-lg h-10 pl-2 outline-none" /><br />
+                <input type="email" name="email" id="email" required placeholder="Email Id" className="border-2 rounded-lg h-10 pl-2 outline-none" /><br />
                 <label htmlFor="password">Password</label>
                 <input type="password" name="password" id="password" required placeholder="Password" className="border-2 rounded-lg h-10 pl-2 outline-none" /><br />
                 <div required className="flex justify-around">
-                    <button type="button" className="border w-20 rounded-lg h-10 text-red-500">Male</button>
-                    <button type="button" className="border w-20 rounded-lg h-10 text-red-500">Female</button>
-                    <button type="button" className="border w-20 rounded-lg h-10 text-red-500">Other</button>
+                    <button type="button" className="border-2 w-20 rounded-lg h-10">Male</button>
+                    <button type="button" className="border-2 w-20 rounded-lg h-10 ">Female</button>
+                    <button type="button" className="border-2 w-20 rounded-lg h-10 ">Other</button>
                 </div><br />
                 <button type="submit" className="bg-gray-600 h-10 border-none rounded text-white text-xl">Submit</button>
             </form><br />
