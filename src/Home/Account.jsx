@@ -5,7 +5,7 @@ import Signup from "./Form/Signup";
 import Validate from "./Form/Validate";
 
 export default function Account() {
-    const [param, setParms] = useSearchParams()
+    const [param] = useSearchParams()
     const formSet = param.get("form")
 
     function DisplayForm(item) {
