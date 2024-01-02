@@ -7,17 +7,14 @@ import Validate from "./Form/Validate";
 export default function Account() {
     const [param, setParms] = useSearchParams()
     const formSet = param.get("form")
-    const auth = localStorage.getItem("x-auth")
 
     function DisplayForm(item) {
         if (item === "signup") {
             return <Signup />
         } else if (item === "verify") {
             return <Validate />
-        } else if (item === "login") {
-            return <LoginForm />
         } else {
-            
+            return <LoginForm />
         }
     }
 
