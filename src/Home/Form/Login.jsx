@@ -28,7 +28,8 @@ export default function LoginForm() {
             },
             body: JSON.stringify(loginData)
         };
-        const response = await fetch("api/v2/auth/login", requestData)
+        try{
+            const response = await fetch("api/v2/auth/login", requestData)
         const resData = await response.json()
         if(response.ok){
             setContext(() => ({
@@ -43,6 +44,12 @@ export default function LoginForm() {
                 error : resData.error
             }))
         }
+        }catch (error){
+            setContext(() => ({
+                isLoading : false,
+                error : error
+            }))
+        }   
     }
 
     function HandleSubmit(event) {
