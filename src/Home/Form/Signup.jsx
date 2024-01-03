@@ -43,7 +43,7 @@ export default function Signup() {
             body : JSON.stringify(userInfo)
         }
         try{
-            const response = await fetch("api/v2/signup",requestBody)
+            const response = await fetch("signup",requestBody)
         const jsonData = await response.json();
         if(response.ok){
             const email = userInfo.emailId;

@@ -29,7 +29,7 @@ export default function LoginForm() {
             body: JSON.stringify(loginData)
         };
         try {
-            const response = await fetch("api/v2/auth/login", requestData)
+            const response = await fetch("auth/login", requestData)
             const resData = await response.json()
             if (response.ok) {
                 setContext(() => ({

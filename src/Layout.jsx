@@ -9,7 +9,10 @@ export default function LayOut() {
 
     useEffect(() => {
         const userdata = localStorage.getItem("userInfo")
-        {userdata && setUserName(JSON.parse(userdata).fullName)}
+        if(userdata){
+            const name = JSON.parse(userdata).fullName;
+            setUserName(name)
+        }
     },[])
 
 

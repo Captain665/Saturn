@@ -34,7 +34,7 @@ export default function Validate() {
         };
 
         try {
-            const response = await fetch("/api/v2/otp-validate", requestData)
+            const response = await fetch("otp-validate", requestData)
             const jsonData = await response.json()
             if (response.ok) {
                 const data = JSON.stringify(jsonData.result)
