@@ -7,21 +7,23 @@ import Validate from "./Form/Validate";
 export default function Account() {
     const [param] = useSearchParams()
     const formSet = param.get("form")
+    const userDataExist = localStorage.getItem("userInfo")
 
-    function DisplayForm(item) {
-        if (item === "signup") {
+    const accountInfo = <h1>This is Account info</h1>
+
+    function DisplayForm() {
+        if (formSet === "signup") {
             return <Signup />
-        } else if (item === "verify") {
+        } else if (formSet === "verify") {
             return <Validate />
         } else {
             return <LoginForm />
         }
     }
 
-
     return (
         <div className="p-5 self-center shadow-xl flex flex-col h-fit w-full mt-6 mb-10 rounded-3xl"><br />
-            {DisplayForm(formSet)}
+            {userDataExist ? accountInfo : DisplayForm()}
         </div>
     )
 

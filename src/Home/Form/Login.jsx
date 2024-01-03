@@ -18,7 +18,7 @@ export default function LoginForm() {
     const fetchData = async function loginAPI() {
         setContext((prevData) => ({
             ...prevData,
-            isLoading : true
+            isLoading: true
         }))
         const requestData = {
             method: 'POST',
@@ -28,28 +28,28 @@ export default function LoginForm() {
             },
             body: JSON.stringify(loginData)
         };
-        try{
+        try {
             const response = await fetch("api/v2/auth/login", requestData)
-        const resData = await response.json()
-        if(response.ok){
+            const resData = await response.json()
+            if (response.ok) {
+                setContext(() => ({
+                    isLoading: false,
+                    error: null
+                }))
+                localStorage.setItem("userInfo", JSON.stringify(resData.result))
+                navigate("/")
+            } else {
+                setContext(() => ({
+                    isLoading: false,
+                    error: resData.error
+                }))
+            }
+        } catch (error) {
             setContext(() => ({
-                isLoading : false,
-                error : null
-            }))
-            localStorage.setItem("userInfo",resData.result)
-            navigate("/")
-        }else{
-            setContext(() => ({
-                isLoading : false,
-                error : resData.error
+                isLoading: false,
+                error: error
             }))
         }
-        }catch (error){
-            setContext(() => ({
-                isLoading : false,
-                error : error
-            }))
-        }   
     }
 
     function HandleSubmit(event) {
@@ -59,7 +59,7 @@ export default function LoginForm() {
 
     return (
         <div>
-            <h1 className="text-4xl font-bold text-center" >Login</h1><br/>
+            <h1 className="text-4xl font-bold text-center" >Login</h1><br />
             {context.error && <p className="text-center text-red-500 font-bold">{context.error}</p>}
 
             <form onSubmit={HandleSubmit} method="post" className="flex justify-center flex-col mx-auto w-3/4">
@@ -82,9 +82,9 @@ export default function LoginForm() {
                     value={loginData.password}
                 /><br />
 
-                <button type="submit" 
-                className="bg-blue-500 h-10 border-none rounded text-white text-xl">
-                {context.isLoading ? "Loading..." : "Sign in"}</button>
+                <button type="submit"
+                    className="bg-blue-500 h-10 border-none rounded text-white text-xl">
+                    {context.isLoading ? "Loading..." : "Sign in"}</button>
 
             </form><br />
 

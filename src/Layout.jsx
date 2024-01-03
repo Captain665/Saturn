@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Outlet, NavLink } from "react-router-dom";
 import { FaSquareInstagram, FaFacebook, FaSquareTwitter, FaLinkedin, FaYoutube } from "react-icons/fa6";
 
 
 
 export default function LayOut() {
+    const [userName, setUserName] = React.useState(null)
+
+    useEffect(() => {
+        const userdata = localStorage.getItem("userInfo")
+        {userdata && setUserName(JSON.parse(userdata).fullName)}
+    },[])
 
 
     return (
@@ -17,7 +23,7 @@ export default function LayOut() {
                     <NavLink to="/" end className={({isActive}) => (isActive ? "underline font-bold" : null)}>Home</NavLink>
                     <NavLink to="about" className={({isActive}) => (isActive ? "underline font-bold" : null)}>About</NavLink>
                     <NavLink to="contact" className={({isActive}) => (isActive ? "underline font-bold" : null)}>Contact Us</NavLink>
-                    <NavLink to="account?form=login" className={({isActive}) => (isActive ? "underline font-bold" : null)}>Account</NavLink>
+                    <NavLink to="account?form=login" className={({isActive}) => (isActive ? "underline font-bold" : null)}>{userName ? userName.split(" ")[0] : "Account"}</NavLink>
                 </nav>
             </header>
             <Outlet />
