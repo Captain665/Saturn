@@ -4,8 +4,8 @@ import Home from "./Home/HomePage";
 import LayOut from "./Layout";
 import About from "./Home/About";
 import Contact from "./Home/ContactUs";
-import Account from "./Home/Account";
 import NonExistPath from "./InvalidPath";
+import Account from "./Accounts/Account";
 
 export default function BasePage() {
     return (
@@ -15,7 +15,7 @@ export default function BasePage() {
                     <Route index element={<Home />} />
                     <Route path="about" element={<About />} />
                     <Route path="contact" element={<Contact />} />
-                    <Route path="account" element={<Account />} />
+                    <Route path="account" element={<Account/>} />
                     <Route path="*" element={<NonExistPath />} />
                 </Route>
             </Routes>

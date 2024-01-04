@@ -8,7 +8,7 @@ export default function Signup() {
         mobileNumber: "",
         emailId: "",
         password: "",
-        gender: "male"
+        gender: "Male"
     });
     const [context, setContext] = React.useState({error : "", isloading : false, msg : ""})
 
@@ -43,8 +43,8 @@ export default function Signup() {
             body : JSON.stringify(userInfo)
         }
         try{
-            const response = await fetch("signup",requestBody)
-        const jsonData = await response.json();
+            const response = await fetch("signup" , requestBody)
+            const jsonData = await response.json();
         if(response.ok){
             const email = userInfo.emailId;
             const mobile = userInfo.mobileNumber

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Outlet, NavLink } from "react-router-dom";
-import { FaSquareInstagram, FaFacebook, FaSquareTwitter, FaLinkedin, FaYoutube } from "react-icons/fa6";
+import { FaSquareInstagram, FaFacebook, FaSquareTwitter, FaLinkedin, FaYoutube, FaUser } from "react-icons/fa6";
 
 
 
@@ -9,24 +9,26 @@ export default function LayOut() {
 
     useEffect(() => {
         const userdata = localStorage.getItem("userInfo")
-        if(userdata){
+        if (userdata) {
             const name = JSON.parse(userdata).fullName;
             setUserName(name)
         }
-    },[])
+    }, [])
+
+    const userLogo = <FaUser className="text-lg" />
 
 
     return (
         <div className="flex flex-col">
             <header className="flex w-full h-16 flex-row justify-between items-center shadow-md bg-white">
-                <NavLink to="/">
+                <NavLink to="/" className="w-2/6">
                     <img src="/LogoImage.jpg" alt="logo" className="p-3 h-20 object-content ml-20 rounded-2xl" />
                 </NavLink>
-                <nav className="flex flex-row space-x-20 mr-20">
-                    <NavLink to="/" end className={({isActive}) => (isActive ? "underline font-bold" : null)}>Home</NavLink>
-                    <NavLink to="about" className={({isActive}) => (isActive ? "underline font-bold" : null)}>About</NavLink>
-                    <NavLink to="contact" className={({isActive}) => (isActive ? "underline font-bold" : null)}>Contact Us</NavLink>
-                    <NavLink to="account?form=login" className={({isActive}) => (isActive ? "underline font-bold" : null)}>{userName ? userName.split(" ")[0] : "Account"}</NavLink>
+                <nav className="flex w-4/6 items-center gap-20 place-content-center">
+                    <NavLink to="/" end className={({ isActive }) => (isActive ? "underline font-bold" : null)}>Home</NavLink>
+                    <NavLink to="about" className={({ isActive }) => (isActive ? "underline font-bold" : null)}>About</NavLink>
+                    <NavLink to="contact" className={({ isActive }) => (isActive ? "underline font-bold" : null)}>Contact Us</NavLink>
+                    <NavLink to="account?form=login" className={({ isActive }) => (isActive ? "underline font-bold" : null)}> {userName ? userName.split(" ")[0] : "Account"}</NavLink>
                 </nav>
             </header>
             <Outlet />
