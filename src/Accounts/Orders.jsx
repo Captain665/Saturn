@@ -5,24 +5,25 @@ export default function OrderDetails({ token }) {
     const [orderslist, setOrderList] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(false)
 
-    const fetchData = async function getData() {
-        setIsLoading(true)
-        const requestBody = {
-            method: 'GET',
-            headers: {
-                Authorization: token
-            }
-        }
-
-        const response = await fetch("orders", requestBody)
-        const jsonData = await response.json();
-        setOrderList(jsonData.result)
-        setIsLoading(false)
-    }
 
     useEffect(() => {
+        const fetchData = async function getData() {
+            setIsLoading(true)
+            const requestBody = {
+                method: 'GET',
+                headers: {
+                    Authorization: token
+                }
+            }
+    
+            const response = await fetch("orders", requestBody)
+            const jsonData = await response.json();
+            setOrderList(jsonData.result)
+            setIsLoading(false)
+        }
+
         fetchData()
-    }, [])
+    }, [token])
 
     const orderDetails = orderslist.map((item) => (
         <div className="w-full shadow-lg p-5 flex flex-col gap-y-10 rounded-lg" key={item.id}>

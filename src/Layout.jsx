@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Outlet, NavLink } from "react-router-dom";
-import { FaSquareInstagram, FaFacebook, FaSquareTwitter, FaLinkedin, FaYoutube, FaUser } from "react-icons/fa6";
+import { FaSquareInstagram, FaFacebook, FaSquareTwitter, FaLinkedin, FaYoutube } from "react-icons/fa6";
 
 
 
@@ -14,8 +14,6 @@ export default function LayOut() {
             setUserName(name)
         }
     }, [])
-
-    // const userLogo = <FaUser className="text-lg" />
 
 
     return (
