@@ -6,6 +6,8 @@ import About from "./Home/About";
 import Contact from "./Home/ContactUs";
 import NonExistPath from "./InvalidPath";
 import Account from "./Accounts/Account";
+import StationList from "./App/Stations";
+import OutletList from "./App/Outlets";
 
 export default function BasePage() {
     return (
@@ -17,6 +19,9 @@ export default function BasePage() {
                     <Route path="contact" element={<Contact />} />
                     <Route path="account" element={<Account/>} />
                     <Route path="*" element={<NonExistPath />} />
+
+                    <Route path="/:pnr/outlets" element={<StationList/>}/>
+                    <Route path="/outlet/station/:code" element={<OutletList />}/>
                 </Route>
             </Routes>
         </BrowserRouter>

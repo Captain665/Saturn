@@ -46,9 +46,9 @@ export default function Signup() {
             const response = await fetch("signup" , requestBody)
             const jsonData = await response.json();
         if(response.ok){
-            const email = userInfo.emailId;
-            const mobile = userInfo.mobileNumber
-            navigate("?form=verify&email=" + email + "&mobile="+ mobile + "")
+            // const email = userInfo.emailId;
+            // const mobile = userInfo.mobileNumber
+            navigate("?form=verify", {state:{mobileNumber : userInfo.mobileNumber, emailId : userInfo.emailId}} )
             }else{
             setContext((prevData) => ({
                 ...prevData,

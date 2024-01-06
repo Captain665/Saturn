@@ -8,10 +8,11 @@ export default function LoginForm() {
     const navigate = useNavigate()
 
     function handleChange(event) {
-        const target = event.target;
+        const name = event.target.name;
+        const value = event.target.value;
         setloginData((prevData) => ({
             ...prevData,
-            [target.name]: target.value
+            [name]: value
         }))
     }
 
@@ -38,6 +39,7 @@ export default function LoginForm() {
                 }))
                 localStorage.setItem("userInfo", JSON.stringify(resData.result))
                 navigate("/")
+                window.location.reload(true)
             } else {
                 setContext(() => ({
                     isLoading: false,

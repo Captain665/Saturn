@@ -18,9 +18,7 @@ export default function Account() {
     function logOut() {
         localStorage.clear();
         navigate("/")
-    }
-    function handleOnClick() {
-        setData("")
+        window.location.reload(true)
     }
 
     function DisplayForm() {
@@ -46,19 +44,9 @@ export default function Account() {
                     <input value="Logout" type="button" onClick={logOut}
                         className={`mt-4 cursor-pointer ${({ isActive }) => (isActive ? "underline font-bold" : null)}`} />
                 </div>
-                <div className="w-2/3 p-10 border-4">{data === "orders" ? <OrderDetails token={info.jwt}/> : <CustomerDetails/> }</div>
-            </div> : DisplayForm()}
+                <div className="w-2/3 p-6 border-4">{data === "orders" ? <OrderDetails token={info.jwt}/> : <CustomerDetails/> }</div>
+            </div> : DisplayForm()
+            }
         </div>
     )
-
-
-
-
-
-
-
-
-
-
-
 }

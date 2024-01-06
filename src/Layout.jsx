@@ -15,7 +15,7 @@ export default function LayOut() {
         }
     }, [])
 
-    const userLogo = <FaUser className="text-lg" />
+    // const userLogo = <FaUser className="text-lg" />
 
 
     return (

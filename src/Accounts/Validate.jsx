@@ -1,10 +1,9 @@
 import React from "react";
-import { useNavigate, useSearchParams, NavLink } from "react-router-dom";
+import { useNavigate, NavLink, useLocation, } from "react-router-dom";
 
 export default function Validate() {
-    const [params] = useSearchParams()
-    const email = params.get("email")
-    const mobileNumber = params.get("mobile")
+    const {state} = useLocation();
+    const {mobileNumber, emailId} = state;
     const [data, setData] = React.useState({ mobileNumber: mobileNumber, otp: "" })
     const [context, setContext] = React.useState({ error: "", isLoading: false })
 
@@ -65,7 +64,7 @@ export default function Validate() {
             <form action="" onSubmit={handleSubmit} method="post" className="flex justify-center flex-col mx-auto w-3/4">
                 <label htmlFor="email">Email Id</label>
                 <input type="email" placeholder="Email Id"
-                    name="email" id="email" value={email} disabled className="border rounded-lg h-10 pl-2 outline-none " /><br />
+                    name="email" id="email" value={emailId} disabled className="border rounded-lg h-10 pl-2 outline-none " /><br />
 
                 <label htmlFor="number">OTP</label>
                 <input type="number" name="mobileNumber" id="number" onChange={handleOnChange} value={data.otp}
