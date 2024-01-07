@@ -30,7 +30,7 @@ export default function OrderDetails({ token }) {
             <ul className="top-40">
                 <div className="flex">
                     <div className="flex justify-start items-center w-4/6">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3qP_gI3CSPTJSGMnPXOlmByYJ9hAGedIrZ8EYzhxDeQ&s" alt="outlet" className="object-cover overflow-hidden" width={50} height={50}/>
+                        <img src={item.outlets.logoImage} alt="outlet" className="object-cover overflow-hidden" width={50} height={50}/>
                         <li className="font-bold ml-2">{item.outlets.outletName}</li>
                     </div>
                     <div className=" w-2/6 text-end">
