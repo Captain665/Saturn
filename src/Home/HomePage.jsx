@@ -52,11 +52,11 @@ export default function Home() {
 
     return (
         <>
-            <div className="bg-cover bg-center bg-[url('https://burst.shopifycdn.com/photos/flatlay-iron-skillet-with-meat-and-other-food.jpg?width=1000&format=pjpg&exif=0&iptc=0')] h-svh bg-no-repeat w-full">
+            <div className="bg-cover bg-center opacity-90 bg-[url('https://burst.shopifycdn.com/photos/flatlay-iron-skillet-with-meat-and-other-food.jpg?width=1000&format=pjpg&exif=0&iptc=0')] h-svh bg-no-repeat w-full">
                 <div className="h-screen flex justify-center items-center flex-col">
                 {context.error && <h1 className="font-bold text-white text-xl">{context.error}</h1>}
                     <input type="number" name="pnr" value={pnr} onChange={(event) => ([setPnr(event.target.value), setContext((prevData) => ({...prevData, error : ""}))])}
-                    className="border-2 rounded-md h-14 outline-none w-2/7 pl-5 text-xl text-start font-medium" placeholder="Enter PNR Number"/><br />
+                    className="border-2 rounded-md h-14 outline-none w-2/6 pl-5 text-xl text-start font-medium" placeholder="Enter PNR Number"/><br />
 
                     <button type="Submit" onClick={fetchData} disabled={context.isLoading ? true : false}
                     className="bg-blue-800 p-2 text-white border-none font-bold w-1/12 rounded-lg text-xl cursor-pointer">{context.isLoading ? "Loading..." : "Submit"}</button>

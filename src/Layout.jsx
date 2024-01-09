@@ -30,7 +30,7 @@ export default function LayOut() {
                 </nav>
             </header>
             <Outlet />
-            <footer className="bg-neutral-800 w-full shadow-md flex flex-col justify-center text-white h-52">
+            <footer className="bg-neutral-800 opacity-90 w-full shadow-md flex flex-col justify-center text-white h-52">
                 <div className="flex space-x-6 justify-center pt-0 cursor-pointer text-4xl">
                     <FaSquareInstagram />
                     <FaFacebook />

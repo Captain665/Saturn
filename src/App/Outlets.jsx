@@ -26,8 +26,8 @@ export default function OutletList() {
             const jsonData = await response.json()
             setOutletData(jsonData.result)
         }
-        fetchData()
-    }, [code])
+        return () => fetchData()
+    }, [code,token])
 
     function handleOnClick(outlet){
         const route = "/station/"+code+"/outlet/"+outlet.id+"/menu"
@@ -39,12 +39,12 @@ export default function OutletList() {
         <>
             <div key={outlet.id} 
             className="shadow-lg w-2/3 flex h-40 rounded border-2 
-            border-[#ff7e8b] hover:bg-[#ff7e8b] hover:text-white bg-transparent cursor-pointer" 
+             hover:opacity-60 cursor-pointer" 
             onClick={() => handleOnClick(outlet)}
             >
                 <div className="rounded-md w-1/3">
-                    <img src={outlet.logoImage} className="w-full h-full object-content" alt="logoImage" />
-
+                    <img src={outlet.logoImage} className="w-full h-full object-center" alt="logoImage" />
+    
                 </div>
                 <div className="border-l-2 pl-4 w-full justify-center p-3">
                     <h2 className="text-xl font-bold pt-2">{outlet.outletName}</h2>
