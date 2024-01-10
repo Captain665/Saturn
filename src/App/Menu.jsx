@@ -1,30 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import { FaStar } from "react-icons/fa6";
 
 export default function MenuList() {
     const { code, id } = useParams();
     const { state } = useLocation()
-    const { station } = state
+    const { stations } = state
     const { outlet } = state
-    const { trainInfo } = state;
+    const { trainDetails } = state;
     const [outletInfo] = useState(outlet)
-    const [stationInfo] = useState(station)
-    const [trainDetail] = useState(trainInfo)
-    const [menuList, setMenuList] = useState(["menu item page"])
-    const localData = localStorage.getItem("userInfo")
-    const token = JSON.parse(localData).jwt
-
+    const [stationInfo] = useState(stations)
+    const [trainDetail] = useState(trainDetails)
+    const [menuList, setMenuList] = useState([])
     const [orderItems, setOrderItems] = useState([])
     const [amount, setAmount] = useState(0)
+    const navigate = useNavigate()
 
     useEffect(() => {
-        const fetchData = async function fetchMenu() {
+        const fetchData = async () => {
             const requestBody = {
-                method: "GET",
-                headers: {
-                    Authorization: token
-                }
+                method: "GET"
             }
             const url = "/outlet/" + outletInfo.id + "/menu"
             const response = await fetch(url, requestBody)
@@ -33,24 +28,31 @@ export default function MenuList() {
                 setMenuList(jsonData.result)
             }
         }
-        return () => fetchData()
-    }, [outletInfo.id, token, code, id])
+        return () => {fetchData()}
+    }, [outletInfo.id, code, id])
 
-    function handleOnClick(menuItem) {
-        console.log(menuItem)
+    function addItem(menuItem) {
         setAmount(oldData => (oldData + JSON.parse(menuItem.basePrice)))
         const data = {
-            id: menuItem.id,
-            quantity: 1
+            itemId : menuItem.id,
+            quantity: 1,
+            name : menuItem.name,
+            description : menuItem.description,
+            basePrice : menuItem.basePrice, 
+            isVegeterian : menuItem.isVegeterian
         }
-        const existItemIndex = orderItems.findIndex(item => item.id === data.id)
+        const existItemIndex = orderItems.findIndex(item => item.itemId === data.itemId)
 
         setOrderItems((prevData) => {
             if (existItemIndex !== -1) {
                 const updatedItem = [...prevData]
                 updatedItem[existItemIndex] = {
-                    id: prevData[existItemIndex].id,
-                    quantity: prevData[existItemIndex].quantity + 1
+                    itemId : prevData[existItemIndex].itemId,
+                    quantity: prevData[existItemIndex].quantity + 1,
+                    name : prevData[existItemIndex].name,
+                    description : prevData[existItemIndex].description,
+                    basePrice : prevData[existItemIndex].basePrice,
+                    isVegeterian : prevData[existItemIndex].isVegeterian
                 }
                 return updatedItem;
             } else {
@@ -58,8 +60,38 @@ export default function MenuList() {
             }
         })
     }
+    function removeItem(menuItem){
+        setAmount(oldData => (oldData - JSON.parse(menuItem.basePrice)))
+        const existItem = orderItems.findIndex(item => item.itemId === menuItem.id)
+        const existQuantity = orderItems[existItem].quantity;
+        setOrderItems(prevData => {
+            if(existQuantity > 1){
+                const updatedItem = [...prevData]
+                updatedItem[existItem] = {
+                    itemId : menuItem.id,
+                    quantity : updatedItem[existItem].quantity - 1,
+                    name : prevData[existItem].name,
+                    description : prevData[existItem].description,
+                    basePrice : prevData[existItem].basePrice,
+                    isVegeterian : prevData[existItem].isVegeterian
+                }
+                return updatedItem
+            }else{
+                return prevData.filter(a => a.itemId !== menuItem.id)
+            }
+        })
+    }
+
+    function handleCheckOut(){
+        console.log("checkout")
+        window.sessionStorage.setItem("selectedItemInfo",JSON.stringify(orderItems))
+        navigate("/cart")
+    }
+
     console.log(orderItems)
-    console.log(amount)
+
+
+
     const stationAndOutlet = (
         <div className="flex w-11/12 p-5 h-60 shadow">
             <div className="w-1/5 shadow-md rounded-md">
@@ -72,7 +104,7 @@ export default function MenuList() {
                     <p className="text-sm">Delivery Station</p>
                     <p className="text-xl font-semibold"><span>{stationInfo.name}</span> <span>({stationInfo.code})</span></p>
                     <p><span>{(stationInfo.delayArrival === 0 || stationInfo.delayArrival === null) ? "On time " : "Late by " + stationInfo.delayArrival + " mins, "}</span>
-                        <span>{station.halt === "--" ? " Starting station" : " " + station.halt + " mins halt"}</span></p>
+                        <span>{stationInfo.halt === "--" ? " Starting station" : " " + stationInfo.halt + " mins halt"}</span></p>
                 </div>
             </div>
             <div className="w-3/5 pl-10">
@@ -101,11 +133,19 @@ export default function MenuList() {
                     <li className="pt-2 truncate">{menuItem.name}</li>
                     <li className="truncate">{menuItem.description}</li>
                     <li>&#x20B9; {menuItem.basePrice}</li>
-                    <li className="border-2 w-fit px-6 p-1 rounded-lg float-end align-bottom cursor-pointer
-                 border-[#ff7e8b] hover:bg-[#ff7e8b] hover:text-white" onClick={() => handleOnClick(menuItem)}>ADD</li>
+                    <li className="border-2 w-fit px-2 p-1 rounded-lg float-end align-bottom border-[#ff7e8b]">
+                    {
+                    (orderItems.find(item => item.itemId === menuItem.id)) ? 
+                    <div className="flex flex-row justify-between">
+                        <span className="pr-2 cursor-pointer" onClick={() => removeItem(menuItem)} >-</span>
+                    <span>{orderItems[orderItems.findIndex(id => id.itemId === menuItem.id)].quantity}</span>
+                    <span onClick={() => addItem(menuItem)} className="cursor-pointer pl-2">+</span></div> 
+                    : <span className="cursor-pointer" onClick={() => addItem(menuItem)}>ADD</span> 
+                    }
+                    </li>
                 </div>
             </ul>
-        </div>
+        </div>  
     ))
 
     return (
@@ -122,7 +162,7 @@ export default function MenuList() {
                     <p>Amount : &#x20B9;{JSON.parse(amount).toFixed(2)}</p>
                 </div>
                 <div className="fixed right-10">
-                    <button className=" bg-[#ff7e8b] p-2 px-4 rounded-md">Checkout</button>
+                    <button className=" bg-[#ff7e8b] p-2 px-4 rounded-md" onClick={handleCheckOut}>Checkout</button>
                 </div>
                 </>
                 }

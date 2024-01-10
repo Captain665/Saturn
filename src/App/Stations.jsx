@@ -3,15 +3,17 @@ import { useNavigate, useOutletContext } from "react-router";
 
 export default function StationList() {
 
-    const [journeyDetails] = useOutletContext()
+    const [train] = useOutletContext()
+    const [jourenyData] = useState(train)
     const navigate = useNavigate();
-    const [stations, setStations] = useState(journeyDetails.stations)
+    const [stations] = useState(train.stations)
     const [stationLength] = useState(stations.length)
 
+
     function handleOnClick(station) {
-        const trainInfo = journeyDetails.trainInfo;
         console.log("redirected")
-        navigate(station.code, {state:{station,trainInfo}})
+        window.sessionStorage.setItem("selectedStation",JSON.stringify(station))
+        navigate(station.code, {state:{ jourenyData,station }})
     }
 
 

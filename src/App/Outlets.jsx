@@ -4,34 +4,34 @@ import { FaStar } from "react-icons/fa6";
 
 export default function OutletList() {
     const { state } = useLocation()
+    const { jourenyData } = state
     const { station } = state
-    const {trainInfo} = state;
     const { code } = useParams()
+    const [stationCode] = useState(code)
+    const [stations] = useState(station)
+    const [pnrInfo] = useState(jourenyData)
     const navigate = useNavigate()
     const [outletData, setOutletData] = useState([])
-    const userInfo = localStorage.getItem("userInfo")
-    const token = JSON.parse(userInfo).jwt
+    const [trainDetails] = useState(pnrInfo.trainInfo)
 
 
     useEffect(() => {
         const fetchData = async function fetchOutletData() {
             const requestBody = {
-                method: 'GET',
-                headers: {
-                    Authorization: token
-                }
+                method: 'GET'
             }
-            const url = "/outlet/station/" + code
+            const url = "/outlet/station/" + stationCode
             const response = await fetch(url, requestBody)
             const jsonData = await response.json()
             setOutletData(jsonData.result)
         }
-        return () => fetchData()
-    }, [code,token])
+        return () => {fetchData()}
+    }, [stationCode])
 
     function handleOnClick(outlet){
         const route = "/station/"+code+"/outlet/"+outlet.id+"/menu"
-        navigate(route,{state:{station,trainInfo,outlet}})
+        window.sessionStorage.setItem("outletInfo",JSON.stringify(outlet))
+        navigate(route,{state:{stations,trainDetails,outlet}})
     }
 
 
@@ -62,7 +62,7 @@ export default function OutletList() {
 
     return (
         <div className="flex flex-col justify-center self-center items-center w-11/12">
-            <h1>Restaurants at <span className="font-bold text-xl">{station.name}</span><span className="font-thin"> ({code})</span></h1>
+            <h1>Restaurants at <span className="font-bold text-xl">{stations.name}</span><span className="font-thin"> ({code})</span></h1>
             <h1>Showing {outletData.length} Restaurant</h1>
             <br />
             {outletDetails}
