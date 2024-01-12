@@ -16,7 +16,7 @@ export default function OutletList() {
 
 
     useEffect(() => {
-        const fetchData = async function fetchOutletData() {
+        const fetchData = async () => {
             const requestBody = {
                 method: 'GET'
             }

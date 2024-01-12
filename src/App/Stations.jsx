@@ -11,7 +11,6 @@ export default function StationList() {
 
 
     function handleOnClick(station) {
-        console.log("redirected")
         window.sessionStorage.setItem("selectedStation",JSON.stringify(station))
         navigate(station.code, {state:{ jourenyData,station }})
     }

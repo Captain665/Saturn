@@ -39,7 +39,6 @@ export default function TrainDetail() {
             <br />
             </>
          : <h1 className="h-screen flex justify-center items-center text-4xl">Loading...</h1>}
-
         </>
     )
 }
