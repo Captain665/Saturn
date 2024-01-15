@@ -11,6 +11,7 @@ import TrainDetail from "./App/TrainDetails";
 import StationList from "./App/Stations";
 import MenuList from "./App/Menu";
 import CartDetails from "./App/Cart";
+import OrderDetail from "./App/OrderDetails";
 
 export default function BasePage() {
     return (
@@ -29,6 +30,7 @@ export default function BasePage() {
                     </Route>
                     <Route path="/station/:code/outlet/:id/menu" element={<MenuList />} />
                     <Route path="cart" element={<CartDetails />}/>
+                    <Route path="order/:orderId" element={<OrderDetail />}/>
                 </Route>
             </Routes>
         </BrowserRouter>

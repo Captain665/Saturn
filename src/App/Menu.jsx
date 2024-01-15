@@ -1,20 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { FaStar } from "react-icons/fa6";
 
 export default function MenuList() {
     const { code, id } = useParams();
-    const { state } = useLocation()
-    const { stations } = state
-    const { outlet } = state
-    const { trainDetails } = state;
+    const navigate = useNavigate()
+
+    const outlet = JSON.parse(window.sessionStorage.getItem("outletInfo"))
+    const stations = JSON.parse(window.sessionStorage.getItem("selectedStation"))
+    const trainDetails = JSON.parse(window.sessionStorage.getItem("pnrDetails")).trainInfo
+    const selectedItem = JSON.parse(window.sessionStorage.getItem("selectedItemInfo"))
+    const pnr = JSON.parse(window.sessionStorage.getItem("pnr"))
+
     const [outletInfo] = useState(outlet)
     const [stationInfo] = useState(stations)
     const [trainDetail] = useState(trainDetails)
+
+    if (selectedItem === null) {
+        var menuDataList = []
+    } else {
+        var menuDataList = selectedItem
+    }
+
+    const [orderItems, setOrderItems] = useState(menuDataList)
     const [menuList, setMenuList] = useState([])
-    const [orderItems, setOrderItems] = useState([])
-    const [amount, setAmount] = useState(0)
-    const navigate = useNavigate()
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -31,8 +41,12 @@ export default function MenuList() {
         return () => { fetchData() }
     }, [outletInfo.id, code, id])
 
+    useEffect(() => {
+        window.sessionStorage.setItem("selectedItemInfo", JSON.stringify(orderItems))
+    }, [orderItems])
+
+
     function addItem(menuItem) {
-        setAmount(oldData => (oldData + JSON.parse(menuItem.basePrice)))
         const data = {
             itemId: menuItem.id,
             quantity: 1,
@@ -60,9 +74,9 @@ export default function MenuList() {
             }
         })
     }
+
     function removeItem(menuItem) {
-        setAmount(oldData => (oldData - JSON.parse(menuItem.basePrice)))
-        const existItem = orderItems.findIndex(item => item.itemId === menuItem.id)
+        const existItem = orderItems.findIndex(a => a.itemId === menuItem.id)
         const existQuantity = orderItems[existItem].quantity;
         setOrderItems(prevData => {
             if (existQuantity > 1) {
@@ -82,12 +96,14 @@ export default function MenuList() {
         })
     }
 
+
     function handleCheckOut() {
-        window.sessionStorage.setItem("selectedItemInfo", JSON.stringify(orderItems))
         navigate("/cart")
     }
 
-
+    function backToOutlet(){
+        navigate("/"+pnr+"/outlets/"+stationInfo.code)
+    }
 
 
     const stationAndOutlet = (
@@ -95,7 +111,7 @@ export default function MenuList() {
             <div className="w-1/5 shadow-md rounded-md">
                 <div className="bg-black opacity-80 h-1/2 text-white p-3">
                     <p className="text-sm">Delivery Details</p>
-                    <p><span className="pt-1 text-xl font-semibold">{trainDetail.name}</span> <span className="font-bold">({trainDetail.trainNo})</span></p>
+                    <p><span className="pt-1 text-lg font-semibold">{trainDetail.name}</span> <span className="font-bold">({trainDetail.trainNo})</span></p>
                     <p className="text-sm pt-2"><span>On {stationInfo.depDate}</span><span>, at {stationInfo.departure}</span></p>
                 </div>
                 <div className="p-3">
@@ -105,14 +121,15 @@ export default function MenuList() {
                         <span>{stationInfo.halt === "--" ? " Starting station" : " " + stationInfo.halt + " mins halt"}</span></p>
                 </div>
             </div>
-            <div className="w-3/5 pl-10">
+            <div className="w-3/5 pl-10 flex flex-col">
                 <p className="text-4xl font-semibold">{outletInfo.outletName}</p><br /><hr /><br />
                 <p><span className="text-lg">Minimum Order &#x20B9;{outletInfo.minOrderValue}</span></p><br />
-                <div className="flex text-lg">
+                <div className="flex text-lg gap-3">
                     <p className="text-[#FFD700] text-xl"><FaStar /></p>
-                    <p className="pl-2">{outletInfo.ratingValue}</p>
-                    <p className="pl-2">Based on {outletInfo.ratingCount} Ratings</p>
+                    <p className="">{outletInfo.ratingValue}</p>
+                    <p className="">Based on {outletInfo.ratingCount} Ratings</p>
                 </div>
+                <p className="">{outletInfo.deliveryCost > 0 ? "" : "Free Delivery"}</p>
             </div>
             <div className="w-1/5 rounded-sm">
                 <img src={outletInfo.logoImage} alt="logo" className="object-center w-full h-full" />
@@ -120,51 +137,57 @@ export default function MenuList() {
         </div>
     )
 
-    const menuData = menuList.map(menuItem => (
-        <div key={menuItem.id} className="w-full shadow-lg h-40 p-2">
-            <ul className="flex">
-                <div className="w-2/5">
-                    {menuItem.image && <img src={menuItem.image} alt="item logo" className="object-center w-full h-full" />}
-                </div>
-                <div className="border-l-2 pl-2 w-7/12">
-                    <img src={menuItem.isVegeterian ? "/veg.png" : "/nonveg.png"} alt="veg icon" className="w-4" />
-                    <li className="pt-2 truncate">{menuItem.name}</li>
-                    <li className="truncate">{menuItem.description}</li>
-                    <li>&#x20B9; {menuItem.basePrice}</li>
-                    <li className="border-2 w-fit px-2 p-1 rounded-lg float-end align-bottom border-[#ff7e8b]">
-                        {
-                            (orderItems.find(item => item.itemId === menuItem.id)) ?
-                                <div className="flex flex-row justify-between">
-                                    <span className="pr-2 cursor-pointer" onClick={() => removeItem(menuItem)} >-</span>
-                                    <span>{orderItems[orderItems.findIndex(id => id.itemId === menuItem.id)].quantity}</span>
-                                    <span onClick={() => addItem(menuItem)} className="cursor-pointer pl-2">+</span></div>
-                                : <span className="cursor-pointer" onClick={() => addItem(menuItem)}>ADD</span>
-                        }
-                    </li>
-                </div>
-            </ul>
-        </div>
-    ))
+
+
+    const menuData = <>
+        {menuList ? menuList.map(menuItem => (
+            <div key={menuItem.id} className="w-full shadow-lg h-40 p-2">
+                <ul className="flex">
+                    <div className="w-2/5">
+                        {menuItem.image && <img src={menuItem.image} alt="item logo" className="object-center w-full h-full" />}
+                    </div>
+                    <div className="border-l-2 pl-2 w-7/12">
+                        <img src={menuItem.isVegeterian ? "/veg.png" : "/nonveg.png"} alt="veg icon" className="w-4" />
+                        <li className="pt-2 truncate text-lg font-medium">{menuItem.name}</li>
+                        <li className="truncate text-wrap-3 text-xs font-thin opacity-90 pl-1">{menuItem.description}</li>
+                        <li>&#x20B9; {menuItem.basePrice}</li>
+                        <li className="border-2 w-fit px-2 p-1 rounded-lg float-end align-bottom border-[#ff7e8b]">
+                            {
+                                (orderItems.find(item => item.itemId === menuItem.id)) ?
+                                    <div className="flex flex-row justify-between">
+                                        <span className="pr-2 cursor-pointer" onClick={() => removeItem(menuItem)} >-</span>
+                                        <span>{orderItems[orderItems.findIndex(id => id.itemId === menuItem.id)].quantity}</span>
+                                        <span onClick={() => addItem(menuItem)} className="cursor-pointer pl-2">+</span></div>
+                                    : <span className="cursor-pointer" onClick={() => addItem(menuItem)}>ADD</span>
+                            }
+                        </li>
+                    </div>
+                </ul>
+            </div>
+        )) : <h1>Loading...</h1>}
+    </>
+
 
     return (
         <>
+        <p className="bg-green-100 cursor-pointer p-2" onClick={backToOutlet}><span className="font-bold text-2xl w-1/2 pl-8 ">&#x2190;</span>  Outlets</p>
             <div className="w-full flex flex-col justify-center self-center items-center p-5">
                 {stationAndOutlet}
                 <div className="grid grid-cols-3 self-center items-center w-4/5 gap-5 p-5">
                     {menuData}
                 </div>
-                {orderItems.length > 0 && <>
-                    <div className="flex flex-col gap-5 shadow-lg border-2 p-2 bg-[#ff7e8b] absolute left-6 text-center rounded-lg">
-                        <h1 className="text-xl text-white font-bold">Cart</h1>
-                        <p>Item : {orderItems.length}</p>
-                        <p>Amount : &#x20B9;{JSON.parse(amount).toFixed(2)}</p>
-                    </div>
-                    <div className="fixed right-10">
-                        <button className=" bg-[#ff7e8b] p-2 px-4 rounded-md" onClick={handleCheckOut}>Checkout</button>
-                    </div>
-                </>
-                }
             </div>
+            {orderItems.length > 0 && <>
+                <div className="shadow-lg border-2 p-2 rounded-lg w-4/6 self-center fixed bottom-2 bg-green-300" >
+                    <ul className="flex place-items-baseline justify-around">
+                        <li className="text-xl font-bold">Cart</li>
+                        <li>Item : {orderItems.length}</li>
+                        <li>Amount : &#x20B9;{orderItems.reduce((a, b) => a + (b.basePrice * b.quantity), 0)}</li>
+                        <li className="p-2 px-4 rounded-md cursor-pointer bg-orange-300" onClick={handleCheckOut}>Checkout</li>
+                    </ul>
+                </div>
+            </>
+            }
         </>
     )
 }

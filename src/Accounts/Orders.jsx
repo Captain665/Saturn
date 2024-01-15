@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 export default function OrderDetails({ token }) {
+    const navigate = useNavigate()
 
     const [orderslist, setOrderList] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(false)
@@ -15,15 +17,24 @@ export default function OrderDetails({ token }) {
                     Authorization: token
                 }
             }
-    
-            const response = await fetch("orders", requestBody)
+
+            const response = await fetch("/orders", requestBody)
             const jsonData = await response.json();
+            if(response.status === 401){
+                window.localStorage.clear();
+                navigate("?form=login")
+            }
             setOrderList(jsonData.result)
             setIsLoading(false)
         }
 
-        fetchData()
-    }, [token])
+        return () => { fetchData() };
+    }, [])
+
+    function handleViewOrderDetail(order){
+        console.log(order)
+        navigate("/order/"+order.id)
+    }
 
     const orderDetails = orderslist.map((item) => (
         <div className="w-full shadow-lg p-5 flex flex-col gap-y-10 rounded-lg" key={item.id}>
@@ -43,7 +54,7 @@ export default function OrderDetails({ token }) {
                 <li><span className="uppercase text-[#696969] text-xs">Status </span> <br />{item.status}</li>
                 <li><span className="uppercase text-[#696969] text-xs">Total Amount </span><br /> &#x20B9; {item.payable_amount}</li>
                 <li><span className="uppercase text-[#696969] text-xs">Ordered On </span><br />{item.bookingDate}</li><br />
-                <li className="border-2 w-fit inline-flex bg-transparent rounded-lg border-[#ff7e8b] hover:bg-[#ff7e8b]"><span className="p-1 text-[#ff7e8b] hover:text-white">View Details</span></li>
+                <li className="p-2 bg-green-300 w-fit cursor-pointer float-right border-none rounded-xl hover:bg-green-200" onClick={() => handleViewOrderDetail(item)}><span>View Details</span></li>
             </ul>
         </div>
     ))

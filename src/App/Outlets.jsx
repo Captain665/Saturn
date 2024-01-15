@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { FaStar } from "react-icons/fa6";
 
 export default function OutletList() {
-    const { state } = useLocation()
-    const { jourenyData } = state
-    const { station } = state
-    const { code } = useParams()
-    const [stationCode] = useState(code)
+    const navigate = useNavigate()
+
+    const jourenyData = JSON.parse(window.sessionStorage.getItem("pnrDetails"))
+    const station = JSON.parse(window.sessionStorage.getItem("selectedStation"))
+
     const [stations] = useState(station)
     const [pnrInfo] = useState(jourenyData)
-    const navigate = useNavigate()
+
+    const { code, pnr } = useParams()
+    const [stationCode] = useState(code)
+
     const [outletData, setOutletData] = useState([])
     const [trainDetails] = useState(pnrInfo.trainInfo)
 
@@ -25,26 +28,29 @@ export default function OutletList() {
             const jsonData = await response.json()
             setOutletData(jsonData.result)
         }
-        return () => {fetchData()}
+        return () => { fetchData() }
     }, [stationCode])
 
-    function handleOnClick(outlet){
-        const route = "/station/"+code+"/outlet/"+outlet.id+"/menu"
-        window.sessionStorage.setItem("outletInfo",JSON.stringify(outlet))
-        navigate(route,{state:{stations,trainDetails,outlet}})
+    function handleOnClick(outlet) {
+        const route = "/station/" + code + "/outlet/" + outlet.id + "/menu"
+        window.sessionStorage.setItem("outletInfo", JSON.stringify(outlet))
+        navigate(route, { state: { stations, trainDetails, outlet } })
+    }
+
+    function returnToStation(){
+        navigate("/"+pnr+"/outlets")
     }
 
 
     const outletDetails = outletData.map((outlet) => (
         <>
-            <div key={outlet.id} 
-            className="shadow-lg w-2/3 flex h-40 rounded border-2 
-             hover:opacity-60 cursor-pointer" 
-            onClick={() => handleOnClick(outlet)}
+            <div key={outlet.id}
+                className="shadow-lg w-2/3 flex h-48 rounded border-2 cursor-pointer hover:border-4"
+                onClick={() => handleOnClick(outlet)}
             >
                 <div className="rounded-md w-1/3">
                     <img src={outlet.logoImage} className="w-full h-full object-center" alt="logoImage" />
-    
+
                 </div>
                 <div className="border-l-2 pl-4 w-full justify-center p-3">
                     <h2 className="text-xl font-bold pt-2">{outlet.outletName}</h2>
@@ -61,11 +67,16 @@ export default function OutletList() {
 
 
     return (
-        <div className="flex flex-col justify-center self-center items-center w-11/12">
-            <h1>Restaurants at <span className="font-bold text-xl">{stations.name}</span><span className="font-thin"> ({code})</span></h1>
-            <h1>Showing {outletData.length} Restaurant</h1>
+        <>
+            <div className="flex gap-20 self-center"> 
+                <p className="t text-green-500 hover:font-bold text-lg cursor-pointer underline" onClick={returnToStation}>Choose Different Station</p>
+                <h1>Restaurants at <span className="font-bold text-xl">{stations.name}</span><span className="font-thin"> ({code})</span></h1>
+                <h1>{outletData.length} Restaurant Available</h1>
+            </div>
             <br />
-            {outletDetails}
-        </div>
+            <div className="flex flex-col justify-center self-center items-center w-11/12">
+                {outletDetails}
+            </div>
+        </>
     )
 }
