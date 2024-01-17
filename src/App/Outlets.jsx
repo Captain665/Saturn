@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { FaStar } from "react-icons/fa6";
+import { FaStar,FaSpinner} from "react-icons/fa6";
 
 export default function OutletList() {
     const navigate = useNavigate()
@@ -17,8 +17,11 @@ export default function OutletList() {
     const [outletData, setOutletData] = useState([])
     const [trainDetails] = useState(pnrInfo.trainInfo)
 
+    const [isLoading, setIsLoading] = useState(false)
+
 
     useEffect(() => {
+        setIsLoading(true)
         const fetchData = async () => {
             const requestBody = {
                 method: 'GET'
@@ -27,6 +30,7 @@ export default function OutletList() {
             const response = await fetch(url, requestBody)
             const jsonData = await response.json()
             setOutletData(jsonData.result)
+            setIsLoading(false)
         }
         return () => { fetchData() }
     }, [stationCode])
@@ -37,8 +41,8 @@ export default function OutletList() {
         navigate(route, { state: { stations, trainDetails, outlet } })
     }
 
-    function returnToStation(){
-        navigate("/"+pnr+"/outlets")
+    function returnToStation() {
+        navigate("/" + pnr + "/outlets")
     }
 
 
@@ -68,15 +72,18 @@ export default function OutletList() {
 
     return (
         <>
-            <div className="flex gap-20 self-center"> 
-                <p className="t text-green-500 hover:font-bold text-lg cursor-pointer underline" onClick={returnToStation}>Choose Different Station</p>
-                <h1>Restaurants at <span className="font-bold text-xl">{stations.name}</span><span className="font-thin"> ({code})</span></h1>
-                <h1>{outletData.length} Restaurant Available</h1>
-            </div>
-            <br />
-            <div className="flex flex-col justify-center self-center items-center w-11/12">
-                {outletDetails}
-            </div>
+
+            {isLoading ? <h1 className="w-fit m-auto flex items-center h-screen animate-spin text-6xl"><FaSpinner /></h1> :<>
+                <div className="flex gap-20 self-center">
+                    <p className="t text-green-500 hover:font-bold text-lg cursor-pointer underline" onClick={returnToStation}>Choose Different Station</p>
+                    <h1>Restaurants at <span className="font-bold text-xl">{stations.name}</span><span className="font-thin"> ({stationCode})</span></h1>
+                    <h1>{outletData.length} Restaurant Available</h1>
+                </div>
+                <br />
+                <div className="flex flex-col justify-center self-center items-center w-11/12">
+                    {outletDetails}
+                </div>
+            </>}
         </>
     )
 }

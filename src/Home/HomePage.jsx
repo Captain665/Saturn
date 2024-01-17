@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import { FaSpinner } from "react-icons/fa6";
 
 export default function Home() {
     const [pnr, setPnr] = React.useState("")
@@ -63,7 +64,7 @@ export default function Home() {
                         className="border-2 rounded-md h-14 outline-none pl-5 text-xl text-start font-medium w-80" placeholder="Enter PNR Number" /><br />
 
                     <button type="Submit" onClick={() => (fetchData())} disabled={context.isLoading ? true : false}
-                        className="bg-blue-800 px-6 p-3 text-white border-none font-bold rounded-lg text-xl cursor-pointer">{context.isLoading ? "Loading..." : "Submit"}</button>
+                        className="bg-blue-800 px-6 p-3 text-white border-none font-bold rounded-lg text-xl cursor-pointer">{context.isLoading ? <FaSpinner className="animate-spin text-2xl" /> : "Submit"}</button>
                     </div>
                 </div>
                 {context.error && <h1 className="font-bold text-xl bg-white">{context.error}</h1>}

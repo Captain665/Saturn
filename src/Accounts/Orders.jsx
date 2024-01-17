@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
+import { FaSpinner } from "react-icons/fa6";
 
 export default function OrderDetails({ token }) {
     const navigate = useNavigate()
@@ -9,7 +10,7 @@ export default function OrderDetails({ token }) {
 
 
     useEffect(() => {
-        const fetchData = async function getData() {
+        const fetchData = async () =>{
             setIsLoading(true)
             const requestBody = {
                 method: 'GET',
@@ -29,10 +30,9 @@ export default function OrderDetails({ token }) {
         }
 
         return () => { fetchData() };
-    }, [])
+    }, [token,navigate])
 
     function handleViewOrderDetail(order){
-        console.log(order)
         navigate("/order/"+order.id)
     }
 
@@ -64,7 +64,7 @@ export default function OrderDetails({ token }) {
         <div>
             <h1 className="font-bold text-2xl text-center">Order History</h1><br /><br />
             <div className=" grid grid-cols-2 gap-2 w-full">
-                {isLoading ? <h1>Loading...</h1> : orderDetails}
+                {isLoading ? <h1 className="w-fit items-center flex text-4xl animate-spin"><FaSpinner /></h1> : orderDetails}
             </div>
         </div>
     )

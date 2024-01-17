@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { FaStar } from "react-icons/fa6";
+import { FaStar, FaSpinner } from "react-icons/fa6";
 
 export default function MenuList() {
     const { code, id } = useParams();
@@ -25,8 +25,11 @@ export default function MenuList() {
     const [orderItems, setOrderItems] = useState(menuDataList)
     const [menuList, setMenuList] = useState([])
 
+    const [isLoading, setIsLoading] = useState(false)
+
 
     useEffect(() => {
+        setIsLoading(true)
         const fetchData = async () => {
             const requestBody = {
                 method: "GET"
@@ -37,6 +40,7 @@ export default function MenuList() {
             if (response.ok) {
                 setMenuList(jsonData.result)
             }
+            setIsLoading(false)
         }
         return () => { fetchData() }
     }, [outletInfo.id, code, id])
@@ -101,8 +105,8 @@ export default function MenuList() {
         navigate("/cart")
     }
 
-    function backToOutlet(){
-        navigate("/"+pnr+"/outlets/"+stationInfo.code)
+    function backToOutlet() {
+        navigate("/" + pnr + "/outlets/" + stationInfo.code)
     }
 
 
@@ -139,8 +143,8 @@ export default function MenuList() {
 
 
 
-    const menuData = <>
-        {menuList ? menuList.map(menuItem => (
+    const menuData =
+        menuList.map(menuItem => (
             <div key={menuItem.id} className="w-full shadow-lg h-40 p-2">
                 <ul className="flex">
                     <div className="w-2/5">
@@ -164,30 +168,35 @@ export default function MenuList() {
                     </div>
                 </ul>
             </div>
-        )) : <h1>Loading...</h1>}
-    </>
+        ))
 
 
     return (
         <>
-        <p className="bg-green-100 cursor-pointer p-2" onClick={backToOutlet}><span className="font-bold text-2xl w-1/2 pl-8 ">&#x2190;</span>  Outlets</p>
-            <div className="w-full flex flex-col justify-center self-center items-center p-5">
-                {stationAndOutlet}
-                <div className="grid grid-cols-3 self-center items-center w-4/5 gap-5 p-5">
-                    {menuData}
-                </div>
-            </div>
-            {orderItems.length > 0 && <>
-                <div className="shadow-lg border-2 p-2 rounded-lg w-4/6 self-center fixed bottom-2 bg-green-300" >
-                    <ul className="flex place-items-baseline justify-around">
-                        <li className="text-xl font-bold">Cart</li>
-                        <li>Item : {orderItems.length}</li>
-                        <li>Amount : &#x20B9;{orderItems.reduce((a, b) => a + (b.basePrice * b.quantity), 0)}</li>
-                        <li className="p-2 px-4 rounded-md cursor-pointer bg-orange-300" onClick={handleCheckOut}>Checkout</li>
-                    </ul>
-                </div>
-            </>
+            {isLoading ? <h1 className="m-auto w-fit h-screen flex items-center text-6xl animate-spin"> <FaSpinner /> </h1> :
+                <>
+                    <p className="bg-green-100 cursor-pointer p-2" onClick={backToOutlet}><span className="font-bold text-2xl w-1/2 pl-8 ">&#x2190;</span>  Outlets</p>
+                    <div className="w-full flex flex-col justify-center self-center items-center p-5">
+                        {stationAndOutlet}
+                        <div className="grid grid-cols-3 self-center items-center w-4/5 gap-5 p-5">
+                            {menuData}
+                        </div>
+                    </div>
+                    {orderItems.length > 0 && <>
+                        <div className="shadow-lg border-2 p-2 rounded-lg w-4/6 self-center fixed bottom-2 bg-green-300" >
+                            <ul className="flex place-items-baseline justify-around">
+                                <li className="text-xl font-bold">Cart</li>
+                                <li>Item : {orderItems.length}</li>
+                                <li>Amount : &#x20B9;{orderItems.reduce((a, b) => a + (b.basePrice * b.quantity), 0)}</li>
+                                <li className="p-2 px-4 rounded-md cursor-pointer bg-orange-300" onClick={handleCheckOut}>Checkout</li>
+                            </ul>
+                        </div>
+                    </>
+                    }
+
+                </>
             }
+
         </>
     )
 }

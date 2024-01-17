@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { FaSpinner } from "react-icons/fa6";
 
 export default function CartDetails() {
     const navigate = useNavigate()
@@ -12,9 +13,14 @@ export default function CartDetails() {
     const seatInfo = JSON.parse(window.sessionStorage.getItem("pnrDetails")).seatInfo;
 
     const [itemList, setItemList] = useState(itemInfo)
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         window.sessionStorage.setItem("selectedItemInfo", JSON.stringify(itemList))
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 2000)
+        setIsLoading(true)
     }, [itemList])
 
 
@@ -61,16 +67,16 @@ export default function CartDetails() {
     }
 
 
-    function returnToMenu(){
-        const url = "/station/"+stationInfo.code+"/outlet/"+outletInfo.id+"/menu"
+    function returnToMenu() {
+        const url = "/station/" + stationInfo.code + "/outlet/" + outletInfo.id + "/menu"
         navigate(url)
     }
 
-    if(itemList.length === 0){
+    if (itemList.length === 0) {
         returnToMenu()
     }
 
-    function createOrder(){
+    function createOrder() {
         console.log("order create")
     }
 
@@ -152,18 +158,22 @@ export default function CartDetails() {
 
 
     return (
-        <>
-            <div className="bg-green-100 cursor-pointer flex justify-between p-2" onClick={returnToMenu}>
-                <p><span className="font-bold text-2xl w-1/2 pl-8">&#x2190;</span> Menu Items</p>
-                <p className="font-medium text-4xl w-1/2 text-start">Your Cart</p>
-            </div>
-            <div className="w-11/12 self-center m-6 flex gap-5 align-top">
-                {deliveryDetails}
-                {itemDetails}
-            </div>
-            <div className="self-center w-2/5 h-fit">
-                {paymentDetails}
-            </div><br />
+        <> {isLoading ? <h1 className="h-screen w-fit m-auto flex items-center text-4xl animate-spin"><FaSpinner /></h1> :
+            <>
+                <div className="bg-green-100 cursor-pointer flex justify-between p-2" onClick={returnToMenu}>
+                    <p><span className="font-bold text-2xl w-1/2 pl-8">&#x2190;</span> Menu Items</p>
+                    <p className="font-medium text-4xl w-1/2 text-start">Your Cart</p>
+                </div>
+                <div className="w-11/12 self-center m-6 flex gap-5 align-top">
+                    {deliveryDetails}
+                    {itemDetails}
+                </div>
+                <div className="self-center w-2/5 h-fit">
+                    {paymentDetails}
+                </div><br />
+            </>
+        }
+
         </>
     )
 }
