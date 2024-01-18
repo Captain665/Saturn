@@ -19,7 +19,7 @@ export default function CartDetails() {
         window.sessionStorage.setItem("selectedItemInfo", JSON.stringify(itemList))
         setTimeout(() => {
             setIsLoading(false)
-        }, 2000)
+        },  0)
         setIsLoading(true)
     }, [itemList])
 
@@ -82,8 +82,8 @@ export default function CartDetails() {
 
 
     const deliveryDetails = (
-        <div className=" w-1/3 rounded-xl shadow-md bg-green-200 h-fit">
-            <p className="font-medium text-2xl text-center bg-green-300 p-4 rounded-md">Deliver to </p><br />
+        <div className=" w-1/3 rounded-xl shadow-md bg-rose-200 h-fit">
+            <p className="font-medium text-2xl text-center bg-rose-300 p-4 rounded-md">Deliver to </p><br />
             <ol className="p-4 bg-white m-2 rounded-md">
                 <li className="font-semibold text-lg">Passanger Details</li>
                 <li>Name : {userInfo.fullName}</li>
@@ -108,8 +108,8 @@ export default function CartDetails() {
     )
 
     const itemDetails = (
-        <div className="w-2/3 bg-green-200 rounded-xl shadow-md flex flex-col align-center align-top h-fit">
-            <p className="text-center font-medium text-2xl p-4 shadow-lg bg-green-300 rounded-md">Cart Summary</p>
+        <div className="w-2/3 bg-rose-200 rounded-xl shadow-md flex flex-col align-center align-top h-fit">
+            <p className="text-center font-medium text-2xl p-4 shadow-lg bg-rose-300 rounded-md">Cart Summary</p>
             <ul className="bg-white p-2 gap-10 h-16 flex w-11/12 self-center m-2 rounded-md">
                 <img src={outletInfo.logoImage} alt="outlet logo" className="object-cover" width={80} />
                 <li className="font-bold text-2xl">{outletInfo.outletName}</li>
@@ -117,7 +117,7 @@ export default function CartDetails() {
             {itemList && itemList.map(item => (
                 <ul className="p-4 bg-white w-11/12 self-center content-center shadow-md m-2 rounded-lg flex" key={item.itemId}>
                     <ul className="w-3/4">
-                        <img src={item.isVegeterian ? "/veg.png" : "nonveg.png"} alt="item logo" className="w-4" />
+                        <img src={item.isVegeterian ? "/veg.png" : "/nonveg.png"} alt="item logo" className="w-4" />
                         <li className="text-lg">{item.name}</li>
                         <li className="text-xs opacity-80">{item.description}</li>
                         <li className="">&#x20B9;{item.basePrice}</li>
@@ -137,7 +137,7 @@ export default function CartDetails() {
     )
     const paymentDetails = (
         <ul className="bg-white rounded border-2">
-            <p className="text-center bg-green-300 p-5 text-xl font-medium rounded">Payment Details </p>
+            <p className="text-center bg-rose-300 p-5 text-xl font-medium rounded">Payment Details </p>
             <ul className="flex p-5 justify-between gap-2">
                 <ul className="text-lg">
                     <li className="">Subtotal : </li>
@@ -160,7 +160,7 @@ export default function CartDetails() {
     return (
         <> {isLoading ? <h1 className="h-screen w-fit m-auto flex items-center text-4xl animate-spin"><FaSpinner /></h1> :
             <>
-                <div className="bg-green-100 cursor-pointer flex justify-between p-2" onClick={returnToMenu}>
+                <div className="bg-rose-100 cursor-pointer flex justify-between p-2" onClick={returnToMenu}>
                     <p><span className="font-bold text-2xl w-1/2 pl-8">&#x2190;</span> Menu Items</p>
                     <p className="font-medium text-4xl w-1/2 text-start">Your Cart</p>
                 </div>

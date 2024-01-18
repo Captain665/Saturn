@@ -75,7 +75,7 @@ export default function OutletList() {
 
             {isLoading ? <h1 className="w-fit m-auto flex items-center h-screen animate-spin text-6xl"><FaSpinner /></h1> :<>
                 <div className="flex gap-20 self-center">
-                    <p className="t text-green-500 hover:font-bold text-lg cursor-pointer underline" onClick={returnToStation}>Choose Different Station</p>
+                    <p className="t text-rose-400 hover:font-bold text-lg cursor-pointer underline" onClick={returnToStation}>Choose Different Station</p>
                     <h1>Restaurants at <span className="font-bold text-xl">{stations.name}</span><span className="font-thin"> ({stationCode})</span></h1>
                     <h1>{outletData.length} Restaurant Available</h1>
                 </div>

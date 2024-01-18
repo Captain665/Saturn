@@ -2,7 +2,7 @@ import React from "react";
 
 export default function About() {
     return (
-        <div className="m-2 h-fit shadow indent-5 w-9/12 self-center px-32 py-3">
+        <div className="m-2 h-fit shadow indent-5 w-9/12 self-center px-32 py-3 bg-rose-100">
             <br />
             <header>
                 <h1 className="text-4xl font-bold">About Us</h1><hr /><br />

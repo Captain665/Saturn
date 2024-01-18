@@ -37,7 +37,7 @@ export default function TrainDetail() {
         <>
             {isLoading ? <h1 className="text-6xl h-screen m-auto w-fit items-center flex animate-spin"><FaSpinner/></h1> : <>
                 <h1 className="text-4xl font-bold text-center pt-3">Journey Details & Station List</h1>
-                <div className="flex flex-col justify-center self-center items-center w-11/12 shadow rounded-md bg-green-200"><br />
+                <div className="flex flex-col justify-center self-center items-center w-11/12 shadow rounded-md bg-rose-200"><br />
 
                     <div className="p-4 rounded-lg w-full px-28  place-items-center">
                         <ul className="item-center grid grid-cols-2 gap-3">

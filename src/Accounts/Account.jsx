@@ -46,7 +46,7 @@ export default function Account() {
             {isLoading ? <h1 className="h-screen w-fit m-auto flex items-center text-4xl animate-spin"><FaSpinner /></h1> :
                 <div className="p-5 self-center shadow-xl flex flex-col h-fit w-full mt-6 mb-10 rounded-3xl"><br />
                     {userDataExist ? <div className="flex justify-around">
-                        <div className="flex flex-col w-4/12 text-xl p-10 border-4">
+                        <div className="flex flex-col w-4/12 text-xl p-10 border-4 ">
                             <input value="Profile" type="button" onClick={() => (setData("profile"))}
                                 className={`mt-4 cursor-pointer ${({ isActive }) => (isActive ? "underline font-bold" : null)}`} />
 
@@ -56,7 +56,7 @@ export default function Account() {
                             <input value="Logout" type="button" onClick={logOut}
                                 className={`mt-4 cursor-pointer ${({ isActive }) => (isActive ? "underline font-bold" : null)}`} />
                         </div>
-                        <div className="w-2/3 p-6 border-4">{data === "orders" ? <OrderDetails token={info.jwt} /> : <CustomerDetails />}</div>
+                        <div className="w-2/3 p-6 border-4 ">{data === "orders" ? <OrderDetails token={info.jwt} /> : <CustomerDetails />}</div>
                     </div> : DisplayForm()
                     }
                 </div>

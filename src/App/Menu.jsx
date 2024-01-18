@@ -113,7 +113,7 @@ export default function MenuList() {
     const stationAndOutlet = (
         <div className="flex w-11/12 p-5 h-60 shadow">
             <div className="w-1/5 shadow-md rounded-md">
-                <div className="bg-black opacity-80 h-1/2 text-white p-3">
+                <div className="bg-rose-500 opacity-80 h-1/2 text-white p-3">
                     <p className="text-sm">Delivery Details</p>
                     <p><span className="pt-1 text-lg font-semibold">{trainDetail.name}</span> <span className="font-bold">({trainDetail.trainNo})</span></p>
                     <p className="text-sm pt-2"><span>On {stationInfo.depDate}</span><span>, at {stationInfo.departure}</span></p>
@@ -155,7 +155,7 @@ export default function MenuList() {
                         <li className="pt-2 truncate text-lg font-medium">{menuItem.name}</li>
                         <li className="truncate text-wrap-3 text-xs font-thin opacity-90 pl-1">{menuItem.description}</li>
                         <li>&#x20B9; {menuItem.basePrice}</li>
-                        <li className="border-2 w-fit px-2 p-1 rounded-lg float-end align-bottom border-[#ff7e8b]">
+                        <li className="border-2 w-fit px-2 p-1 rounded-lg float-end align-bottom border-rose-400">
                             {
                                 (orderItems.find(item => item.itemId === menuItem.id)) ?
                                     <div className="flex flex-row justify-between">
@@ -183,12 +183,12 @@ export default function MenuList() {
                         </div>
                     </div>
                     {orderItems.length > 0 && <>
-                        <div className="shadow-lg border-2 p-2 rounded-lg w-4/6 self-center fixed bottom-2 bg-green-300" >
+                        <div className="shadow-lg border-2 p-2 rounded-lg w-4/6 self-center fixed bottom-2 bg-rose-300" >
                             <ul className="flex place-items-baseline justify-around">
                                 <li className="text-xl font-bold">Cart</li>
                                 <li>Item : {orderItems.length}</li>
                                 <li>Amount : &#x20B9;{orderItems.reduce((a, b) => a + (b.basePrice * b.quantity), 0)}</li>
-                                <li className="p-2 px-4 rounded-md cursor-pointer bg-orange-300" onClick={handleCheckOut}>Checkout</li>
+                                <li className="p-2 px-4 rounded-md cursor-pointer bg-rose-600 text-white" onClick={handleCheckOut}>Checkout</li>
                             </ul>
                         </div>
                     </>
