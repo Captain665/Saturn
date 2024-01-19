@@ -175,7 +175,7 @@ export default function MenuList() {
         <>
             {isLoading ? <h1 className="m-auto w-fit h-screen flex items-center text-6xl animate-spin"> <FaSpinner /> </h1> :
                 <>
-                    <p className="bg-green-100 cursor-pointer p-2" onClick={backToOutlet}><span className="font-bold text-2xl w-1/2 pl-8 ">&#x2190;</span>  Outlets</p>
+                    <p className="bg-rose-100 cursor-pointer p-2" onClick={backToOutlet}><span className="font-bold text-2xl w-1/2 pl-8 ">&#x2190;</span>  Outlets</p>
                     <div className="w-full flex flex-col justify-center self-center items-center p-5">
                         {stationAndOutlet}
                         <div className="grid grid-cols-3 self-center items-center w-4/5 gap-5 p-5">

@@ -54,7 +54,7 @@ export default function OrderDetails({ token }) {
                 <li><span className="uppercase text-[#696969] text-xs">Status </span> <br />{item.status}</li>
                 <li><span className="uppercase text-[#696969] text-xs">Total Amount </span><br /> &#x20B9; {item.payable_amount}</li>
                 <li><span className="uppercase text-[#696969] text-xs">Ordered On </span><br />{item.bookingDate}</li><br />
-                <li className="p-2 bg-green-300 w-fit cursor-pointer float-right border-none rounded-xl hover:bg-green-200" onClick={() => handleViewOrderDetail(item)}><span>View Details</span></li>
+                <li className="p-2 bg-rose-400 w-fit cursor-pointer float-right border-none rounded-xl hover:bg-rose-200" onClick={() => handleViewOrderDetail(item)}><span>View Details</span></li>
             </ul>
         </div>
     ))

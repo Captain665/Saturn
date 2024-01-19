@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import {FaSpinner} from "react-icons/fa6"
 
 export default function LoginForm() {
 
@@ -84,13 +85,13 @@ export default function LoginForm() {
                     value={loginData.password}
                 /><br />
 
-                <button type="submit"
-                    className="bg-blue-500 h-10 border-none rounded text-white text-xl">
-                    {context.isLoading ? "Loading..." : "Sign in"}</button>
+                <button type="submit" disabled={context.isLoading ? true : false}
+                    className="bg-rose-500 h-10 border-none rounded text-white text-xl">
+                    {context.isLoading ? <li className="inline-flex justify-center text-xl"><FaSpinner className="animate-spin"/></li> : "Sign in"}</button>
 
             </form><br />
 
-            <p className="text-center">Don't have an Account ?  <NavLink to="?form=signup" className="text-blue-400">Create Account</NavLink></p><br /><br />
+            <p className="text-center">Don't have an Account ?  <NavLink to="?form=signup" className="text-rose-400">Create Account</NavLink></p><br /><br />
         </div>
     )
 }

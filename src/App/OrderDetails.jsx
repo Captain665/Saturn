@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { FaUser, FaCartShopping, FaMoneyCheckDollar, FaMoneyBill, FaSpinner } from "react-icons/fa6";
 
 export default function OrderDetail() {
+    const navigate = useNavigate()
     const { orderId } = useParams()
     const token = JSON.parse(localStorage.getItem("userInfo")).jwt;
 
@@ -30,10 +31,15 @@ export default function OrderDetail() {
         return () => { fetchData() }
     }, [orderId, token])
 
+
+    function backToHome(){
+        navigate("/")
+    }
+
     return (
         <>{isLoading ? <h1><FaSpinner /></h1> :
             order && <div className="">
-                <div className="bg-rose-200 cursor-pointer flex items-center w-full text-lg pl-5 p-2">
+                <div className="bg-rose-200 cursor-pointer flex items-center w-full text-lg pl-5 p-2" onClick={backToHome}>
                     <h1>&#x2190; back to home</h1>
                 </div>
                 <h1 className="text-4xl ml-14 mt-5 mb-2">Order Details</h1>
@@ -126,7 +132,7 @@ export default function OrderDetail() {
                             {order && order.orderItems.map((itemData) => (
                                 <div className="flex gap-2 w-11/12 justify-between p-5 border-none bg-white rounded-lg">
                                     <ul>
-                                    <img src={itemData.isVegeterian ? "/veg.png" : "/nonveg.png"} alt="item logo" className="w-4" />
+                                    <img src={itemData.veg ? "/veg.png" : "/nonveg.png"} alt="item logo" className="w-4" />
                                         <li className="font-bold text-lg">{itemData.itemName}</li>
                                         <li className="text-sm">{itemData.description}</li>
                                         <li>&#x20B9;{itemData.basePrice}</li>

@@ -11,6 +11,7 @@ export default function CartDetails() {
     const userInfo = JSON.parse(window.localStorage.getItem("userInfo"))
     const trainInfo = JSON.parse(window.sessionStorage.getItem("pnrDetails")).trainInfo;
     const seatInfo = JSON.parse(window.sessionStorage.getItem("pnrDetails")).seatInfo;
+    const pnr = JSON.parse(window.sessionStorage.getItem("pnr"));
 
     const [itemList, setItemList] = useState(itemInfo)
     const [isLoading, setIsLoading] = useState(false)
@@ -19,7 +20,7 @@ export default function CartDetails() {
         window.sessionStorage.setItem("selectedItemInfo", JSON.stringify(itemList))
         setTimeout(() => {
             setIsLoading(false)
-        },  0)
+        }, 0)
         setIsLoading(true)
     }, [itemList])
 
@@ -76,8 +77,46 @@ export default function CartDetails() {
         returnToMenu()
     }
 
+    const body = {
+        "trainName": trainInfo.name,
+        "trainNo": trainInfo.trainNo,
+        "stationCode": stationInfo.code,
+        "stationName": stationInfo.name,
+        "deliveryDate": stationInfo.depDate + " " + stationInfo.departure,
+        "coach": seatInfo.coach,
+        "berth": seatInfo.berth,
+        "outletId" : outletInfo.id,
+        "customerId" : userInfo.id,
+        "pnr": pnr,
+        "paymentType": "CASH_ON_DELIVERY",
+        "deliveryCharge": outletInfo.deliveryCost,
+        "orderFrom": "desktop Web",
+        "orderItem" : itemList
+    }
+
     function createOrder() {
-        console.log("order create")
+        console.log("create")
+        const requestBody = {
+            method: "POST",
+            headers: {
+                "Authorization": userInfo.jwt,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+
+            },
+            body: JSON.stringify(body)
+        }
+        const fetchData = async () => {
+
+            const response = await fetch("/create/order",requestBody);
+            const jsonData = await response.json();
+            if(response.status === 201){
+                sessionStorage.clear();
+                navigate("/order/"+jsonData.result.id)
+            }
+        }
+
+       fetchData()
     }
 
 
@@ -152,7 +191,7 @@ export default function CartDetails() {
                     <li className="font-bold">&#x20B9;{payable}</li>
                 </ul>
             </ul>
-            <button type="submit" className="bg-orange-300 w-full p-2 text-xl rounded border-none" onClick={createOrder}>Place Order</button>
+            <button type="submit" className="bg-rose-500 w-full p-2 text-xl rounded border-none" onClick={createOrder}>Place Order</button>
         </ul>
     )
 
