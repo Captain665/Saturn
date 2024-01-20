@@ -1,17 +1,18 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Home from "./App/FrontPage/HomePage";
+import LayOut from "./App/Layout/Layout";
+import Home from "./App/FrontPage/HomePage/Home";
 import About from "./App/FrontPage/About";
 import Contact from "./App/FrontPage/ContactUs";
+import Account from "./App/Accounts/Account";
 import NonExistPath from "./InvalidPath";
-import Account from "./Accounts/Account";
-import OutletList from "./App/Outlets";
-import TrainDetail from "./App/TrainDetails";
-import StationList from "./App/Stations";
-import MenuList from "./App/Menu";
-import CartDetails from "./App/Cart";
-import OrderDetail from "./App/OrderDetails";
-import LayOut from "./Layout/Layout";
+import TrainDetail from "./App/Stations/TrainDetails";
+import StationList from "./App/Stations/Stations";
+import OutletList from "./App/Outlets/Outlets";
+import MenuList from "./App/Menu/Menu";
+import CartDetails from "./App/Cart/Cart";
+import OrderDetails from "./App/Accounts/Orders";
+
 
 export default function BasePage() {
     return (
@@ -30,7 +31,7 @@ export default function BasePage() {
                     </Route>
                     <Route path="/station/:code/outlet/:id/menu" element={<MenuList />} />
                     <Route path="cart" element={<CartDetails />}/>
-                    <Route path="order/:orderId" element={<OrderDetail />}/>
+                    <Route path="order/:orderId" element={<OrderDetails />}/>
                 </Route>
             </Routes>
         </BrowserRouter>
