@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+
 import LayOut from "./App/Layout/Layout";
-import Home from "./App/FrontPage/HomePage/Home";
 import About from "./App/FrontPage/About";
 import Contact from "./App/FrontPage/ContactUs";
 import Account from "./App/Accounts/Account";
@@ -12,6 +12,7 @@ import OutletList from "./App/Outlets/Outlets";
 import MenuList from "./App/Menu/Menu";
 import CartDetails from "./App/Cart/Cart";
 import OrderDetails from "./App/Accounts/Orders";
+import Home from "./App/FrontPage/HomePage/Home.html";
 
 
 export default function BasePage() {
