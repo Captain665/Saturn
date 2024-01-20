@@ -1,8 +1,8 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Home from "./Home/HomePage";
-import About from "./Home/About";
-import Contact from "./Home/ContactUs";
+import Home from "./App/FrontPage/HomePage";
+import About from "./App/FrontPage/About";
+import Contact from "./App/FrontPage/ContactUs";
 import NonExistPath from "./InvalidPath";
 import Account from "./Accounts/Account";
 import OutletList from "./App/Outlets";
