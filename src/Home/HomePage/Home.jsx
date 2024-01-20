@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
-import { FaSpinner } from "react-icons/fa6";
+import { FaSpinner, FaTrainTram } from "react-icons/fa6";
 
 export default function Home() {
     const [pnr, setPnr] = React.useState("")
@@ -55,12 +55,13 @@ export default function Home() {
         }
     }
 
+
     return (
         <>
             <div className="bg-cover bg-center opacity-90 bg-[url('https://burst.shopifycdn.com/photos/flatlay-iron-skillet-with-meat-and-other-food.jpg?width=1000&format=pjpg&exif=0&iptc=0')] h-svh bg-no-repeat w-full">
                 <div className="h-screen flex justify-center items-center flex-col">
                     <div className="w-fit self-center shadow-xl rounded-xl items-center place-content-center bg-gray-200 p-10 flex gap-2">
-                    <input type="number" name="pnr" value={pnr} onChange={(event) => ([setPnr(event.target.value), setContext((prevData) => ({ ...prevData, error: "" }))])}
+                    <input type="number" name="pnr" maxLength= "10" value={pnr}  onChange={(event) => ([setPnr(event.target.value), setContext((prevData) => ({ ...prevData, error: "" }))])}
                         className="border-2 rounded-md h-14 outline-none pl-5 text-xl text-start font-medium w-80" placeholder="Enter PNR Number" /><br />
 
                     <button type="Submit" onClick={() => (fetchData())} disabled={context.isLoading ? true : false}
