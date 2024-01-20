@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Home from "./Home/HomePage";
-import LayOut from "./Layout";
 import About from "./Home/About";
 import Contact from "./Home/ContactUs";
 import NonExistPath from "./InvalidPath";
@@ -12,6 +11,7 @@ import StationList from "./App/Stations";
 import MenuList from "./App/Menu";
 import CartDetails from "./App/Cart";
 import OrderDetail from "./App/OrderDetails";
+import LayOut from "./Layout/Layout";
 
 export default function BasePage() {
     return (
