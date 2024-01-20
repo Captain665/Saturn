@@ -70,9 +70,9 @@ export default function Validate() {
                 <input type="number" name="mobileNumber" id="number" onChange={handleOnChange} value={data.otp}
                     required placeholder="OTP" className="border rounded-lg h-10 pl-2 outline-none" /><br />
 
-                <button type="submit" className="bg-gray-600 h-10 border-none rounded text-white text-xl">{context.isLoading ? "Submitting..." : "Submit"}</button>
+                <button type="submit" className="bg-rose-500 h-10 border-none rounded text-white text-xl">{context.isLoading ? "Submitting..." : "Submit"}</button>
             </form><br />
-            <p className="text-center">Have an Account ?  <NavLink href="?form=login" className="text-blue-400">Sign in</NavLink></p><br /><br />
+            <p className="text-center">Have an Account ?  <NavLink href="?form=login" className="text-rose-400">Sign in</NavLink></p><br /><br />
         </div>
     )
 }

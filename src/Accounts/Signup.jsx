@@ -96,16 +96,16 @@ export default function Signup() {
 
                 <div className="flex justify-around">
                     <input type="button" value="Male" onClick={handleGender}
-                        className={`border-2 w-20 cursor-pointer rounded-lg h-10 ${userInfo.gender === "Male" ? "bg-blue-400" : ""}`} />   
+                        className={`border-2 w-20 cursor-pointer rounded-lg h-10 ${userInfo.gender === "Male" ? "bg-rose-400" : ""}`} />   
                     <input  type="button" value="Female" onClick={handleGender}
-                        className={`border-2 w-20 cursor-pointer rounded-lg h-10 ${userInfo.gender === "Female" ? "bg-blue-400" : ""}`} />
+                        className={`border-2 w-20 cursor-pointer rounded-lg h-10 ${userInfo.gender === "Female" ? "bg-rose-400" : ""}`} />
                     <input type="button" value="Other" onClick={handleGender}
-                        className={`border-2 w-20 cursor-pointer rounded-lg h-10 ${userInfo.gender === "Other" ? "bg-blue-400" : ""}`}/>
+                        className={`border-2 w-20 cursor-pointer rounded-lg h-10 ${userInfo.gender === "Other" ? "bg-rose-400" : ""}`}/>
                 </div><br />
 
-                <button type="submit" className="bg-blue-500 h-10 border-none rounded text-white text-xl">{context.isloading ? "Submitting..." : "Submit"}</button>
+                <button type="submit" className="bg-rose-500 h-10 border-none rounded text-white text-xl">{context.isloading ? "Submitting..." : "Submit"}</button>
             </form><br />
-            <p className="text-center">Have an Account ?  <a href="?form=login" className="text-blue-400">Sign In</a></p><br /><br />
+            <p className="text-center">Have an Account ?  <a href="?form=login" className="text-rose-400">Sign In</a></p><br /><br />
         </div>
     )
 }
