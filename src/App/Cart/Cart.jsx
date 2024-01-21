@@ -20,7 +20,7 @@ export default function CartDetails() {
         window.sessionStorage.setItem("selectedItemInfo", JSON.stringify(itemList))
         setTimeout(() => {
             setIsLoading(false)
-        }, 0)
+        }, 1000)
         setIsLoading(true)
     }, [itemList])
 
@@ -85,13 +85,13 @@ export default function CartDetails() {
         "deliveryDate": stationInfo.depDate + " " + stationInfo.departure,
         "coach": seatInfo.coach,
         "berth": seatInfo.berth,
-        "outletId" : outletInfo.id,
-        "customerId" : userInfo.id,
+        "outletId": outletInfo.id,
+        "customerId": userInfo.id,
         "pnr": pnr,
         "paymentType": "CASH_ON_DELIVERY",
         "deliveryCharge": outletInfo.deliveryCost,
         "orderFrom": "desktop Web",
-        "orderItem" : itemList
+        "orderItem": itemList
     }
 
     function createOrder() {
@@ -108,15 +108,15 @@ export default function CartDetails() {
         }
         const fetchData = async () => {
 
-            const response = await fetch("/create/order",requestBody);
+            const response = await fetch("/create/order", requestBody);
             const jsonData = await response.json();
-            if(response.status === 201){
+            if (response.status === 201) {
                 sessionStorage.clear();
-                navigate("/order/"+jsonData.result.id)
+                navigate("/order/" + jsonData.result.id)
             }
         }
 
-       fetchData()
+        fetchData()
     }
 
 

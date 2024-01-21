@@ -1,59 +1,40 @@
-import React from "react";
-import { useNavigate } from "react-router";
-import { FaSpinner, FaTrainTram } from "react-icons/fa6";
+import React, { useRef, useState } from "react";
+import { json, useNavigate } from "react-router";
+import { FaSpinner } from "react-icons/fa6";
+import { ApiData } from "./Home";
+import ErrorToster from "../../../MessageToggle";
+
 
 export default function Home() {
     const [pnr, setPnr] = React.useState("")
-    const [context, setContext] = React.useState({ error: "", isLoading: false })
-    const pnrLength = pnr.length;
+    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = React.useState()
     const navigate = useNavigate()
 
-    const fetchData = async () => {
-        if (pnrLength === 10) {
-            setContext((prevData) => ({
-                ...prevData,
-                isLoading: true
-            }))
-            const requestBody = {
-                method: "GET"
+    setTimeout(() => {
+        setError(null)
+    },10000)
+
+    function GetData(pnr) {
+        const data = async () => {
+            setIsLoading(true)
+            const response = await ApiData(pnr)
+            console.log(response)
+            if (response.status === "failure") {
+                setError(response)
             }
-            const url = "pnr/" + pnr
-            const response = await fetch(url, requestBody);
-            const jsonData = await response.json();
-            if (response.ok) {
-                const station = jsonData.result.stations;
-                if (station.length > 0) {
-                    setContext((prevData) => ({
-                        ...prevData,
-                        isLoading: false,
-                    }))
-                    const route = pnr + "/outlets";
-                    const result = jsonData.result;
-                    window.sessionStorage.setItem("pnr",JSON.stringify(pnr))
-                    window.sessionStorage.setItem("pnrDetails",JSON.stringify(result))
-                    navigate(route, { state: { result } });
-                } else {
-                    setContext((prevData) => ({
-                        ...prevData,
-                        isLoading: false,
-                        error: "Sorry, no restaurant found on your journey"
-                    }))
-                }
-            } else {
-                setContext((prevData) => ({
-                    ...prevData,
-                    isLoading: false,
-                    error: "Something went wrong, Please try after some time"
-                }))
+            if (response.status === "success") {
+                const result = response.result;
+                sessionStorage.setItem("pnrDetails", JSON.stringify(result))
+                sessionStorage.setItem("pnr", JSON.stringify(pnr))
+                const route = pnr + "/outlets";
+                navigate(route, { state: { result } });
             }
-        } else {
-            setContext((prevData) => ({
-                ...prevData,
-                error: "Only 10 digit number are acceptable",
-                isLoading: false
-            }))
+            setIsLoading(false)
         }
+        data()
     }
+
 
 
     return (
@@ -61,14 +42,14 @@ export default function Home() {
             <div className="bg-cover bg-center opacity-90 bg-[url('https://burst.shopifycdn.com/photos/flatlay-iron-skillet-with-meat-and-other-food.jpg?width=1000&format=pjpg&exif=0&iptc=0')] h-svh bg-no-repeat w-full">
                 <div className="h-screen flex justify-center items-center flex-col">
                     <div className="w-fit self-center shadow-xl rounded-xl items-center place-content-center bg-gray-200 p-10 flex gap-2">
-                    <input type="number" name="pnr" maxLength= "10" value={pnr}  onChange={(event) => ([setPnr(event.target.value), setContext((prevData) => ({ ...prevData, error: "" }))])}
-                        className="border-2 rounded-md h-14 outline-none pl-5 text-xl text-start font-medium w-80" placeholder="Enter PNR Number" /><br />
+                        <input type="number" name="pnr" maxLength="10" value={pnr} onChange={(event) => (setPnr(event.target.value))}
+                            className="border-2 rounded-md h-14 outline-none pl-5 text-xl text-start font-medium w-80" placeholder="Enter PNR Number" /><br />
 
-                    <button type="Submit" onClick={() => (fetchData())} disabled={context.isLoading ? true : false}
-                        className="bg-rose-800 px-6 p-3 text-white border-none font-bold rounded-lg text-xl cursor-pointer">{context.isLoading ? <FaSpinner className="animate-spin text-2xl" /> : "Submit"}</button>
+                        <button type="Submit" onClick={() => GetData(pnr)} disabled={isLoading ? true : false}
+                            className="bg-rose-800 px-6 p-3 text-white border-none font-bold rounded-lg text-xl cursor-pointer">{isLoading ? <FaSpinner className="animate-spin text-2xl" /> : "Submit"}</button>
                     </div>
                 </div>
-                {context.error && <h1 className="font-bold text-xl bg-white">{context.error}</h1>}
+                {error && <ErrorToster props={error} />}
             </div>
         </>
     )

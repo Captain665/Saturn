@@ -13,6 +13,7 @@ import MenuList from "./App/Menu/Menu";
 import CartDetails from "./App/Cart/Cart";
 import OrderDetails from "./App/Accounts/Orders";
 import Home from "./App/FrontPage/HomePage/Home.html";
+import ErrorToster from "./MessageToggle";
 
 
 export default function BasePage() {
@@ -33,6 +34,7 @@ export default function BasePage() {
                     <Route path="/station/:code/outlet/:id/menu" element={<MenuList />} />
                     <Route path="cart" element={<CartDetails />}/>
                     <Route path="order/:orderId" element={<OrderDetails />}/>
+                    <Route path="test"/>
                 </Route>
             </Routes>
         </BrowserRouter>
