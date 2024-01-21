@@ -1,39 +1,9 @@
-import React, { useRef, useState } from "react";
-import { json, useNavigate } from "react-router";
+import React from "react";
 import { FaSpinner } from "react-icons/fa6";
-import { ApiData } from "./Home";
 import ErrorToster from "../../../MessageToggle";
 
 
-export default function Home() {
-    const [pnr, setPnr] = React.useState("")
-    const [isLoading, setIsLoading] = useState(false)
-    const [error, setError] = React.useState()
-    const navigate = useNavigate()
-
-    setTimeout(() => {
-        setError(null)
-    },10000)
-
-    function GetData(pnr) {
-        const data = async () => {
-            setIsLoading(true)
-            const response = await ApiData(pnr)
-            console.log(response)
-            if (response.status === "failure") {
-                setError(response)
-            }
-            if (response.status === "success") {
-                const result = response.result;
-                sessionStorage.setItem("pnrDetails", JSON.stringify(result))
-                sessionStorage.setItem("pnr", JSON.stringify(pnr))
-                const route = pnr + "/outlets";
-                navigate(route, { state: { result } });
-            }
-            setIsLoading(false)
-        }
-        data()
-    }
+export default function HomePage({ pnr,handleOnChange, handleOnClick,isLoading,error }) {  
 
 
 
@@ -42,10 +12,10 @@ export default function Home() {
             <div className="bg-cover bg-center opacity-90 bg-[url('https://burst.shopifycdn.com/photos/flatlay-iron-skillet-with-meat-and-other-food.jpg?width=1000&format=pjpg&exif=0&iptc=0')] h-svh bg-no-repeat w-full">
                 <div className="h-screen flex justify-center items-center flex-col">
                     <div className="w-fit self-center shadow-xl rounded-xl items-center place-content-center bg-gray-200 p-10 flex gap-2">
-                        <input type="number" name="pnr" maxLength="10" value={pnr} onChange={(event) => (setPnr(event.target.value))}
+                        <input type="number" name="pnr" maxLength="10" value={pnr} onChange={handleOnChange}
                             className="border-2 rounded-md h-14 outline-none pl-5 text-xl text-start font-medium w-80" placeholder="Enter PNR Number" /><br />
 
-                        <button type="Submit" onClick={() => GetData(pnr)} disabled={isLoading ? true : false}
+                        <button type="Submit" onClick={handleOnClick} disabled={isLoading ? true : false}
                             className="bg-rose-800 px-6 p-3 text-white border-none font-bold rounded-lg text-xl cursor-pointer">{isLoading ? <FaSpinner className="animate-spin text-2xl" /> : "Submit"}</button>
                     </div>
                 </div>

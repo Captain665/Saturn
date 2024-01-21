@@ -12,8 +12,7 @@ import OutletList from "./App/Outlets/Outlets";
 import MenuList from "./App/Menu/Menu";
 import CartDetails from "./App/Cart/Cart";
 import OrderDetails from "./App/Accounts/Orders";
-import Home from "./App/FrontPage/HomePage/Home.html";
-import ErrorToster from "./MessageToggle";
+import Home from "./App/FrontPage/HomePage/Home";
 
 
 export default function BasePage() {

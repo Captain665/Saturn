@@ -1,30 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
+import HomePage from "./Home.html";
+import { useNavigate } from "react-router";
+import { PnrResponse } from "../../ApiCall/PnrApi";
 
-export async function ApiData(pnr) {
 
 
-    const message = {
-        status: "failure",
-        error: "Sorry, Restaurant are not available in your journey"
-    }
+export default function Home() {
 
-    const payload = {
-        method: "GET"
-    }
-    const url = "pnr/" + pnr
-    const response = await fetch(url, payload);
-    const jsonData = await response.json();
-    if (response?.ok) {
-        const stationList = jsonData.result.stations.length
-        console.log(stationList)
-        if (stationList > 1) {
-            return jsonData;
-        } else {
-            return message;
+    const [pnr, setPnr] = useState("")
+    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState()
+    const navigate = useNavigate()
+
+
+    setTimeout(() => {
+        setError(null)
+    }, 10000)
+
+    function GetData(pnr) {
+        const data = async () => {
+            setIsLoading(true)
+            const response = await PnrResponse(pnr)
+            console.log(response)
+            if (response.status === "failure") {
+                setError(response)
+            }
+            if (response.status === "success") {
+                const result = response.result;
+                sessionStorage.setItem("pnrDetails", JSON.stringify(result))
+                sessionStorage.setItem("pnr", JSON.stringify(pnr))
+                const route = pnr + "/outlets";
+                navigate(route, { state: { result } });
+            }
+            setIsLoading(false)
         }
-    } else {
-        return jsonData;
+        data()
+    }
+    function handleOnChange(event) {
+        setPnr(event.target.value)
     }
 
-    return null
+
+    return (
+        <>
+            <HomePage
+                pnr={pnr}
+                handleOnChange={(event) => handleOnChange(event)}
+                handleOnClick={() => GetData(pnr)}
+                isLoading={isLoading}
+                error={error}
+            />
+        </>
+    )
+
 }
