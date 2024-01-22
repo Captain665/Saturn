@@ -21,7 +21,6 @@ export default function Home() {
         const data = async () => {
             setIsLoading(true)
             const response = await PnrResponse(pnr)
-            console.log(response)
             if (response.status === "failure") {
                 setError(response)
             }

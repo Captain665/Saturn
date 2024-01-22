@@ -11,13 +11,13 @@ export default function ErrorToster({ props }) {
         toast.success(msg, { autoClose: 4000 })
     }
 
-    const failuer = () => {
+    const failure = () => {
         toast.error(msg, { autoClose: 4000 })
     }
 
     useEffect(() => {
         if (status === "failure") {
-            failuer()
+            failure()
         }else{
             success()
         }

@@ -6,13 +6,13 @@ import About from "./App/FrontPage/About";
 import Contact from "./App/FrontPage/ContactUs";
 import Account from "./App/Accounts/Account";
 import NonExistPath from "./InvalidPath";
-import TrainDetail from "./App/Stations/TrainDetails";
-import StationList from "./App/Stations/Stations";
 import OutletList from "./App/Outlets/Outlets";
 import MenuList from "./App/Menu/Menu";
 import CartDetails from "./App/Cart/Cart";
 import OrderDetails from "./App/Accounts/Orders";
 import Home from "./App/FrontPage/HomePage/Home";
+import StationList from "./App/Stations/Stations";
+import TrainInfo from "./App/Stations/Train";
 
 
 export default function BasePage() {
@@ -26,14 +26,14 @@ export default function BasePage() {
                     <Route path="account" element={<Account />} />
                     <Route path="*" element={<NonExistPath />} />
 
-                    <Route path=":pnr/outlets" element={<TrainDetail />}>
-                        <Route index element={<StationList />}/>
+                    <Route path=":pnr/outlets" element={<TrainInfo />}>
+                        <Route index element={<StationList />} />
                         <Route path=":code" element={<OutletList />} />
                     </Route>
                     <Route path="/station/:code/outlet/:id/menu" element={<MenuList />} />
-                    <Route path="cart" element={<CartDetails />}/>
-                    <Route path="order/:orderId" element={<OrderDetails />}/>
-                    <Route path="test"/>
+                    <Route path="cart" element={<CartDetails />} />
+                    <Route path="order/:orderId" element={<OrderDetails />} />
+                    <Route path="test" />
                 </Route>
             </Routes>
         </BrowserRouter>
