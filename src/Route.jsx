@@ -7,7 +7,7 @@ import Contact from "./App/FrontPage/ContactUs";
 import Account from "./App/Accounts/Account";
 import NonExistPath from "./InvalidPath";
 import OutletList from "./App/Outlets/Outlets";
-import MenuList from "./App/Menu/Menu";
+import MenuItem from "./App/Menu/Menu";
 import CartDetails from "./App/Cart/Cart";
 import OrderDetails from "./App/Accounts/Orders";
 import Home from "./App/FrontPage/HomePage/Home";
@@ -30,7 +30,7 @@ export default function BasePage() {
                         <Route index element={<StationList />} />
                         <Route path=":code" element={<OutletList />} />
                     </Route>
-                    <Route path="/station/:code/outlet/:id/menu" element={<MenuList />} />
+                    <Route path="/station/:code/outlet/:id/menu" element={<MenuItem />} />
                     <Route path="cart" element={<CartDetails />} />
                     <Route path="order/:orderId" element={<OrderDetails />} />
                     <Route path="test" />

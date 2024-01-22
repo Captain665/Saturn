@@ -18,7 +18,7 @@ function Headers({name}) {
 
     return (
         <>
-            <header className="flex w-full flex-row justify-between items-center shadow-lg bg-rose-100">
+            <header className="flex w-full flex-row justify-between items-center shadow-lg bg-rose-200">
                 <NavLink to="/" className="flex justify-center w-2/6">
                     <img src="/LogoImage.jpg" alt="logo" className="p-3 h-20 object-content ml-20 rounded-2xl" />
                 </NavLink>
