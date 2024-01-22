@@ -25,14 +25,16 @@ export default function TrainInfo() {
             if(response.status === "failure"){
                 setError(response)
                 setTimeout(() => {
+                    setIsLoading(false)
                     navigate("/")
                 },4000)
                 
             }
             if(response.status === "success"){
                 setTrainData(response.result)
+                setIsLoading(false)
             }   
-            setIsLoading(false)
+            
         }
         return () => { data() }
     }, [pnr])

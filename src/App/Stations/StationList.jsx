@@ -1,4 +1,4 @@
-import React,{ memo } from "react";
+import React, { memo } from "react";
 
 
 
@@ -25,7 +25,6 @@ function StationData({ stations, handleOnClick }) {
                 </div>
             ))}
             <br />
-
         </>
     )
 }

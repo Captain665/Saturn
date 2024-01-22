@@ -13,10 +13,10 @@ function TrainHtml({ isLoading, train, error }) {
                     <div className="p-4 rounded-lg w-full px-28  place-items-center">
                         <ul className="item-center grid grid-cols-2 gap-3">
                             <li className="inline-flex text-xl gap-2"><span><FaTrain /></span>
-                                <span className="font-bold text-2xl pl-4">{train?.trainInfo.trainNo}</span> -
-                                <span className="font-thin">{train?.trainInfo.name}</span></li>
-                            <li className="inline-flex flex-row-reverse text-xl">On {train?.trainInfo.dt}</li>
-                            <li className="font-thin text-lg pl-14">{train?.trainInfo.boarding} onwords</li>
+                                <span className="font-bold text-2xl pl-4">{train?.trainInfo?.trainNo}</span> -
+                                <span className="font-thin">{train?.trainInfo?.name}</span></li>
+                            <li className="inline-flex flex-row-reverse text-xl">On {train?.trainInfo?.dt}</li>
+                            <li className="font-thin text-lg pl-14">{train?.trainInfo?.boarding} onwords</li>
                         </ul>
                     </div>
                 </div>
