@@ -8,11 +8,11 @@ import Account from "./App/Accounts/Account";
 import NonExistPath from "./InvalidPath";
 import OutletList from "./App/Outlets/Outlets";
 import MenuItem from "./App/Menu/Menu";
-import CartDetails from "./App/Cart/Cart";
 import OrderDetails from "./App/Accounts/Orders";
 import Home from "./App/FrontPage/HomePage/Home";
 import StationList from "./App/Stations/Stations";
 import TrainInfo from "./App/Stations/Train";
+import CartInfo from "./App/Cart/Cart";
 
 
 export default function BasePage() {
@@ -31,7 +31,7 @@ export default function BasePage() {
                         <Route path=":code" element={<OutletList />} />
                     </Route>
                     <Route path="/station/:code/outlet/:id/menu" element={<MenuItem />} />
-                    <Route path="cart" element={<CartDetails />} />
+                    <Route path="cart" element={<CartInfo />} />
                     <Route path="order/:orderId" element={<OrderDetails />} />
                     <Route path="test" />
                 </Route>

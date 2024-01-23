@@ -1,8 +1,6 @@
 
 export async function MenuResponse(outletId){
 
-    console.log(outletId)
-
     const payload = {
         method : "GET"
     }
