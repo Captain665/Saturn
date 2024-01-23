@@ -4,6 +4,9 @@ import { FaSpinner } from "react-icons/fa6";
 
 export default function OrderDetails({ token }) {
     const navigate = useNavigate()
+    const jwt = JSON.parse(localStorage.getItem("userInfo"))?.jwt;
+
+    const auth = token === undefined ? jwt : token
 
     const [orderslist, setOrderList] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(false)
@@ -15,7 +18,7 @@ export default function OrderDetails({ token }) {
             const requestBody = {
                 method: 'GET',
                 headers: {
-                    Authorization: token
+                    Authorization: auth
                 }
             }
 
@@ -36,7 +39,7 @@ export default function OrderDetails({ token }) {
         navigate("/order/"+order.id)
     }
 
-    const orderDetails = orderslist.map((item) => (
+    const orderDetails = orderslist?.map((item) => (
         <div className="w-full shadow-lg p-5 flex flex-col gap-y-10 rounded-lg" key={item.id}>
             <ul className="top-40">
                 <div className="flex">

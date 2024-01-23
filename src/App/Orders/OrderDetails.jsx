@@ -5,7 +5,7 @@ import { FaUser, FaCartShopping, FaMoneyCheckDollar, FaMoneyBill, FaSpinner } fr
 export default function OrderDetail() {
     const navigate = useNavigate()
     const { orderId } = useParams()
-    const token = JSON.parse(localStorage.getItem("userInfo")).jwt;
+    const token = JSON.parse(localStorage.getItem("userInfo"))?.jwt;
 
     const [isLoading, setIsLoading] = useState(false)
     const [order, setOrder] = useState()
@@ -26,6 +26,9 @@ export default function OrderDetail() {
             if (response.ok) {
                 setOrder(jsonData.result)
             }
+            if(response.status === 401){
+                navigate("/")
+            }
             setIsLoading(false)
         }
         return () => { fetchData() }
@@ -39,7 +42,7 @@ export default function OrderDetail() {
     return (
         <>{isLoading ? <h1><FaSpinner /></h1> :
             order && <div className="">
-                <div className="bg-rose-200 cursor-pointer flex items-center w-full text-lg pl-5 p-2" onClick={backToHome}>
+                <div className="bg-rose-100 cursor-pointer flex items-center w-full text-lg pl-5 p-2" onClick={backToHome}>
                     <h1>&#x2190; back to home</h1>
                 </div>
                 <h1 className="text-4xl ml-14 mt-5 mb-2">Order Details</h1>

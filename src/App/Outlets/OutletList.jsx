@@ -26,7 +26,7 @@ function OutletHtml({returnToStation, isLoading, outletData, stations, stationCo
                                 </div>
                                 <div className="border-l-2 pl-4 w-full justify-center p-3">
                                     <h2 className="text-xl font-bold pt-2">{outlet.outletName}</h2>
-                                    <h2 className="pt-1">Min order {outlet.minOrderValue}</h2>
+                                    <h2 className="pt-1">Min order : &#x20B9;{outlet.minOrderValue}</h2>
                                     <div className="flex pt-2">
                                         <span className="text-[#FFD700] items-center"><FaStar /></span>
                                         <span className="pl-2"> {outlet.ratingValue} </span>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import CartDetails from "./CartInfo";
+import { CreateOrderResponse } from "../ApiCall/CreateOrderApi";
 
 export default function CartInfo() {
 
@@ -10,8 +11,8 @@ export default function CartInfo() {
     const stationInfo = JSON.parse(window.sessionStorage.getItem("selectedStation"))
     const itemInfo = JSON.parse(window.sessionStorage.getItem("selectedItemInfo"))
     const userInfo = JSON.parse(window.localStorage.getItem("userInfo"))
-    const trainInfo = JSON.parse(window.sessionStorage.getItem("pnrDetails")).trainInfo;
-    const seatInfo = JSON.parse(window.sessionStorage.getItem("pnrDetails")).seatInfo;
+    const trainInfo = JSON.parse(window.sessionStorage.getItem("pnrDetails"))?.trainInfo;
+    const seatInfo = JSON.parse(window.sessionStorage.getItem("pnrDetails"))?.seatInfo;
     const pnr = JSON.parse(window.sessionStorage.getItem("pnr"));
 
     const [itemList, setItemList] = useState(itemInfo)
@@ -26,11 +27,10 @@ export default function CartInfo() {
     }, [itemList])
 
 
-    const subTotal = itemList.reduce((a, b) => a + (b.basePrice * b.quantity), 0)
-    const taxes = JSON.parse((subTotal * 0.05).toFixed(2))
-    const deliveryCharge = outletInfo.deliveryCost;
-    const payable = Math.round(subTotal + taxes + deliveryCharge)
-
+    const itemSize = itemList?.length
+    if (itemList === 0 || itemSize === undefined) {
+        returnToMenu()
+    }
 
     function addItem(item) {
         const index = itemList.findIndex(a => a.itemId === item.itemId)
@@ -48,7 +48,6 @@ export default function CartInfo() {
         })
     }
     function removeItem(item) {
-        console.log(item)
         const index = itemList.findIndex(a => a.itemId === item.itemId)
         const quantity = itemList[index].quantity;
         setItemList(prevData => {
@@ -71,54 +70,24 @@ export default function CartInfo() {
 
 
     function returnToMenu() {
-        console.log("test")
-        const url = "/station/" + stationInfo.code + "/outlet/" + outletInfo.id + "/menu"
+        const url = "/station/" + stationInfo?.code + "/outlet/" + outletInfo?.id + "/menu"
         navigate(url)
     }
 
-    if (itemList.length === 0) {
-        returnToMenu()
-    }
 
-    const body = {
-        "trainName": trainInfo.name,
-        "trainNo": trainInfo.trainNo,
-        "stationCode": stationInfo.code,
-        "stationName": stationInfo.name,
-        "deliveryDate": stationInfo.depDate + " " + stationInfo.departure,
-        "coach": seatInfo.coach,
-        "berth": seatInfo.berth,
-        "outletId": outletInfo.id,
-        "customerId": userInfo.id,
-        "pnr": pnr,
-        "paymentType": "CASH_ON_DELIVERY",
-        "deliveryCharge": outletInfo.deliveryCost,
-        "orderFrom": "desktop Web",
-        "orderItem": itemList
-    }
+
+
 
     function createOrder() {
-        console.log("create")
-        const requestBody = {
-            method: "POST",
-            headers: {
-                "Authorization": userInfo.jwt,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-
-            },
-            body: JSON.stringify(body)
-        }
         const fetchData = async () => {
-
-            const response = await fetch("/create/order", requestBody);
-            const jsonData = await response.json();
-            if (response.status === 201) {
+            const response = await CreateOrderResponse(trainInfo, stationInfo, seatInfo, outletInfo, userInfo, itemList, pnr);
+            if (response.status === "success") {
                 sessionStorage.clear();
-                navigate("/order/" + jsonData.result.id)
+                const orderId = response?.result.id;
+                console.log(orderId)
+                navigate("/order/" + orderId)
             }
         }
-
         fetchData()
     }
 
@@ -126,22 +95,18 @@ export default function CartInfo() {
 
     return (
         <>
-            <CartDetails 
-            isLoading={isLoading}
-            userInfo={userInfo}
-            trainInfo={trainInfo}
-            stationInfo={stationInfo}
-            seatInfo={seatInfo}
-            subTotal={subTotal}
-            taxes={taxes}
-            deliveryCharge={deliveryCharge}
-            payable={payable}
-            itemList={itemList}
-            outletInfo={outletInfo}
-            createOrder={createOrder}
-            removeItem={removeItem}
-            addItem={addItem}
-            returnToMenu={() => returnToMenu()}
+            <CartDetails
+                isLoading={isLoading}
+                userInfo={userInfo}
+                trainInfo={trainInfo}
+                stationInfo={stationInfo}
+                seatInfo={seatInfo}
+                itemList={itemList}
+                outletInfo={outletInfo}
+                createOrder={createOrder}
+                removeItem={removeItem}
+                addItem={addItem}
+                returnToMenu={() => returnToMenu()}
             />
         </>
     )

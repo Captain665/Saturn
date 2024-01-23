@@ -1,15 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import React from "react";
 import { FaSpinner } from "react-icons/fa6";
 import DeliveryInfo from "./DeliveryInfo";
 import ItemInfo from "./ItemList";
 import PaymentInfo from "./PaymentInfo";
 
 export default function CartDetails({
-    isLoading, returnToMenu, 
+    isLoading, returnToMenu,
     userInfo, trainInfo, stationInfo, seatInfo,
-    subTotal, taxes, deliveryCharge, payable, createOrder,
-    outletInfo, itemList, removeItem, addItem
+    createOrder, outletInfo, itemList, removeItem, addItem
 
 }) {
 
@@ -22,26 +20,23 @@ export default function CartDetails({
                     <p className="font-medium text-4xl w-1/2 text-start">Your Cart</p>
                 </div>
                 <div className="w-11/12 self-center m-6 flex gap-5 align-top">
-                    <DeliveryInfo 
-                    userInfo={userInfo}
-                    trainInfo={trainInfo}
-                    stationInfo={stationInfo}
-                    seatInfo={seatInfo}
+                    <DeliveryInfo
+                        userInfo={userInfo}
+                        trainInfo={trainInfo}
+                        stationInfo={stationInfo}
+                        seatInfo={seatInfo}
                     />
-                    <ItemInfo 
-                    outletInfo={outletInfo}
-                    itemList={itemList}
-                    removeItem={removeItem}
-                    addItem={addItem}
+                    <ItemInfo
+                        outletInfo={outletInfo}
+                        itemList={itemList}
+                        removeItem={removeItem}
+                        addItem={addItem}
                     />
                 </div>
-                <PaymentInfo 
-                subTotal={subTotal}
-                taxes={taxes}
-                deliveryCharge={deliveryCharge}
-                payable={payable}
-                createOrder={createOrder}
-                
+                <PaymentInfo
+                    itemList={itemList}
+                    createOrder={createOrder}
+                    outletInfo={outletInfo}
                 />
             </>
         }
