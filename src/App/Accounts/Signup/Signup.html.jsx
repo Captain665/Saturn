@@ -1,15 +1,14 @@
 import React from "react";
-import { useNavigate } from "react-router";
 import { NavLink } from "react-router-dom";
 
 export default function SignupData({ userInfo, handleSubmit, handleGender, handleOnChange, isloading}) {
 
     
     return (
-        <div>
+        <div><br /><br />
             <h1 className="text-4xl font-bold text-center" >Create an Account</h1><br />
 
-            <form onSubmit={handleSubmit} method="post" className="flex justify-center flex-col mx-auto w-3/4">
+            <form onSubmit={handleSubmit} method="post" className="flex justify-center flex-col mx-auto max-w-2xl w-3/4">
 
                 <label htmlFor="fullname">Fullname</label>
                 <input type="text" name="fullName" id="fullname" onChange={handleOnChange}

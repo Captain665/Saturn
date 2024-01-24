@@ -16,6 +16,19 @@ export async function SignupResponse(userInfo){
     return jsonData
 }
 
-export async function OtpValidateReponse(){
-    return null;
+export async function OtpValidateReponse(info){
+
+    const payload = {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(info)
+    };
+
+    const url = "/otp-validate"
+    const response = await fetch(url, payload);
+    const jsonData = await response.json();
+    return jsonData;
 }

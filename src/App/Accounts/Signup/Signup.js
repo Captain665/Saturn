@@ -5,7 +5,6 @@ import ErrorToster from "../../../MessageToggle";
 import { SignupResponse } from "../../ApiCall/SignupApi";
 
 export default function SignUp() {
-
     const navigate = useNavigate()
     const [userInfo, setUserInfo] = useState({
         fullName: "",
@@ -17,8 +16,7 @@ export default function SignUp() {
     const [isloading, setIsLoading] = useState(false)
     const [error, setError] = useState(null)
 
-    
-    function handleOnChange(event) {
+    function handleSignupOnChange(event) {
         const target = event.target;
         setUserInfo((prevData) => ({
             ...prevData,
@@ -33,32 +31,38 @@ export default function SignUp() {
         }))
     }
 
-    const fetchData = async () => {
+    const fetchSignUp = async () => {
         setIsLoading(true)
         const response = await SignupResponse(userInfo);
-        if(response === "success"){
-            navigate("?form=verify", { state: { mobileNumber: userInfo.mobileNumber, emailId: userInfo.emailId } })
-        }else{
+        if (response === "success") {
+            setError(response)
+            navigate("?step=Verify", {state : {mobileNumber : userInfo.mobileNumber,emailId : userInfo.emailId}})
+        } else {
             setError(response)
         }
         setIsLoading(false)
     }
 
-    function handleSubmit(event) {
+    function handleSignupSubmit(event) {
         event.preventDefault()
-        fetchData()
+        fetchSignUp()
     }
 
 
+
+
+    // validate Js
+
+
     return (
-        <>
-            <SignupData
+        <><SignupData
                 userInfo={userInfo}
-                handleSubmit={handleSubmit}
+                handleSubmit={handleSignupSubmit}
                 handleGender={handleGender}
-                handleOnChange={handleOnChange}
+                handleOnChange={handleSignupOnChange}
                 isloading={isloading}
             />
+
             {error && <ErrorToster props={error} />}
         </>
     )

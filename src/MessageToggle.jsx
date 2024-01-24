@@ -6,10 +6,11 @@ export default function ErrorToster({ props }) {
    
     const status = props?.status;
     const msg = props?.error;
+    const result = props?.result;
 
 
     const success = () => {
-        toast.success(msg, { autoClose: 4000 })
+        toast.success(result, { autoClose: 4000 })
     }
 
     const failure = () => {
