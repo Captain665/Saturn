@@ -13,7 +13,7 @@ import StationList from "./App/Stations/Stations";
 import TrainInfo from "./App/Stations/Train";
 import CartInfo from "./App/Cart/Cart";
 import OrderDetails from "./App/Orders/OrderDetails/OrderDetail";
-import LoginForm from "./App/Accounts/Login/Login";
+import Login from "./App/Accounts/Login/Login";
 import Signup from "./App/Accounts/Signup/Signup";
 
 
@@ -36,7 +36,7 @@ export default function BasePage() {
                     <Route path="cart" element={<CartInfo />} />
                     <Route path="order/:orderId" element={<OrderDetails />} />
                     <Route path="test" />
-                    <Route path="login"  element={<LoginForm />}/>
+                    <Route path="login"  element={<Login />}/>
                     <Route path="signup" element={<Signup />} />
                 </Route>
             </Routes>

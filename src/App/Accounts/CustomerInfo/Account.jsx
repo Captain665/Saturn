@@ -17,7 +17,7 @@ export default function Account() {
         setTimeout(() => {
             if (!info) {
                 const url = "/login?path=account"; 
-                navigate(url)       
+                navigate(url, { replace :  true })       
             }
             setIsLoading(false)
         }, 1)

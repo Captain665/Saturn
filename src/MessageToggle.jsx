@@ -3,6 +3,7 @@ import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function ErrorToster({ props }) {
+   
     const status = props?.status;
     const msg = props?.error;
 
@@ -22,8 +23,6 @@ export default function ErrorToster({ props }) {
             success()
         }
     },[props])
-
-
 
 
     return (
