@@ -36,7 +36,7 @@ export default function SignUp() {
         const response = await SignupResponse(userInfo);
         if (response === "success") {
             setError(response)
-            navigate("?step=Verify", {state : {mobileNumber : userInfo.mobileNumber,emailId : userInfo.emailId}})
+            navigate("?step=Verify", {state : {mobileNumber : userInfo.mobileNumber, emailId : userInfo.emailId}})
         } else {
             setError(response)
         }

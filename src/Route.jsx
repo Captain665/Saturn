@@ -38,7 +38,9 @@ export default function BasePage() {
                     <Route path="order/:orderId" element={<OrderDetails />} />
                     <Route path="test" element={<Validate />}/>
                     <Route path="login"  element={<Login />}/>
-                    <Route path="signup" element={<Signup />} />
+                    <Route path="signup" element={<Signup />} > 
+                    <Route path="?step=Verify" element={<Validate />}/>
+                    </Route>
                 </Route>
             </Routes>
         </BrowserRouter>

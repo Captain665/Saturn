@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import ValidateHtml from "./Validate.html";
 import ErrorToster from "../../../MessageToggle";
 import { OtpValidateReponse } from "../../ApiCall/SignupApi";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 
 export default function Validate(){
+    const { state } = useLocation();
+    const {mobileNumber, emailId} = state;
+
     const navigate = useNavigate()
     const [info, setInfo] = useState({
-        mobileNumber : "125",
+        mobileNumber : mobileNumber,
         otp : ""
     })
     const [isLoading, setIsLoading] = useState(false)
@@ -43,7 +46,7 @@ export default function Validate(){
             handleOtpChange={handleOtpChange}
             handleOtpSubmit={handleOtpSubmit}
             isLoading={isLoading}
-            emailId={userInfo.emailId}
+            emailId={emailId}
             otp={info.otp}
             />
             {error && <ErrorToster props={error} />}
