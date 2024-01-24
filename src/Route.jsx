@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import LayOut from "./App/Layout/Layout";
 import About from "./App/FrontPage/About";
 import Contact from "./App/FrontPage/ContactUs";
-import Account from "./App/Accounts/Account";
+import Account from "./App/Accounts/CustomerInfo/Account";
 import NonExistPath from "./InvalidPath";
 import OutletList from "./App/Outlets/Outlets";
 import MenuItem from "./App/Menu/Menu";
@@ -13,6 +13,8 @@ import StationList from "./App/Stations/Stations";
 import TrainInfo from "./App/Stations/Train";
 import CartInfo from "./App/Cart/Cart";
 import OrderDetails from "./App/Orders/OrderDetails/OrderDetail";
+import LoginForm from "./App/Accounts/Login/Login";
+import Signup from "./App/Accounts/Signup/Signup";
 
 
 export default function BasePage() {
@@ -34,6 +36,8 @@ export default function BasePage() {
                     <Route path="cart" element={<CartInfo />} />
                     <Route path="order/:orderId" element={<OrderDetails />} />
                     <Route path="test" />
+                    <Route path="login"  element={<LoginForm />}/>
+                    <Route path="signup" element={<Signup />} />
                 </Route>
             </Routes>
         </BrowserRouter>

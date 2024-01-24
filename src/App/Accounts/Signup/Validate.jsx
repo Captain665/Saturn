@@ -72,7 +72,7 @@ export default function Validate() {
 
                 <button type="submit" className="bg-rose-500 h-10 border-none rounded text-white text-xl">{context.isLoading ? "Submitting..." : "Submit"}</button>
             </form><br />
-            <p className="text-center">Have an Account ?  <NavLink href="?form=login" className="text-rose-400">Sign in</NavLink></p><br /><br />
+            <p className="text-center">Have an Account ?  <NavLink to="" className="text-rose-400">Sign in</NavLink></p><br /><br />
         </div>
     )
 }

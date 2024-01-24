@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import { NavLink } from "react-router-dom";
 
 export default function Signup() {
 
@@ -46,8 +47,6 @@ export default function Signup() {
             const response = await fetch("signup" , requestBody)
             const jsonData = await response.json();
         if(response.ok){
-            // const email = userInfo.emailId;
-            // const mobile = userInfo.mobileNumber
             navigate("?form=verify", {state:{mobileNumber : userInfo.mobileNumber, emailId : userInfo.emailId}} )
             }else{
             setContext((prevData) => ({
@@ -105,7 +104,7 @@ export default function Signup() {
 
                 <button type="submit" className="bg-rose-500 h-10 border-none rounded text-white text-xl">{context.isloading ? "Submitting..." : "Submit"}</button>
             </form><br />
-            <p className="text-center">Have an Account ?  <a href="?form=login" className="text-rose-400">Sign In</a></p><br /><br />
+            <p className="text-center">Have an Account ?  <NavLink to="/login" className="text-rose-400">Sign In</NavLink></p><br /><br />
         </div>
     )
 }
