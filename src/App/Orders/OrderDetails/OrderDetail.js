@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import OrderInfo from "./OrderInfo";
-import { OrderDetailResponse } from "../ApiCall/OrderInfoAPI";
+import { OrderDetailResponse } from "../../ApiCall/OrderInfoAPI";
 
 export default function OrderDetails() {
     const navigate = useNavigate()

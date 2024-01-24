@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { FaSpinner } from "react-icons/fa6";
 
-export default function OrderDetails({ token }) {
+export default function OrderList({ token }) {
     const navigate = useNavigate()
     const jwt = JSON.parse(localStorage.getItem("userInfo"))?.jwt;
 

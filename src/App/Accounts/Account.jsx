@@ -3,9 +3,9 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import LoginForm from "./Login";
 import Signup from "./Signup";
 import Validate from "./Validate";
-import OrderDetails from "./Orders";
 import CustomerDetails from "./CustomerInfo";
 import { FaSpinner } from "react-icons/fa6";
+import OrderList from "../Orders/OrderList/Orders.html";
 
 export default function Account() {
     const [param] = useSearchParams()
@@ -56,7 +56,7 @@ export default function Account() {
                             <input value="Logout" type="button" onClick={logOut}
                                 className={`mt-4 cursor-pointer ${({ isActive }) => (isActive ? "underline font-bold" : null)}`} />
                         </div>
-                        <div className="w-2/3 p-6 border-4 ">{data === "orders" ? <OrderDetails token={info.jwt} /> : <CustomerDetails />}</div>
+                        <div className="w-2/3 p-6 border-4 ">{data === "orders" ? <OrderList token={info.jwt} /> : <CustomerDetails />}</div>
                     </div> : DisplayForm()
                     }
                 </div>

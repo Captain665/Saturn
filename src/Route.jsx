@@ -12,7 +12,7 @@ import Home from "./App/FrontPage/HomePage/Home";
 import StationList from "./App/Stations/Stations";
 import TrainInfo from "./App/Stations/Train";
 import CartInfo from "./App/Cart/Cart";
-import OrderDetails from "./App/Orders/OrderDetail";
+import OrderDetails from "./App/Orders/OrderDetails/OrderDetail";
 
 
 export default function BasePage() {
