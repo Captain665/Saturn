@@ -1,74 +1,39 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router";
+import React from "react";
 import { FaSpinner } from "react-icons/fa6";
 
-export default function OrderList({ token }) {
-    const navigate = useNavigate()
-    const jwt = JSON.parse(localStorage.getItem("userInfo"))?.jwt;
-
-    const auth = token === undefined ? jwt : token
-
-    const [orderslist, setOrderList] = React.useState([])
-    const [isLoading, setIsLoading] = React.useState(false)
-
-
-    useEffect(() => {
-        const fetchData = async () =>{
-            setIsLoading(true)
-            const requestBody = {
-                method: 'GET',
-                headers: {
-                    Authorization: auth
-                }
-            }
-
-            const response = await fetch("/orders", requestBody)
-            const jsonData = await response.json();
-            if(response.status === 401){
-                window.localStorage.clear();
-                navigate("?form=login")
-            }
-            setOrderList(jsonData.result)
-            setIsLoading(false)
-        }
-
-        return () => { fetchData() };
-    }, [token,navigate])
-
-    function handleViewOrderDetail(order){
-        navigate("/order/"+order.id)
-    }
-
-    const orderDetails = orderslist?.map((item) => (
-        <div className="w-full shadow-lg p-5 flex flex-col gap-y-10 rounded-lg" key={item.id}>
-            <ul className="top-40">
-                <div className="flex">
-                    <div className="flex justify-start items-center w-4/6">
-                        <img src={item.outlets.logoImage} alt="outlet" className="object-cover overflow-hidden" width={50} height={50}/>
-                        <li className="font-bold ml-2">{item.outlets.outletName}</li>
-                    </div>
-                    <div className=" w-2/6 text-end">
-                        <li>{item.paymentType === "CASH_ON_DELIVERY" ? "COD" : item.paymentType}</li>
-                    </div>
-                </div>
-                <li className="font-[1] text-[#9c9c9c]"><span>{item.stationName},   </span> {item.stationCode}</li>
-                <hr />
-                <li><span className="uppercase text-[#696969] text-xs">Order Number</span> <br />{item.id}</li>
-                <li><span className="uppercase text-[#696969] text-xs">Status </span> <br />{item.status}</li>
-                <li><span className="uppercase text-[#696969] text-xs">Total Amount </span><br /> &#x20B9; {item.payable_amount}</li>
-                <li><span className="uppercase text-[#696969] text-xs">Ordered On </span><br />{item.bookingDate}</li><br />
-                <li className="p-2 bg-rose-400 w-fit cursor-pointer float-right border-none rounded-xl hover:bg-rose-200" onClick={() => handleViewOrderDetail(item)}><span>View Details</span></li>
-            </ul>
-        </div>
-    ))
+export default function OrderHtml({ orderslist, isLoading, handleViewOrderDetail }) {
 
 
     return (
-        <div>
-            <h1 className="font-bold text-2xl text-center">Order History</h1><br /><br />
-            <div className=" grid grid-cols-2 gap-2 w-full">
-                {isLoading ? <h1 className="w-fit items-center flex text-4xl animate-spin"><FaSpinner /></h1> : orderDetails}
-            </div>
-        </div>
+        <>
+            {isLoading ? <h1 className="w-fit items-center flex text-4xl animate-spin"><FaSpinner /></h1> :
+                <div>
+                    <h1 className="font-bold text-2xl text-center">Order History</h1><br /><br />
+                    <div className=" grid grid-cols-2 gap-2 w-full">
+                        {orderslist?.map(item => (
+                            <div className="w-full shadow-lg p-5 flex flex-col gap-y-10 rounded-lg" key={item.id}>
+                                <ul className="top-40">
+                                    <div className="flex">
+                                        <div className="flex justify-start items-center w-4/6">
+                                            <img src={item.outlets.logoImage} alt="outlet" className="object-cover overflow-hidden" width={50} height={50} />
+                                            <li className="font-bold ml-2">{item.outlets.outletName}</li>
+                                        </div>
+                                        <div className=" w-2/6 text-end">
+                                            <li>{item.paymentType === "CASH_ON_DELIVERY" ? "COD" : item.paymentType}</li>
+                                        </div>
+                                    </div>
+                                    <li className="font-[1] text-[#9c9c9c]"><span>{item.stationName},   </span> {item.stationCode}</li>
+                                    <hr />
+                                    <li><span className="uppercase text-[#696969] text-xs">Order Number</span> <br />{item.id}</li>
+                                    <li><span className="uppercase text-[#696969] text-xs">Status </span> <br />{item.status}</li>
+                                    <li><span className="uppercase text-[#696969] text-xs">Total Amount </span><br /> &#x20B9; {item.payable_amount}</li>
+                                    <li><span className="uppercase text-[#696969] text-xs">Ordered On </span><br />{item.bookingDate}</li><br />
+                                    <li className="p-2 bg-rose-400 w-fit cursor-pointer float-right border-none rounded-xl hover:bg-rose-200" onClick={() => handleViewOrderDetail(item)}><span>View Details</span></li>
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
+                </div>}
+        </>
     )
 }

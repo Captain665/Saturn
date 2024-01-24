@@ -1,8 +1,9 @@
 import React from "react";
 
 export default function CustomerDetails() {
-    const userDataExist = localStorage.getItem("userInfo")
-    const info = JSON.parse(userDataExist)
+
+    const info = JSON.parse(localStorage.getItem("userInfo"))
+
     return (
         <div>
             <h1 className="text-center font-bold text-4xl">Profile</h1>

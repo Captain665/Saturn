@@ -5,7 +5,7 @@ import Signup from "./Signup";
 import Validate from "./Validate";
 import CustomerDetails from "./CustomerInfo";
 import { FaSpinner } from "react-icons/fa6";
-import OrderList from "../Orders/OrderList/Orders.html";
+import OrderList from "../Orders/OrderList/Orders";
 
 export default function Account() {
     const [param] = useSearchParams()
@@ -22,7 +22,7 @@ export default function Account() {
             setIsLoading(false)
         }, 2000)
         setIsLoading(true)
-    },[])
+    }, [])
 
 
     function logOut() {
