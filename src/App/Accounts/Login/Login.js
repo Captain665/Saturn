@@ -29,7 +29,7 @@ export default function Login() {
             localStorage.setItem("userInfo", JSON.stringify(response.result))
             const path = param.get("path") ? "/" + param.get("path") : "/"
             navigate(path, {replace:true})
-            window.location.reload(true)
+            // window.location.reload(true)
         }else{
             setError(response)
         }
@@ -41,6 +41,7 @@ export default function Login() {
         fetchData()
     }
 
+    console.log(param.get("path"))
     return (
         <>
             <LoginForm 

@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import LayOut from "./App/Layout/Layout";
 import About from "./App/FrontPage/About";
 import Contact from "./App/FrontPage/ContactUs";
-import Account from "./App/Accounts/CustomerInfo/Account";
+import Account from "./App/Accounts/AccountsInfo/Account";
 import NonExistPath from "./InvalidPath";
 import OutletList from "./App/Outlets/Outlets";
 import MenuItem from "./App/Menu/Menu";

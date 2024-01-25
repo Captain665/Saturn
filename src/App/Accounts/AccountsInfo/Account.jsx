@@ -15,8 +15,12 @@ export default function Account() {
     useEffect(() => {
         setTimeout(() => {
             if (!info) {
-                setParams("?path=account")
-                navigate("/login")
+                setParams({path : window.location.pathname})
+                console.log(window.location.pathname)
+                console.log(param.get("path"))
+                const url = param.get("path") ? "/login" + `?${param.get("path")}` : "/login"
+                console.log(url)
+                navigate(url)
             }
             setIsLoading(false)
         }, 1)
@@ -28,12 +32,12 @@ export default function Account() {
         setIsLoading(true)
         localStorage.clear();
         navigate("/")
-        window.location.reload(true)
     }
 
     function HandleOnClick(value) {
         setData(value)
     }
+    console.log(param.get("path"))
 
     return (
         <>
