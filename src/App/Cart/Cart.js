@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import CartDetails from "./CartInfo";
 import { CreateOrderResponse } from "../ApiCall/CreateOrderApi";
 
 export default function CartInfo() {
 
     const navigate = useNavigate()
+    const location = useLocation()
 
     const outletInfo = JSON.parse(window.sessionStorage.getItem("outletInfo"))
     const stationInfo = JSON.parse(window.sessionStorage.getItem("selectedStation"))
@@ -21,6 +22,10 @@ export default function CartInfo() {
     useEffect(() => {
         window.sessionStorage.setItem("selectedItemInfo", JSON.stringify(itemList))
         setTimeout(() => {
+            if(!userInfo){
+                const pathName = `/login?redirectedTo=${location.pathname}`
+                navigate(pathName)
+            }
             setIsLoading(false)
         }, 1000)
         setIsLoading(true)

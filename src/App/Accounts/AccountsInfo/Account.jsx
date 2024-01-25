@@ -1,26 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import CustomerDetails from "./CustomerInfo";
 import { FaSpinner } from "react-icons/fa6";
 import OrderList from "../../Orders/OrderList/Orders";
 
 export default function Account() {
-    const [param, setParams] = useSearchParams()
-    const info = JSON.parse(localStorage.getItem("userInfo"));
+    const location = useLocation()
     const navigate = useNavigate()
-    const [data, setData] = useState("profile")
 
+    const info = JSON.parse(localStorage.getItem("userInfo"));
+    const [data, setData] = useState("profile")
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         setTimeout(() => {
             if (!info) {
-                setParams({path : window.location.pathname})
-                console.log(window.location.pathname)
-                console.log(param.get("path"))
-                const url = param.get("path") ? "/login" + `?${param.get("path")}` : "/login"
-                console.log(url)
-                navigate(url)
+                const pathName = `/login?redirectedTo=${location.pathname}`
+                navigate(pathName)
             }
             setIsLoading(false)
         }, 1)
@@ -28,16 +24,17 @@ export default function Account() {
     }, [])
 
 
-    function LogOut() {
+    const LogOut = () => {
         setIsLoading(true)
         localStorage.clear();
         navigate("/")
+        window.location.reload(true)
     }
 
     function HandleOnClick(value) {
         setData(value)
     }
-    console.log(param.get("path"))
+
 
     return (
         <>

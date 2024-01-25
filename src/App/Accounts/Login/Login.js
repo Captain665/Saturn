@@ -6,7 +6,7 @@ import ErrorToster from "../../../MessageToggle";
 
 export default function Login() {
 
-    const [param, setParams] = useSearchParams()
+    const [param] = useSearchParams()
 
     const [loginData, setloginData] = useState({ mobileNumber: "", password: "" })
     const [isLoading, setLoading] = useState(false)
@@ -27,9 +27,8 @@ export default function Login() {
         const response =  await LoginResponse(loginData)
         if(response.status === "success"){
             localStorage.setItem("userInfo", JSON.stringify(response.result))
-            const path = param.get("path") ? "/" + param.get("path") : "/"
+            const path = param.get("redirectedTo") ? param.get("redirectedTo") : "/"
             navigate(path, {replace:true})
-            // window.location.reload(true)
         }else{
             setError(response)
         }
@@ -41,7 +40,7 @@ export default function Login() {
         fetchData()
     }
 
-    console.log(param.get("path"))
+    console.log(param.get("redirectedTo"))
     return (
         <>
             <LoginForm 
