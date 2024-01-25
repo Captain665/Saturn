@@ -20,10 +20,7 @@ export default function OrderList({ token }) {
             if (response.status === "success") {
 
             }
-            // if(response.status === 401){
-            //     window.localStorage.clear();
-            //     navigate("?form=login")
-            // }
+            
             setOrderList(response.result)
             setIsLoading(false)
         }

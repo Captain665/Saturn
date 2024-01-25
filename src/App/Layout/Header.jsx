@@ -26,7 +26,7 @@ function Headers({name}) {
                     <NavLink to="/" end className={(isActive) => isActiveCheck(isActive)}>{home}</NavLink>
                     <NavLink to="about" className={(isActive) => isActiveCheck(isActive)}>{about}</NavLink>
                     <NavLink to="contact" className={(isActive) => isActiveCheck(isActive)}>{contact}</NavLink>
-                    <NavLink to="account?form=login" className={(isActive) => isActiveCheck(isActive)}><p className="flex gap-1 items-center"><FaUser/> {account}</p></NavLink>
+                    <NavLink to="account" className={(isActive) => isActiveCheck(isActive)}><p className="flex gap-1 items-center"><FaUser/> {account}</p></NavLink>
                 </nav>
             </header>
         </>

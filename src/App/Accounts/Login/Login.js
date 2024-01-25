@@ -28,7 +28,7 @@ export default function Login() {
         if(response.status === "success"){
             localStorage.setItem("userInfo", JSON.stringify(response.result))
             const path = param.get("path") ? "/" + param.get("path") : "/"
-            navigate(path)
+            navigate(path, {replace:true})
             window.location.reload(true)
         }else{
             setError(response)

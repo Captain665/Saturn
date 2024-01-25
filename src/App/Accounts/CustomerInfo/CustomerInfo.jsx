@@ -6,7 +6,7 @@ export default function CustomerDetails({ info }) {
     return (
         <> {info &&
             <div className="self-center">
-                <h1 className="text-center font-bold text-4xl">Profile</h1>
+                <h1 className="text-center font-bold text-3xl">Profile</h1>
                 <form action="" method="post" className="flex justify-center flex-col mx-auto max-w-2xl"><br />
                     <label htmlFor="" className="font-bold">Fullname</label>
                     <input type="text" name="fullname" id="fullname"

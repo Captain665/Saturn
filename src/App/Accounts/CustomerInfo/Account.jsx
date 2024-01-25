@@ -6,18 +6,17 @@ import OrderList from "../../Orders/OrderList/Orders";
 
 export default function Account() {
     const [param, setParams] = useSearchParams()
-    // const path = param.get("path")
     const info = JSON.parse(localStorage.getItem("userInfo"));
     const navigate = useNavigate()
-    const [data, setData] = useState("")
+    const [data, setData] = useState("profile")
 
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         setTimeout(() => {
             if (!info) {
-                const url = "/login?path=account"; 
-                navigate(url, { replace :  true })       
+                setParams("?path=account")
+                navigate("/login")
             }
             setIsLoading(false)
         }, 1)
@@ -25,10 +24,15 @@ export default function Account() {
     }, [])
 
 
-    function logOut() {
+    function LogOut() {
+        setIsLoading(true)
         localStorage.clear();
         navigate("/")
         window.location.reload(true)
+    }
+
+    function HandleOnClick(value) {
+        setData(value)
     }
 
     return (
@@ -36,20 +40,25 @@ export default function Account() {
             {isLoading ? <h1 className="h-screen w-fit m-auto flex items-center text-4xl animate-spin"><FaSpinner /></h1> :
                 <div className="p-5 self-center shadow-xl flex flex-col h-fit w-full mt-6 mb-10 rounded-3xl"><br />
                     {info && <div className="flex justify-around">
-                        <div className="flex flex-col w-4/12 text-xl p-10 border-4 ">
-                            <NavLink></NavLink>
-                            <NavLink></NavLink>
-                            <NavLink></NavLink>
-                            <input value="Profile" type="button" onClick={() => (setData("profile"))}
-                                className={`mt-4 cursor-pointer ${({ isActive }) => (isActive ? "underline font-bold" : null)}`} />
+                        <div className="flex flex-col w-1/5 text-xl p-10 border-4 border-rose-200 justify-start gap-3">
 
-                            <input value="Orders" type="button" onClick={() => (setData("orders"))}
-                                className={`mt-4 cursor-pointer ${({ isActive }) => (isActive ? "underline font-bold" : null)}`} />
+                            <NavLink to="" onClick={() => HandleOnClick("profile")}
+                                className={data === "profile" ? "underline font-bold" : null}>Profile</NavLink>
 
-                            <input value="Logout" type="button" onClick={logOut}
-                                className={`mt-4 cursor-pointer ${({ isActive }) => (isActive ? "underline font-bold" : null)}`} />
+                            <NavLink to="" onClick={() => HandleOnClick("orders")}
+                                className={data === "orders" ? "underline font-bold" : null} >Orders</NavLink>
+
+                            <NavLink onClick={LogOut}
+                                className="border-none bg-rose-400 w-fit mt-10 p-2 px-5 rounded-md font-bold hover:bg-rose-300">Logout</NavLink>
+
                         </div>
-                        <div className="w-2/3 p-6 border-4 ">{data === "orders" ? <OrderList token={info.jwt} /> : <CustomerDetails info={info} />}</div>
+                        <div className=" w-4/5 p-6 border-4 border-rose-200 ">
+                            {
+                                data === "orders" ?
+                                    <OrderList token={info.jwt} />
+                                    : <CustomerDetails info={info} />
+                            }
+                        </div>
                     </div>
                     }
                 </div>
