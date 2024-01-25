@@ -15,7 +15,6 @@ import CartInfo from "./App/Cart/Cart";
 import OrderDetails from "./App/Orders/OrderDetails/OrderDetail";
 import Login from "./App/Accounts/Login/Login";
 import Signup from "./App/Accounts/Signup/Signup";
-import Validate from "./App/Accounts/Signup/Validate";
 
 
 export default function BasePage() {
@@ -36,11 +35,9 @@ export default function BasePage() {
                     <Route path="/station/:code/outlet/:id/menu" element={<MenuItem />} />
                     <Route path="cart" element={<CartInfo />} />
                     <Route path="order/:orderId" element={<OrderDetails />} />
-                    <Route path="test" element={<Validate />}/>
+                    <Route path="test"/>
                     <Route path="login"  element={<Login />}/>
-                    <Route path="signup" element={<Signup />} > 
-                    <Route path="?step=Verify" element={<Validate />}/>
-                    </Route>
+                    <Route path="signup" element={<Signup />} /> 
                 </Route>
             </Routes>
         </BrowserRouter>

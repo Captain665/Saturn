@@ -16,7 +16,7 @@ export async function SignupResponse(userInfo){
     return jsonData
 }
 
-export async function OtpValidateReponse(info){
+export async function OtpValidateReponse(mobileNumber, otp){
 
     const payload = {
         method: 'POST',
@@ -24,11 +24,15 @@ export async function OtpValidateReponse(info){
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(info)
+        body: JSON.stringify({
+            mobileNumber : mobileNumber,
+            otp : otp
+        })
     };
 
     const url = "/otp-validate"
     const response = await fetch(url, payload);
     const jsonData = await response.json();
+    
     return jsonData;
 }
