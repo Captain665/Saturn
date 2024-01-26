@@ -4,9 +4,12 @@ import { useNavigate } from "react-router";
 import ErrorToster from "../../../MessageToggle";
 import { SignupResponse, OtpValidateReponse } from "../../ApiCall/SignupApi";
 import ValidateHtml from "./Validate.html";
+import { useSearchParams } from "react-router-dom";
 
 export default function SignUp() {
     const navigate = useNavigate()
+    const [params] = useSearchParams()
+
     const [userInfo, setUserInfo] = useState({
         fullName: "",
         mobileNumber: "",
@@ -68,8 +71,9 @@ export default function SignUp() {
         if (response.status === "success") {
             const data = JSON.stringify(response.result)
             localStorage.setItem("userInfo", data)
-            navigate("/", {replace:true})
-            window.location.reload(true)
+            const path = params.get("redirectedTo") || "/"
+            navigate(path, { replace: true })
+            window.location.reload(path)
         } else {
             setError(response)
         }

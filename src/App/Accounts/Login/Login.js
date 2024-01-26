@@ -1,17 +1,17 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import LoginForm from "./Login.html";
 import { LoginResponse } from "../../ApiCall/LoginApi";
 import ErrorToster from "../../../MessageToggle";
 
 export default function Login() {
-
     const [param] = useSearchParams()
+    const navigate = useNavigate()
+    
 
     const [loginData, setloginData] = useState({ mobileNumber: "", password: "" })
     const [isLoading, setLoading] = useState(false)
-    const [ error, setError ] = useState(null) 
-    const navigate = useNavigate()
+    const [error, setError] = useState(null)
 
     function handleChange(event) {
         const name = event.target.name;
@@ -24,12 +24,15 @@ export default function Login() {
 
     const fetchData = async () => {
         setLoading(true)
-        const response =  await LoginResponse(loginData)
-        if(response.status === "success"){
-            localStorage.setItem("userInfo", JSON.stringify(response.result))
-            const path = param.get("redirectedTo") ? param.get("redirectedTo") : "/"
-            navigate(path, {replace:true})
-        }else{
+        const response = await LoginResponse(loginData)
+
+        if (response.status === "success") {
+            localStorage.setItem("userInfo", JSON.stringify(response.result));
+            const path = param.get("redirectedTo") || "/";
+            navigate(path, { replace: true })
+            window.location.reload(true)
+        } else {
+
             setError(response)
         }
         setLoading(false)
@@ -40,16 +43,16 @@ export default function Login() {
         fetchData()
     }
 
-    console.log(param.get("redirectedTo"))
     return (
         <>
-            <LoginForm 
-            isLoading={isLoading}
-            handleChange={handleChange}
-            HandleSubmit={HandleSubmit}
-            loginData={loginData}
+            <LoginForm
+                isLoading={isLoading}
+                handleChange={handleChange}
+                HandleSubmit={HandleSubmit}
+                loginData={loginData}
+                redirectedTo={param.get("redirectedTo")}
             />
-            {error && <ErrorToster props={error}/>}
+            {error && <ErrorToster props={error} />}
         </>
     )
 }

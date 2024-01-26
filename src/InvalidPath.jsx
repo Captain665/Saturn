@@ -1,11 +1,11 @@
 import React from "react";
-import { redirect, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 export default function NonExistPath() {
     const navigate = useNavigate();
 
     function onClickHandle() {
-        navigate("/")
+        navigate("/", { replace: true})
     }
 
     return (

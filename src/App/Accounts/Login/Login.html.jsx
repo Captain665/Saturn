@@ -2,10 +2,11 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { FaSpinner } from "react-icons/fa6"
 
-export default function LoginForm({ isLoading, handleChange, HandleSubmit, loginData }) {
+export default function LoginForm({ isLoading, handleChange, HandleSubmit, loginData, redirectedTo }) {
 
 
-
+    // const path = redirectedTo || ""
+    const path = redirectedTo ? `/signup?redirecteTo=${redirectedTo}` : "/signup"
     return (
         <div><br /><br /><br />
             <h1 className="text-4xl font-bold text-center" >Login</h1><br />
@@ -37,7 +38,7 @@ export default function LoginForm({ isLoading, handleChange, HandleSubmit, login
             </form><br />
 
             <p className="text-center">Don't have an Account ?
-                <NavLink to="/signup" className="text-rose-400 hover:font-bold">Create Account</NavLink>
+                <NavLink to={path} className="text-rose-400 hover:font-bold">Create Account</NavLink>
             </p><br /><br /><br />
         </div>
     )
