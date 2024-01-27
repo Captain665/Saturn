@@ -15,7 +15,7 @@ function Footers() {
                     <FaLinkedin />
                     <FaYoutube />
                 </div>
-                <div className="flex space-x-14 justify-center pt-6 text-white">
+                <div className="flex md:space-x-14 pt-6 text-white justify-center gap-5">
                     <NavLink to="/" >Home</NavLink>
                     <NavLink>News</NavLink>
                     <NavLink to="about" >About</NavLink>
