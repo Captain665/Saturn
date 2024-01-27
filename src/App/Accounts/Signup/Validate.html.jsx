@@ -5,7 +5,7 @@ export default function ValidateHtml({ handleOtpChange, handleOtpSubmit, isLoadi
 
     return (
         <div><br /><br />
-            <h1 className="text-4xl font-bold text-center">Email Verification</h1><br />
+            <h1 className="md:text-4xl font-bold text-center text-2xl">Email Verification</h1><br />
 
             <form action="" onSubmit={handleOtpSubmit} method="post" className="flex justify-center flex-col mx-auto w-3/4 max-w-2xl">
                 <label htmlFor="email">Email Id</label>

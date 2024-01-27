@@ -19,7 +19,7 @@ export default function Account() {
                 navigate(pathName)
             }
             setIsLoading(false)
-        }, 1)
+        }, 1000)
         setIsLoading(true)
     }, [])
 
@@ -39,9 +39,9 @@ export default function Account() {
     return (
         <>
             {isLoading ? <h1 className="h-screen w-fit m-auto flex items-center text-4xl animate-spin"><FaSpinner /></h1> :
-                <div className="p-5 self-center shadow-xl flex flex-col h-fit w-full mt-6 mb-10 rounded-3xl"><br />
-                    {info && <div className="flex justify-around">
-                        <div className="flex flex-col w-1/5 text-xl p-10 border-4 border-rose-200 justify-start gap-3">
+                <div className="md:p-5 self-center shadow-xl flex flex-col h-fit w-full md:mt-6 mb-10 rounded-3xl p-1"><br />
+                    {info && <div className="flex md:justify-around flex-col md:flex-row">
+                        <div className="flex md:flex-col md:w-1/5 text-xl md:p-10 md:border-4 md:border-rose-200 md:justify-start md:gap-3 gap-8 justify-center p-2 w-full">
 
                             <NavLink to="" onClick={() => HandleOnClick("profile")}
                                 className={data === "profile" ? "underline font-bold" : null}>Profile</NavLink>
@@ -50,10 +50,10 @@ export default function Account() {
                                 className={data === "orders" ? "underline font-bold" : null} >Orders</NavLink>
 
                             <NavLink onClick={LogOut}
-                                className="border-none bg-rose-400 w-fit mt-10 p-2 px-5 rounded-md font-bold hover:bg-rose-300">Logout</NavLink>
+                                className="hidden md:block border-none bg-rose-400 w-fit md:mt-10 md:p-2 md:px-5 rounded-md font-bold hover:bg-rose-300 p-1">Logout</NavLink>
 
                         </div>
-                        <div className=" w-4/5 p-6 border-4 border-rose-200 ">
+                        <div className="md:w-4/5 p-6 md:border-4 md:border-rose-200 border-t-2 w-full">
                             {
                                 data === "orders" ?
                                     <OrderList token={info.jwt} />

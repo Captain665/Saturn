@@ -9,7 +9,7 @@ export default function OrderHtml({ orderslist, isLoading, handleViewOrderDetail
             {isLoading ? <h1 className="w-fit items-center flex text-4xl animate-spin"><FaSpinner /></h1> :
                 <div>
                     <h1 className="font-bold text-2xl text-center">Order History</h1><br /><br />
-                    <div className=" grid grid-cols-2 gap-2 w-full">
+                    <div className=" grid md:grid-cols-2 gap-2 w-full">
                         {orderslist?.map(item => (
                             <div className="w-full shadow-lg p-5 flex flex-col gap-y-10 rounded-lg" key={item.id}>
                                 <ul className="top-40">
