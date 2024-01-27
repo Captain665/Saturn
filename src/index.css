@@ -4,4 +4,5 @@
 
 * {
     font-family: 'Times New Roman', Times, serif;
+    min-width: max-content;
 }
