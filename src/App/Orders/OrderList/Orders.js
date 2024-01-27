@@ -26,7 +26,7 @@ export default function OrderList({ token }) {
         }
 
         return () => { fetchData() };
-    }, [token, navigate])
+    }, [token, navigate, auth])
 
     function handleViewOrderDetail(order) {
         navigate("/order/" + order.id)

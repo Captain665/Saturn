@@ -16,22 +16,23 @@ export default function MenuItem() {
     const selectedItem = JSON.parse(sessionStorage.getItem("selectedItemInfo"))
     const pnr = JSON.parse(sessionStorage.getItem("pnr"))
 
-    if (selectedItem === null) {
-        var menuDataList = []
-    } else {
-        var menuDataList = selectedItem
-    }
+    // if (selectedItem === null) {
+    //     var menuDataList = []
+    // } else {
+    //     var menuDataList = selectedItem
+    // }
 
-    const [orderItems, setOrderItems] = useState(menuDataList)
+    const [orderItems, setOrderItems] = useState(selectedItem)
     const [menuList, setMenuList] = useState([])
 
     const [isLoading, setIsLoading] = useState(false)
 
+const outletId = outletInfo?.id;
 
     useEffect(() => {
         setIsLoading(true)
         const fetchData = async () => {
-            const response = await MenuResponse(outletInfo.id)
+            const response = await MenuResponse(outletId)
             if(response.status === "success"){
                 const itemList = response.result;
                 setMenuList(itemList)
@@ -41,7 +42,7 @@ export default function MenuItem() {
             setIsLoading(false)
         }
         return () => { fetchData() }
-    }, [ code, id])
+    }, [ code, id,outletId])
 
     useEffect(() => {
         window.sessionStorage.setItem("selectedItemInfo", JSON.stringify(orderItems))

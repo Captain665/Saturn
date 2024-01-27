@@ -23,6 +23,4 @@ export async function PnrResponse(pnr) {
     } else {
         return jsonData;
     }
-
-    return null
 }

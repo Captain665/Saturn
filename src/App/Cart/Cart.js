@@ -18,18 +18,19 @@ export default function CartInfo() {
 
     const [itemList, setItemList] = useState(itemInfo)
     const [isLoading, setIsLoading] = useState(false)
+    const path =  location.pathname;
 
     useEffect(() => {
         window.sessionStorage.setItem("selectedItemInfo", JSON.stringify(itemList))
         setTimeout(() => {
             if(!userInfo){
-                const pathName = `/login?redirectedTo=${location.pathname}`
+                const pathName = `/login?redirectedTo=${path}`
                 navigate(pathName)
             }
             setIsLoading(false)
         }, 1000)
         setIsLoading(true)
-    }, [itemList])
+    }, [itemList,path, userInfo, navigate])
 
 
     const itemSize = itemList?.length

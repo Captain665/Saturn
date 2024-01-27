@@ -11,17 +11,18 @@ export default function Account() {
     const info = JSON.parse(localStorage.getItem("userInfo"));
     const [data, setData] = useState("profile")
     const [isLoading, setIsLoading] = useState(false)
+    const path = location.pathname;
 
     useEffect(() => {
         setTimeout(() => {
             if (!info) {
-                const pathName = `/login?redirectedTo=${location.pathname}`
+                const pathName = `/login?redirectedTo=${path}`
                 navigate(pathName)
             }
             setIsLoading(false)
         }, 1)
         setIsLoading(true)
-    }, [])
+    }, [info,path, navigate])
 
 
     const LogOut = () => {
