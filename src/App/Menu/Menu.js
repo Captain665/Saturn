@@ -32,16 +32,16 @@ export default function MenuItem() {
         setIsLoading(true)
         const fetchData = async () => {
             const response = await MenuResponse(outletInfo.id)
-            if(response.status === "success"){
+            if (response.status === "success") {
                 const itemList = response.result;
                 setMenuList(itemList)
-            }else{
+            } else {
                 setMenuList(null)
             }
             setIsLoading(false)
         }
         return () => { fetchData() }
-    }, [ code, id])
+    }, [code, id])
 
     useEffect(() => {
         window.sessionStorage.setItem("selectedItemInfo", JSON.stringify(orderItems))
@@ -104,7 +104,7 @@ export default function MenuItem() {
     }
 
     function backToOutlet() {
-        navigate("/" + pnr + "/outlets/" + stationInfo.code)
+        navigate("/" + pnr + "/outlets/" + code)
     }
 
 
