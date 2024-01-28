@@ -11,7 +11,7 @@ export default function OrderHtml({ orderslist, isLoading, handleViewOrderDetail
                     <h1 className="font-bold text-2xl text-center">Order History</h1><br /><br />
                     <div className=" grid md:grid-cols-2 gap-2 w-full">
                         {orderslist?.map(item => (
-                            <div className="w-full shadow-lg p-5 flex flex-col gap-y-10 rounded-lg" key={item.id}>
+                            <div className="w-full shadow-lg p-5 flex flex-col gap-y-10 rounded-lg border-2" key={item.id}>
                                 <ul className="top-40">
                                     <div className="flex">
                                         <div className="flex justify-start items-center w-4/6">
@@ -22,7 +22,7 @@ export default function OrderHtml({ orderslist, isLoading, handleViewOrderDetail
                                             <li>{item.paymentType === "CASH_ON_DELIVERY" ? "COD" : item.paymentType}</li>
                                         </div>
                                     </div>
-                                    <li className="font-[1] text-[#9c9c9c]"><span>{item.stationName},   </span> {item.stationCode}</li>
+                                    <li className="font-[1] text-[#9c9c9c] text-xs"><span className="text-base">{item.stationName},   </span> {item.stationCode}</li>
                                     <hr />
                                     <li><span className="uppercase text-[#696969] text-xs">Order Number</span> <br />{item.id}</li>
                                     <li><span className="uppercase text-[#696969] text-xs">Status </span> <br />{item.status}</li>

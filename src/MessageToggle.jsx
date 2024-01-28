@@ -14,7 +14,7 @@ export default function ErrorToster({ props }) {
     }
 
     const failure = () => {
-        toast.error(msg, { autoClose: 4000 })
+        toast.error(msg, { autoClose: 4000, className : "" })
     }
 
     useEffect(() => {

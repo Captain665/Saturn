@@ -22,19 +22,19 @@ export default function TrainInfo() {
         setIsLoading(true)
         const data = async () => {
             const response = await PnrResponse(pnr)
-            if(response.status === "failure"){
+            if (response.status === "failure") {
                 setError(response)
                 setTimeout(() => {
                     setIsLoading(false)
                     navigate("/")
-                },4000)
-                
+                }, 4000)
+
             }
-            if(response.status === "success"){
+            if (response.status === "success") {
                 setTrainData(response.result)
                 setIsLoading(false)
-            }   
-            
+            }
+
         }
         return () => { data() }
     }, [pnr])
