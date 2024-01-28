@@ -9,17 +9,17 @@ export default function PaymentInfo({ itemList, createOrder, outletInfo}) {
 
     return (
         <>
-            <div className="self-center w-2/5 h-fit">
+            <div className="self-center md:w-2/5 h-fit w-full m-1">
                 <ul className="bg-white rounded border-2 border-rose-200">
-                    <p className="text-center bg-rose-300 p-5 text-xl font-medium">Payment Details </p>
+                    <p className="text-center bg-rose-300 p-5 md:text-xl font-medium text-lg">Payment Details </p>
                     <ul className="flex p-5 justify-between gap-2">
-                        <ul className="text-lg">
+                        <ul className="md:text-lg text-sm">
                             <li className="">Item Total : </li>
                             <li>Taxes :</li>
                             <li>Delivery Charge :</li>
                             <li className="font-bold text-2xl mt-2">Grand Total : </li>
                         </ul>
-                        <ul className="text-lg">
+                        <ul className="md:text-lg text-sm">
                             <li>&#x20B9;{subTotal}</li>
                             <li>&#x20B9;{taxes}</li>
                             <li>&#x20B9;{deliveryCharge}</li>
