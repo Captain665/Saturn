@@ -32,13 +32,8 @@ const outletId = outletInfo?.id;
     useEffect(() => {
         setIsLoading(true)
         const fetchData = async () => {
-<<<<<<< HEAD
             const response = await MenuResponse(outletId)
             if(response.status === "success"){
-=======
-            const response = await MenuResponse(outletInfo.id)
-            if (response.status === "success") {
->>>>>>> mobileWeb
                 const itemList = response.result;
                 setMenuList(itemList)
             } else {
@@ -47,11 +42,7 @@ const outletId = outletInfo?.id;
             setIsLoading(false)
         }
         return () => { fetchData() }
-<<<<<<< HEAD
     }, [ code, id,outletId])
-=======
-    }, [code, id])
->>>>>>> mobileWeb
 
     useEffect(() => {
         window.sessionStorage.setItem("selectedItemInfo", JSON.stringify(orderItems))
