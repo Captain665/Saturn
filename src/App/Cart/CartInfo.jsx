@@ -19,8 +19,8 @@ export default function CartDetails({
                     <p><span className="font-bold text-2xl w-1/2 md:pl-8">&#x2190;</span> Menu Items</p>
                     <p className="font-medium text-4xl w-1/2 text-start hidden md:block">Your Cart</p>
                 </div>
-                <div className="md:w-11/12 self-center md:m-6 m-2 flex md:gap-5 align-top md:flex-row flex-col">
-                    <p className="text-center font-medium text-2xl md:hidden mb-2">Your Cart</p>
+                <p className="text-center font-medium text-2xl md:hidden md:mb-2">Your Cart</p>
+                <div className="md:w-11/12 w-full self-center md:m-6 m-2 flex md:gap-5 align-top md:flex-row flex-col-reverse gap-3">
                     <DeliveryInfo
                         userInfo={userInfo}
                         trainInfo={trainInfo}
