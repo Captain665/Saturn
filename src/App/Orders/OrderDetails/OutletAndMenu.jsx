@@ -3,17 +3,17 @@ import React, { memo } from "react";
 function OrderedItems({ order }) {
     return (
         <>
-            <div className="flex flex-col items-center gap-2 w-3/4 m-auto">
+            <div className="flex flex-col items-center gap-2 md:w-3/4 md:m-auto m-2">
                 <h1 className="text-2xl font-bold">Your Order</h1><br />
                 {order && order.orderItems.map((itemData) => (
-                    <div className="flex gap-2 w-11/12 justify-between p-5 border-none bg-white rounded-lg" key={itemData.id}>
+                    <div className="flex gap-2 md:w-11/12 w-full justify-between md:p-5 p-2 border-none bg-white rounded-lg" key={itemData.id}>
                         <ul>
                             <img src={itemData.veg ? "/veg.png" : "/nonveg.png"} alt="item logo" className="w-4" />
-                            <li className="font-bold text-lg">{itemData.itemName}</li>
-                            <li className="text-sm">{itemData.description}</li>
+                            <li className="font-bold md:text-lg text-base">{itemData.itemName}</li>
+                            <li className="md:text-sm text-xs">{itemData.description}</li>
                             <li>&#x20B9;{itemData.basePrice}</li>
                         </ul>
-                        <ul className="flex gap-5 items-center">
+                        <ul className="flex md:gap-5 gap-2 items-center">
                             <li>{itemData.quantity}</li>
                             <li>X</li>
                             <li className="font-bold">&#x20B9;{JSON.parse((itemData.basePrice * itemData.quantity).toFixed(2))}</li>

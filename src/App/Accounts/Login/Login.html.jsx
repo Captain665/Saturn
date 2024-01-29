@@ -9,7 +9,7 @@ export default function LoginForm({ isLoading, handleChange, HandleSubmit, login
     const path = redirectedTo ? `/signup?redirecteTo=${redirectedTo}` : "/signup"
     return (
         <div><br /><br /><br />
-            <h1 className="text-4xl font-bold text-center" >Login</h1><br />
+            <h1 className="md:text-4xl font-bold text-center text-2xl" >Login</h1><br />
 
             <form onSubmit={HandleSubmit} method="post" className="flex justify-center flex-col mx-auto w-3/4 max-w-2xl">
 
@@ -38,7 +38,7 @@ export default function LoginForm({ isLoading, handleChange, HandleSubmit, login
             </form><br />
 
             <p className="text-center">Don't have an Account ?
-                <NavLink to={path} className="text-rose-400 hover:font-bold">Create Account</NavLink>
+                <NavLink to={path} className="text-rose-400 hover:font-bold"> Create Account</NavLink>
             </p><br /><br /><br />
         </div>
     )
