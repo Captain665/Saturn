@@ -21,7 +21,7 @@ export default function Account() {
             }
             setIsLoading(false)
         }, 1000)
-        setIsLoading(true)
+        setIsLoading()
     }, [info,path, navigate])
 
 

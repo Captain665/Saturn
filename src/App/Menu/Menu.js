@@ -17,12 +17,12 @@ export default function MenuItem() {
     const pnr = JSON.parse(sessionStorage.getItem("pnr"))
 
     // if (selectedItem === null) {
-    //     var menuDataList = []
+    //     var itemListInfo = []
     // } else {
-    //     var menuDataList = selectedItem
+    //     var itemListInfo = selectedItem
     // }
 
-    const [orderItems, setOrderItems] = useState(selectedItem)
+    const [orderItems, setOrderItems] = useState(selectedItem === null ? [] : selectedItem)
     const [menuList, setMenuList] = useState([])
 
     const [isLoading, setIsLoading] = useState(false)

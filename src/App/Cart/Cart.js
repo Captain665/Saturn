@@ -28,9 +28,10 @@ export default function CartInfo() {
                 navigate(pathName)
             }
             setIsLoading(false)
+            console.log("test")
         }, 1000)
         setIsLoading(true)
-    }, [itemList,path, userInfo, navigate])
+    }, [itemList, path])
 
 
     const itemSize = itemList?.length
