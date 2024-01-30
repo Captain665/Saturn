@@ -55,7 +55,7 @@ export default function MenuList({ menuList, isLoading, orderItems, addItem, rem
 
                     <div className="md:grid md:grid-cols-3 self-center items-center md:w-4/5 md:gap-5 md:p-5 mt-5 mb-5">
                         {menuItemList?.map(menuItem => (
-                            <div key={menuItem.id} className="w-full shadow-lg md:h-40 p-2">
+                            <div key={menuItem.id} className="w-full shadow md:h-40 p-2">
                                 <ul className="flex">
                                     <div className="md:w-2/5 w-1/3">
                                         {menuItem.image && <img src={menuItem.image} alt="item logo" className="object-center w-full h-full" />}
