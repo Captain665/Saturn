@@ -1,14 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaSpinner } from "react-icons/fa6";
+import Filters from "./Filters";
 
 export default function MenuList({ menuList, isLoading, orderItems, addItem, removeItem }) {
+    const [isVeg, setIsVeg] = useState(null)
+    const [sortByAmount, setSortByAmount] = useState(null)
+
+    function applyVegFilter(veg) {
+        veg === isVeg ? setIsVeg(null) : setIsVeg(veg)
+    }
+
+    function applyPriceFilter(value) {
+        console.log(value)
+    }
+
+    const menuItemList = isVeg ? menuList.filter(veg => veg.isVegeterian === (isVeg === "veg") ? true : false) : menuList
 
 
     return (
         <>
             {isLoading ? <h1 className="m-auto w-fit h-screen flex items-center text-6xl animate-spin"> <FaSpinner /> </h1> :
+                <>
+                    <Filters
+                        vegFilter={(type) => applyVegFilter(type)}
+                        priceFilter={(value) => applyPriceFilter(value)}
+                        active={isVeg}
+                    />
+
                     <div className="md:grid md:grid-cols-3 self-center items-center md:w-4/5 md:gap-5 md:p-5 mt-5 mb-5">
-                        {menuList?.map(menuItem => (
+                        {menuItemList?.map(menuItem => (
                             <div key={menuItem.id} className="w-full shadow-lg md:h-40 p-2">
                                 <ul className="flex">
                                     <div className="md:w-2/5 w-1/3">
@@ -34,6 +54,7 @@ export default function MenuList({ menuList, isLoading, orderItems, addItem, rem
                             </div>
                         ))}
                     </div>
+                </>
             }
         </>
     )

@@ -27,12 +27,10 @@ export default function MenuItem() {
 
     const [isLoading, setIsLoading] = useState(false)
 
-const outletId = outletInfo?.id;
-
     useEffect(() => {
         setIsLoading(true)
         const fetchData = async () => {
-            const response = await MenuResponse(outletId)
+            const response = await MenuResponse(id)
             if(response.status === "success"){
                 const itemList = response.result;
                 setMenuList(itemList)
@@ -42,7 +40,7 @@ const outletId = outletInfo?.id;
             setIsLoading(false)
         }
         return () => { fetchData() }
-    }, [ code, id,outletId])
+    }, [ code, id])
 
     useEffect(() => {
         window.sessionStorage.setItem("selectedItemInfo", JSON.stringify(orderItems))
@@ -108,8 +106,7 @@ const outletId = outletInfo?.id;
         navigate("/" + pnr + "/outlets/" + code)
     }
 
-
-
+    
 
     return (
         <>
