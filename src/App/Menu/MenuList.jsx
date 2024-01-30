@@ -3,18 +3,44 @@ import { FaSpinner } from "react-icons/fa6";
 import Filters from "./Filters";
 
 export default function MenuList({ menuList, isLoading, orderItems, addItem, removeItem }) {
-    const [isVeg, setIsVeg] = useState(null)
-    const [sortByAmount, setSortByAmount] = useState(null)
+    const [itemFilter, setItemFilter] = useState({ isVeg: null, amountSort: null })
 
     function applyVegFilter(veg) {
-        veg === isVeg ? setIsVeg(null) : setIsVeg(veg)
+        veg === itemFilter.isVeg
+            ? setItemFilter(prevData => ({
+                ...prevData,
+                isVeg: null
+            }))
+            : setItemFilter(prevData => ({
+                ...prevData,
+                isVeg: veg
+            }))
     }
 
     function applyPriceFilter(value) {
-        console.log(value)
+        value === itemFilter.amountSort
+            ? setItemFilter(prevData => ({
+                ...prevData,
+                amountSort: null
+            }))
+            : setItemFilter(prevData => ({
+                ...prevData,
+                amountSort: value
+            }))
     }
 
-    const menuItemList = isVeg ? menuList.filter(veg => veg.isVegeterian === (isVeg === "veg") ? true : false) : menuList
+
+    const VegList = itemFilter?.isVeg
+        ? menuList.filter(veg => veg.isVegeterian === (itemFilter.isVeg === "veg") ? true : false)
+        : menuList;
+
+    const menuItemList = itemFilter?.amountSort ?
+        (itemFilter.amountSort === "hightoLow" ?
+            VegList.toSorted((a, b) => b.basePrice - a.basePrice)
+            : VegList.toSorted((a, b) => a.basePrice - b.basePrice)
+        )
+        : VegList
+
 
 
     return (
@@ -24,7 +50,7 @@ export default function MenuList({ menuList, isLoading, orderItems, addItem, rem
                     <Filters
                         vegFilter={(type) => applyVegFilter(type)}
                         priceFilter={(value) => applyPriceFilter(value)}
-                        active={isVeg}
+                        active={itemFilter}
                     />
 
                     <div className="md:grid md:grid-cols-3 self-center items-center md:w-4/5 md:gap-5 md:p-5 mt-5 mb-5">
