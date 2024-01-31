@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaSpinner } from "react-icons/fa6";
 import Filters from "./Filters";
+import IsLoading from "../../Loading";
 
 export default function MenuList({ menuList, isLoading, orderItems, addItem, removeItem }) {
     const [itemFilter, setItemFilter] = useState({ isVeg: null, amountSort: null })
@@ -45,7 +46,7 @@ export default function MenuList({ menuList, isLoading, orderItems, addItem, rem
 
     return (
         <>
-            {isLoading ? <h1 className="m-auto w-fit h-screen flex items-center text-6xl animate-spin"> <FaSpinner /> </h1> :
+            {isLoading ? <IsLoading /> :
                 <>
                     <Filters
                         vegFilter={(type) => applyVegFilter(type)}

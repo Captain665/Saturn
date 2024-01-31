@@ -3,6 +3,7 @@ import { FaSpinner } from "react-icons/fa6";
 import DeliveryInfo from "./DeliveryInfo";
 import ItemInfo from "./ItemList";
 import PaymentInfo from "./PaymentInfo";
+import IsLoading from "../../Loading";
 
 export default function CartDetails({
     isLoading, returnToMenu,
@@ -13,7 +14,7 @@ export default function CartDetails({
 
 
     return (
-        <> {isLoading ? <h1 className="h-screen w-fit m-auto flex items-center text-4xl animate-spin"><FaSpinner /></h1> :
+        <> {isLoading ? <IsLoading /> :
             <>
                 <div className="bg-rose-50 cursor-pointer flex md:justify-between p-2" onClick={returnToMenu}>
                     <p><span className="font-bold text-2xl w-1/2 md:pl-8">&#x2190;</span> Menu Items</p>

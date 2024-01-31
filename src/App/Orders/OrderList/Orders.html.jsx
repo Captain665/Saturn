@@ -1,12 +1,13 @@
 import React from "react";
 import { FaSpinner } from "react-icons/fa6";
+import IsLoading from "../../../Loading";
 
 export default function OrderHtml({ orderslist, isLoading, handleViewOrderDetail }) {
 
 
     return (
         <>
-            {isLoading ? <h1 className="w-fit items-center flex text-4xl animate-spin"><FaSpinner /></h1> :
+            {isLoading ? <IsLoading /> :
                 <div>
                     <h1 className="font-bold text-2xl text-center">Order History</h1><br /><br />
                     <div className=" grid md:grid-cols-2 gap-2 w-full">

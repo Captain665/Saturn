@@ -3,6 +3,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import CustomerDetails from "./CustomerInfo";
 import { FaSpinner } from "react-icons/fa6";
 import OrderList from "../../Orders/OrderList/Orders";
+import IsLoading from "../../../Loading";
 
 export default function Account() {
     const location = useLocation()
@@ -39,7 +40,7 @@ export default function Account() {
 
     return (
         <>
-            {isLoading ? <h1 className="h-screen w-fit m-auto flex items-center text-4xl animate-spin"><FaSpinner /></h1> :
+            {isLoading ? <IsLoading /> :
                 <div className="md:p-5 self-center shadow-xl flex flex-col h-fit w-full md:mt-6 mb-10 rounded-3xl p-1"><br />
                     {info && <div className="flex md:justify-around flex-col md:flex-row">
                         <div className="flex md:flex-col md:w-1/5 text-xl md:p-10 md:border-4 md:border-rose-200 md:justify-start md:gap-3 gap-8 justify-center p-2 w-full">

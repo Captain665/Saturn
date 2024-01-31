@@ -2,12 +2,13 @@ import React from "react";
 import { FaSpinner } from "react-icons/fa6";
 import CustomerAndPaymentInfo from "./CustomerAndPaymentInfo";
 import OrderedItems from "./OutletAndMenu";
+import IsLoading from "../../../Loading";
 
 export default function OrderInfo({ order, isLoading, backToHome }) {
 
 
     return (
-        <>{isLoading ? <h1><FaSpinner /></h1> :
+        <>{isLoading ? <IsLoading /> :
             order && <div className="">
                 <div className="bg-rose-50 cursor-pointer flex items-center w-full text-lg pl-5 p-2" onClick={backToHome}>
                     <h1>&#x2190; back to home</h1>

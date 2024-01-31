@@ -5,7 +5,7 @@ import { FaSpinner } from "react-icons/fa6"
 export default function LoginForm({ isLoading, handleChange, HandleSubmit, loginData, redirectedTo }) {
 
 
-    // const path = redirectedTo || ""
+
     const path = redirectedTo ? `/signup?redirecteTo=${redirectedTo}` : "/signup"
     return (
         <div><br /><br /><br />

@@ -1,12 +1,13 @@
 import React, { memo } from "react";
 import { FaStar, FaSpinner } from "react-icons/fa6";
+import IsLoading from "../../Loading";
 
 function OutletHtml({ returnToStation, isLoading, outletData, stations, stationCode, handleOnClick }) {
 
     return (
         <>
 
-            {isLoading ? <h1 className="w-fit m-auto flex items-center h-screen animate-spin text-6xl"><FaSpinner /></h1> : <>
+            {isLoading ? <IsLoading /> : <>
                 <div className="flex md:gap-20 self-center justify-between pt-2 w-full">
                     <p className="text-rose-400 hover:font-bold md:text-lg text-sm cursor-pointer underline text-center w-1/3"
                         onClick={returnToStation}>Choose Different Station</p>
