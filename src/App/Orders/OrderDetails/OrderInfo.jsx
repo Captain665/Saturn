@@ -1,5 +1,4 @@
 import React from "react";
-import { FaSpinner } from "react-icons/fa6";
 import CustomerAndPaymentInfo from "./CustomerAndPaymentInfo";
 import OrderedItems from "./OutletAndMenu";
 import IsLoading from "../../../Loading";

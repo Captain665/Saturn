@@ -16,12 +16,6 @@ export default function MenuItem() {
     const selectedItem = JSON.parse(sessionStorage.getItem("selectedItemInfo"))
     const pnr = JSON.parse(sessionStorage.getItem("pnr"))
 
-    // if (selectedItem === null) {
-    //     var itemListInfo = []
-    // } else {
-    //     var itemListInfo = selectedItem
-    // }
-
     const [orderItems, setOrderItems] = useState(selectedItem === null ? [] : selectedItem)
     const [menuList, setMenuList] = useState([])
 

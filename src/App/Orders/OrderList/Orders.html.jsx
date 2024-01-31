@@ -1,5 +1,4 @@
 import React from "react";
-import { FaSpinner } from "react-icons/fa6";
 import IsLoading from "../../../Loading";
 
 export default function OrderHtml({ orderslist, isLoading, handleViewOrderDetail }) {

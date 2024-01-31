@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { FaTrain, FaSpinner } from "react-icons/fa6";
+import { FaTrain } from "react-icons/fa6";
 import ErrorToster from "../../MessageToggle";
 import IsLoading from "../../Loading";
 

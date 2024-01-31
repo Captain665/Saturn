@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { FaStar, FaSpinner } from "react-icons/fa6";
+import { FaStar } from "react-icons/fa6";
 import IsLoading from "../../Loading";
 
 function OutletHtml({ returnToStation, isLoading, outletData, stations, stationCode, handleOnClick }) {

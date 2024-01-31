@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FaSpinner } from "react-icons/fa6";
 import Filters from "./Filters";
 import IsLoading from "../../Loading";
 

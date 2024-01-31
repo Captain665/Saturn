@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import CustomerDetails from "./CustomerInfo";
-import { FaSpinner } from "react-icons/fa6";
 import OrderList from "../../Orders/OrderList/Orders";
 import IsLoading from "../../../Loading";
 
@@ -15,15 +14,11 @@ export default function Account() {
     const path = location.pathname;
 
     useEffect(() => {
-        setTimeout(() => {
-            if (!info) {
-                const pathName = `/login?redirectedTo=${path}`
-                navigate(pathName)
-            }
-            setIsLoading(false)
-        }, 1000)
-        setIsLoading()
-    }, [info,path, navigate])
+        if (!info) {
+            const pathName = `/login?redirectedTo=${path}`
+            navigate(pathName)
+        }
+    }, [info, path, navigate])
 
 
     const LogOut = () => {
