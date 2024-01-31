@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Outlet} from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Footers from "./Footer";
 import Headers from "./Header";
 
@@ -17,9 +17,11 @@ export default function LayOut() {
 
     return (
         <div className="flex flex-col">
-            <Headers name={userName}/>
-            <Outlet />
-            <Footers /> 
+            <Headers name={userName} />
+            <main className="min-h-screen">
+                <Outlet />
+            </main>
+            <Footers />
         </div>
     )
 }
