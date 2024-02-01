@@ -34,7 +34,7 @@ export default function Account() {
 
 
     return (
-        <>
+        <div className="flex flex-col">
             {isLoading ? <IsLoading /> :
                 <div className="md:p-5 self-center shadow-xl flex flex-col h-fit w-full md:mt-6 mb-10 rounded-3xl p-1"><br />
                     {info && <div className="flex md:justify-around flex-col md:flex-row">
@@ -61,7 +61,7 @@ export default function Account() {
                     }
                 </div>
             }
-        </>
+        </div>
 
     )
 }

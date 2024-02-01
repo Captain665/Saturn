@@ -28,7 +28,6 @@ export default function CartInfo() {
                 navigate(pathName)
             }
             setIsLoading(false)
-            console.log("test")
         }, 1000)
         setIsLoading(true)
     }, [itemList, path])
@@ -82,16 +81,12 @@ export default function CartInfo() {
     }
 
 
-
-
-
     function createOrder() {
         const fetchData = async () => {
             const response = await CreateOrderResponse(trainInfo, stationInfo, seatInfo, outletInfo, userInfo, itemList, pnr);
             if (response.status === "success") {
                 sessionStorage.clear();
                 const orderId = response?.result.id;
-                console.log(orderId)
                 navigate("/order/" + orderId)
             }
         }

@@ -6,7 +6,7 @@ import IsLoading from "../../Loading";
 function TrainHtml({ isLoading, train, error }) {
 
     return (
-        <>
+        <div className="flex flex-col">
             {isLoading ? <IsLoading /> : <>
                 <h1 className="md:text-4xl text-xl font-bold text-center md:pt-3 pt-1">Journey Details & Station List</h1>
                 <div className="flex flex-col md:justify-center self-center items-center md:w-11/12 shadow rounded-md bg-rose-100 m-1 py-5 p-2">
@@ -24,7 +24,7 @@ function TrainHtml({ isLoading, train, error }) {
             </>
             }
             {error && <ErrorToster props={error} />}
-        </>
+        </div>
     )
 
 }

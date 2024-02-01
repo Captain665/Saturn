@@ -13,7 +13,7 @@ export default function CartDetails({
 
 
     return (
-        <> {isLoading ? <IsLoading /> :
+        <div className="flex flex-col"> {isLoading ? <IsLoading /> :
             <>
                 <div className="bg-rose-50 cursor-pointer flex md:justify-between p-2" onClick={returnToMenu}>
                     <p><span className="font-bold text-2xl w-1/2 md:pl-8">&#x2190;</span> Menu Items</p>
@@ -41,6 +41,6 @@ export default function CartDetails({
                 />
             </>
         }
-        </>
+        </div>
     )
 }

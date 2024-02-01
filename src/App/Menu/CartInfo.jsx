@@ -5,7 +5,7 @@ import { FaTrashCan } from "react-icons/fa6";
 function CartInfo({ orderItems, handleCheckOut, clearCart }) {
 
     return (
-        <>
+        <div className="flex flex-col">
             {orderItems?.length > 0 && <>
                 <div className="border-2 p-2 rounded md:rounded-lg md:w-4/6 w-full self-center fixed bottom-0 bg-rose-200">
                     <ul className="flex place-items-baseline justify-around">
@@ -18,7 +18,7 @@ function CartInfo({ orderItems, handleCheckOut, clearCart }) {
                 </div>
             </>
             }
-        </>
+        </div>
     )
 }
 

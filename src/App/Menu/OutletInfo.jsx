@@ -29,7 +29,7 @@ function OutletInfo({ backToOutlet, trainDetail, stationInfo, outletInfo }) {
                             <p className="">{outletInfo?.ratingValue}</p>
                             <p className="">Based on {outletInfo?.ratingCount} Ratings</p>
                         </div>
-                        <p className="text-sm ml-2 w-fit p-1 rounded-lg">{outletInfo.deliveryCost != 0 ? null : "Free Delivery"}</p>
+                        <p className="text-sm ml-2 w-fit p-1 rounded-lg">{outletInfo.deliveryCost !== 0 ? null : "Free Delivery"}</p>
                     </div>
                     <div className="md:w-1/5 rounded-sm w-2/5 bg-gray-300 h-28">
                         <img src={outletInfo?.logoImage} alt="logo" className="object-center w-full h-full" />
