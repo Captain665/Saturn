@@ -46,7 +46,7 @@ export default function MenuList({ menuList, isLoading, orderItems, addItem, rem
     return (
         <>
             {isLoading ? <IsLoading /> :
-                <>
+                <div className="flex flex-col">
                     <Filters
                         vegFilter={(type) => applyVegFilter(type)}
                         priceFilter={(value) => applyPriceFilter(value)}
@@ -80,7 +80,7 @@ export default function MenuList({ menuList, isLoading, orderItems, addItem, rem
                             </div>
                         ))}
                     </div>
-                </>
+                </div>
             }
         </>
     )

@@ -99,6 +99,10 @@ export default function MenuItem() {
     function backToOutlet() {
         navigate("/" + pnr + "/outlets/" + code)
     }
+    function clearCart(){
+        setOrderItems([])        
+    }
+
 
     
 
@@ -122,6 +126,7 @@ export default function MenuItem() {
             <CartInfo
                 orderItems={orderItems}
                 handleCheckOut={handleCheckOut}
+                clearCart={clearCart}
             />
         </>
     )

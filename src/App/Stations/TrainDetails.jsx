@@ -9,7 +9,7 @@ function TrainHtml({ isLoading, train, error }) {
         <>
             {isLoading ? <IsLoading /> : <>
                 <h1 className="md:text-4xl text-xl font-bold text-center md:pt-3 pt-1">Journey Details & Station List</h1>
-                <div className="flex flex-col md:justify-center self-center items-center md:w-11/12 shadow rounded-md bg-rose-100 m-1 py-2">
+                <div className="flex flex-col md:justify-center self-center items-center md:w-11/12 shadow rounded-md bg-rose-100 m-1 py-5 p-2">
 
                     <div className="md:p-4 rounded-lg w-full md:px-28 place-items-center p-1">
                         <ul className="item-center grid grid-cols-2 md:gap-3">

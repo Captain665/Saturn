@@ -21,15 +21,15 @@ function OutletHtml({ returnToStation, isLoading, outletData, stations, stationC
                 <div className="flex flex-col justify-center self-center items-center md:w-11/12 m-2 md:mt-10">
                     {outletData?.map(outlet => (
                         <div key={outlet.id}
-                            className="shadow-lg md:w-2/3 w-full flex m-1 md:h-48 rounded border-2 cursor-pointer hover:border-4"
+                            className="shadow-lg md:w-2/3 w-full flex m-1 md:h-48 h-24 rounded border-2 cursor-pointer hover:border-4"
                             onClick={() => handleOnClick(outlet)}>
                             <div className="rounded-md w-1/3">
                                 <img src={outlet.logoImage} className="w-full h-full object-center" alt="logoImage" />
                             </div>
-                            <div className="border-l-2 pl-4 w-full justify-center p-3">
-                                <h2 className="text-xl font-bold pt-2">{outlet.outletName}</h2>
-                                <h2 className="pt-1">Min order : &#x20B9;{outlet.minOrderValue}</h2>
-                                <div className="flex pt-2">
+                            <div className="border-l-2 pl-4 w-full justify-center md:p-3">
+                                <h2 className="md:text-xl text-base font-bold pt-2">{outlet.outletName}</h2>
+                                <h2 className="pt-1 md:test-base text-sm">Min order : &#x20B9;{outlet.minOrderValue}</h2>
+                                <div className="flex md:pt-2 md:test-base text-sm">
                                     <span className="text-[#FFD700] items-center"><FaStar /></span>
                                     <span className="pl-2"> {outlet.ratingValue} </span>
                                     <span className="pl-2"> Based on {outlet.ratingCount} Ratings</span>
