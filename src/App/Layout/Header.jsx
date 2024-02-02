@@ -55,7 +55,7 @@ function Headers({ name }) {
         <>
             <header className="flex w-full flex-row justify-between items-center shadow-lg bg-rose-200">
                 <NavLink to="/" className="flex items-center">
-                    <img src="/LogoImage.jpg" alt="logo" className="p-3 h-20 object-content ml-4 md:ml-20 rounded-2xl" />
+                    <img src="https://logowik.com/content/uploads/images/restaurant9491.logowik.com.webp" alt="logo" className="p-3 h-20 object-content ml-4 md:ml-20 rounded-2xl" />
                 </NavLink>
                 <nav className="hidden md:flex w-1/2 items-center justify-around place-content-center flex-col md:flex-row">
                     {links}
