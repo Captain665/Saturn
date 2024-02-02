@@ -44,8 +44,10 @@ function Headers({ name }) {
         <NavLink to="/" end className={(isActive) => isActiveCheck(isActive)} onClick={NavBarInvisible}>{home}</NavLink>
         <NavLink to="about" className={(isActive) => isActiveCheck(isActive)} onClick={NavBarInvisible}>{about}</NavLink>
         <NavLink to="contact" className={(isActive) => isActiveCheck(isActive)} onClick={NavBarInvisible}>{contact}</NavLink>
-        <NavLink to="account" className={(isActive) => isActiveCheck(isActive)} onClick={NavBarInvisible}><p className="flex gap-1 items-center"><FaUser /> {account}</p></NavLink>
-        <NavLink to={pathName} className="bg-orange-500 text-center p-1 rounded-md border:none md:hidden text-white" onClick={LogOut}>{linkValue}</NavLink>
+        <NavLink to="account" className={(isActive) => isActiveCheck(isActive)} onClick={NavBarInvisible}>
+            <p className="flex gap-1 items-center"><FaUser /> {account}</p></NavLink>
+        <NavLink to={pathName}
+            className="bg-orange-500 text-center p-1 rounded-md border:none md:hidden text-white" onClick={LogOut}>{linkValue}</NavLink>
     </>
 
 
@@ -58,13 +60,14 @@ function Headers({ name }) {
                 <nav className="hidden md:flex w-1/2 items-center justify-around place-content-center flex-col md:flex-row">
                     {links}
                 </nav>
-                <nav className={`md:hidden mr-10 ${isVisible ? "border-2" : null} p-1 border-black`} onClick={HandleOnClick}>
-                    <FaBars className="text-3xl" />
+                <nav className={`md:hidden relative w-full`} >
+                    <span className={`float-right text-3xl ${isVisible ? "border-2" : null} border-black p-1 mr-10 cursor-pointer`} onClick={HandleOnClick}><FaBars /></span>
+
+                    <div className={`flex-col bg-rose-300 p-5 gap-5 md:hidden ${isVisible ? "flex" : "hidden"} z-[100] absolute right-5 top-12 rounded-lg`}>
+                        {links}
+                    </div>
                 </nav>
             </header>
-            <div className={`flex-col bg-rose-300 self-end p-5 gap-5 md:hidden ${isVisible ? "flex" : "hidden"} overflow-visible sticky`}>
-                {links}
-            </div>
         </>
     )
 }
