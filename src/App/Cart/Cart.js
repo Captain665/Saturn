@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import CartDetails from "./CartInfo";
 import { CreateOrderResponse } from "../ApiCall/CreateOrderApi";
+import ErrorToster from "../../MessageToggle";
 
 export default function CartInfo() {
 
@@ -18,23 +19,26 @@ export default function CartInfo() {
 
     const [itemList, setItemList] = useState(itemInfo)
     const [isLoading, setIsLoading] = useState(false)
-    const path =  location.pathname;
+    const [error, setError] = useState(null)
+    const path = location.pathname;
 
     useEffect(() => {
         window.sessionStorage.setItem("selectedItemInfo", JSON.stringify(itemList))
         setTimeout(() => {
-            if(!userInfo){
+            if (!userInfo || error?.error === "Not authorize to Access") {
                 const pathName = `/login?redirectedTo=${path}`
                 navigate(pathName)
             }
             setIsLoading(false)
         }, 1000)
-        setIsLoading(true)
-    }, [itemList, path])
+
+        setError(null)
+        return () => { setIsLoading(true) }
+    }, [itemList])
 
 
     const itemSize = itemList?.length
-    if (itemList === 0 || itemSize === undefined) {
+    if (itemList === 0 || itemSize === undefined) { 
         returnToMenu()
     }
 
@@ -81,17 +85,20 @@ export default function CartInfo() {
     }
 
 
-    function createOrder() {
-        const fetchData = async () => {
-            const response = await CreateOrderResponse(trainInfo, stationInfo, seatInfo, outletInfo, userInfo, itemList, pnr);
-            if (response.status === "success") {
-                sessionStorage.clear();
-                const orderId = response?.result.id;
-                navigate("/order/" + orderId)
-            }
+    const createOrder = async () => {
+        setIsLoading(true)
+        const response = await CreateOrderResponse(trainInfo, stationInfo, seatInfo, outletInfo, userInfo, itemList, pnr);
+        if (response.status === "success") {
+            sessionStorage.clear();
+            const orderId = response?.result.id;
+            navigate("/order/" + orderId)
+        }else{
+            setError(response)   
         }
-        fetchData()
+        setIsLoading(false)
     }
+
+    console.log(error)
 
 
 
@@ -109,6 +116,9 @@ export default function CartInfo() {
                 removeItem={removeItem}
                 addItem={addItem}
                 returnToMenu={() => returnToMenu()}
+            />
+            <ErrorToster 
+            props={error}
             />
         </>
     )
