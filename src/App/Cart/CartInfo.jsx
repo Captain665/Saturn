@@ -15,8 +15,8 @@ export default function CartDetails({
     return (
         <div className="flex flex-col"> {isLoading ? <IsLoading /> :
             <>
-                <div className="bg-rose-50 cursor-pointer flex md:justify-between p-2" onClick={returnToMenu}>
-                    <p><span className="font-bold text-2xl w-1/2 md:pl-8">&#x2190;</span> Menu Items</p>
+                <div className="bg-rose-50 cursor-pointer flex md:justify-between p-2">
+                    <p><span className="font-bold text-2xl w-1/2 md:pl-8" onClick={returnToMenu}>&#x2190;</span> Menu Items</p>
                     <p className="font-medium text-4xl w-1/2 text-start hidden md:block">Your Cart</p>
                 </div>
                 <p className="text-center font-medium text-2xl md:hidden md:mb-2">Your Cart</p>

@@ -13,7 +13,7 @@ function StationData({ stations, handleOnClick }) {
 
             <div className="flex flex-col md:mt-10">
                 {stations?.map(station => (
-                    <div className="m-1 md:m-2 md:w-1/2 w-11/12 content-center self-center rounded-lg md:p-5 p-2 md:h-28
+                    <div className="m-1 md:m-2 md:w-1/2 w-11/12 content-center self-center md:rounded-lg rounded-md md:p-5 p-2 md:h-28
                   border-2 cursor-pointer hover:border-4 flex justify-between" key={station.code} onClick={() => handleOnClick(station)}>
                         <div className="self-center text-start md:text-xl text-sm" key={station.code}>
                             <p className="font-bold">{station.name}  <span className="font-light text-xs md:text-base">{station.code}</span></p>

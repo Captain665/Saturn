@@ -18,7 +18,7 @@ export default function LayOut() {
     return (
         <div className="flex flex-col">
             <Headers name={userName} />
-            <main className="min-h-screen">
+            <main className="min-h-screen w-full">
                 <Outlet />
             </main>
             <Footers />

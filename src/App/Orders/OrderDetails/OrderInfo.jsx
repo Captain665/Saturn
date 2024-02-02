@@ -9,8 +9,8 @@ export default function OrderInfo({ order, isLoading, backToHome }) {
     return (
         <>{isLoading ? <IsLoading /> :
             order && <div className="">
-                <div className="bg-rose-50 cursor-pointer flex items-center w-full text-lg pl-5 p-2" onClick={backToHome}>
-                    <h1>&#x2190; back to home</h1>
+                <div className="bg-rose-50 cursor-pointer flex items-center w-full text-lg md:pl-5 p-2">
+                    <h1 onClick={backToHome}>&#x2190; Back to Home</h1>
                 </div>
                 <h1 className="md:text-4xl md:ml-14 ml-5 md:mt-5 mb-2 text-2xl">Order Details</h1>
                 <div className="flex flex-col items-center">

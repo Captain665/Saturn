@@ -5,7 +5,7 @@ function OutletInfo({ backToOutlet, trainDetail, stationInfo, outletInfo }) {
 
     return (
         <>
-            <p className="bg-rose-50 cursor-pointer p-2" onClick={backToOutlet}><span className="font-bold text-2xl w-1/2 pl-8 ">&#x2190;</span>  Outlets</p>
+            <p className="bg-rose-50 cursor-pointer p-2"><span onClick={backToOutlet}><span className="font-bold text-2xl w-1/2 md:pl-8 ">&#x2190;</span>  Outlets</span></p>
             <div className="w-full flex flex-col justify-center self-center items-center md:p-5">
                 <div className="flex w-11/12 md:p-5 md:h-60 h-32 shadow">
                     <div className="w-1/5 shadow-md rounded-md hidden md:block">
