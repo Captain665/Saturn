@@ -36,7 +36,10 @@ export default function Home() {
         data()
     }
     function handleOnChange(event) {
-        setPnr(event.target.value)
+        const value = event.target.value
+        if(value.length <= 10){
+            setPnr(value)
+        } 
     }
 
 

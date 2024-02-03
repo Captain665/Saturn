@@ -7,7 +7,7 @@ import ErrorToster from "../../../MessageToggle";
 export default function Login() {
     const [param] = useSearchParams()
     const navigate = useNavigate()
-    
+
 
     const [loginData, setloginData] = useState({ mobileNumber: "", password: "" })
     const [isLoading, setLoading] = useState(false)
@@ -16,10 +16,12 @@ export default function Login() {
     function handleChange(event) {
         const name = event.target.name;
         const value = event.target.value;
-        setloginData((prevData) => ({
-            ...prevData,
-            [name]: value
-        }))
+        if (value?.length <= 10) {
+            setloginData((prevData) => ({
+                ...prevData,
+                [name]: value
+            }))
+        }
     }
 
     const fetchData = async () => {

@@ -22,6 +22,7 @@ export default function LoginForm({ isLoading, handleChange, HandleSubmit, login
                             className="border rounded-lg h-10 pl-2 outline-none"
                             onChange={handleChange}
                             value={loginData?.mobileNumber}
+                            maxLength={10}
                         /><br />
 
                         <label htmlFor="password">Password</label>

@@ -4,5 +4,14 @@
 
 * {
     font-family: 'Times New Roman', Times, serif;
-    max-width:100%
+    max-width: 100%
+}
+
+@layer base {
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 }
