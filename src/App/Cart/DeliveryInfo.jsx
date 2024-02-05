@@ -4,8 +4,8 @@ export default function DeliveryInfo({ userInfo, trainInfo, stationInfo, seatInf
 
     return (
         <>
-            <div className="md:w-1/3 rounded-xl shadow-md bg-rose-200 h-fit md:mb-0 mb-2 w-full">
-                <p className="font-medium md:text-2xl text-center bg-rose-300 p-4 rounded-md text-lg">Deliver to </p><br />
+            <div className="md:w-1/3 rounded-xl shadow-md bg-sky-200 h-fit md:mb-0 mb-2 w-full">
+                <p className="font-medium md:text-2xl text-center bg-sky-300 p-4 rounded-md text-lg">Deliver to </p><br />
                 {userInfo && <ol className="p-4 bg-white m-2 rounded-md text-sm md:text-base">
                     <li className="font-semibold text-lg">Passanger Details</li>
                     <li>Name : {userInfo.fullName}</li>

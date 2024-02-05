@@ -20,9 +20,9 @@ export default function ValidateHtml({ handleOtpChange, handleOtpSubmit, isLoadi
                         <input type="number" name="mobileNumber" id="number" onChange={handleOtpChange} value={otp}
                             required placeholder="OTP" className="border rounded-lg h-10 pl-2 outline-none" /><br />
 
-                        <button type="submit" className="bg-rose-500 h-10 border-none rounded text-white text-xl">Submit</button>
+                        <button type="submit" className="bg-sky-500 h-10 border-none rounded text-white text-xl hover:bg-sky-400">Submit</button>
                     </form><br />
-                    <p className="text-center">Have an Account ?  <NavLink to="/login" className="text-rose-400"> Sign in</NavLink></p><br /><br />
+                    <p className="text-center">Have an Account ?  <NavLink to="/login" className="text-sky-400 hover:font-bold"> Sign in</NavLink></p><br /><br />
                 </div>
             }
         </>

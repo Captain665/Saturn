@@ -3,7 +3,7 @@ import React from "react";
 export default function About() {
     return (
         <div className="flex flex-col">
-            <div className="m-2 h-fit shadow md:indent-5 indent-2 md:w-9/12 self-center px-1 md:px-32 md:py-3 bg-rose-100 text-pretty">
+            <div className="m-2 h-fit shadow md:indent-5 indent-2 md:w-9/12 self-center px-1 md:px-32 md:py-3 text-pretty">
                 <br />
                 <header>
                     <h1 className="md:text-4xl text-2xl font-bold">About Us</h1><hr /><br />

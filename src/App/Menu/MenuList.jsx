@@ -65,14 +65,14 @@ export default function MenuList({ menuList, isLoading, orderItems, addItem, rem
                                         <li className="pt-2 truncate text-lg font-medium">{menuItem.name}</li>
                                         <li className="truncate text-wrap-3 text-xs font-thin opacity-90 pl-1">{menuItem.description}</li>
                                         <li>&#x20B9; {menuItem.basePrice}</li>
-                                        <li className="border-2 w-fit px-2 p-1 rounded-lg float-end align-bottom border-rose-400">
+                                        <li className="border-2 w-fit px-4 p-0.5 rounded-lg float-end align-bottom border-sky-400">
                                             {
                                                 (orderItems?.find(item => item.itemId === menuItem.id)) ?
                                                     <div className="flex flex-row justify-between">
                                                         <span className="pr-2 cursor-pointer" onClick={() => removeItem(menuItem)} >-</span>
                                                         <span>{orderItems[orderItems.findIndex(id => id.itemId === menuItem.id)].quantity}</span>
                                                         <span onClick={() => addItem(menuItem)} className="cursor-pointer pl-2">+</span></div>
-                                                    : <span className="cursor-pointer" onClick={() => addItem(menuItem)}>ADD</span>
+                                                    : <span className="cursor-pointer text-sm" onClick={() => addItem(menuItem)}>ADD</span>
                                             }
                                         </li>
                                     </div>

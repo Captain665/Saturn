@@ -47,13 +47,13 @@ function Headers({ name }) {
         <NavLink to="account" className={(isActive) => isActiveCheck(isActive)} onClick={NavBarInvisible}>
             <p className="flex gap-1 items-center"><FaUser /> {account}</p></NavLink>
         <NavLink to={pathName}
-            className="bg-orange-500 text-center p-1 rounded-md border:none md:hidden text-white" onClick={LogOut}>{linkValue}</NavLink>
+            className="bg-sky-500 text-center p-1 rounded-md border:none md:hidden text-white" onClick={LogOut}>{linkValue}</NavLink>
     </>
 
 
     return (
         <>
-            <header className="flex w-full flex-row justify-between items-center shadow-lg bg-rose-200">
+            <header className="flex w-full flex-row justify-between items-center shadow-lg bg-sky-400">
                 <NavLink to="/" className="flex items-center">
                     <img src="https://logowik.com/content/uploads/images/restaurant9491.logowik.com.webp" alt="logo" className="p-3 h-20 object-content ml-4 md:ml-20 rounded-2xl" />
                 </NavLink>
@@ -63,7 +63,7 @@ function Headers({ name }) {
                 <nav className={`md:hidden relative w-full`} >
                     <span className={`float-right text-3xl ${isVisible ? "border-2" : null} border-black p-1 mr-10 cursor-pointer`} onClick={HandleOnClick}><FaBars /></span>
 
-                    <div className={`flex-col bg-rose-300 p-5 gap-5 md:hidden ${isVisible ? "flex" : "hidden"} z-[100] absolute right-5 top-12 rounded-lg`}>
+                    <div className={`flex-col bg-white p-5 gap-4 md:hidden ${isVisible ? "flex" : "hidden"} z-[100] absolute right-5 top-12 rounded-lg w-40`}>
                         {links}
                     </div>
                 </nav>

@@ -35,13 +35,13 @@ export default function LoginForm({ isLoading, handleChange, HandleSubmit, login
                         /><br /><br />
 
                         <button type="submit"
-                            className="bg-rose-500 h-10 border-none rounded text-white text-xl hover:bg-rose-400">
+                            className="bg-sky-500 h-10 border-none rounded text-white text-xl hover:bg-sky-400">
                             Sign in</button>
 
                     </form><br />
 
                     <p className="text-center">Don't have an Account ?
-                        <NavLink to={path} className="text-rose-400 hover:font-bold"> Create Account</NavLink>
+                        <NavLink to={path} className="text-sky-400 hover:font-bold "> Create Account</NavLink>
                     </p><br /><br /><br />
                 </>
             }

@@ -5,11 +5,11 @@ function OutletInfo({ backToOutlet, trainDetail, stationInfo, outletInfo }) {
 
     return (
         <>
-            <p className="bg-rose-50 cursor-pointer p-2"><span onClick={backToOutlet}><span className="font-bold text-2xl w-1/2 md:pl-8 ">&#x2190;</span>  Outlets</span></p>
+            <p className="bg-gray-200 cursor-pointer p-2 mx-0.5"><span onClick={backToOutlet}><span className="font-bold text-2xl w-1/2 md:pl-8 ">&#x2190;</span>  Outlets</span></p>
             <div className="w-full flex flex-col justify-center self-center items-center md:p-5">
                 <div className="flex w-11/12 md:p-5 md:h-60 h-32 shadow">
                     <div className="w-1/5 shadow-md rounded-md hidden md:block">
-                        <div className="bg-rose-500 opacity-80 h-1/2 text-white p-3">
+                        <div className="bg-sky-500 opacity-80 h-1/2 text-white p-3">
                             <p className="text-sm">Delivery Details</p>
                             <p><span className="pt-1 text-lg font-semibold">{trainDetail?.name}</span> <span className="font-bold">({trainDetail?.trainNo})</span></p>
                             <p className="text-sm pt-2"><span>On {stationInfo?.depDate}</span><span>, at {stationInfo?.departure}</span></p>
@@ -31,7 +31,7 @@ function OutletInfo({ backToOutlet, trainDetail, stationInfo, outletInfo }) {
                         </div>
                         <p className="text-sm ml-2 w-fit p-1 rounded-lg">{outletInfo.deliveryCost !== 0 ? null : "Free Delivery"}</p>
                     </div>
-                    <div className="md:w-1/5 rounded-sm w-2/5 bg-gray-300 h-28">
+                    <div className="md:w-1/5 rounded-sm w-2/5 bg-gray-300 md:h-28 h-24">
                         <img src={outletInfo?.logoImage} alt="logo" className="object-center w-full h-full" />
                     </div>
                 </div>

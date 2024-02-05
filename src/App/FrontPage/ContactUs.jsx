@@ -3,7 +3,7 @@ import React from "react";
 export default function Contact() {
     return (
         <div className="flex flex-col">
-            <div className="m-2 h-fit shadow md:indent-5 indent-2 px-1 md:w-9/12 self-center md:px-32 md:py-3 bg-rose-100 text-pretty">
+            <div className="m-2 h-fit shadow md:indent-5 indent-2 px-1 md:w-9/12 self-center md:px-32 md:py-3 text-pretty">
                 <br />
                 <header>
                     <h1 className="md:text-4xl text-2xl font-bold" >Contact Us</h1><hr /><br />

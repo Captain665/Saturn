@@ -35,16 +35,16 @@ export default function SignupData({ userInfo, handleSubmit, handleGender, handl
 
                     <div className="flex justify-around">
                         <input type="button" value="Male" onClick={handleGender}
-                            className={`border-2 w-20 cursor-pointer rounded-lg h-10 ${userInfo.gender === "Male" ? "bg-rose-400" : ""}`} />
+                            className={`border-2 w-20 cursor-pointer rounded-lg h-10 ${userInfo.gender === "Male" ? "bg-sky-300" : ""}`} />
                         <input type="button" value="Female" onClick={handleGender}
-                            className={`border-2 w-20 cursor-pointer rounded-lg h-10 ${userInfo.gender === "Female" ? "bg-rose-400" : ""}`} />
+                            className={`border-2 w-20 cursor-pointer rounded-lg h-10 ${userInfo.gender === "Female" ? "bg-sky-300" : ""}`} />
                         <input type="button" value="Other" onClick={handleGender}
-                            className={`border-2 w-20 cursor-pointer rounded-lg h-10 ${userInfo.gender === "Other" ? "bg-rose-400" : ""}`} />
+                            className={`border-2 w-20 cursor-pointer rounded-lg h-10 ${userInfo.gender === "Other" ? "bg-sky-300" : ""}`} />
                     </div><br />
 
-                    <button type="submit" className="bg-rose-500 h-10 border-none rounded text-white text-xl">Get OTP</button>
+                    <button type="submit" className="bg-sky-500 h-10 border-none rounded text-white text-xl hover:bg-sky-400">Get OTP</button>
                 </form><br />
-                <p className="text-center">Have an Account ?  <NavLink to="/login" className="text-rose-400">Sign In</NavLink></p><br /><br />
+                <p className="text-center">Have an Account ?  <NavLink to="/login" className="text-sky-400">Sign In</NavLink></p><br /><br />
             </div>
         }
         </>

@@ -5,7 +5,7 @@ function CustomerAndPaymentInfo({ order }) {
     return (
         <>
             {order && <div className="md:grid md:grid-cols-2 flex flex-col-reverse justify-center md:gap-2">
-                <ul className="md:w-fit md:p-10 p-2 bg-white md:bg-rose-100 md:m-auto m-2 rounded-lg w-11/12">
+                <ul className="md:w-fit md:p-10 p-2 bg-white md:bg-sky-200 md:m-auto m-2 rounded-lg w-11/12">
                     <h1 className="text-xl font-bold inline-flex gap-2"><FaUser />Customer</h1>
                     <ul className="flex md:p-2 md:pl-10">
                         <ul className="font-light text-[#696969]">
@@ -23,7 +23,7 @@ function CustomerAndPaymentInfo({ order }) {
                     </ul>
 
                 </ul>
-                <ul className="md:w-fit md:p-10 p-2 bg-white md:bg-rose-100 md:m-auto m-2 rounded-lg w-11/12">
+                <ul className="md:w-fit md:p-10 p-2 bg-white md:bg-sky-200 md:m-auto m-2 rounded-lg w-11/12">
                     <h1 className="text-xl font-bold inline-flex gap-2"><FaCartShopping />Delivery Info</h1>
                     <ul className="flex md:p-2 md:pl-10">
                         <ul className="text-[#696969]">
@@ -40,7 +40,7 @@ function CustomerAndPaymentInfo({ order }) {
                         </ul>
                     </ul>
                 </ul>
-                <ul className="md:w-fit md:p-10 p-2 bg-white md:m-auto m-2 rounded-lg w-11/12 md:bg-rose-100 ">
+                <ul className="md:w-fit md:p-10 p-2 bg-white md:m-auto m-2 rounded-lg w-11/12 md:bg-sky-200 ">
                     <h1 className="text-xl font-bold inline-flex gap-2"> <FaMoneyCheckDollar />Payment Info</h1>
                     <ul className="flex md:p-2 md:pl-10">
                         <ul className="text-[#696969]">
@@ -57,7 +57,7 @@ function CustomerAndPaymentInfo({ order }) {
                         </ul>
                     </ul>
                 </ul>
-                <ul className="md:w-fit md:p-10 p-2 md:m-auto m-2 rounded-lg w-11/12 bg-white md:bg-rose-100">
+                <ul className="md:w-fit md:p-10 p-2 md:m-auto m-2 rounded-lg w-11/12 bg-white md:bg-sky-200">
                     <h1 className="text-xl font-bold inline-flex gap-2"><FaMoneyBill /> Amount</h1>
                     <ul className="flex md:p-2 md:pl-10">
                         <ul className="text-[#696969]">

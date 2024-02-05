@@ -10,8 +10,8 @@ export default function PaymentInfo({ itemList, createOrder, outletInfo}) {
     return (
         <>
             <div className="self-center md:w-2/5 h-fit w-full m-1">
-                <ul className="bg-white rounded border-2 border-rose-200">
-                    <p className="text-center bg-rose-300 p-5 md:text-xl font-medium text-lg">Payment Details </p>
+                <ul className="bg-white rounded border-2 border-sky-200">
+                    <p className="text-center bg-sky-300 p-5 md:text-xl font-medium text-lg">Payment Details </p>
                     <ul className="flex p-5 justify-between gap-2">
                         <ul className="md:text-lg text-sm">
                             <li className="">Item Total : </li>
@@ -26,7 +26,7 @@ export default function PaymentInfo({ itemList, createOrder, outletInfo}) {
                             <li className="font-bold text-2xl mt-2">&#x20B9;{payable}</li>
                         </ul>
                     </ul>
-                    <button type="submit" className="bg-rose-400 w-full p-2 text-xl border-none hover:bg-rose-200 hover:font-bold" onClick={createOrder}>Place Order</button>
+                    <button type="submit" className="bg-sky-400 w-full p-2 text-xl border-none hover:bg-sky-200" onClick={createOrder}>Place Order</button>
                 </ul>
             </div><br /><br />
         </>

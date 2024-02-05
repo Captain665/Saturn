@@ -56,8 +56,6 @@ export default function SignUp() {
         event.preventDefault()
         fetchSignUp()
     }
-    console.log(isValidate)
-
 
     // otp validate js
 

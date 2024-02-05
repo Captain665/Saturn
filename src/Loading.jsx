@@ -5,7 +5,7 @@ export default function IsLoading() {
 
     return (
         <>
-            <p className="h-screen w-fit m-auto flex items-center text-4xl animate-spin"><FaSpinner /></p>
+            <p className="h-screen w-fit m-auto flex items-center text-4xl animate-spin bg-transparent"><FaSpinner /></p>
         </>
     )
 }
