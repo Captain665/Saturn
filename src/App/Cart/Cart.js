@@ -34,7 +34,7 @@ export default function CartInfo() {
 
         setError(null)
         return () => { setIsLoading(true) }
-    }, [itemList])
+    }, [itemList, navigate, path, userInfo, error])
 
 
     const itemSize = itemList?.length

@@ -15,7 +15,6 @@ import CartInfo from "./App/Cart/Cart";
 import OrderDetails from "./App/Orders/OrderDetails/OrderDetail";
 import Login from "./App/Accounts/Login/Login";
 import Signup from "./App/Accounts/Signup/Signup";
-import Filters from "./App/Menu/Filters";
 import IsLoading from "./Loading";
 
 
