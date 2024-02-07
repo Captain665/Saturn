@@ -91,7 +91,7 @@ export default function CartInfo() {
         if (response.status === "success") {
             sessionStorage.clear();
             const orderId = response?.result.id;
-            navigate("/order/" + orderId)
+            navigate( "/order/".concat(orderId) )
         }else{
             setError(response)   
         }
