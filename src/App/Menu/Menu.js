@@ -14,7 +14,6 @@ export default function MenuItem() {
     const stationInfo = JSON.parse(sessionStorage.getItem("selectedStation"))
     const trainDetail = JSON.parse(sessionStorage.getItem("pnrDetails"))?.trainInfo
     const selectedItem = JSON.parse(sessionStorage.getItem("selectedItemInfo"))
-    const pnr = JSON.parse(sessionStorage.getItem("pnr"))
 
     const [orderItems, setOrderItems] = useState(selectedItem === null ? [] : selectedItem)
     const [menuList, setMenuList] = useState([])

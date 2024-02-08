@@ -5,7 +5,7 @@ import { OutletResponse } from "../ApiCall/OutletApi";
 
 export default function OutletList() {
     const navigate = useNavigate()
-    const { code, pnr } = useParams()
+    const { code } = useParams()
     const station = JSON.parse(sessionStorage.getItem("selectedStation"))
     const [outletData, setOutletData] = useState([])
     const [isLoading, setIsLoading] = useState(false)

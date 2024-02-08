@@ -47,7 +47,7 @@ export default function TrainInfo() {
             data()
         }
 
-    }, [pnr])
+    }, [pnr, navigate])
 
     useEffect(() => {
 
