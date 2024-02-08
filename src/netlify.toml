@@ -1,5 +1,5 @@
 [[redirects]]
-  from = "/api/v2/ *"
+  from = "*"
   to = "http://localhost:9090/api/v2/:splat"
   status = 200
   force = true  
