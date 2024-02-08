@@ -5,13 +5,14 @@ import { PnrResponse } from "../ApiCall/PnrApi";
 
 
 export default function TrainInfo() {
+
     const navigate = useNavigate()
     const result = JSON.parse(window.sessionStorage.getItem("pnrDetails"))
-    var pnrRes = []
-    if (result !== null || result !== undefined) {
-        pnrRes = result
-    }
-    const [train, setTrainData] = useState(pnrRes);
+    // var pnrRes = []
+    // if (result !== null || result !== undefined) {
+    //     pnrRes = result
+    // }
+    const [train, setTrainData] = useState(result ? result : []);
     let { pnr } = useParams()
 
     const [isLoading, setIsLoading] = useState(false)
@@ -19,9 +20,12 @@ export default function TrainInfo() {
 
 
     useEffect(() => {
+
         setIsLoading(true)
+
         const data = async () => {
             const response = await PnrResponse(pnr)
+
             if (response.status === "failure") {
                 setError(response)
                 setTimeout(() => {
@@ -30,17 +34,25 @@ export default function TrainInfo() {
                 }, 4000)
 
             }
+
             if (response.status === "success") {
                 setTrainData(response.result)
                 setIsLoading(false)
             }
 
         }
-        return () => { data() }
-    }, [pnr, navigate])
+
+        return () => {
+            setIsLoading(false)
+            data()
+        }
+
+    }, [pnr])
 
     useEffect(() => {
+
         window.sessionStorage.setItem("pnrDetails", JSON.stringify(train))
+
     }, [train])
 
 

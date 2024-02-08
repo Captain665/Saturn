@@ -32,7 +32,6 @@ export default function Login() {
             localStorage.setItem("userInfo", JSON.stringify(response.result));
             const path = param.get("redirectedTo") || "/";
             navigate(path, { replace: true })
-            window.location.reload(true)
         } else {
 
             setError(response)

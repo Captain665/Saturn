@@ -12,7 +12,7 @@ export default function StationList() {
 
     function handleOnClick(station) {
         window.sessionStorage.setItem("selectedStation", JSON.stringify(station))
-        navigate(station.code, { state: { jourenyData, station } })
+        navigate("outlets/" + station.code, { state: { jourenyData, station } })
     }
 
     return (

@@ -29,9 +29,9 @@ export default function BasePage() {
                     <Route path="account" element={<Account />} />
                     <Route path="*" element={<NonExistPath />} />
 
-                    <Route path=":pnr/outlets" element={<TrainInfo />}>
+                    <Route path=":pnr/stations" element={<TrainInfo />}>
                         <Route index element={<StationList />} />
-                        <Route path=":code" element={<OutletList />} />
+                        <Route path="outlets/:code" element={<OutletList />} />
                     </Route>
                     <Route path="/station/:code/outlet/:id/menu" element={<MenuItem />} />
                     <Route path="cart" element={<CartInfo />} />

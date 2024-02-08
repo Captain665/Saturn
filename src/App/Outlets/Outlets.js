@@ -18,19 +18,21 @@ export default function OutletList() {
             if (response.status === "success") {
                 setOutletData(response.result)
             }
-            setIsLoading(false)
         }
-        return () => { fetchData() }
+        setIsLoading(false)
+        return () => {
+            fetchData()
+        }
     }, [code])
 
-    function handleOnClick(outlet) {
-        const route = "/station/" + code + "/outlet/" + outlet.id + "/menu"
+    const handleOnClick =  (outlet) => {
+        const route = "/station/".concat(code) + "/outlet/".concat(outlet.id) + "/menu"
         window.sessionStorage.setItem("outletInfo", JSON.stringify(outlet))
-        navigate( route )
+        navigate(route)
     }
 
     function returnToStation() {
-        navigate("/" + pnr + "/outlets")
+        navigate(-1, {replace : true})
     }
 
 

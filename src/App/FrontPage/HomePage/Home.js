@@ -28,7 +28,7 @@ export default function Home() {
                 const result = response.result;
                 sessionStorage.setItem("pnrDetails", JSON.stringify(result))
                 sessionStorage.setItem("pnr", JSON.stringify(pnr))
-                const route = pnr + "/outlets";
+                const route = pnr + "/stations";
                 navigate(route, { state: { result } });
             }
             setIsLoading(false)

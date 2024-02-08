@@ -93,12 +93,13 @@ export default function MenuItem() {
 
 
     function handleCheckOut() {
-        navigate("/cart")
+        navigate( "/cart" )
     }
 
     function backToOutlet() {
-        navigate("/" + pnr + "/outlets/" + code)
+        navigate(-1, { replace : true })
     }
+
     function clearCart(){
         setOrderItems([])        
     }
