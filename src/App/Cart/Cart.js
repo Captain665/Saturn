@@ -33,8 +33,9 @@ export default function CartInfo() {
         }, 1000)
 
         setError(null)
+
         return () => { setIsLoading(true) }
-    }, [itemList, navigate, path, userInfo, error])
+    }, [itemList, navigate, path, error])
 
 
     const itemSize = itemList?.length
@@ -98,8 +99,6 @@ export default function CartInfo() {
         setIsLoading(false)
     }
 
-    console.log(error)
-
 
 
     return (
@@ -115,7 +114,7 @@ export default function CartInfo() {
                 createOrder={createOrder}
                 removeItem={removeItem}
                 addItem={addItem}
-                returnToMenu={() => returnToMenu()}
+                returnToMenu={returnToMenu}
             />
             <ErrorToster 
             props={error}
