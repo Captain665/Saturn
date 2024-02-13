@@ -21,18 +21,23 @@ export default function MenuItem() {
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
-        setIsLoading(true)
+        
         const fetchData = async () => {
+            setIsLoading(true)
             const response = await MenuResponse(id)
             if(response.status === "success"){
                 const itemList = response.result;
                 setMenuList(itemList)
+                setIsLoading(() => false)
             } else {
                 setMenuList(null)
+                setIsLoading(() => false)
             }
-            setIsLoading(false)
         }
-        return () => { fetchData() }
+        fetchData()
+        return () => {
+            setIsLoading(() => false)
+            }
     }, [ code, id])
 
     useEffect(() => {

@@ -20,33 +20,28 @@ export default function TrainInfo() {
 
 
     useEffect(() => {
-
-        setIsLoading(true)
-
+        console.log("mounting..")
         const data = async () => {
+            setIsLoading(false)
             const response = await PnrResponse(pnr)
-
             if (response.status === "failure") {
-                setError(response)
+                setError(() => response)
                 setTimeout(() => {
-                    setIsLoading(false)
+                    setIsLoading(() => false)
                     navigate("/")
                 }, 4000)
-
             }
-
             if (response.status === "success") {
                 setTrainData(response.result)
-                setIsLoading(false)
+                setIsLoading(() => false)
             }
-
         }
+        data()
 
         return () => {
-            setIsLoading(false)
-            data()
+            console.log("unmount..")
+            setIsLoading(() => false)
         }
-
     }, [pnr, navigate])
 
     useEffect(() => {
