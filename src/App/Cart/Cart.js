@@ -34,7 +34,7 @@ export default function CartInfo() {
 
         setError(null)
 
-        return () => { setIsLoading(true) }
+        return () => { setIsLoading(false) }
     }, [itemList, navigate, path, error, userInfo])
 
 
