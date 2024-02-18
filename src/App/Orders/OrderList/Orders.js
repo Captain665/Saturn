@@ -24,8 +24,10 @@ export default function OrderList({ token }) {
             setOrderList(response.result)
             setIsLoading(false)
         }
-
-        return () => { fetchData() };
+        fetchData()
+        return () => {  
+            setIsLoading(() => false)
+        };
     }, [token, navigate, auth])
 
     function handleViewOrderDetail(order) {

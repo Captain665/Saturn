@@ -45,7 +45,7 @@ export default function TrainInfo() {
     }, [pnr, navigate])
 
     useEffect(() => {
-
+        console.log("test")
         window.sessionStorage.setItem("pnrDetails", JSON.stringify(train))
 
     }, [train])

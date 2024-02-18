@@ -9,6 +9,7 @@ export default function Home() {
 
     // const [pnr, setPnr] = useState("")
     const pnr = useRef("")
+
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState()
     const navigate = useNavigate()
@@ -20,7 +21,7 @@ export default function Home() {
 
     function GetData(pnr) {
         const data = async () => {
-            setIsLoading(true)
+            setIsLoading(() => true)
             const response = await PnrResponse(pnr.current)
             if (response.status === "failure") {
                 setError(() => response)
@@ -36,6 +37,7 @@ export default function Home() {
         }
         data()
     }
+    console.log(pnr.current)
     function handleOnChange(event) {
         const value = event.target.value
         if(value.length <= 10){
