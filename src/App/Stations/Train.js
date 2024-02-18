@@ -57,6 +57,7 @@ export default function TrainInfo() {
                 isLoading={isLoading}
                 train={train}
                 error={error}
+                pnr = {pnr}
             />
             <Outlet context={[train]} />
         </>

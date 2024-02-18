@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { FaStar } from "react-icons/fa6";
+import { FaStar,FaChevronRight } from "react-icons/fa6";
 import IsLoading from "../../Loading";
 
 function OutletHtml({ returnToStation, isLoading, outletData, stations, stationCode, handleOnClick }) {
@@ -15,18 +15,18 @@ function OutletHtml({ returnToStation, isLoading, outletData, stations, stationC
                             <p className="md:text-xl text-sm">Restaurants at </p>
                             <p className="md:text-2xl text-base font-bold">{stations?.name} <span className="font-thin text-xs md:text-lg">({stationCode})</span></p>
                         </div>
-                        <h1 className="text-sm md:text-lg w-1/4">{outletData?.length} Restaurant Available</h1>
+                        <h1 className="text-sm md:text-lg w-1/4 text-center">{outletData?.length} Restaurant Available</h1>
                     </div>
 
-                    <div className="flex flex-col justify-center self-center items-center md:w-11/12 m-2 md:mt-10 w-full">
+                    <div className="flex flex-col justify-center self-center items-center md:w-11/12 m-2 md:mt-10 w-full bg-white">
                         {outletData?.map(outlet => (
                             <div key={outlet.id}
-                                className="shadow-lg md:w-2/3 flex m-1 w-full md:h-48 h-28 rounded border-2 cursor-pointer hover:border-4"
+                                className="shadow-2xl bg-white md:w-2/3 flex m-1 w-full md:h-48 h-28 rounded cursor-pointer"
                                 onClick={() => handleOnClick(outlet)}>
-                                <div className="rounded-md w-2/5">
+                                <div className="rounded-md w-2/5 bg-sky-200 m-2">
                                     <img src={outlet.logoImage} className="w-full h-full object-center" alt="logoImage" />
                                 </div>
-                                <div className="border-l-2 pl-4 w-full justify-center md:p-3">
+                                <div className="border-l-2 pl-4 w-11/12 justify-center md:p-3">
                                     <h2 className="md:text-2xl text-lg font-bold pt-2">{outlet.outletName}</h2>
                                     <h2 className="pt-1 md:text-base text-sm">Min order : &#x20B9;{outlet.minOrderValue}</h2>
                                     <div className="flex md:pt-2 md:text-base text-sm">
@@ -34,6 +34,9 @@ function OutletHtml({ returnToStation, isLoading, outletData, stations, stationC
                                         <span className="pl-2"> {outlet.ratingValue} </span>
                                         <span className="pl-2"> Based on {outlet.ratingCount} Ratings</span>
                                     </div>
+                                </div>
+                                <div className="self-center mr-2 text-sky-300">
+                                    <FaChevronRight />
                                 </div>
                             </div>
                         ))}

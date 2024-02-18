@@ -19,6 +19,7 @@ import IsLoading from "./Loading";
 
 
 export default function BasePage() {
+    
     return (
         <BrowserRouter>
             <Routes>
@@ -32,7 +33,7 @@ export default function BasePage() {
                     <Route path=":pnr/stations" element={<TrainInfo />}>
                         <Route index element={<StationList />} />
                         <Route path="outlets/:code" element={<OutletList />} />
-                    </Route>
+                    </Route>    
                     <Route path="/station/:code/outlet/:id/menu" element={<MenuItem />} />
                     <Route path="cart" element={<CartInfo />} />
                     <Route path="order/:orderId" element={<OrderDetails />} />
