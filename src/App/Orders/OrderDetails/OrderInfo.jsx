@@ -1,7 +1,7 @@
 import React from "react";
 import CustomerAndPaymentInfo from "./CustomerAndPaymentInfo";
 import OrderedItems from "./OutletAndMenu";
-import IsLoading from "../../../Loading";
+import IsLoading from "../../../App/Components/Loading";
 
 export default function OrderInfo({ order, isLoading, backToHome }) {
 

@@ -1,29 +1,17 @@
 import React, { memo } from "react";
-import { FaTrain, FaChevronLeft } from "react-icons/fa6";
-import ErrorToster from "../../MessageToggle";
-import IsLoading from "../../Loading";
+import { FaTrain } from "react-icons/fa6";
+import ErrorToster from "../../App/Components/MessageToggle";
+import IsLoading from "../../App/Components/Loading";
+import { FormatedDateWithWeek } from "../Components/DateTimeFormatChange";
 
 function TrainHtml({ isLoading, train, error, pnr }) {
-
-    const date = train?.trainInfo.dt
-    const [day, month, year] = date.split('-');
-    const validFormatDateString = `${year}-${month}-${day}`;
-
-    const original_date = new Date(validFormatDateString) 
-
-    const boardingDate = original_date.toLocaleDateString('en-GB', {
-        weekday: 'short',
-        day: 'numeric',
-        month: 'short'
-    })
-
 
     return (
         <div className="flex flex-col">
 
             {isLoading ? <IsLoading /> : <>
 
-                <div className="flex w-full md:w-3/4 justify-between mt-2 self-center items-center">
+                <div className="flex w-11/12 md:w-3/4 justify-between mt-2 self-center items-center">
                     <hr className="flex-grow border-t border-gray-300" />
                     <span className="px-3 md:text-lg">TRAIN DETAILS </span>
                     <hr className="flex-grow border-t border-gray-300" />
@@ -51,7 +39,7 @@ function TrainHtml({ isLoading, train, error, pnr }) {
                     </ul>
 
                     <ul className="flex justify-between mt-2">
-                        <li className=" text-gray-400">{boardingDate}</li>
+                        <li className=" text-gray-400">{FormatedDateWithWeek(train?.trainInfo.dt)}</li>
                         <li>{ }</li>
                     </ul>
 

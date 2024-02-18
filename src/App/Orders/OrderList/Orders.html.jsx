@@ -1,5 +1,5 @@
 import React from "react";
-import IsLoading from "../../../Loading";
+import IsLoading from "../../../App/Components/Loading";
 
 export default function OrderHtml({ orderslist, isLoading, handleViewOrderDetail }) {
 

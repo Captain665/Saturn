@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import CustomerDetails from "./CustomerInfo";
 import OrderList from "../../Orders/OrderList/Orders";
-import IsLoading from "../../../Loading";
+import IsLoading from "../../Components/Loading";
 
 export default function Account() {
     const location = useLocation()

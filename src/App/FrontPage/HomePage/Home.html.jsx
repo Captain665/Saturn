@@ -1,6 +1,6 @@
 import React from "react";
-import ErrorToster from "../../../MessageToggle";
-import IsLoading from "../../../Loading";
+import ErrorToster from "../../../App/Components/MessageToggle";
+import IsLoading from "../../../App/Components/Loading";
 
 
 export default function HomePage({ handleOnChange, handleOnClick, isLoading, error }) {

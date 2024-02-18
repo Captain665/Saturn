@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { FaStar,FaChevronRight } from "react-icons/fa6";
-import IsLoading from "../../Loading";
+import IsLoading from "../../App/Components/Loading";
 
 function OutletHtml({ returnToStation, isLoading, outletData, stations, stationCode, handleOnClick }) {
 

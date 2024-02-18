@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import IsLoading from "../../../Loading";
+import IsLoading from "../../Components/Loading";
+
 
 export default function LoginForm({ isLoading, handleChange, HandleSubmit, loginData, redirectedTo }) {
 

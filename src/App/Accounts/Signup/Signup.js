@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SignupData from "./Signup.html";
 import { useNavigate } from "react-router";
-import ErrorToster from "../../../MessageToggle";
+import ErrorToster from "../../Components/MessageToggle";
 import { SignupResponse, OtpValidateReponse } from "../../ApiCall/SignupApi";
 import ValidateHtml from "./Validate.html";
 import { useSearchParams } from "react-router-dom";

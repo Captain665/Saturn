@@ -8,10 +8,7 @@ export default function TrainInfo() {
 
     const navigate = useNavigate()
     const result = JSON.parse(window.sessionStorage.getItem("pnrDetails"))
-    // var pnrRes = []
-    // if (result !== null || result !== undefined) {
-    //     pnrRes = result
-    // }
+
     const [train, setTrainData] = useState(result ? result : []);
     let { pnr } = useParams()
 
@@ -20,7 +17,6 @@ export default function TrainInfo() {
 
 
     useEffect(() => {
-        console.log("mounting..")
         const data = async () => {
             setIsLoading(false)
             const response = await PnrResponse(pnr)
@@ -39,7 +35,6 @@ export default function TrainInfo() {
         data()
 
         return () => {
-            console.log("unmount..")
             setIsLoading(() => false)
         }
     }, [pnr, navigate])

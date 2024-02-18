@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Filters from "./Filters";
-import IsLoading from "../../Loading";
+import IsLoading from "../../App/Components/Loading";
 
 export default function MenuList({ menuList, isLoading, orderItems, addItem, removeItem }) {
     const [itemFilter, setItemFilter] = useState({ isVeg: null, amountSort: null })

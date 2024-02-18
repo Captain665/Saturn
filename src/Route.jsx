@@ -5,7 +5,7 @@ import LayOut from "./App/Layout/Layout";
 import About from "./App/FrontPage/About";
 import Contact from "./App/FrontPage/ContactUs";
 import Account from "./App/Accounts/AccountsInfo/Account";
-import NonExistPath from "./InvalidPath";
+import NonExistPath from "../src/App/Components/InvalidPath";
 import OutletList from "./App/Outlets/Outlets";
 import MenuItem from "./App/Menu/Menu";
 import Home from "./App/FrontPage/HomePage/Home";
@@ -15,7 +15,7 @@ import CartInfo from "./App/Cart/Cart";
 import OrderDetails from "./App/Orders/OrderDetails/OrderDetail";
 import Login from "./App/Accounts/Login/Login";
 import Signup from "./App/Accounts/Signup/Signup";
-import IsLoading from "./Loading";
+import IsLoading from "../src/App/Components/Loading";
 
 
 export default function BasePage() {

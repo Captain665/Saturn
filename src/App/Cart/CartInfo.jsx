@@ -2,7 +2,7 @@ import React from "react";
 import DeliveryInfo from "./DeliveryInfo";
 import ItemInfo from "./ItemList";
 import PaymentInfo from "./PaymentInfo";
-import IsLoading from "../../Loading";
+import IsLoading from "../../App/Components/Loading"
 
 export default function CartDetails({
     isLoading, returnToMenu,

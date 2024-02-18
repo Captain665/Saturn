@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import CartDetails from "./CartInfo";
 import { CreateOrderResponse } from "../ApiCall/CreateOrderApi";
-import ErrorToster from "../../MessageToggle";
+import ErrorToster from "../../App/Components/MessageToggle"
 
 export default function CartInfo() {
 

@@ -1,40 +1,48 @@
 import React, { memo } from "react";
 import { FaChevronRight } from "react-icons/fa6";
+import { FormatedDate, FormatedTime } from "../Components/DateTimeFormatChange";
+
+export function TrainTiming(value){
+    const delayTime = JSON.parse(value)
+    return delayTime === 0 ? "On Time" : "Late by" + value + " mins"
+}
+
+export function StationCheck(value){
+    return value === "--" ? "Starting station" : value + " mins halt"
+}
 
 
 function StationData({ stations, handleOnClick }) {
 
     return (
-        <>
-            <div className="grid grid-cols-2 md:text-lg text-xs font-semibold mt-5">
-                <h2 className="text-center md:ml-5">Select Delivery Station</h2>
-                <h2 className="text-center md:mr-5">{stations?.length} Stations Available</h2>
+        <><div className="flex flex-col">
+
+            <div className="flex w-11/12 md:w-1/2 justify-between mt-16 self-center items-center mb-5">
+                <hr className="flex-grow border-t border-gray-300" />
+                <span className="px-3 md:text-lg">AVAILABLE STATIONS</span>
+                <hr className="flex-grow border-t border-gray-300" />
             </div>
 
-            <div className="flex flex-col md:mt-10 mt-3">
-                {stations?.map(station => (
-                    <div className="m-1 md:m-2 md:w-1/2 w-11/12 content-center self-center md:rounded rounded-md md:p-5 p-4 md:h-28
-                   shadow-lg bg-white cursor-pointer flex justify-between" key={station.code} onClick={() => handleOnClick(station)}>
-                        <div className="self-center text-start md:text-xl text-sm" key={station.code}>
-                            <p className="font-bold">{station.name}  <span className="font-light text-xs md:text-base">{station.code}</span></p>
-                            <div className="md:flex md:pt-2 pt-1 md:text-base text-xs">
-                                <p>{(JSON.parse(station.delayArrival) === 0 || station.delayArrival === null) ? "On time" : "Late by " + station.delayArrival + " mins"},</p>
-                                <p>{station.halt === "--" ? " Starting station" : " " + " " + station.halt + " mins halt"}</p>
-                            </div>
-                        </div>
-                        <div className="self-center text-center md:pr-10 flex gap-2">
-                            <div>
-                            <p className={`font-bold md:text-xl text-sm ${JSON.parse(station.delayArrival) > 0 ? "text-red-500" : "text-green-600"  }`}>{station.departure}</p>
-                            <p className="pt-4 md:text-lg font-bold text-sm">{station.depDate}</p>
-                            </div>
-                            <div className="self-center text-center text-sky-300">
-                            <FaChevronRight />
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
-            <br />
+            {stations?.map(station => (
+                <ul key={station.code} onClick={() => handleOnClick(station)} 
+                className="flex justify-between shadow-lg w-11/12 md:w-1/2 content-center self-center h-28 px-4 bg-white m-1 rounded-md md:h-36 cursor-pointer">
+                    <ul className="self-center text-start text-sm md:text-base">
+                        <li className="font-bold text-base md:text-xl">{station.name}<span className="ml-1 font-normal text-xs md:text-base">{station.code}</span></li>
+                        <li>{TrainTiming(station.delayArrival)}</li>
+                        <li>{StationCheck(station.halt)}</li>
+                    </ul>
+                    <ul className="flex text-base md:text-xl">
+                        <ul className="self-center text-center">
+                            <li className={`font-bold ${JSON.parse(station.delayArrival) > 0 ? "text-red-500" : "text-green-600"}`}>{FormatedTime(station.departure)}</li>
+                            <li>{FormatedDate(station.depDate)}</li>
+                        </ul>
+                        <ul className="self-center text-center text-sky-300 pl-2">
+                            <li><FaChevronRight /></li>
+                        </ul>
+                    </ul>
+                </ul>
+            ))}
+        </div><br />
         </>
     )
 }
