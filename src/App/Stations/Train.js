@@ -18,7 +18,7 @@ export default function TrainInfo() {
 
     useEffect(() => {
         const data = async () => {
-            setIsLoading(false)
+            setIsLoading(true)
             const response = await PnrResponse(pnr)
             if (response.status === "failure") {
                 setError(() => response)
@@ -28,7 +28,7 @@ export default function TrainInfo() {
                 }, 4000)
             }
             if (response.status === "success") {
-                setTrainData(response.result)
+                setTrainData(() => response.result)
                 setIsLoading(() => false)
             }
         }
@@ -40,10 +40,11 @@ export default function TrainInfo() {
     }, [pnr, navigate])
 
     useEffect(() => {
-        console.log("test")
+        
         window.sessionStorage.setItem("pnrDetails", JSON.stringify(train))
 
     }, [train])
+
 
 
     return (

@@ -1,10 +1,11 @@
-import React, { memo } from "react";
+import React from "react";
 import { FaChevronRight } from "react-icons/fa6";
 import { FormatedDate, FormatedTime } from "../Components/DateTimeFormatChange";
+import { memo } from "react";
 
 export function TrainTiming(value){
     const delayTime = JSON.parse(value)
-    return delayTime === 0 ? "On Time" : "Late by" + value + " mins"
+    return delayTime === 0 ? "On Time" : "Late by " + value + " mins"
 }
 
 export function StationCheck(value){
@@ -36,7 +37,7 @@ function StationData({ stations, handleOnClick }) {
                             <li className={`font-bold ${JSON.parse(station.delayArrival) > 0 ? "text-red-500" : "text-green-600"}`}>{FormatedTime(station.departure)}</li>
                             <li>{FormatedDate(station.depDate)}</li>
                         </ul>
-                        <ul className="self-center text-center text-sky-300 pl-2">
+                        <ul className="self-center text-center text-gray-400 pl-2">
                             <li><FaChevronRight /></li>
                         </ul>
                     </ul>
