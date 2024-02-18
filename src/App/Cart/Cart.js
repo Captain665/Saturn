@@ -94,9 +94,9 @@ export default function CartInfo() {
             const orderId = response?.result.id;
             navigate( "/order/".concat(orderId) )
         }else{
-            setError(response)   
+            setError(() => response)   
         }
-        setIsLoading(false)
+        setIsLoading(() => false)
     }
 
 

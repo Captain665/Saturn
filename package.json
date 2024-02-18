@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://localhost:9090/api/v2/",
   "dependencies": {
+    "@fontsource/metropolis": "^5.0.7",
     "@fortawesome/fontawesome": "^1.1.8",
     "@fortawesome/fontawesome-free-regular": "^5.0.13",
     "@fortawesome/fontawesome-free-solid": "^5.0.13",

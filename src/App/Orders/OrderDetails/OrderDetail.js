@@ -21,7 +21,10 @@ export default function OrderDetails() {
             }
             setIsLoading(false)
         }
-        return () => { fetchData() }
+        fetchData()
+        return () => { 
+            setIsLoading(() => false)
+            }
     }, [orderId, token])
 
     function backToHome() {

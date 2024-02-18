@@ -12,16 +12,21 @@ export default function OutletList() {
 
 
     useEffect(() => {
-        setIsLoading(true)
+
         const fetchData = async () => {
+            setIsLoading(true)
             const response = await OutletResponse(code)
             if (response.status === "success") {
                 setOutletData(response.result)
+                setIsLoading(() => false)
+            }else{
+                setIsLoading(() => false)
             }
         }
-        setIsLoading(false)
+
+        fetchData()
         return () => {
-            fetchData()
+            setIsLoading(() => false)
         }
     }, [code])
 
