@@ -17,6 +17,7 @@ export default function SignUp() {
         password: "",
         gender: "Male"
     });
+
     const [isloading, setIsLoading] = useState(false)
     const [error, setError] = useState(null)
     const [isValidate, setIsValidate] = useState(false);
@@ -41,19 +42,21 @@ export default function SignUp() {
     }
 
     const fetchSignUp = async () => {
-        setIsLoading(true)
+        setIsLoading(() => true)
         const response = await SignupResponse(userInfo);
+        
         if (response.status === "success") {
-            setIsValidate(true)
-            setError(response)
+            setIsValidate(() => true)
+            setError(() => response)
         } else {
-            setError(response)
+            setError(() => response)
         }
-        setIsLoading(false)
+        setIsLoading(() => false)
     }
 
     function handleSignupSubmit(event) {
         event.preventDefault()
+        setError(null)
         fetchSignUp()
     }
 
@@ -64,7 +67,7 @@ export default function SignUp() {
     }
 
     const fetchOtp = async () => {
-        setIsLoading(true)
+        setIsLoading(() => true)
         const response = await OtpValidateReponse(userInfo.mobileNumber, otp)
         if (response.status === "success") {
             const data = JSON.stringify(response.result)
@@ -73,17 +76,16 @@ export default function SignUp() {
             navigate(path, { replace: true })
             window.location.reload(path)
         } else {
-            setError(response)
+            setError(() => response)
         }
         setIsLoading(false)
     }
 
     function handleOtpSubmit(event) {
         event.preventDefault()
+        setError(null)
         fetchOtp()
     }
-
-
 
     return (
         <>
