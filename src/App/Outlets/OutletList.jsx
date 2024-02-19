@@ -23,8 +23,8 @@ function OutletHtml({ returnToStation, isLoading, outletData, stations, stationC
                             <div key={outlet.id}
                                 className="shadow-2xl bg-white md:w-2/3 flex m-1 w-full md:h-48 h-28 rounded cursor-pointer"
                                 onClick={() => handleOnClick(outlet)}>
-                                <div className="rounded-md w-2/5 bg-sky-200 m-2">
-                                    <img src={outlet.logoImage} className="w-full h-full object-center" alt="logoImage" />
+                                <div className="rounded-md w-2/5 bg-gray-200 m-2">
+                                    <img src={outlet.logoImage} className="w-full h-full object-center" alt="" />
                                 </div>
                                 <div className="border-l-2 pl-4 w-11/12 justify-center md:p-3">
                                     <h2 className="md:text-2xl text-lg font-bold pt-2">{outlet.outletName}</h2>

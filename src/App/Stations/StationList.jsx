@@ -20,7 +20,7 @@ function StationData({ stations, handleOnClick }) {
 
             <div className="flex w-11/12 md:w-1/2 justify-between mt-16 self-center items-center mb-5">
                 <hr className="flex-grow border-t border-gray-300" />
-                <span className="px-3 md:text-lg">AVAILABLE STATIONS</span>
+                <span className="px-3 md:text-lg text-gray-500">AVAILABLE STATIONS</span>
                 <hr className="flex-grow border-t border-gray-300" />
             </div>
 
@@ -35,7 +35,7 @@ function StationData({ stations, handleOnClick }) {
                     <ul className="flex text-base md:text-xl">
                         <ul className="self-center text-center">
                             <li className={`font-bold ${JSON.parse(station.delayArrival) > 0 ? "text-red-500" : "text-green-600"}`}>{FormatedTime(station.departure)}</li>
-                            <li>{FormatedDate(station.depDate)}</li>
+                            <li className="text-xs md:text-base">{FormatedDate(station.depDate)}</li>
                         </ul>
                         <ul className="self-center text-center text-gray-400 pl-2">
                             <li><FaChevronRight /></li>

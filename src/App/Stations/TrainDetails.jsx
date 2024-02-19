@@ -14,7 +14,7 @@ function TrainHtml({ isLoading, train, error, pnr }) {
 
                 <div className="flex w-11/12 md:w-3/4 justify-between mt-2 self-center items-center">
                     <hr className="flex-grow border-t border-gray-300" />
-                    <span className="px-3 md:text-lg">TRAIN DETAILS </span>
+                    <span className="px-3 md:text-lg text-gray-500">TRAIN DETAILS </span>
                     <hr className="flex-grow border-t border-gray-300" />
                 </div>
 
@@ -26,21 +26,21 @@ function TrainHtml({ isLoading, train, error, pnr }) {
 
                     <ul className="flex justify-between mt-2">
                         <li className=" text-gray-400">{train?.trainInfo?.name}</li>
-                        <li className=" text-gray-400">Seat No: <span className=" text-black">{train?.seatInfo.coach}/{train?.seatInfo.berth}</span></li>
+                        <li className=" text-gray-400">Seat No: <span className=" text-black">{train?.seatInfo?.coach}/{train?.seatInfo?.berth}</span></li>
                     </ul>
 
                     <ul className="flex justify-between mt-2 w-full">
-                        <li>{train?.trainInfo.boarding}</li>
+                        <li>{train?.trainInfo?.boarding}</li>
                         <li className="flex items-center w-1/2">
                             <hr className="flex-grow border-t border-sky-300" />
                             <span className="px-3 text-xs"><FaTrain /></span>
                             <hr className="flex-grow border-t border-sky-300" />
                         </li>
-                        <li>{train?.trainInfo.destination}</li>
+                        <li>{train?.trainInfo?.destination}</li>
                     </ul>
 
                     <ul className="flex justify-between mt-2">
-                        <li className=" text-gray-400">{FormatedDateWithWeek(train?.trainInfo.dt)}</li>
+                        <li className=" text-gray-400">{FormatedDateWithWeek(train?.trainInfo?.dt)}</li>
                         <li>{ }</li>
                     </ul>
 

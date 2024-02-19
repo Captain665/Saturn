@@ -18,7 +18,7 @@ export default function TrainInfo() {
 
     useEffect(() => {
         const data = async () => {
-            setIsLoading(true)
+            setIsLoading(() => true)
             const response = await PnrResponse(pnr)
             if (response.status === "failure") {
                 setError(() => response)

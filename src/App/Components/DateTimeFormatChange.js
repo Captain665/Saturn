@@ -1,23 +1,27 @@
 
 export function FormatedDateWithWeek(date) {
+    if (date) {
+        const [day, month, year] = date?.split('-');
 
-    const [day, month, year] = date.split('-');
+        const validFormatDateString = `${year}-${month}-${day}`;
 
-    const validFormatDateString = `${year}-${month}-${day}`;
+        const original_date = new Date(validFormatDateString)
 
-    const original_date = new Date(validFormatDateString)
+        return original_date.toLocaleDateString('en-GB', {
+            weekday: 'short',
+            day: 'numeric',
+            month: 'short'
+        })
+    }else{
+        return null;
+    }
 
-    return original_date.toLocaleDateString('en-GB', {
-        weekday: 'short',
-        day: 'numeric',
-        month: 'short'
-    })
 }
 
-export function FormatedDate(date){
+export function FormatedDate(date) {
 
     const newDate = new Date(date)
-    
+
     return newDate.toLocaleDateString('en-GB', {
         day: 'numeric',
         month: 'long'
