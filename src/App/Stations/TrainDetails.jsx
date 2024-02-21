@@ -32,9 +32,9 @@ function TrainHtml({ isLoading, train, error, pnr }) {
                     <ul className="flex justify-between mt-2 w-full">
                         <li>{train?.trainInfo?.boarding}</li>
                         <li className="flex items-center w-1/2">
-                            <hr className="flex-grow border-t border-sky-300" />
-                            <span className="px-3 text-xs"><FaTrain /></span>
-                            <hr className="flex-grow border-t border-sky-300" />
+                            <hr className="flex-grow border-t-2 border-sky-300" />
+                            <span className="px-3 text-xs md:text-lg"><FaTrain /></span>
+                            <hr className="flex-grow border-t-2 border-sky-300" />
                         </li>
                         <li>{train?.trainInfo?.destination}</li>
                     </ul>
