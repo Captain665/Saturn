@@ -27,7 +27,7 @@ function OutletHtml({ returnToStation, isLoading, outletData, stations, stationC
                                         <ul className="flex">
                                             <li className="bg-green-600 p-1 rounded-full"><FaStar className="text-white" /></li>
                                             <li className="pl-1 font-semibold">{outlet.ratingValue}</li>
-                                            {outlet.ratingCount > 0 && <li className="text-xs pl-0.5 pt-1">{`(${outlet.ratingCount}+)`}</li>}
+                                            {outlet.ratingCount > 0 && <li className="text-xs pl-0.5 pt-1">{`(${outlet.ratingCount}k+)`}</li>}
                                         </ul>
                                         <li className="text-gray-500 text-sm">{outlet.tags}</li>
                                     </ul>

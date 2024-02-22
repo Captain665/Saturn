@@ -1,11 +1,42 @@
 import React, { memo } from "react";
-import { FaStar } from "react-icons/fa6";
+import { FaStar, FaChevronLeft } from "react-icons/fa6";
 
 function OutletInfo({ backToOutlet, trainDetail, stationInfo, outletInfo }) {
 
     return (
         <>
-            <p className="bg-gray-200 cursor-pointer p-2 mx-0.5"><span onClick={backToOutlet}><span className="font-bold text-2xl w-1/2 md:pl-8 ">&#x2190;</span>  Outlets</span></p>
+            <ul>
+                <li><FaChevronLeft /></li>
+                <ul className="hidden">
+                    <li>
+                        <img src={outletInfo?.logoImage} alt="" />
+                    </li>
+                </ul>
+                <ul>
+                    <ul>
+                        <li>{outletInfo.outletName}</li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <ul>
+                                <li>{outletInfo.ratingValue}</li>
+                                <li>{outletInfo.ratingCount}</li>
+                            </ul>
+                            <ul>
+                                <li>{outletInfo.minOrderValue}</li>
+                            </ul>
+                        </li>
+                        <li></li>
+                        <li></li>
+                        <li></li><hr />
+                        <li></li>
+                        
+                    </ul>
+                </ul>
+            </ul>
+
+
+            <p className="bg-gray-200 p-2 mx-0.5"><span onClick={backToOutlet} className="cursor-pointer"><span className="font-bold text-2xl w-1/2 md:pl-8 ">&#x2190;</span>  Outlets</span></p>
             <div className="w-full flex flex-col justify-center self-center items-center md:p-5">
                 <div className="flex w-11/12 md:p-5 md:h-60 h-32 shadow">
                     <div className="w-1/5 shadow-md rounded-md hidden md:block">
