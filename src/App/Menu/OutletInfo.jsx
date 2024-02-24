@@ -1,42 +1,43 @@
 import React, { memo } from "react";
-import { FaStar, FaChevronLeft } from "react-icons/fa6";
+import { FaStar, FaArrowLeft, FaPersonBiking } from "react-icons/fa6";
 
 function OutletInfo({ backToOutlet, trainDetail, stationInfo, outletInfo }) {
 
+
     return (
         <>
-            <ul>
-                <li><FaChevronLeft /></li>
-                <ul className="hidden">
-                    <li>
-                        <img src={outletInfo?.logoImage} alt="" />
-                    </li>
+            <ul className="">
+                <ul className="m-3">
+                    <li className="text-xl font-thin text-zinc-700" onClick={backToOutlet}><FaArrowLeft /></li>
+                    <li className="text-2xl font-bold mt-2">{outletInfo.outletName}</li>
                 </ul>
-                <ul>
-                    <ul>
-                        <li>{outletInfo.outletName}</li>
-                    </ul>
-                    <ul>
-                        <li>
-                            <ul>
-                                <li>{outletInfo.ratingValue}</li>
-                                <li>{outletInfo.ratingCount}</li>
-                            </ul>
-                            <ul>
-                                <li>{outletInfo.minOrderValue}</li>
-                            </ul>
-                        </li>
-                        <li></li>
-                        <li></li>
-                        <li></li><hr />
-                        <li></li>
-                        
-                    </ul>
+
+                <ul className="m-3 flex flex-col gap-2 p-3 shadow rounded-xl from-slate-800 border-2">
+                    <li className="flex gap-2 justify-start font-bold items-center">
+                        <li><FaStar className="text-white bg-green-600 p-1 rounded-full text-xl" /> </li>
+                        <li className="font-bold text-lg">{outletInfo.ratingValue}</li>
+                        {outletInfo.ratingCount && <li>({outletInfo.ratingCount}k + ratings)</li>}
+                        <li className="text-gray-500 text-xs">•</li>
+                        <li> &#x20B9;{outletInfo.minOrderValue} Min</li>
+                    </li>
+                    <li className=" truncate">{outletInfo.tags}</li>
+                    <li className="flex gap-3">
+                        <li className="text-gray-500">•</li>
+                        <li className="font-bold">Outlet</li>
+                        <li className="text-gray-500">{outletInfo.stationCode}</li>
+                    </li>
+                    <hr />
+                    <li className="flex gap-2 items-center">
+                        <li className="text-xl"><FaPersonBiking /> </li>
+                        {outletInfo.deliveryCost 
+                        ? <li>&#x20B9;{outletInfo.deliveryCost} Delivery fee will apply</li> 
+                        : <li>Free Delivery</li>}
+                    </li>
                 </ul>
             </ul>
 
 
-            <p className="bg-gray-200 p-2 mx-0.5"><span onClick={backToOutlet} className="cursor-pointer"><span className="font-bold text-2xl w-1/2 md:pl-8 ">&#x2190;</span>  Outlets</span></p>
+            {/* <p className="bg-gray-200 p-2 mx-0.5"><span onClick={backToOutlet} className="cursor-pointer"><span className="font-bold text-2xl w-1/2 md:pl-8 ">&#x2190;</span>  Outlets</span></p>
             <div className="w-full flex flex-col justify-center self-center items-center md:p-5">
                 <div className="flex w-11/12 md:p-5 md:h-60 h-32 shadow">
                     <div className="w-1/5 shadow-md rounded-md hidden md:block">
@@ -66,7 +67,7 @@ function OutletInfo({ backToOutlet, trainDetail, stationInfo, outletInfo }) {
                         <img src={outletInfo?.logoImage} alt="logo" className="object-center w-full h-full" />
                     </div>
                 </div>
-            </div>
+            </div> */}
         </>
     )
 }
