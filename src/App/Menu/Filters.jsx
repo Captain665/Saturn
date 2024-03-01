@@ -4,25 +4,25 @@ export default function Filters({ vegFilter, priceFilter, active }) {
 
 
     return (
-        <div className="flex gap-4 m-2 md:w-4/5 justify-start self-center">
+        <div className="flex gap-4 md:m-5 m-2 justify-start self-center md:w-3/4 md:ml-14">
             <button
                 onClick={() => vegFilter("veg")}
-                className={`rounded border-2 text-sm md:text-lg flex justify-center place-items-center gap-0.5 p-1 px-2 font-thin ${active.isVeg === "veg" ? "bg-green-200 border-none" : null}`}>
-                <img src="/veg.png" alt="" width={15} />
+                className={`rounded border-2 text-sm md:text-lg flex justify-center place-items-center gap-0.5 p-1 px-2 font-thin ${active.isVeg === "veg" ? "bg-[#388E3C] text-white" : null}`}>
+                <img src="/veg.png" alt="" width={15} className="bg-white"/>
                 Veg
             </button>
             <button
                 onClick={() => vegFilter('nonVeg')}
-                className={`rounded border-2 text-sm md:text-lg flex justify-center place-items-center gap-0.5 p-1 font-thin ${active.isVeg === "nonVeg" ? "bg-red-200 border-none" : null}`}>
-                <img src="/nonveg.png" alt="" width={15} />
+                className={`rounded border-2 text-sm md:text-lg flex justify-center place-items-center gap-0.5 p-1 font-thin ${active.isVeg === "nonVeg" ? "bg-[#BF360C] text-white" : null}`}>
+                <img src="/nonveg.png" alt="" width={15} className="bg-white"/>
                 Non Veg
             </button>
             <button
                 onClick={() => priceFilter("hightoLow")}
-                className={`rounded border-2 p-1 md:text-lg text-sm ${active.amountSort === "hightoLow" ? " bg-sky-300 border-none" : null}`}>High to Low</button>
+                className={`rounded border-2 p-1 md:text-lg text-sm ${active.amountSort === "hightoLow" ? " bg-slate-700 text-white" : null}`}>High to Low</button>
             <button
                 onClick={() => priceFilter("lowtohigh")}
-                className={`rounded border-2 p-1 md:text-lg text-sm ${active.amountSort === "lowtohigh" ? " bg-sky-300 border-none" : null}`}>Low to High</button>
+                className={`rounded border-2 p-1 md:text-lg text-sm ${active.amountSort === "lowtohigh" ? " bg-slate-700 text-white" : null}`}>Low to High</button>
         </div>
     )
 }
