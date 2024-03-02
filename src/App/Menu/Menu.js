@@ -104,10 +104,6 @@ export default function MenuItem() {
         navigate(-1, { replace : true })
     }
 
-    function clearCart(){
-        setOrderItems([])        
-    }
-
 
     
 
@@ -131,7 +127,7 @@ export default function MenuItem() {
             <CartInfo
                 orderItems={orderItems}
                 handleCheckOut={handleCheckOut}
-                clearCart={clearCart}
+                
             />
         </>
     )

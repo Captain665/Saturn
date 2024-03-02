@@ -2,23 +2,26 @@ import React, { memo } from "react";
 import { FaTrashCan, FaCartShopping } from "react-icons/fa6";
 
 
-function CartInfo({ orderItems, handleCheckOut, clearCart }) {
+function CartInfo({ orderItems, handleCheckOut }) {
+
+    const totalItems = orderItems.length;
+    const totalAmount = orderItems.reduce((a, b) => a + (b.basePrice * b.quantity), 0).toFixed(2);
 
     return (
-        <div className="flex flex-col">
-            {orderItems?.length > 0 && <>
-                <div className="border-2 p-2 rounded md:rounded-lg md:w-4/6 w-full self-center fixed bottom-0 bg-sky-300 z-50">
-                    <ul className="flex place-items-baseline justify-around">
-                        <FaTrashCan className="text-lg cursor-pointer" onClick={clearCart}/>
-                        <li className="text-xl font-bold hidden md:block"><FaCartShopping /></li>
-                        <li className="hidden md:block">Item : {orderItems.length}</li>
-                        <li>Amount : &#x20B9;{orderItems.reduce((a, b) => a + (b.basePrice * b.quantity), 0)}</li>
-                        <li className="md:p-2 p-1.5 md:px-4 rounded-md cursor-pointer md:text-base bg-sky-600 text-white" onClick={handleCheckOut}>Checkout</li>
+        <>
+            {totalItems > 0 &&
+                < div className="flex justify-center font-extrabold text-white" >
+                    <ul className="flex fixed bottom-0 bg-[#60b246] w-full md:w-1/2 p-3 md:p-4 px-5 z-50 justify-between">
+                        <li className="">{totalItems} Item added</li>
+                        <li className="flex items-center gap-1 cursor-pointer" onClick={handleCheckOut}>
+                            <li>VIEW CART</li>
+                            <li><FaCartShopping /></li>
+                        </li>
                     </ul>
-                </div>
-            </>
+                </div >
             }
-        </div>
+        </>
+
     )
 }
 
