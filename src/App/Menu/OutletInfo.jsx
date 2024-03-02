@@ -16,32 +16,34 @@ function OutletInfo({ backToOutlet, trainDetail, stationInfo, outletInfo }) {
 
             <ul className="m-3 flex flex-col gap-2 md:gap-4 p-3 shadow rounded-xl from-slate-800 border-2 md:relative justify-center max-h-fit">
 
-                <li className="flex gap-2 justify-start font-bold items-center">
+                <ul className="flex gap-2 justify-start font-bold items-center">
                     <li><FaStar className="text-white bg-green-600 p-1 rounded-full text-xl" /> </li>
                     <li className="font-bold text-lg">{outletInfo?.ratingValue}</li>
-                    {outletInfo?.ratingCount && <li>({outletInfo?.ratingCount}k + ratings)</li>}
+                    {outletInfo?.ratingCount &&
+                        <li>({outletInfo?.ratingCount}k + ratings)</li>
+                    }
                     <li className="text-gray-500 text-xs">•</li>
                     <li> &#x20B9;{outletInfo?.minOrderValue} Min</li>
-                </li>
+                </ul>
 
                 <li className=" truncate">{outletInfo?.tags}</li>
 
-                <li className="flex gap-3">
+                <ul className="flex gap-3">
                     <li className="text-gray-500">•</li>
                     <li className="font-bold">Outlet</li>
                     <li className="text-gray-500">{outletInfo?.stationCode}</li>
-                </li>
+                </ul>
 
                 <hr />
 
-                <li className="flex gap-2 items-center text-gray-600">
+                <ul className="flex gap-2 items-center text-gray-600">
                     <li className="text-xl">
                         <FaPersonBiking />
                     </li>
                     {outletInfo?.deliveryCost
                         ? <li>&#x20B9;{outletInfo?.deliveryCost} Delivery fee will apply</li>
                         : <li>Free Delivery</li>}
-                </li>
+                </ul>
 
                 <li className="hidden md:block absolute right-2 h-full w-1/4 p-2">
                     <img src={outletInfo?.logoImage} alt="" className="w-full h-full object-center object-cover rounded-lg" />
