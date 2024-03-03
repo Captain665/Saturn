@@ -8,7 +8,7 @@ export default function PaymentInfo({ paymentMode, proceedToPay, mode, totalAmou
     const payMode = () => {
         return mode && mode?.toUpperCase();
     }
-    if(isLoading){
+    if (isLoading) {
         return <IsLoading />
     }
 
@@ -17,7 +17,7 @@ export default function PaymentInfo({ paymentMode, proceedToPay, mode, totalAmou
         <>
             <div className="md:w-2/5 w-11/12 m-auto md:mt-10 mt-5">
                 <ul className="flex items-center gap-3">
-                    <li><FaArrowLeft className="text-lg cursor-pointer" onClick={backToCart}/></li>
+                    <li><FaArrowLeft className="text-lg cursor-pointer" onClick={backToCart} /></li>
                     <ul>
                         <li className="font-bold text-xl"> Payment Options</li>
                         <ul className="flex items-center gap-1 text-gray-500 text-sm">
@@ -105,18 +105,17 @@ export default function PaymentInfo({ paymentMode, proceedToPay, mode, totalAmou
                         </ul>
                     </ul>
                 </ul>
-
-
-
             </div>
 
-            <ul className={`flex justify-center fixed bottom-0 content-center bg-[#1ba672] md:w-2/5 w-full h-16 md:h-auto font-extrabold text-lg
+            <ul className="flex justify-center">
+                <ul className={`self-center flex justify-center fixed bottom-0 content-center bg-[#1ba672] md:w-2/5 w-full h-16 md:h-auto font-extrabold text-lg
             cursor-pointer text-center z-50 text-white ${mode ? "block" : "hidden"} md:rounded-md`}
-                onClick={proceedToPay}>
-                <button className="p-2">PAY &#x20B9;{totalAmount} WITH {payMode()}</button>
+                    onClick={proceedToPay}>
+                    <button className="p-2">PAY &#x20B9;{totalAmount} WITH {payMode()}</button>
+                </ul>
             </ul>
 
-            <ErrorToster props={error}/>
+            <ErrorToster props={error} />
 
         </>
     )
