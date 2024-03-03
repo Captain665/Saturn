@@ -9,11 +9,11 @@ export default function CartSummary({ itemList, makePayment, outletInfo, userInf
         delivery: false
     })
 
-
     const subTotal = JSON.parse(itemList?.reduce((a, b) => a + (b.basePrice * b.quantity), 0).toFixed(2))
     const taxes = JSON.parse((subTotal * 0.05).toFixed(2))
     const deliveryCharge = outletInfo?.deliveryCost;
     const payable = Math.round(subTotal + taxes + deliveryCharge)
+    
 
 
     function customerDetailsShown() {

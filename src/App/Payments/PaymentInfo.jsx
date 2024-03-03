@@ -1,10 +1,15 @@
 import React from "react";
 import { FaArrowLeft, FaChevronRight, FaWallet, FaCreditCard, FaBuildingColumns, FaMoneyBill1 } from "react-icons/fa6";
+import IsLoading from "../Components/Loading";
+import ErrorToster from "../Components/MessageToggle";
 
-export default function PaymentInfo({ paymentMode, proceedToPay, mode, totalAmount }) {
+export default function PaymentInfo({ paymentMode, proceedToPay, mode, totalAmount, backToCart, isLoading, error, totalItem }) {
 
     const payMode = () => {
         return mode && mode?.toUpperCase();
+    }
+    if(isLoading){
+        return <IsLoading />
     }
 
 
@@ -12,13 +17,13 @@ export default function PaymentInfo({ paymentMode, proceedToPay, mode, totalAmou
         <>
             <div className="md:w-2/5 w-11/12 m-auto md:mt-10 mt-5">
                 <ul className="flex items-center gap-3">
-                    <li><FaArrowLeft className="text-lg cursor-pointer" /></li>
+                    <li><FaArrowLeft className="text-lg cursor-pointer" onClick={backToCart}/></li>
                     <ul>
                         <li className="font-bold text-xl"> Payment Options</li>
                         <ul className="flex items-center gap-1 text-gray-500 text-sm">
-                            <li>2 items</li>
+                            <li>{totalItem} items</li>
                             <li className="text-xs">•</li>
-                            <li>Total: 180</li>
+                            <li>Total: &#x20B9;{totalAmount}</li>
                         </ul>
                     </ul>
                 </ul>
@@ -110,6 +115,8 @@ export default function PaymentInfo({ paymentMode, proceedToPay, mode, totalAmou
                 onClick={proceedToPay}>
                 <button className="p-2">PAY &#x20B9;{totalAmount} WITH {payMode()}</button>
             </ul>
+
+            <ErrorToster props={error}/>
 
         </>
     )
