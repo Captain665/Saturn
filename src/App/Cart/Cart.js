@@ -99,6 +99,11 @@ export default function CartInfo() {
         setIsLoading(() => false)
     }
 
+    const makePayment = () => {
+        navigate("/payments")
+    }
+
+
 
 
     return (
@@ -111,7 +116,7 @@ export default function CartInfo() {
                 seatInfo={seatInfo}
                 itemList={itemList}
                 outletInfo={outletInfo}
-                createOrder={createOrder}
+                makePayment={makePayment}
                 removeItem={removeItem}
                 addItem={addItem}
                 returnToMenu={returnToMenu}

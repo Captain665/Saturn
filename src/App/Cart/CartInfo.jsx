@@ -7,7 +7,7 @@ import CartSummary from "./CartSummary";
 export default function CartDetails({
     isLoading, returnToMenu,
     userInfo, trainInfo, stationInfo, seatInfo,
-    createOrder, outletInfo, itemList, removeItem, addItem
+    makePayment, outletInfo, itemList, removeItem, addItem
 
 }) {
 
@@ -36,7 +36,7 @@ export default function CartDetails({
                     <CartSummary
                         outletInfo={outletInfo}
                         itemList={itemList}
-                        createOrder={createOrder}
+                        makePayment={makePayment}
                         userInfo={userInfo}
                         stationInfo={stationInfo}
                         trainInfo={trainInfo}

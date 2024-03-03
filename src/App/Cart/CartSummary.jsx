@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { FormatedDateWithYear, FormatedTime } from "../Components/DateTimeFormatChange";
 
-export default function CartSummary({ itemList, createOrder, outletInfo, userInfo, stationInfo, trainInfo, seatInfo }) {
+export default function CartSummary({ itemList, makePayment, outletInfo, userInfo, stationInfo, trainInfo, seatInfo }) {
 
     const [detailsShown, setDetailsShown] = useState({
         customer: false,
@@ -29,13 +29,13 @@ export default function CartSummary({ itemList, createOrder, outletInfo, userInf
         }))
     }
 
-    function billDetail(event){
+    function billDetail(event) {
         event.preventDefault()
         const bill = document.getElementById('bill')
         bill.scrollIntoView({
-            behavior : 'smooth'
+            behavior: 'smooth'
         })
-        
+
     }
 
     return (
@@ -67,7 +67,7 @@ export default function CartSummary({ itemList, createOrder, outletInfo, userInf
             <br />
 
             <button className="text-center bg-[#60b246] w-full h-10 text-white font-extrabold text-xl"
-                onClick={createOrder}>
+                onClick={makePayment}>
                 MAKE PAYMENT
             </button>
 
@@ -112,7 +112,7 @@ export default function CartSummary({ itemList, createOrder, outletInfo, userInf
                         <a href="#bill" className="text-blue-500 text-sm font-extralight" onClick={(event) => billDetail(event)}>VIEW DETAILED BILL</a>
                     </ul>
                     <ul className="flex items-center cursor-pointer bg-[#60b646] text-white p-1 md:p-4 px-5 w-1/2 text-center"
-                        onClick={createOrder}>
+                        onClick={makePayment}>
                         <li>MAKE PAYMENT</li>
                     </ul>
                 </ul>

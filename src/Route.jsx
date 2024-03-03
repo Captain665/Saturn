@@ -16,6 +16,7 @@ import OrderDetails from "./App/Orders/OrderDetails/OrderDetail";
 import Login from "./App/Accounts/Login/Login";
 import Signup from "./App/Accounts/Signup/Signup";
 import IsLoading from "../src/App/Components/Loading";
+import Payments from "./App/Payments/Payment";
 
 
 export default function BasePage() {
@@ -36,6 +37,7 @@ export default function BasePage() {
                     </Route>    
                     <Route path="/station/:code/outlet/:id/menu" element={<MenuItem />} />
                     <Route path="cart" element={<CartInfo />} />
+                    <Route path="payments" element={<Payments />} />
                     <Route path="order/:orderId" element={<OrderDetails />} />
                     <Route path="test" element={<IsLoading />}/>
                     <Route path="login"  element={<Login />}/>
