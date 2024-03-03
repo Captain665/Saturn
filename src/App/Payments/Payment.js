@@ -17,6 +17,7 @@ export default function Payments() {
 
     const [paymentSelection, setPaymentSelection] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
+    
     const [error, setError] = useState(null)
 
     const subTotal = JSON.parse(itemInfo?.reduce((a, b) => a + (b.basePrice * b.quantity), 0).toFixed(2))

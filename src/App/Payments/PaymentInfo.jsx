@@ -108,14 +108,14 @@ export default function PaymentInfo({ paymentMode, proceedToPay, mode, totalAmou
             </div>
 
             <ul className="flex justify-center">
-                <ul className={`self-center flex justify-center fixed bottom-0 content-center bg-[#1ba672] md:w-2/5 w-full h-16 md:h-auto font-extrabold text-lg
+                <ul className={`self-center flex justify-center fixed bottom-0 content-center bg-[#60b646] md:w-2/5 w-full h-16 md:h-auto font-extrabold text-lg
             cursor-pointer text-center z-50 text-white ${mode ? "block" : "hidden"} md:rounded-md`}
                     onClick={proceedToPay}>
                     <button className="p-2">PAY &#x20B9;{totalAmount} WITH {payMode()}</button>
                 </ul>
             </ul>
 
-            <ErrorToster props={error} />
+            <ErrorToster props={error} />   
 
         </>
     )
