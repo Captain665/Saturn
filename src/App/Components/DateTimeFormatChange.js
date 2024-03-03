@@ -54,3 +54,25 @@ export function FormatedDateWithYear(date){
         year : 'numeric'
     })
 }
+
+export function FormatedDateWithTime(date){
+
+    const newDate = new Date(date)
+
+    const year =  newDate.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'long',
+        year : 'numeric'
+    })
+
+    const time =  newDate.toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true,
+    });
+     
+    const dateTime = time + " " + year;
+
+    return dateTime;
+
+}
