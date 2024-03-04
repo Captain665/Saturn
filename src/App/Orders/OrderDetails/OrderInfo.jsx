@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import CustomerAndPaymentInfo from "./CustomerAndPaymentInfo";
-import OrderedItems from "./OutletAndMenu";
 import IsLoading from "../../../App/Components/Loading";
-import { FaArrowLeft, FaChevronDown } from "react-icons/fa6";
+import { FaArrowLeft, FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { FormatedDateWithTime } from "../../Components/DateTimeFormatChange";
 
 
@@ -23,44 +21,24 @@ export default function OrderInfo({ order, isLoading, backToHome }) {
         return JSON.parse(totalValue.toFixed(2))
     }
 
-    // const isShown = (value) => {
-    //     if (value === "customer") {
-    //         setIsDetailShown(prevData => ({
-    //             ...prevData,
-    //             customer: !prevData.customer
-    //         }))
-    //     } else if (value === "delivery") {
-    //         setIsDetailShown(prevData => ({
-    //             ...prevData,
-    //             delivery: !prevData.delivery
-    //         }))
-    //     } else {
-    //         setIsDetailShown(prevData => ({
-    //             ...prevData,
-    //             restaurant: !prevData.restaurant
-    //         }))
-    //     }
-
-    // }
-
     const customer = () => {
         setIsDetailShown(prevData => ({
             ...prevData,
-            customer : !prevData.customer
+            customer: !prevData.customer
         }))
     }
 
     const delivery = () => {
         setIsDetailShown(prevData => ({
             ...prevData,
-            delivery : !prevData.delivery
+            delivery: !prevData.delivery
         }))
     }
 
     const restaurant = () => {
         setIsDetailShown(prevData => ({
             ...prevData,
-            restaurant : !prevData.restaurant
+            restaurant: !prevData.restaurant
         }))
     }
 
@@ -71,7 +49,9 @@ export default function OrderInfo({ order, isLoading, backToHome }) {
             <ul className="w-3/4 m-auto mt-5">
 
                 <ul>
-                    <li className="flex items-center gap-2 opacity-70 cursor-pointer"><FaArrowLeft /> Back to Home</li>
+                    <li className="flex items-center gap-2 opacity-70 cursor-pointer w-fit" onClick={backToHome}>
+                        <FaArrowLeft /> Back to Home
+                    </li>
                     <li className="mt-10 font-extrabold text-2xl">Order Details</li>
                 </ul>
 
@@ -161,11 +141,11 @@ export default function OrderInfo({ order, isLoading, backToHome }) {
 
                     <ul className="w-2/6 p-2 bg-white flex border flex-col h-fit mt-10">
                         <ul>
-                            <ul className="flex items-center justify-between px-2 border-b" onClick={customer}>
+                            <ul className="flex items-center justify-between px-2 border-b-2 cursor-pointer" onClick={customer}>
                                 <li className="font-bold text-lg">User</li>
-                                <li><FaChevronDown /></li>
+                                <li>{detailShown.customer ? <FaChevronUp /> : <FaChevronDown />}</li>
                             </ul>
-                            <ul className="flex justify-start p-5 gap-5">
+                            <ul className={`${detailShown.customer ? "flex" : "hidden"} justify-start p-5 gap-5`}>
                                 <ul className=" opacity-70">
                                     <li>Name : </li>
                                     <li> Mobile : </li>
@@ -179,11 +159,11 @@ export default function OrderInfo({ order, isLoading, backToHome }) {
                             </ul>
                         </ul>
                         <ul>
-                            <ul className="flex items-center justify-between px-2 mt-5 border-b" onClick={delivery}>
+                            <ul className="flex items-center justify-between px-2 mt-5 border-b-2 cursor-pointer" onClick={delivery}>
                                 <li className="font-bold text-lg">Delivery details</li>
-                                <li><FaChevronDown /> </li>
+                                <li>{detailShown.delivery ? <FaChevronUp /> : <FaChevronDown />} </li>
                             </ul>
-                            <ul className="flex justify-start p-5 gap-5">
+                            <ul className={`${detailShown.delivery ? "flex" : "hidden"} justify-start p-5 gap-5`}>
                                 <ul className=" opacity-70">
                                     <li>Station :</li>
                                     <li>Date :</li>
@@ -199,11 +179,11 @@ export default function OrderInfo({ order, isLoading, backToHome }) {
                             </ul>
                         </ul>
                         <ul>
-                            <ul className="flex items-center justify-between px-2 mt-5 border-b" onClick={restaurant}>
+                            <ul className="flex items-center justify-between px-2 mt-5 border-b-2 cursor-pointer" onClick={restaurant}>
                                 <li className="font-bold text-lg">Restaurant details</li>
-                                <li><FaChevronDown /> </li>
+                                <li>{detailShown.restaurant ? <FaChevronUp /> : <FaChevronDown />}</li>
                             </ul>
-                            <ul className="flex justify-start p-5 gap-5">
+                            <ul className={`${detailShown.restaurant ? "flex" : "hidden"} justify-start p-5 gap-5`}>
                                 <ul className=" opacity-70">
                                     <li>Name :</li>
                                     <li>Location :</li>
@@ -223,48 +203,8 @@ export default function OrderInfo({ order, isLoading, backToHome }) {
                 </ul>
 
             </ul>
-            <br /><br />
-
-
-
-
-
-
-
-
-
-
-            {isLoading ? <IsLoading /> :
-                order && <div className="">
-                    <div className="bg-gray-200 flex items-center w-full text-lg md:pl-5 p-2">
-                        <h1 onClick={backToHome} className="cursor-pointer">&#x2190; Back to Home</h1>
-                    </div>
-                    <h1 className="md:text-4xl md:ml-14 ml-5 md:mt-5 mb-2 text-2xl">Order Details</h1>
-                    <div className="flex flex-col items-center">
-                        <div className="md:w-11/12 bg-sky-200 rounded-xl shadow-2xl w-full">
-                            <div className="flex justify-between md:p-5 p-2">
-                                <ul className="content-center items-center w-1/2">
-                                    <li className="text-lg font-bold cursor-pointer">Order ID: #{order.id}</li>
-                                    <li>{order.bookingDate}</li>
-                                    <li className="w-14 rounded-md bg-gray-300"><img src={order.outlets.logoImage} alt="logo" className="object-contain" /></li>
-                                    <li className="text-xl font-bold">{order.outlets.outletName}</li>
-                                </ul>
-                                <ul className="font-bold w-1/2 inline-flex md:justify-center justify-end self-start">
-                                    <li className="border-none md:p-2 p-1 bg-green-400 rounded-lg">{order.status}</li>
-                                </ul>
-                            </div>
-
-                            <CustomerAndPaymentInfo
-                                order={order}
-                            />
-                            <OrderedItems
-                                order={order}
-                            />
-
-                        </div>
-                    </div><br /><br />
-
-                </div>}
+            <br />
+            <br />
         </>
     )
 }
