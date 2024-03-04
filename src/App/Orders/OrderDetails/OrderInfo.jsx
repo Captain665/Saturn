@@ -45,17 +45,17 @@ export default function OrderInfo({ order, isLoading, backToHome }) {
 
     return (
         <>
-            <ul className="w-3/4 m-auto mt-5">
+            <ul className="md:w-3/4 m-auto mt-5 w-full">
 
                 <ul>
-                    <li className="flex items-center gap-2 opacity-70 cursor-pointer w-fit" onClick={backToHome}>
+                    <li className="flex items-center gap-2 opacity-70 cursor-pointer w-fit ml-2 md:ml-0" onClick={backToHome}>
                         <FaArrowLeft /> Back to Home
                     </li>
-                    <li className="mt-10 font-extrabold text-2xl">Order Details</li>
+                    <li className="mt-10 font-extrabold text-2xl ml-2 md:ml-0">Order Details</li>
                 </ul>
 
-                <ul className="flex gap-2">
-                    <ul className="flex w-4/6 justify-between p-2 bg-white border rounded-md">
+                <ul className="flex md:flex-row flex-col gap-2 m-2">
+                    <ul className="flex md:w-4/6 w-full justify-between p-2 bg-white border rounded-md gap-2">
                         <ul>
                             <li className="opacity-50 font-extrabold">Order ID</li>
                             <li className="font-bold">#{order?.id}</li>
@@ -66,7 +66,7 @@ export default function OrderInfo({ order, isLoading, backToHome }) {
                         </ul>
                         <ul>
                             <li className="opacity-50 font-extrabold">Payment</li>
-                            <ul className="flex gap-1">
+                            <ul className="flex flex-col md:flex-row gap-1">
                                 <li>{order?.paymentType}</li>
                                 <ul className="flex gap-1 bg-green-100 items-center rounded-2xl px-1">
                                     <li className="bg-green-600 text-white rounded-full w-5 h-fit text-center text-sm">&#x2713;</li>
@@ -79,18 +79,18 @@ export default function OrderInfo({ order, isLoading, backToHome }) {
                             <li>{order?.status}</li>
                         </ul>
                     </ul>
-                    <ul className="w-2/6 p-2 bg-white rounded-md border flex justify-center items-center">
+                    <ul className="w-2/6 p-2 bg-white rounded-md border md:flex hidden justify-center items-center">
                         <li className="font-bold text-lg">Order Summary</li>
                     </ul>
                 </ul>
 
-                <ul className="flex gap-2 mt-5">
-                    <ul className="w-4/6 p-2 bg-white">
+                <ul className="flex md:flex-row flex-col gap-2 mt-5">
+                    <ul className="md:w-4/6 w-full p-2 bg-white">
                         <ul className="flex justify-between px-1 border-b-2 border-b-black">
-                            <ul className="w-4/6">
+                            <ul className="md:w-4/6 w-3/6">
                                 <li className="opacity-50 font-extrabold">Ordered Items</li>
                             </ul>
-                            <ul className="w-2/6 flex justify-between opacity-50 font-extrabold ">
+                            <ul className="md:w-2/6 w-3/6 flex justify-between opacity-50 font-extrabold ">
                                 <li cl>Price</li>
                                 <li>Quantity</li>
                                 <li>Total Price</li>
@@ -138,7 +138,7 @@ export default function OrderInfo({ order, isLoading, backToHome }) {
                         </ul>
                     </ul>
 
-                    <ul className="w-2/6 p-2 bg-white flex border flex-col h-fit mt-10">
+                    <ul className="md:w-2/6 w-full p-2 bg-white flex border flex-col h-fit mt-10">
                         <ul>
                             <ul className="flex items-center justify-between px-2 border-b-2 cursor-pointer" onClick={customer}>
                                 <li className="font-bold text-lg">User</li>
