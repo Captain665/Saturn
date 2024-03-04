@@ -12,9 +12,6 @@ export default function OrderInfo({ order, isLoading, backToHome }) {
         restaurant: true
     })
 
-    if (isLoading) {
-        return <IsLoading />
-    }
 
     const totalPrice = (a, b) => {
         const totalValue = a * b;
@@ -42,7 +39,9 @@ export default function OrderInfo({ order, isLoading, backToHome }) {
         }))
     }
 
-
+    if (isLoading) {
+        return <IsLoading />
+    }
 
     return (
         <>
