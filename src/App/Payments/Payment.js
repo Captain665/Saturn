@@ -36,7 +36,7 @@ export default function Payments() {
 
     const createOrder = async () => {
         setIsLoading(() => true)
-        const response = await CreateOrderResponse(trainInfo, stationInfo, seatInfo, outletInfo, userInfo, itemInfo, pnr);
+        const response = await CreateOrderResponse(trainInfo, stationInfo, seatInfo, outletInfo, userInfo, itemInfo, pnr, paymentSelection);
         if (response.status === "success") {
             sessionStorage.clear();
             const orderId = response?.result.id;

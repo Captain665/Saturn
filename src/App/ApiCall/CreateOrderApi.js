@@ -1,5 +1,5 @@
 
-export async function CreateOrderResponse(trainInfo, stationInfo, seatInfo, outletInfo, userInfo,itemList, pnr) {
+export async function CreateOrderResponse(trainInfo, stationInfo, seatInfo, outletInfo, userInfo,itemList, pnr,paymentSelection) {
     
 
     const body = {
@@ -13,7 +13,7 @@ export async function CreateOrderResponse(trainInfo, stationInfo, seatInfo, outl
         "outletId": outletInfo.id,
         "customerId": userInfo.id,
         "pnr": pnr,
-        "paymentType": "CASH_ON_DELIVERY",
+        "paymentType": paymentSelection,
         "deliveryCharge": outletInfo.deliveryCost,
         "orderFrom": "desktop Web",
         "orderItem": itemList
