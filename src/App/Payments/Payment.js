@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PaymentInfo from "./PaymentInfo";
 import { useNavigate } from "react-router";
 import { CreateOrderResponse } from "../ApiCall/CreateOrderApi";
+import { isMobile } from "react-device-detect";
 
 
 export default function Payments() {
@@ -33,10 +34,13 @@ export default function Payments() {
     const backToCart = () => {
         navigate("/cart")   
     }
+    const device = isMobile ? "Mobile Web" : "Desktop Web"  
+    console.log(device)
 
     const createOrder = async () => {
         setIsLoading(() => true)
-        const response = await CreateOrderResponse(trainInfo, stationInfo, seatInfo, outletInfo, userInfo, itemInfo, pnr, paymentSelection);
+        const response = await CreateOrderResponse(trainInfo, 
+            stationInfo, seatInfo, outletInfo, userInfo, itemInfo, pnr, paymentSelection, device);
         if (response.status === "success") {
             sessionStorage.clear();
             const orderId = response?.result.id;

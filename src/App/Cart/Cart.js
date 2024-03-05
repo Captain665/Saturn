@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import CartDetails from "./CartInfo";
-// import { CreateOrderResponse } from "../ApiCall/CreateOrderApi";
 import ErrorToster from "../../App/Components/MessageToggle"
 
 export default function CartInfo() {
@@ -18,34 +17,28 @@ export default function CartInfo() {
 
 
     const [itemList, setItemList] = useState(itemInfo)
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
     const path = location.pathname;
 
-    // useEffect(() => {
-    //     if (!userInfo) {
-    //         const pathName = `/login?redirectedTo=${path}`
-    //         navigate(pathName)
-    //     }
-    // }, [])
-
     useEffect(() => {
+        
         window.sessionStorage.setItem("selectedItemInfo", JSON.stringify(itemList))
         setTimeout(() => {
             if (!userInfo || error?.error === "Not authorize to Access") {
                 const pathName = `/login?redirectedTo=${path}`
                 navigate(pathName)
             }
-            setIsLoading(false)
-        }, 1000)
-
-        setError(null)
-
-        return () => { setIsLoading(false) }
+            setIsLoading(() => false)
+        }, 2000)
+        
+        return () => { setError(false) }
     }, [itemList, navigate, path, error, userInfo])
 
+  
 
-    const itemSize = itemList?.length
+
+    const itemSize = itemList?.length;
     if (itemList === 0 || itemSize === undefined) {
         returnToMenu()
     }
@@ -92,25 +85,9 @@ export default function CartInfo() {
         navigate(url)
     }
 
-
-    // const createOrder = async () => {
-    //     setIsLoading(true)
-    //     const response = await CreateOrderResponse(trainInfo, stationInfo, seatInfo, outletInfo, userInfo, itemList, pnr);
-    //     if (response.status === "success") {
-    //         sessionStorage.clear();
-    //         const orderId = response?.result.id;
-    //         navigate("/order/".concat(orderId))
-    //     } else {
-    //         setError(() => response)
-    //     }
-    //     setIsLoading(() => false)
-    // }
-
     const makePayment = () => {
         navigate("/payments")
     }
-
-
 
 
     return (

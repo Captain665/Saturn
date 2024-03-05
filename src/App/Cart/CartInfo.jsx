@@ -1,6 +1,6 @@
 import React from "react";
 import ItemInfo from "./ItemList";
-// import IsLoading from "../../App/Components/Loading"
+import IsLoading from "../../App/Components/Loading"
 import { FaArrowLeft } from "react-icons/fa6";
 import CartSummary from "./CartSummary";
 
@@ -12,6 +12,10 @@ export default function CartDetails({
 }) {
 
     const totalItem = itemList?.reduce((a, b) => a + b.quantity, 0)
+
+    if(isLoading){
+        return <IsLoading />
+    }
 
 
     return (
