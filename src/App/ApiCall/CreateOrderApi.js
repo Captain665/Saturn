@@ -29,7 +29,7 @@ export async function CreateOrderResponse(trainInfo, stationInfo, seatInfo, outl
         },
         body: JSON.stringify(body)
     }
-    const url = "/api/v2/create/order"
+    const url = "/create/order"
     const response = await fetch(url, payload);
     const jsonData = await response.json();
     return jsonData;
