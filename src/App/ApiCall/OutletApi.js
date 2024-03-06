@@ -5,7 +5,7 @@ export async function OutletResponse(code){
         method: "GET"
     }
     
-    const url = "/outlet/station/" + code
+    const url = "/api/v2/outlet/station/" + code
     const response =  await fetch(url, payload)
     const jsonData =  await response.json();
     if(response.ok){

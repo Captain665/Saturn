@@ -9,7 +9,7 @@ export async function SignupResponse(userInfo){
         body : JSON.stringify(userInfo)
     }
 
-    const url = "/signup"
+    const url = "/api/v2/signup"
     const response = await fetch(url, payload)
     const jsonData = await response.json();
     
@@ -30,7 +30,7 @@ export async function OtpValidateReponse(mobileNumber, otp){
         })
     };
 
-    const url = "/otp-validate"
+    const url = "/api/v2/otp-validate"
     const response = await fetch(url, payload);
     const jsonData = await response.json();
     

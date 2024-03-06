@@ -6,7 +6,7 @@ export async function OrderDetailResponse(token, orderId) {
             Authorization: token
         }
     }
-    const url = "/order/" + orderId
+    const url = "/api/v2/order/" + orderId
 
     const response = await fetch(url, payload)
     const jsonData = await response.json();
