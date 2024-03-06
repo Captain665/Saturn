@@ -1,4 +1,4 @@
 [[redirects]]
   from = "/api/v2"
-  to = "https://57fd-182-71-79-227.ngrok-free.app "
+  to = "http://localhost:9090"
   status = 200
