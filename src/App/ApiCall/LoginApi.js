@@ -9,7 +9,7 @@ export async function LoginResponse(loginData){
         body: JSON.stringify(loginData)
     };
 
-    const url = "/auth/login"
+    const url = "/api/v2/auth/login"
     const response = await fetch(url, payload);
     const jsonData = await response.json();
 

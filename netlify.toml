@@ -1,4 +1,4 @@
 [[redirects]]
-  from = ".netlify.app/"
-  to = "https//localhost:9090/"
+  from = "/api/v2"
+  to = "https://57fd-182-71-79-227.ngrok-free.app "
   status = 200
