@@ -15,7 +15,7 @@ export default function SignUp() {
         mobileNumber: "",
         emailId: "",
         password: "",
-        gender: "Male"
+        gender: ""
     });
 
     const [isloading, setIsLoading] = useState(false)
@@ -34,12 +34,6 @@ export default function SignUp() {
         }))
     }
 
-    function handleGender(event) {
-        setUserInfo((prevData) => ({
-            ...prevData,
-            gender: event.target.value
-        }))
-    }
 
     const fetchSignUp = async () => {
         setIsLoading(() => true)
@@ -101,7 +95,6 @@ export default function SignUp() {
                 <SignupData
                     userInfo={userInfo}
                     handleSubmit={handleSignupSubmit}
-                    handleGender={handleGender}
                     handleOnChange={handleSignupOnChange}
                     isloading={isloading}
                 />

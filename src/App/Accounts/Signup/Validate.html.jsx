@@ -1,30 +1,73 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import IsLoading from "../../Components/Loading";
+import { FaEnvelope, FaKey } from "react-icons/fa6";
 
 export default function ValidateHtml({ handleOtpChange, handleOtpSubmit, isLoading, emailId, otp }) {
 
     return (
-        <>
-            {isLoading
-                ? <IsLoading />
-                : <div><br /><br />
-                    <h1 className="md:text-4xl font-bold text-center text-2xl">Email Verification</h1><br />
+        <> {
+            isLoading
+                ? <IsLoading /> 
+                :
+                <form
+                    className="border md:p-10 p-5 md:px-12 px-6 flex flex-col justify-center w-fit m-auto mt-20
+                items-center bg-transparent gap-5 rounded-xl self-center place-content-center md:shadow-xl"
+                    method="post"
+                    onSubmit={handleOtpSubmit}
+                >
 
-                    <form action="" onSubmit={handleOtpSubmit} method="post" className="flex justify-center flex-col mx-auto w-3/4 max-w-2xl">
-                        <label htmlFor="email">Email Id</label>
-                        <input type="email" placeholder="Email Id"
-                            name="email" id="email" value={emailId} disabled className="border rounded-lg h-10 pl-2 outline-none " /><br />
+                    <ul className="text-8xl text-gray-300 opacity-90">
+                        <li><FaEnvelope /></li>
+                    </ul>
 
-                        <label htmlFor="number">OTP</label>
-                        <input type="number" name="mobileNumber" id="number" onChange={handleOtpChange} value={otp}
-                            required placeholder="OTP" className="border rounded-lg h-10 pl-2 outline-none" /><br />
+                    <ul className="flex border items-center h-10 bg-gray-100 gap-2">
+                        <li className="bg-white p-2 w-full h-full px-3">
+                            <FaEnvelope />
+                        </li>
+                        <li>
+                            <input
+                                type="email"
+                                name="email"
+                                id="email"
+                                placeholder="Email Id"
+                                disabled
+                                className="bg-gray-100 outline-none"
+                                value={emailId}
+                            />
+                        </li>
+                    </ul>
 
-                        <button type="submit" className="bg-sky-500 h-10 border-none rounded text-white text-xl hover:bg-sky-400">Submit</button>
-                    </form><br />
-                    <p className="text-center">Have an Account ?  <NavLink to="/login" className="text-sky-400 hover:font-bold"> Sign in</NavLink></p><br /><br />
-                </div>
-            }
+                    <ul className="flex border items-center h-10 bg-gray-100 gap-2">
+                        <li className="bg-white p-2 w-full h-full px-3">
+                            <FaKey />
+                        </li>
+                        <li>
+                            <input
+                                type="number"
+                                name="otp"
+                                id="otp"
+                                placeholder="OTP"
+                                required
+                                className="bg-gray-100 outline-none"
+                                onChange={handleOtpChange}
+                                value={otp}
+                            />
+                        </li>
+                    </ul>
+
+                    <ul className="bg-[#60b246] w-full text-white
+                        font-extrabold h-10 inline-flex justify-center text-xl cursor-pointer">
+                        <button>Submit</button>
+                    </ul>
+
+                    <ul className="flex gap-1 text-sm">
+                        <li>Have an Account ?</li>
+                        <NavLink to="/login" className="text-sky-400">Sign in</NavLink>
+                    </ul>
+                </form>
+
+        }
         </>
     )
 }
