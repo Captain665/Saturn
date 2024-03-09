@@ -6,7 +6,7 @@ import IsLoading from "../../Components/Loading";
 
 export default function LoginForm({ isLoading, handleChange, HandleSubmit, loginData, redirectedTo }) {
 
-    const path = redirectedTo ? `/signup?redirecteTo=${redirectedTo}` : "/signup"
+    const path = redirectedTo ? `/signup?redirectedTo=${redirectedTo}` : "/signup"
 
 
 

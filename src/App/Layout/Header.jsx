@@ -7,7 +7,7 @@ import { FaUser, FaHouse, FaPhone, FaInfo, FaBars } from "react-icons/fa6";
 function Headers({ name }) {
     const navigate = useNavigate()
 
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    const [userInfo] = useState(JSON.parse(localStorage.getItem("userInfo")) || null)
     const [isVisible, setIsvisible] = useState(false)
 
     function isActiveCheck({ isActive }) {

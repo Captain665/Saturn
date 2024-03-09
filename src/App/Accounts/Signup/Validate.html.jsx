@@ -3,7 +3,9 @@ import { NavLink } from "react-router-dom";
 import IsLoading from "../../Components/Loading";
 import { FaEnvelope, FaKey } from "react-icons/fa6";
 
-export default function ValidateHtml({ handleOtpChange, handleOtpSubmit, isLoading, emailId, otp }) {
+export default function ValidateHtml({ handleOtpChange, handleOtpSubmit, isLoading, emailId, otp, redirectedTo }) {
+
+    const path = redirectedTo ? `/login?redirectedTo=${redirectedTo}` : "/login"
 
     return (
         <> {
@@ -63,7 +65,7 @@ export default function ValidateHtml({ handleOtpChange, handleOtpSubmit, isLoadi
 
                     <ul className="flex gap-1 text-sm">
                         <li>Have an Account ?</li>
-                        <NavLink to="/login" className="text-sky-400">Sign in</NavLink>
+                        <NavLink to={path} className="text-sky-400">Sign in</NavLink>
                     </ul>
                 </form>
 

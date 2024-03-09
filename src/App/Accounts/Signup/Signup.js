@@ -38,7 +38,7 @@ export default function SignUp() {
     const fetchSignUp = async () => {
         setIsLoading(() => true)
         const response = await SignupResponse(userInfo);
-        
+
         if (response.status === "success") {
             setIsValidate(() => true)
             setError(() => response)
@@ -83,20 +83,21 @@ export default function SignUp() {
 
     return (
         <>
-            {isValidate ?
-                <ValidateHtml
+            {isValidate
+                ? <ValidateHtml
                     handleOtpChange={handleOtpChange}
                     handleOtpSubmit={handleOtpSubmit}
                     isLoading={isloading}
                     emailId={userInfo.emailId}
                     otp={otp}
-
-                /> :
-                <SignupData
+                    redirectedTo={params.get("redirectedTo")}
+                />
+                : <SignupData
                     userInfo={userInfo}
                     handleSubmit={handleSignupSubmit}
                     handleOnChange={handleSignupOnChange}
                     isloading={isloading}
+                    redirectedTo={params.get("redirectedTo")}
                 />
             }
             {error && <ErrorToster props={error} />}

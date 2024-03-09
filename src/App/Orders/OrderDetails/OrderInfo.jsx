@@ -49,7 +49,7 @@ export default function OrderInfo({ order, isLoading, backToHome }) {
 
                 <ul>
                     <li className="flex items-center gap-2 opacity-70 cursor-pointer w-fit ml-2 md:ml-0" onClick={backToHome}>
-                        <FaArrowLeft /> Back to Home
+                        <FaArrowLeft /> Back
                     </li>
                     <li className="mt-10 font-extrabold text-2xl ml-2 md:ml-0">Order Details</li>
                 </ul>

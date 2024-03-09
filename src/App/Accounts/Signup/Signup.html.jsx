@@ -3,7 +3,9 @@ import { NavLink } from "react-router-dom";
 import IsLoading from "../../Components/Loading";
 import { FaUser, FaMobileRetro, FaEnvelope, FaLock } from "react-icons/fa6";
 
-export default function SignupData({ userInfo, handleSubmit, handleOnChange, isloading }) {
+export default function SignupData({ userInfo, handleSubmit, handleOnChange, isloading, redirectedTo }) {
+
+    const path = redirectedTo ? `/login?redirectedTo=${redirectedTo}` : "/login"
 
 
     return (
@@ -117,7 +119,7 @@ export default function SignupData({ userInfo, handleSubmit, handleOnChange, isl
 
                     <ul className="flex gap-1 text-sm">
                         <li>Have an Account ?</li>
-                        <NavLink to="/login" className="text-sky-400">Sign In</NavLink>
+                        <NavLink to={path} className="text-sky-400">Sign In</NavLink>
                     </ul>
 
                 </form>

@@ -34,12 +34,17 @@ export default function OrderList({ token }) {
         navigate("/order/" + order.id)
     }
 
+    function HandleBack() {
+        navigate("/account", {replace : true})
+    }
+
     return (
         <>
             <OrderHtml
                 isLoading={isLoading}
                 orderslist={orderslist}
                 handleViewOrderDetail={(item) => handleViewOrderDetail(item)}
+                handleBack={HandleBack}
             />
         </>
     )
