@@ -18,7 +18,7 @@ export default function HomePage({ handleOnChange, handleOnClick, isLoading, err
                             className="border-2 rounded-md h-14 outline-none pl-5 text-xl text-start font-medium" placeholder="Enter PNR Number" /><br />
 
                         <button type="submit"
-                            className="bg-sky-500 px-6 md:p-3 p-2 border-none font-bold rounded-lg text-xl cursor-pointer hover:bg-sky-400">Submit</button>
+                            className="px-6 md:p-3 p-2 border-none font-bold rounded-lg text-xl cursor-pointer bg-[#60b246]">Submit</button>
                     </form>
                 </div>
                 {error && <ErrorToster props={error} />}

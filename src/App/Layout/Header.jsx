@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import { FaUser, FaHouse, FaPhone, FaInfo, FaBars } from "react-icons/fa6";
@@ -8,16 +8,32 @@ function Headers({ name }) {
     const navigate = useNavigate()
 
     const [userInfo] = useState(JSON.parse(localStorage.getItem("userInfo")) || null)
+
     const [isVisible, setIsvisible] = useState(false)
+    const boxRef = useRef(null)
+
+    useEffect(() => {
+        const handleDocumentClick = (event) =>{
+            if(boxRef.current && !boxRef.current.contains(event.target)){
+                setIsvisible(() => false)
+            }
+        }
+
+        document.addEventListener("click",handleDocumentClick)
+
+        return () => {
+            document.removeEventListener("click",handleDocumentClick)
+        }
+    },[])
 
     function isActiveCheck({ isActive }) {
         return isActive ? "underline font-bold" : null
-
     }
 
     function HandleOnClick() {
-        setIsvisible(!isVisible)
+        setIsvisible(() => !isVisible)
     }
+    
 
     function NavBarInvisible() {
         setIsvisible(false)
@@ -60,7 +76,7 @@ function Headers({ name }) {
                 <nav className="hidden md:flex w-1/2 items-center justify-around place-content-center flex-col md:flex-row text-black opacity-80 font-extrabold text-xl">
                     {links}
                 </nav>
-                <nav className={`md:hidden relative w-full`} >
+                <nav className={`md:hidden relative w-full`} ref={boxRef}>
                     <span className={`float-right text-3xl ${isVisible ? "border-2" : null} border-black p-1 mr-10 cursor-pointer`} onClick={HandleOnClick}><FaBars /></span>
 
                     <div className={`flex-col bg-white p-5 gap-4 md:hidden ${isVisible ? "flex" : "hidden"} z-[100] absolute right-5 top-12 rounded-lg w-40 border-2`}>
