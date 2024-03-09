@@ -7,11 +7,11 @@ export default function OrderHtml({ orderslist, isLoading, handleViewOrderDetail
     return (
         <>
             {isLoading ? <IsLoading /> :
-                <div>
-                    <h1 className="font-bold text-2xl text-center">Order History</h1><br /><br />
-                    <div className=" grid md:grid-cols-2 gap-2 w-full">
+                <div className="w-11/12 m-auto md:w-5/6 md:mt-20 mt-10">
+                    <h1 className="font-bold text-2xl text-center md:text-start">Order History</h1><br /><br />
+                    <div className=" grid md:grid-cols-2 gap-5 w-full">
                         {orderslist?.map(item => (
-                            <div className="w-full shadow-lg p-5 flex flex-col gap-y-10 rounded-lg border-2" key={item.id}>
+                            <div className="w-full p-5 flex flex-col gap-y-10 rounded-lg border" key={item.id}>
                                 <ul className="top-40">
                                     <div className="flex">
                                         <div className="flex justify-start items-center w-4/6">

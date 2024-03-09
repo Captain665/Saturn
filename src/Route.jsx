@@ -17,7 +17,6 @@ import Login from "./App/Accounts/Login/Login";
 import Signup from "./App/Accounts/Signup/Signup";
 import IsLoading from "../src/App/Components/Loading";
 import Payments from "./App/Payments/Payment";
-import OrderHtml from "./App/Orders/OrderList/Orders.html";
 import CustomerDetails from "../src/App/Accounts/AccountsInfo/CustomerInfo"
 import OrderList from "./App/Orders/OrderList/Orders";
 
