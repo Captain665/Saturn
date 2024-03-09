@@ -17,6 +17,9 @@ import Login from "./App/Accounts/Login/Login";
 import Signup from "./App/Accounts/Signup/Signup";
 import IsLoading from "../src/App/Components/Loading";
 import Payments from "./App/Payments/Payment";
+import OrderHtml from "./App/Orders/OrderList/Orders.html";
+import CustomerDetails from "../src/App/Accounts/AccountsInfo/CustomerInfo"
+import OrderList from "./App/Orders/OrderList/Orders";
 
 
 export default function BasePage() {
@@ -29,6 +32,9 @@ export default function BasePage() {
                     <Route path="about" element={<About />} />
                     <Route path="contact" element={<Contact />} />
                     <Route path="account" element={<Account />} />
+                    <Route path="customer/details" element={<CustomerDetails />} />
+                        
+                    
                     <Route path="*" element={<NonExistPath />} />
 
                     <Route path=":pnr/stations" element={<TrainInfo />}>
@@ -39,6 +45,7 @@ export default function BasePage() {
                     <Route path="cart" element={<CartInfo />} />
                     <Route path="payments" element={<Payments />} />
                     <Route path="order/:orderId" element={<OrderDetails />} />
+                    <Route path="orders" element = {<OrderList />}/>
                     <Route path="test" element={<IsLoading />}/>
                     <Route path="login"  element={<Login />}/>
                     <Route path="signup" element={<Signup />} /> 
