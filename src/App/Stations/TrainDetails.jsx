@@ -8,7 +8,7 @@ function TrainHtml({ isLoading, train, error, pnr }) {
 
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col w-full">
 
             {isLoading ? <IsLoading /> : <>
 

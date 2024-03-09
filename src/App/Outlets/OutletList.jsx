@@ -5,9 +5,9 @@ import IsLoading from "../../App/Components/Loading";
 function OutletHtml({ returnToStation, isLoading, outletData, stations, stationCode, handleOnClick }) {
 
     return (
-        <>
+        <div className="w-full">
             {isLoading ? <IsLoading /> :
-                <div className="flex flex-col">
+                <div className="flex flex-col w-full">
                     <div className="flex w-11/12 md:w-4/5 justify-between md:mt-16 mt-10 self-center items-center md:mb-5">
                         <hr className="flex-grow border-t border-gray-300" />
                         <span className="px-3 md:text-lg text-gray-500">AVAILABLE RESTAURANTS</span>
@@ -41,7 +41,7 @@ function OutletHtml({ returnToStation, isLoading, outletData, stations, stationC
                     </div><br /><br />
                 </div>
             }
-        </>
+        </div>
     )
 }
 export default memo(OutletHtml)

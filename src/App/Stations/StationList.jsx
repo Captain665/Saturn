@@ -16,7 +16,7 @@ export function StationCheck(value){
 function StationData({ stations, handleOnClick }) {
 
     return (
-        <><div className="flex flex-col">
+        <><div className="flex flex-col w-full">
 
             <div className="flex w-11/12 md:w-1/2 justify-between mt-16 self-center items-center mb-5">
                 <hr className="flex-grow border-t border-gray-300" />
