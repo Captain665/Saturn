@@ -5,7 +5,7 @@ import LayOut from "./App/Layout/Layout";
 import About from "./App/FrontPage/About";
 import Contact from "./App/FrontPage/ContactUs";
 import Account from "./App/Accounts/AccountsInfo/Account";
-import NonExistPath from "./InvalidPath";
+import NonExistPath from "../src/App/Components/InvalidPath";
 import OutletList from "./App/Outlets/Outlets";
 import MenuItem from "./App/Menu/Menu";
 import Home from "./App/FrontPage/HomePage/Home";
@@ -15,10 +15,14 @@ import CartInfo from "./App/Cart/Cart";
 import OrderDetails from "./App/Orders/OrderDetails/OrderDetail";
 import Login from "./App/Accounts/Login/Login";
 import Signup from "./App/Accounts/Signup/Signup";
-import IsLoading from "./Loading";
+import IsLoading from "../src/App/Components/Loading";
+import Payments from "./App/Payments/Payment";
+import CustomerDetails from "../src/App/Accounts/AccountsInfo/CustomerInfo"
+import OrderList from "./App/Orders/OrderList/Orders";
 
 
 export default function BasePage() {
+    
     return (
         <BrowserRouter>
             <Routes>
@@ -27,15 +31,20 @@ export default function BasePage() {
                     <Route path="about" element={<About />} />
                     <Route path="contact" element={<Contact />} />
                     <Route path="account" element={<Account />} />
+                    <Route path="customer/details" element={<CustomerDetails />} />
+                        
+                    
                     <Route path="*" element={<NonExistPath />} />
 
                     <Route path=":pnr/stations" element={<TrainInfo />}>
                         <Route index element={<StationList />} />
                         <Route path="outlets/:code" element={<OutletList />} />
-                    </Route>
+                    </Route>    
                     <Route path="/station/:code/outlet/:id/menu" element={<MenuItem />} />
                     <Route path="cart" element={<CartInfo />} />
+                    <Route path="payments" element={<Payments />} />
                     <Route path="order/:orderId" element={<OrderDetails />} />
+                    <Route path="orders" element = {<OrderList />}/>
                     <Route path="test" element={<IsLoading />}/>
                     <Route path="login"  element={<Login />}/>
                     <Route path="signup" element={<Signup />} /> 

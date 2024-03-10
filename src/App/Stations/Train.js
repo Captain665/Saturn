@@ -2,16 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Outlet, useNavigate, useParams } from "react-router";
 import TrainHtml from "./TrainDetails";
 import { PnrResponse } from "../ApiCall/PnrApi";
+import IsLoading from "../Components/Loading";
 
 
 export default function TrainInfo() {
 
     const navigate = useNavigate()
     const result = JSON.parse(window.sessionStorage.getItem("pnrDetails"))
-    // var pnrRes = []
-    // if (result !== null || result !== undefined) {
-    //     pnrRes = result
-    // }
+
     const [train, setTrainData] = useState(result ? result : []);
     let { pnr } = useParams()
 
@@ -20,9 +18,8 @@ export default function TrainInfo() {
 
 
     useEffect(() => {
-        console.log("mounting..")
         const data = async () => {
-            setIsLoading(false)
+            setIsLoading(() => true)
             const response = await PnrResponse(pnr)
             if (response.status === "failure") {
                 setError(() => response)
@@ -32,23 +29,27 @@ export default function TrainInfo() {
                 }, 4000)
             }
             if (response.status === "success") {
-                setTrainData(response.result)
+                setTrainData(() => response.result)
                 setIsLoading(() => false)
             }
         }
         data()
 
         return () => {
-            console.log("unmount..")
             setIsLoading(() => false)
         }
     }, [pnr, navigate])
 
     useEffect(() => {
-        console.log("test")
+        
         window.sessionStorage.setItem("pnrDetails", JSON.stringify(train))
 
     }, [train])
+
+    if(isLoading){
+        return <IsLoading />
+    }
+
 
 
     return (
@@ -57,6 +58,7 @@ export default function TrainInfo() {
                 isLoading={isLoading}
                 train={train}
                 error={error}
+                pnr = {pnr}
             />
             <Outlet context={[train]} />
         </>

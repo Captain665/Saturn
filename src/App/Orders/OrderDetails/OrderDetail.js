@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import OrderInfo from "./OrderInfo";
 import { OrderDetailResponse } from "../../ApiCall/OrderInfoAPI";
+import { isMobile } from "react-device-detect";
 
 export default function OrderDetails() {
+    
     const navigate = useNavigate()
     const { orderId } = useParams()
     const token = JSON.parse(localStorage.getItem("userInfo"))?.jwt;
@@ -28,7 +30,10 @@ export default function OrderDetails() {
     }, [orderId, token])
 
     function backToHome() {
-        navigate("/")
+        const orders = "/orders"
+        const account = "/account"
+        const path = isMobile ? orders : account
+        navigate(path)
     }
 
 

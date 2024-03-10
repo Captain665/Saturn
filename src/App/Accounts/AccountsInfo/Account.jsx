@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import CustomerDetails from "./CustomerInfo";
 import OrderList from "../../Orders/OrderList/Orders";
-import IsLoading from "../../../Loading";
+import { FaArrowLeft, FaChevronRight, FaCircleUser, FaCaretRight } from "react-icons/fa6";
+import CustomerDetails from "./CustomerInfo";
 
 export default function Account() {
     const location = useLocation()
@@ -10,7 +10,6 @@ export default function Account() {
 
     const info = JSON.parse(localStorage.getItem("userInfo"));
     const [data, setData] = useState("profile")
-    const [isLoading, setIsLoading] = useState(false)
     const path = location.pathname;
 
     useEffect(() => {
@@ -22,7 +21,6 @@ export default function Account() {
 
 
     const LogOut = () => {
-        setIsLoading(true)
         localStorage.clear();
         navigate("/")
         window.location.reload(true)
@@ -32,35 +30,93 @@ export default function Account() {
         setData(value)
     }
 
+    const backToHome = () => {
+        navigate("/")
+    }
+
+
 
     return (
-        <div className="flex flex-col">
-            {isLoading ? <IsLoading /> :
-                <div className="md:p-5 self-center shadow-xl flex flex-col h-fit w-full md:mt-6 mb-10 rounded-3xl p-1"><br />
-                    {info && <div className="flex md:justify-around flex-col md:flex-row">
-                        <div className="flex md:flex-col md:w-1/5 text-xl md:p-10 md:border-2 md:justify-start md:gap-3 gap-8 justify-center p-2 w-full">
 
-                            <NavLink to="" onClick={() => HandleOnClick("profile")}
-                                className={data === "profile" ? "underline font-bold" : null}>Profile</NavLink>
+        <div className="md:w-4/5 w-11/12 m-auto md:flex justify-start">
 
-                            <NavLink to="" onClick={() => HandleOnClick("orders")}
-                                className={data === "orders" ? "underline font-bold" : null} >Orders</NavLink>
+            <div className="md:w-2/6 m-auto md:m-0 mt-5 md:mt-10 flex flex-col gap-5 w-full">
 
-                            <NavLink onClick={LogOut}
-                                className="hidden md:block border-none bg-sky-400 w-fit md:mt-10 md:p-2 md:px-5 rounded-md font-bold hover:bg-sky-300 p-1">Logout</NavLink>
+                <ul
+                    className="text-lg flex items-center gap-2 opacity-70 w-fit cursor-pointer"
+                    onClick={backToHome}
+                >
+                    <li><FaArrowLeft /></li>
+                    <li>Back</li>
+                </ul>
 
-                        </div>
-                        <div className="md:w-4/5 p-6 md:border-2 border-t-2 w-full">
-                            {
-                                data === "orders" ?
-                                    <OrderList token={info.jwt} />
-                                    : <CustomerDetails info={info} />
-                            }
-                        </div>
-                    </div>
-                    }
-                </div>
-            }
+                <ul className="flex gap-5 items-center">
+                    <ul className="text-7xl text-gray-400 opacity-80">
+                        <li><FaCircleUser /></li>
+                    </ul>
+
+                    <ul className="">
+                        <li className="text-lg font-semibold tracking-wide">{info?.fullName}</li>
+                        <li className="opacity-80">{info?.emailId}</li>
+                        <ul className={`items-center flex gap-1 ${data === "profile" ? "text-green-500" : ""} text-lg cursor-pointer`}>
+                            <li className="text-xl font-medium hidden md:block" onClick={() => HandleOnClick("profile")}>
+                                View details
+                            </li>
+                            <NavLink to="/customer/details" className="md:hidden">View details </NavLink>
+                            <FaCaretRight />
+                        </ul>
+                    </ul>
+                </ul>
+                <hr />
+
+                <ul className="flex flex-col mt-10 gap-4 tracking-wide">
+
+                    <ul className={`flex items-center justify-between px-5 cursor-pointer ${data === "history" ? "text-green-500" : ""}`}>
+                        <li
+                            className="text-xl font-medium hidden md:block"
+                            onClick={() => HandleOnClick("history")}
+                        >
+                            Order History
+                        </li>
+                        <NavLink to="/orders" className="md:hidden text-xl font-medium">Order History</NavLink>
+                        <li className=" opacity-60"><FaChevronRight /></li>
+                    </ul>
+                    <hr />
+
+                    <ul className="flex items-center justify-between px-5 cursor-pointer">
+
+                        <NavLink to="/" className="text-xl font-medium">Book Order</NavLink>
+
+                        <li className=" opacity-60"><FaChevronRight /></li>
+                    </ul>
+                    <hr />
+
+                    <ul className="flex items-center justify-between px-5 cursor-pointer">
+                        <li className="text-xl font-medium">FAQ</li>
+                        <li className=" opacity-60"><FaChevronRight /></li>
+                    </ul>
+                    <hr />
+
+                    <ul className="flex items-center justify-between px-5 cursor-pointer text-red-500" onClick={LogOut}>
+                        <li className="text-xl font-medium ">LOGOUT</li>
+                        <li className="opacity-60"><FaChevronRight /></li>
+                    </ul>
+
+
+                </ul>
+
+            </div>
+
+            <div className="md:block hidden w-full">
+
+                {
+                    data === "history"
+                        ? <OrderList />
+                        :
+                        <CustomerDetails />
+                }
+            </div>
+
         </div>
 
     )

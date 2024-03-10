@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router";
 import StationData from "./StationList";
 
@@ -7,7 +7,12 @@ export default function StationList() {
     const [train] = useOutletContext()
     const [jourenyData] = useState(train)
     const navigate = useNavigate();
-    const [stations] = useState(train?.stations)
+    const [stations, setStations] = useState(train?.stations)
+
+    useEffect(() => {
+        const data =  train.stations    
+        setStations(() => data)
+    },[train.stations])
 
 
     function handleOnClick(station) {

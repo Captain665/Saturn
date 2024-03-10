@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SignupData from "./Signup.html";
 import { useNavigate } from "react-router";
-import ErrorToster from "../../../MessageToggle";
+import ErrorToster from "../../Components/MessageToggle";
 import { SignupResponse, OtpValidateReponse } from "../../ApiCall/SignupApi";
 import ValidateHtml from "./Validate.html";
 import { useSearchParams } from "react-router-dom";
@@ -15,7 +15,7 @@ export default function SignUp() {
         mobileNumber: "",
         emailId: "",
         password: "",
-        gender: "Male"
+        gender: ""
     });
 
     const [isloading, setIsLoading] = useState(false)
@@ -34,17 +34,11 @@ export default function SignUp() {
         }))
     }
 
-    function handleGender(event) {
-        setUserInfo((prevData) => ({
-            ...prevData,
-            gender: event.target.value
-        }))
-    }
 
     const fetchSignUp = async () => {
         setIsLoading(() => true)
         const response = await SignupResponse(userInfo);
-        
+
         if (response.status === "success") {
             setIsValidate(() => true)
             setError(() => response)
@@ -89,21 +83,21 @@ export default function SignUp() {
 
     return (
         <>
-            {isValidate ?
-                <ValidateHtml
+            {isValidate
+                ? <ValidateHtml
                     handleOtpChange={handleOtpChange}
                     handleOtpSubmit={handleOtpSubmit}
                     isLoading={isloading}
                     emailId={userInfo.emailId}
                     otp={otp}
-
-                /> :
-                <SignupData
+                    redirectedTo={params.get("redirectedTo")}
+                />
+                : <SignupData
                     userInfo={userInfo}
                     handleSubmit={handleSignupSubmit}
-                    handleGender={handleGender}
                     handleOnChange={handleSignupOnChange}
                     isloading={isloading}
+                    redirectedTo={params.get("redirectedTo")}
                 />
             }
             {error && <ErrorToster props={error} />}

@@ -1,43 +1,209 @@
-import React from "react";
-import CustomerAndPaymentInfo from "./CustomerAndPaymentInfo";
-import OrderedItems from "./OutletAndMenu";
-import IsLoading from "../../../Loading";
+import React, { useState } from "react";
+import IsLoading from "../../../App/Components/Loading";
+import { FaArrowLeft, FaChevronDown, FaChevronUp } from "react-icons/fa6";
+import { FormatedDateWithTime } from "../../Components/DateTimeFormatChange";
+
 
 export default function OrderInfo({ order, isLoading, backToHome }) {
 
+    const [detailShown, setIsDetailShown] = useState({
+        customer: true,
+        delivery: true,
+        restaurant: true
+    })
+
+
+    const totalPrice = (a, b) => {
+        const totalValue = a * b;
+        return JSON.parse(totalValue.toFixed(2))
+    }
+
+    const customer = () => {
+        setIsDetailShown(prevData => ({
+            ...prevData,
+            customer: !prevData.customer
+        }))
+    }
+
+    const delivery = () => {
+        setIsDetailShown(prevData => ({
+            ...prevData,
+            delivery: !prevData.delivery
+        }))
+    }
+
+    const restaurant = () => {
+        setIsDetailShown(prevData => ({
+            ...prevData,
+            restaurant: !prevData.restaurant
+        }))
+    }
+
+    if (isLoading) {
+        return <IsLoading />
+    }
 
     return (
-        <>{isLoading ? <IsLoading /> :
-            order && <div className="">
-                <div className="bg-gray-200 flex items-center w-full text-lg md:pl-5 p-2">
-                    <h1 onClick={backToHome} className="cursor-pointer">&#x2190; Back to Home</h1>
-                </div>
-                <h1 className="md:text-4xl md:ml-14 ml-5 md:mt-5 mb-2 text-2xl">Order Details</h1>
-                <div className="flex flex-col items-center">
-                    <div className="md:w-11/12 bg-sky-200 rounded-xl shadow-2xl w-full">
-                        <div className="flex justify-between md:p-5 p-2">
-                            <ul className="content-center items-center w-1/2">
-                                <li className="text-lg font-bold cursor-pointer">Order ID: #{order.id}</li>
-                                <li>{order.bookingDate}</li>
-                                <li className="w-14 rounded-md bg-gray-300"><img src={order.outlets.logoImage} alt="logo" className="object-contain" /></li>
-                                <li className="text-xl font-bold">{order.outlets.outletName}</li>
+        <>
+            <ul className="md:w-3/4 m-auto mt-5 w-full">
+
+                <ul>
+                    <li className="flex items-center gap-2 opacity-70 cursor-pointer w-fit ml-2 md:ml-0" onClick={backToHome}>
+                        <FaArrowLeft /> Back
+                    </li>
+                    <li className="mt-10 font-extrabold text-2xl ml-2 md:ml-0">Order Details</li>
+                </ul>
+
+                <ul className="flex md:flex-row flex-col gap-2 m-2">
+                    <ul className="flex md:flex-row flex-col md:w-4/6 w-full justify-between p-2 bg-white md:border rounded-md gap-2">
+                        <ul>
+                            <li className="opacity-50 font-extrabold">Order ID</li>
+                            <li className="font-bold">#{order?.id}</li>
+                        </ul>
+                        <ul>
+                            <li className="opacity-50 font-extrabold">Date</li>
+                            <li>{FormatedDateWithTime(order?.bookingDate)}</li>
+                        </ul>
+                        <ul>
+                            <li className="opacity-50 font-extrabold">Payment</li>
+                            <ul className="flex flex-col md:flex-row gap-1">
+                                <li>{order?.paymentType}</li>
+                                <ul className={`gap-1 bg-green-100 items-center rounded-2xl px-1 w-fit ${order?.paymentType === "CASH" ? "hidden" : "flex" }`}>
+                                    <li className="bg-green-600 text-white rounded-full w-5 h-fit text-center text-sm">&#x2713;</li>
+                                    <li className="text-green-600">Paid</li>
+                                </ul>
                             </ul>
-                            <ul className="font-bold w-1/2 inline-flex md:justify-center justify-end self-start">
-                                <li className="border-none md:p-2 p-1 bg-green-400 rounded-lg">{order.status}</li>
+                        </ul>
+                        <ul>
+                            <li className="opacity-50 font-extrabold">Status</li>
+                            <li className="bg-green-600 font-extrabold px-1 rounded text-white w-fit">{order?.status}</li>
+                        </ul>
+                    </ul>
+                    <ul className="w-2/6 p-2 bg-white rounded-md border md:flex hidden justify-center items-center">
+                        <li className="font-bold text-lg">Order Summary</li>
+                    </ul>
+                </ul>
+
+                <ul className="flex md:flex-row flex-col gap-2 mt-5">
+                    <ul className="md:w-4/6 w-full p-2 bg-white">
+                        <ul className="flex justify-between px-1 border-b-2 border-b-black md:text-base text-xs" >
+                            <ul className="md:w-4/6 w-3/5">
+                                <li className="opacity-50 font-extrabold">Ordered Items</li>
                             </ul>
-                        </div>
+                            <ul className="md:w-2/6 w-2/5 flex justify-between opacity-50 font-extrabold gap-3">
+                                <li>Price</li>
+                                <li>Quantity</li>
+                                <li>Total Price</li>
+                            </ul>
+                        </ul>
+                        <div className="">
+                            {order && order?.orderItems?.map((itemData) => (
+                                <ul className="flex justify-between border md:p-5 p-3 mt-2 items-center" key={itemData.id}>
+                                    <ul className="md:w-4/6 mt-2 w-3/5">
+                                        <img src={itemData.veg ? "/veg.png" : "/nonveg.png"} alt="item logo" className="md:w-3 w-2" />
+                                        <li className="md:text-lg">{itemData.itemName}</li>
+                                        <li className="text-xs opacity-80 line-clamp-1 px-2 pr-10">{itemData.description}</li>
+                                    </ul>
+                                    <ul className="md:w-2/6 w-2/5 flex justify-between md:text-base text-xs">
+                                        <li>&#x20B9;{itemData.basePrice}</li>
+                                        <li>{itemData.quantity}</li>
+                                        <li>&#x20B9;{totalPrice(itemData?.basePrice, itemData?.quantity)}</li>
+                                    </ul>
+                                </ul>
+                            ))}
+                        </div><br />
 
-                        <CustomerAndPaymentInfo
-                            order={order}
-                        />
-                        <OrderedItems
-                            order={order}
-                        />
+                        <ul className="">
+                            <li className="border-b-black border-b-2 opacity-70 pl-2">#BILL DETAILS</li>
+                            <ul className="flex justify-end gap-10 mt-5">
+                                <ul className="flex flex-col gap-2 opacity-90">
+                                    <li className="font-bold">Item Total : </li>
+                                    <li>Taxes : </li>
+                                    <li>Delivery Charges : </li>
+                                    <li className="opacity-100 text-lg font-extrabold">Paid : </li>
+                                </ul>
+                                <ul className="flex flex-col gap-2 opacity-90">
+                                    <li>&#x20B9;{order?.totalAmount}</li>
+                                    <li>&#x20B9;{order?.gst}</li>
+                                    <li>&#x20B9;{order?.deliveryCharge}</li>
+                                    <li className="opacity-100 text-lg font-extrabold">&#x20B9;{order?.payable_amount}</li>
+                                </ul>
 
-                    </div>
-                </div><br /><br />
+                            </ul>
 
-            </div>}
+                            <ul className={`${order?.paymentType === "CASH" ? "hidden" : "flex" } gap-1 bg-green-100 w-fit px-2 rounded-xl float-right mt-2 mr-5 items-center`}>
+                                <li className="bg-green-600 text-white rounded-full w-5 h-fit text-center text-sm">&#x2713;</li>
+                                <li className="text-green-600">Paid</li>
+                            </ul>
+                        </ul>
+                    </ul>
+
+                    <ul className="md:w-2/6 w-full p-2 bg-white flex md:border flex-col h-fit mt-10">
+                        <ul>
+                            <ul className="flex items-center justify-between px-2 border-b-2 cursor-pointer" onClick={customer}>
+                                <li className="font-bold md:text-lg">User</li>
+                                <li>{detailShown.customer ? <FaChevronUp /> : <FaChevronDown />}</li>
+                            </ul>
+                            <ul className={`${detailShown.customer ? "flex" : "hidden"} justify-start p-5 gap-5 md:text-base text-sm`}>
+                                <ul className=" opacity-70">
+                                    <li>Name : </li>
+                                    <li> Mobile : </li>
+                                    <li>Email : </li>
+                                </ul>
+                                <ul className="">
+                                    <li>{order?.customerDetail?.fullName}</li>
+                                    <li>{order?.customerDetail?.mobileNumber}</li>
+                                    <li>{order?.customerDetail?.emailId}</li>
+                                </ul>
+                            </ul>
+                        </ul>
+                        <ul>
+                            <ul className="flex items-center justify-between px-2 mt-5 border-b-2 cursor-pointer" onClick={delivery}>
+                                <li className="font-bold md:text-lg">Delivery details</li>
+                                <li>{detailShown.delivery ? <FaChevronUp /> : <FaChevronDown />} </li>
+                            </ul>
+                            <ul className={`${detailShown.delivery ? "flex" : "hidden"} justify-start p-5 gap-5 md:text-base text-sm`}>
+                                <ul className=" opacity-70">
+                                    <li>Station :</li>
+                                    <li>Date :</li>
+                                    <li>Coach :</li>
+                                    <li>Berth :</li>
+                                </ul>
+                                <ul className="">
+                                    <li>{order?.stationName},{order?.stationCode}</li>
+                                    <li>{order?.deliveryDate}</li>
+                                    <li>{order?.coach}</li>
+                                    <li>{order?.berth}</li>
+                                </ul>
+                            </ul>
+                        </ul>
+                        <ul>
+                            <ul className="flex items-center justify-between px-2 mt-5 border-b-2 cursor-pointer" onClick={restaurant}>
+                                <li className="font-bold md:text-lg">Restaurant details</li>
+                                <li>{detailShown.restaurant ? <FaChevronUp /> : <FaChevronDown />}</li>
+                            </ul>
+                            <ul className={`${detailShown.restaurant ? "flex" : "hidden"} justify-start p-5 gap-5 md:text-base text-sm`}>
+                                <ul className=" opacity-70">
+                                    <li>Name :</li>
+                                    <li>Location :</li>
+                                    <li>Mobile :</li>
+                                    <li>fssai:</li>
+                                </ul>
+                                <ul className="">
+                                    <li>{order?.outlets?.outletName}</li>
+                                    <li>{order?.outlets?.city}</li>
+                                    <li>{order?.outlets?.mobileNo}</li>
+                                    <li>{order?.outlets?.fssaiNo}</li>
+                                </ul>
+                            </ul>
+                        </ul>
+                    </ul>
+
+                </ul>
+
+            </ul>
+            <br />
+            <br />
         </>
     )
 }

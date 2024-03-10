@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import LoginForm from "./Login.html";
 import { LoginResponse } from "../../ApiCall/LoginApi";
-import ErrorToster from "../../../MessageToggle";
+import ErrorToster from "../../Components/MessageToggle";
 
 export default function Login() {
     const [param] = useSearchParams()
@@ -24,6 +24,7 @@ export default function Login() {
         }
     }
 
+
     const fetchData = async () => {
         setLoading(true)
         const response = await LoginResponse(loginData)
@@ -43,6 +44,8 @@ export default function Login() {
         event.preventDefault()
         fetchData()
     }
+
+    
 
     return (
         <>
