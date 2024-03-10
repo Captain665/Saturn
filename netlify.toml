@@ -1,4 +1,0 @@
-[[redirects]]
-  from = "/api/v2"
-  to = "http://localhost:9090"
-  status = 200
