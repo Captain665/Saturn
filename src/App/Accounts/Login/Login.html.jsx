@@ -35,6 +35,7 @@ export default function LoginForm({ isLoading, handleChange, HandleSubmit, login
                                     onChange={handleChange}
                                     value={loginData?.mobileNumber}
                                     maxLength={10}
+                                    minLength={10}
                                     name="mobileNumber"
                                     id="mobileNumber"
                                 />
