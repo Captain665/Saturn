@@ -4,7 +4,7 @@ export default function Filters({ vegFilter, priceFilter, active }) {
 
 
     return (
-        <div className="flex gap-4 md:m-5 m-2 justify-start self-center md:w-3/4 md:ml-14">
+        <div className="flex md:gap-4 md:m-5 m-2 md:justify-start justify-between self-center md:w-3/4 md:ml-14 w-full px-4">
             <button
                 onClick={() => vegFilter("veg")}
                 className={`rounded border-2 text-sm md:text-lg flex justify-center place-items-center gap-0.5 p-1 px-2 font-thin ${active.isVeg === "veg" ? "bg-[#388E3C] text-white" : null}`}>

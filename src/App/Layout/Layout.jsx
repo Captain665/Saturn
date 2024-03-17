@@ -1,18 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import Footers from "./Footer";
 import Headers from "./Header";
 
 export default function LayOut() {
-    const [userName, setUserName] = React.useState(null)
+    const [userName, setUserName] = useState(null)
+    const userdata = localStorage.getItem("userInfo")
 
     useEffect(() => {
-        const userdata = localStorage.getItem("userInfo")
         if (userdata) {
             const name = JSON.parse(userdata).fullName;
-            setUserName(name)
+            const userName = name.split(" ")[0]
+            setUserName(userName)
+        }else{
+            setUserName("Account")
         }
-    }, [])
+    }, [userdata])
 
 
     return (

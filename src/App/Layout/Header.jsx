@@ -1,11 +1,13 @@
 import React, { memo, useEffect, useRef, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 import { FaUser, FaHouse, FaPhone, FaInfo, FaBars } from "react-icons/fa6";
 
 
 function Headers({ name }) {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const location = useLocation();
+    const path = location.pathname;
 
     const [userInfo] = useState(JSON.parse(localStorage.getItem("userInfo")) || null)
 
@@ -51,17 +53,17 @@ function Headers({ name }) {
     const linkValue = userInfo ? "LogOut" : "Login"
     const pathName = userInfo ? "/" : "/login"
 
-    const account = name ? name.split(" ")[0] : "Account"
-    const home = <p className="flex gap-1 items-center"><FaHouse className="" />Home</p>
-    const contact = <p className="flex gap-1 items-center"><FaPhone /> Contact Us</p>
-    const about = <p className="flex gap-1 items-center"><FaInfo /> About</p>
-    const accounts = <p className="flex gap-1 items-center"><FaUser /> {account}</p>
+    // const account = name ? name.split(" ")[0] : "Account"
+    // const home = <p className="flex gap-1 items-center"><FaHouse className="" />Home</p>
+    // const contact = <p className="flex gap-1 items-center"><FaPhone /> Contact Us</p>
+    // const about = <p className="flex gap-1 items-center"><FaInfo /> About</p>
+    // const accounts = <p className="flex gap-1 items-center"><FaUser /> {name}</p>
     
     const links = <>
         <NavLink to="/" end className={(isActive) => isActiveCheck(isActive)} onClick={NavBarInvisible}>Home</NavLink>
         <NavLink to="about" className={(isActive) => isActiveCheck(isActive)} onClick={NavBarInvisible}>About</NavLink>
         <NavLink to="contact" className={(isActive) => isActiveCheck(isActive)} onClick={NavBarInvisible}>Contact Us</NavLink>
-        <NavLink to="account" className={(isActive) => isActiveCheck(isActive)} onClick={NavBarInvisible}>Account</NavLink>
+        <NavLink to="account" className={(isActive) => isActiveCheck(isActive)} onClick={NavBarInvisible}>{name}</NavLink>
             
         <NavLink to={pathName}
             className="bg-sky-500 text-center p-1 rounded-md border:none md:hidden text-white" onClick={LogOut}>{linkValue}</NavLink>
@@ -70,7 +72,7 @@ function Headers({ name }) {
 
     return (
         <>
-            <header className="flex w-full flex-row justify-between items-center mt-5">
+            <header className={`hidden md:flex w-full flex-row justify-between items-center mt-5 ${path === "/" ? null : "shadow-xl bg-white" }`}>
                 <NavLink to="/" className="flex items-center">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShl9AxBvXhrjACetW1Gbwauif23ndcwWW94Q&usqp=CAU" alt="logo" className="p-1 h-16 object-content ml-4 md:ml-28 rounded-2xl" />
                 </NavLink>
