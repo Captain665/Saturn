@@ -32,7 +32,7 @@ export default function CartInfo() {
             setIsLoading(() => false)
         }, 2000)
         
-        return () => { setError(false) }
+        return () => { setError(false) }    
     }, [itemList, navigate, path, error, userInfo])
 
   

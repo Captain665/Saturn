@@ -2,7 +2,9 @@ import React, { memo } from "react";
 import { FaCartShopping } from "react-icons/fa6";
 
 
-function CartInfo({ orderItems, handleCheckOut }) {
+const CartInfo = ({ orderItems, handleCheckOut }) => {
+
+    console.log("cart component")
 
     const totalItems = orderItems.length;
 

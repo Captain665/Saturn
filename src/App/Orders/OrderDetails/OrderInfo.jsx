@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import IsLoading from "../../../App/Components/Loading";
 import { FaArrowLeft, FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { FormatedDateWithTime } from "../../Components/DateTimeFormatChange";
 
 
-export default function OrderInfo({ order, isLoading, backToHome }) {
+export default function OrderInfo({ order, backToHome }) {
 
     const [detailShown, setIsDetailShown] = useState({
         customer: true,
@@ -37,10 +36,6 @@ export default function OrderInfo({ order, isLoading, backToHome }) {
             ...prevData,
             restaurant: !prevData.restaurant
         }))
-    }
-
-    if (isLoading) {
-        return <IsLoading />
     }
 
     return (

@@ -1,8 +1,7 @@
 import React, { memo, useEffect, useRef, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { isMobile } from "react-device-detect";
 
-import { FaUser, FaHouse, FaPhone, FaInfo, FaBars } from "react-icons/fa6";
+import { FaBars } from "react-icons/fa6";
 
 
 function Headers({ name }) {
@@ -75,7 +74,7 @@ function Headers({ name }) {
 
     return (
         <>
-            <header className={`flex w-full flex-row justify-between items-center md:mt-5 mt-3 ${path === "/" ? null : "shadow-xl bg-white" }`}>
+            <header className={`sticky flex w-full flex-row justify-between items-center md:mt-5 mt-3 ${path === "/" ? null : "shadow-xl bg-white" } `}>
                 <NavLink to="/" className="flex items-center">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShl9AxBvXhrjACetW1Gbwauif23ndcwWW94Q&usqp=CAU" alt="logo" className="p-1 h-16 object-content ml-4 md:ml-28 rounded-2xl" />
                 </NavLink>

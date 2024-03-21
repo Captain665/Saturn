@@ -1,7 +1,18 @@
-import React, { memo } from "react";
+import React, { memo, useContext } from "react";
 import { FaStar, FaArrowLeft, FaPersonBiking } from "react-icons/fa6";
+import { outletData } from "./Menu";
 
-function OutletInfo({ backToOutlet, trainDetail, stationInfo, outletInfo }) {
+
+function OutletInfo() {
+
+    const outletDat = useContext(outletData)
+
+    const outletInfo = outletDat.selectedOutletInfo
+    const handleOnBack = outletDat.backToOutlet;
+   
+
+
+    console.log("outlet info component mou details is run")
 
 
     return (
@@ -9,7 +20,7 @@ function OutletInfo({ backToOutlet, trainDetail, stationInfo, outletInfo }) {
 
             <ul className="m-3">
                 <li className="text-xl font-thin text-zinc-700">
-                    <FaArrowLeft onClick={backToOutlet} className="cursor-pointer" />
+                    <FaArrowLeft onClick={handleOnBack} className="cursor-pointer" />
                 </li>
                 <li className="text-2xl font-bold mt-2 md:text-3xl">{outletInfo?.outletName}</li>
             </ul>

@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import PaymentInfo from "./PaymentInfo";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { CreateOrderResponse } from "../ApiCall/CreateOrderApi";
 import { isMobile } from "react-device-detect";
 
 
 export default function Payments() {
     const navigate = useNavigate()
+    const location = useLocation()
+    const path = location.pathname;
 
     const outletInfo = JSON.parse(window.sessionStorage.getItem("outletInfo"))
     const stationInfo = JSON.parse(window.sessionStorage.getItem("selectedStation"))
@@ -18,38 +20,44 @@ export default function Payments() {
 
     const [paymentSelection, setPaymentSelection] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
-    
+
     const [error, setError] = useState(null)
 
     const subTotal = JSON.parse(itemInfo?.reduce((a, b) => a + (b.basePrice * b.quantity), 0).toFixed(2))
     const taxes = JSON.parse((subTotal * 0.05).toFixed(2))
     const deliveryCharge = outletInfo?.deliveryCost;
     const payable = Math.round(subTotal + taxes + deliveryCharge)
-    
+
 
     const selectPaymentMode = (mode) => {
         setPaymentSelection((prevData) => (prevData === mode ? null : mode))
     }
 
     const backToCart = () => {
-        navigate("/cart")   
+        navigate("/cart")
     }
-    const device = isMobile ? "Mobile Web" : "Desktop Web"  
-    console.log(device)
+    const device = isMobile ? "Mobile Web" : "Desktop Web"
 
     const createOrder = async () => {
         setIsLoading(() => true)
-        const response = await CreateOrderResponse(trainInfo, 
+        const response = await CreateOrderResponse(trainInfo,
             stationInfo, seatInfo, outletInfo, userInfo, itemInfo, pnr, paymentSelection, device);
         if (response.status === "success") {
             sessionStorage.clear();
             const orderId = response?.result.id;
-            navigate("/order/".concat(orderId))
+            const path = "/order/" + orderId + "?type=new"
+            navigate(path)
             setIsLoading(() => false)
         } else {
             setError(() => response)
             setIsLoading(() => false)
         }
+    }
+
+    if(error?.error === "Not authorize to Access"){
+        localStorage.clear();
+        const pathName = `/login?redirectedTo=${path}`
+        navigate(pathName)
     }
 
 
@@ -59,11 +67,11 @@ export default function Payments() {
             proceedToPay={createOrder}
             mode={paymentSelection}
             totalAmount={payable}
-            backToCart = {backToCart}
-            isLoading = {isLoading}
+            backToCart={backToCart}
+            isLoading={isLoading}
             error={error}
             totalItem={itemInfo?.length}
-            
+
         />
     )
 }

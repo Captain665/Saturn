@@ -32,7 +32,7 @@ function OutletHtml({ returnToStation, isLoading, outletData, stations, stationC
                                         <li className="text-gray-500 text-sm">{outlet.tags}</li>
                                     </ul>
                                     <ul className="text-gray-600 md:self-center flex flex-col">
-                                        <li>&#x20B9;{outlet.minOrderValue} Min</li>
+                                        <li>Min &#x20B9;{outlet.minOrderValue}</li>
                                         <li className="md:hidden block self-center mt-5 text-lg text-gray-4 00"><FaChevronRight /></li>
                                     </ul>
                                 </ul>

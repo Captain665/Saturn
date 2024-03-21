@@ -1,18 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import MenuList from "./MenuList";
 import OutletInfo from "./OutletInfo";
 import CartInfo from "./CartInfo";
 import { MenuResponse } from "../ApiCall/MenuApi";
 
+export const outletData = createContext();
+export const menuData = createContext();
+
 export default function MenuItem() {
 
     const { code, id } = useParams();
     const navigate = useNavigate()
+    // const outletInfo = useContext(JSON.parse(sessionStorage.getItem("outletInfo")));
 
-    const outletInfo = JSON.parse(sessionStorage.getItem("outletInfo"))
-    const stationInfo = JSON.parse(sessionStorage.getItem("selectedStation"))
-    const trainDetail = JSON.parse(sessionStorage.getItem("pnrDetails"))?.trainInfo
+   
+
+    const selectedOutletInfo = JSON.parse(sessionStorage.getItem("outletInfo"))
+    // const stationInfo = JSON.parse(sessionStorage.getItem("selectedStation"))
+    // const trainDetail = JSON.parse(sessionStorage.getItem("pnrDetails"))?.trainInfo
     const selectedItem = JSON.parse(sessionStorage.getItem("selectedItemInfo"))
 
     const [orderItems, setOrderItems] = useState(selectedItem === null ? [] : selectedItem)
@@ -21,11 +27,11 @@ export default function MenuItem() {
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
-        
+
         const fetchData = async () => {
             setIsLoading(true)
             const response = await MenuResponse(id)
-            if(response.status === "success"){
+            if (response.status === "success") {
                 const itemList = response.result;
                 setMenuList(itemList)
                 setIsLoading(() => false)
@@ -37,12 +43,14 @@ export default function MenuItem() {
         fetchData()
         return () => {
             setIsLoading(() => false)
-            }
-    }, [ code, id])
+        }
+    }, [code, id])
 
     useEffect(() => {
         window.sessionStorage.setItem("selectedItemInfo", JSON.stringify(orderItems))
     }, [orderItems])
+
+    
 
 
     function addItem(menuItem) {
@@ -97,35 +105,30 @@ export default function MenuItem() {
 
 
     function handleCheckOut() {
-        navigate( "/cart" )
+        navigate("/cart")
     }
 
     function backToOutlet() {
-        navigate(-1, { replace : true })
+        navigate(-1, { replace: true })
     }
+
 
 
     return (
         <>
-            <OutletInfo
-                backToOutlet={backToOutlet}
-                trainDetail={trainDetail}
-                stationInfo={stationInfo}
-                outletInfo={outletInfo}
-            />
+            <outletData.Provider value={{selectedOutletInfo, backToOutlet}}>
+                <OutletInfo />
+            </outletData.Provider>
 
-            <MenuList
-                menuList={menuList}
-                isLoading={isLoading}
-                orderItems={orderItems}
-                addItem={(menuItem) => addItem(menuItem)}
-                removeItem={(menuItem) => removeItem(menuItem)}
-            />
+
+            <menuData.Provider value={{ menuList, isLoading, orderItems, addItem, removeItem }}>
+                <MenuList />
+            </menuData.Provider>
 
             <CartInfo
                 orderItems={orderItems}
                 handleCheckOut={handleCheckOut}
-                
+
             />
         </>
     )
