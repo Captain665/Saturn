@@ -8,10 +8,6 @@ export default function PaymentInfo({ paymentMode, proceedToPay, mode, totalAmou
     const payMode = () => {
         return mode && mode?.toUpperCase();
     }
-    if (isLoading) {
-        return <IsLoading isLoading={isLoading}/>
-    }
-
 
     return (
         <>
@@ -111,11 +107,17 @@ export default function PaymentInfo({ paymentMode, proceedToPay, mode, totalAmou
                 <ul className={`self-center flex justify-center fixed bottom-0 content-center bg-[#60b646] md:w-2/5 w-full h-16 md:h-auto font-extrabold text-lg
             cursor-pointer text-center z-50 text-white ${mode ? "block" : "hidden"} md:rounded-md`}
                     onClick={proceedToPay}>
-                    <button className="p-2">PAY &#x20B9;{totalAmount} WITH {payMode()}</button>
+                    <button
+                        type="submit"
+                        className="p-2"
+                        disabled={isLoading}
+                    >
+                        PAY &#x20B9;{totalAmount} WITH {payMode()}
+                    </button>
                 </ul>
             </ul>
 
-            <ErrorToster props={error} />   
+            <ErrorToster props={error} />
 
         </>
     )

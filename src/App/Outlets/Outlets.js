@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import OutletHtml from "./OutletList";
 import { OutletResponse } from "../ApiCall/OutletApi";
+import Spinner from "../Components/Spinner";
 
 export default function OutletList() {
     const navigate = useNavigate()
@@ -19,7 +20,7 @@ export default function OutletList() {
             if (response.status === "success") {
                 setOutletData(response.result)
                 setIsLoading(() => false)
-            }else{
+            } else {
                 setIsLoading(() => false)
             }
         }
@@ -30,14 +31,14 @@ export default function OutletList() {
         }
     }, [code])
 
-    const handleOnClick =  (outlet) => {
+    const handleOnClick = (outlet) => {
         const route = "/station/".concat(code) + "/outlet/".concat(outlet.id) + "/menu"
         window.sessionStorage.setItem("outletInfo", JSON.stringify(outlet))
         navigate(route)
     }
 
     function returnToStation() {
-        navigate(-1, {replace : true})
+        navigate(-1, { replace: true })
     }
 
 
@@ -50,6 +51,9 @@ export default function OutletList() {
                 stationCode={code}
                 returnToStation={() => returnToStation()}
                 handleOnClick={(outlet) => handleOnClick(outlet)}
+            />
+            <Spinner
+                isLoading={isLoading}
             />
         </>
 

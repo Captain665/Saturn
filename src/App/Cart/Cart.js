@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import CartDetails from "./CartInfo";
 import ErrorToster from "../../App/Components/MessageToggle"
+import Spinner from "../Components/Spinner";
 
 export default function CartInfo() {
 

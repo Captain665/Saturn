@@ -3,6 +3,7 @@ import { Outlet, useNavigate, useParams } from "react-router";
 import TrainHtml from "./TrainDetails";
 import { PnrResponse } from "../ApiCall/PnrApi";
 import IsLoading from "../Components/Loading";
+import Spinner from "../Components/Spinner";
 
 
 export default function TrainInfo() {
@@ -46,9 +47,9 @@ export default function TrainInfo() {
 
     }, [train])
 
-    if(isLoading){
-        return <IsLoading  isLoading={isLoading}/>
-    }
+    // if(isLoading){
+    //     return <IsLoading  isLoading={isLoading}/>
+    // }
 
 
 
@@ -61,6 +62,7 @@ export default function TrainInfo() {
                 pnr = {pnr}
             />
             <Outlet context={[train]} />
+            <Spinner isLoading={isLoading}/>
         </>
     )
 }

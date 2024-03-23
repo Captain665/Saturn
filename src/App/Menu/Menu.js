@@ -4,6 +4,7 @@ import MenuList from "./MenuList";
 import OutletInfo from "./OutletInfo";
 import CartInfo from "./CartInfo";
 import { MenuResponse } from "../ApiCall/MenuApi";
+import Spinner from "../Components/Spinner";
 
 export const outletData = createContext();
 export const menuData = createContext();
@@ -128,8 +129,8 @@ export default function MenuItem() {
             <CartInfo
                 orderItems={orderItems}
                 handleCheckOut={handleCheckOut}
-
             />
+            <Spinner isLoading={isLoading} />
         </>
     )
 }

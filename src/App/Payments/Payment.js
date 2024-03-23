@@ -3,6 +3,7 @@ import PaymentInfo from "./PaymentInfo";
 import { useLocation, useNavigate } from "react-router";
 import { CreateOrderResponse } from "../ApiCall/CreateOrderApi";
 import { isMobile } from "react-device-detect";
+import Spinner from "../Components/Spinner";
 
 
 export default function Payments() {
@@ -62,6 +63,7 @@ export default function Payments() {
 
 
     return (
+        <>
         <PaymentInfo
             paymentMode={selectPaymentMode}
             proceedToPay={createOrder}
@@ -71,7 +73,8 @@ export default function Payments() {
             isLoading={isLoading}
             error={error}
             totalItem={itemInfo?.length}
-
         />
+        <Spinner isLoading={isLoading}/>
+        </>
     )
 }
