@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import LoginForm from "./Login.html";
 import { LoginResponse } from "../../ApiCall/LoginApi";
 import ErrorToster from "../../Components/MessageToggle";
+import Spinner from "../../Components/Spinner";
 
 export default function Login() {
     const [param] = useSearchParams()
@@ -45,7 +46,7 @@ export default function Login() {
         fetchData()
     }
 
-    
+
 
     return (
         <>
@@ -56,6 +57,11 @@ export default function Login() {
                 loginData={loginData}
                 redirectedTo={param.get("redirectedTo")}
             />
+
+            <Spinner
+                isLoading={isLoading}
+            />
+
             {error && <ErrorToster props={error} />}
         </>
     )

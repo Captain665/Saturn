@@ -12,9 +12,9 @@ export default function HomePage({ handleOnChange, handleOnClick, error, isLoadi
         setDialog(() => true)
     }
 
-    if (isLoading) {
-        return <IsLoading isLoading={isLoading}/>
-    }
+    // if (isLoading) {
+    //     return <IsLoading isLoading={isLoading}/>
+    // }
 
 
 
@@ -232,7 +232,7 @@ export default function HomePage({ handleOnChange, handleOnClick, error, isLoadi
                 </ul>
 
                 <dialog open={dialog} id="dialog" className={`top-0 flex justify-center items-center w-full h-screen bg-transparent ${dialog ? "bg-opacity-30 backdrop-blur-sm" : "hidden"}`}>
-                    <form method="" onSubmit={handleOnClick} className="md:w-2/6 w-11/12 border-2 px-10 md:py-5 py-2 flex flex-col gap-5 bg-white rounded-xl shadow-2xl z-50">
+                    <form method="post" onSubmit={handleOnClick} className="md:w-2/6 w-11/12 border-2 px-10 md:py-5 py-2 flex flex-col gap-5 bg-white rounded-xl shadow-2xl z-50">
                         <ul className="flex border items-center h-12 bg-gray-100 gap-2 mt-5 text-lg">
                             <li className="bg-white md:p-2 h-full px-4 md:px-5 flex justify-center self-center items-center">
                                 <FaTrain />

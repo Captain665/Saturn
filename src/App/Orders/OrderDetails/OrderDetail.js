@@ -48,8 +48,8 @@ export default function OrderDetails() {
 
     }
 
-    if (isLoading) {
-        return <IsLoading isLoading={isLoading}/>
+    if(isLoading){
+        return <IsLoading />
     }
 
 
@@ -59,12 +59,13 @@ export default function OrderDetails() {
                 order={order}
                 backToHome={backToHome}
             />
+
             <SuccessPlacedConfirm
                 orderId={order?.id}
                 shown={isShown}
                 handleOnClick={handleOnClick}
-
             />
+
         </>
     )
 }

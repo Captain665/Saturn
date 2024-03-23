@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { FaSquareInstagram, FaFacebook, FaSquareTwitter, FaLinkedin, FaYoutube, FaHouse, FaUser, FaCartShopping } from "react-icons/fa6";
+import { FaSquareInstagram, FaFacebook, FaSquareTwitter, FaLinkedin, FaYoutube } from "react-icons/fa6";
 
 
 function Footers() {

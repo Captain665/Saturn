@@ -5,6 +5,7 @@ import ErrorToster from "../../Components/MessageToggle";
 import { SignupResponse, OtpValidateReponse } from "../../ApiCall/SignupApi";
 import ValidateHtml from "./Validate.html";
 import { useSearchParams } from "react-router-dom";
+import Spinner from "../../Components/Spinner";
 
 export default function SignUp() {
     const navigate = useNavigate()
@@ -87,7 +88,6 @@ export default function SignUp() {
                 ? <ValidateHtml
                     handleOtpChange={handleOtpChange}
                     handleOtpSubmit={handleOtpSubmit}
-                    isLoading={isloading}
                     emailId={userInfo.emailId}
                     otp={otp}
                     redirectedTo={params.get("redirectedTo")}
@@ -96,10 +96,12 @@ export default function SignUp() {
                     userInfo={userInfo}
                     handleSubmit={handleSignupSubmit}
                     handleOnChange={handleSignupOnChange}
-                    isloading={isloading}
                     redirectedTo={params.get("redirectedTo")}
                 />
             }
+            <Spinner 
+            isLoading={isloading}
+            />
             {error && <ErrorToster props={error} />}
         </>
     )

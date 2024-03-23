@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import OrderHtml from "./Orders.html";
 import { OrderListResponse } from "../../ApiCall/OrderListApi";
+import Spinner from "../../Components/Spinner";
 
 export default function OrderList({ token }) {
     const navigate = useNavigate()
@@ -20,12 +21,12 @@ export default function OrderList({ token }) {
             if (response.status === "success") {
 
             }
-            
+
             setOrderList(response.result)
             setIsLoading(false)
         }
         fetchData()
-        return () => {  
+        return () => {
             setIsLoading(() => false)
         };
     }, [token, navigate, auth])
@@ -35,16 +36,19 @@ export default function OrderList({ token }) {
     }
 
     function HandleBack() {
-        navigate("/account", {replace : true})
+        navigate("/account", { replace: true })
     }
 
     return (
         <>
             <OrderHtml
-                isLoading={isLoading}
                 orderslist={orderslist}
                 handleViewOrderDetail={(item) => handleViewOrderDetail(item)}
                 handleBack={HandleBack}
+            />
+
+            <Spinner
+                isLoading={isLoading}
             />
         </>
     )
