@@ -1,8 +1,7 @@
 import React, { memo } from "react";
 import { FaStar, FaChevronRight } from "react-icons/fa6";
-import IsLoading from "../../App/Components/Loading";
 
-function OutletHtml({ returnToStation, isLoading, outletData, stations, stationCode, handleOnClick }) {
+function OutletHtml({ outletData, handleOnClick }) {
 
     return (
         <div className="w-full">

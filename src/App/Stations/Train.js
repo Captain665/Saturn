@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Outlet, useNavigate, useParams } from "react-router";
 import TrainHtml from "./TrainDetails";
 import { PnrResponse } from "../ApiCall/PnrApi";
-import IsLoading from "../Components/Loading";
 import Spinner from "../Components/Spinner";
 
 
@@ -46,11 +45,6 @@ export default function TrainInfo() {
         window.sessionStorage.setItem("pnrDetails", JSON.stringify(train))
 
     }, [train])
-
-    // if(isLoading){
-    //     return <IsLoading  isLoading={isLoading}/>
-    // }
-
 
 
     return (

@@ -1,6 +1,5 @@
 import React from "react";
 import { FaArrowLeft, FaChevronRight, FaWallet, FaCreditCard, FaBuildingColumns, FaMoneyBill1 } from "react-icons/fa6";
-import IsLoading from "../Components/Loading";
 import ErrorToster from "../Components/MessageToggle";
 
 export default function PaymentInfo({ paymentMode, proceedToPay, mode, totalAmount, backToCart, isLoading, error, totalItem }) {

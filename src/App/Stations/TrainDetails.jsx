@@ -1,10 +1,9 @@
 import React, { memo } from "react";
 import { FaTrain } from "react-icons/fa6";
 import ErrorToster from "../../App/Components/MessageToggle";
-import IsLoading from "../../App/Components/Loading";
 import { FormatedDateWithWeek } from "../Components/DateTimeFormatChange";
 
-function TrainHtml({ isLoading, train, error, pnr }) {
+function TrainHtml({ train, error, pnr }) {
 
 
     return (

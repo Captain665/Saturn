@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import Filters from "./Filters";
-import IsLoading from "../../App/Components/Loading";
 import { FaPlus, FaMinus } from "react-icons/fa6";
 import { menuData } from "./Menu";
 
@@ -8,7 +7,6 @@ export default function MenuList() {
 
     const itemData = useContext(menuData);
     const menuList = itemData.menuList;
-    const isLoading = itemData.isLoading;
     const orderItems = itemData.orderItems;
     const addItem = itemData.addItem;
     const removeItem = itemData.removeItem;
