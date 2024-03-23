@@ -14,7 +14,7 @@ export default function CartDetails({
     const totalItem = itemList?.reduce((a, b) => a + b.quantity, 0)
 
     if(isLoading){
-        return <IsLoading />
+        return <IsLoading isLoading={isLoading}/>
     }
 
 

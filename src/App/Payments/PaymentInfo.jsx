@@ -9,7 +9,7 @@ export default function PaymentInfo({ paymentMode, proceedToPay, mode, totalAmou
         return mode && mode?.toUpperCase();
     }
     if (isLoading) {
-        return <IsLoading />
+        return <IsLoading isLoading={isLoading}/>
     }
 
 

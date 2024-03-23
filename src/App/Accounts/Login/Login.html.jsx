@@ -14,7 +14,7 @@ export default function LoginForm({ isLoading, handleChange, HandleSubmit, login
 
         <>
             {
-                isLoading ? <IsLoading /> :
+                isLoading ? <IsLoading isLoading={isLoading}/> :
                     <form method="post" onSubmit={HandleSubmit}
                         className="border md:p-10 p-5 md:px-12 px-6 flex flex-col justify-center w-fit m-auto mt-20
                  items-center bg-transparent gap-5 rounded-xl self-center place-content-center md:shadow-xl"
@@ -61,7 +61,7 @@ export default function LoginForm({ isLoading, handleChange, HandleSubmit, login
 
                         <ul className="bg-[#60b246] w-full text-white hover:opacity-80
                                         font-extrabold h-10 inline-flex justify-center text-xl cursor-pointer">
-                            <button>LOGIN</button>
+                            <button type="submit">LOGIN</button>
                         </ul>
 
                         <ul className="flex gap-1 text-sm">

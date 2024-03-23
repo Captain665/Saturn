@@ -55,7 +55,7 @@ export default function MenuList() {
 
     return (
         <>
-            {isLoading ? <IsLoading /> :
+            {isLoading ? <IsLoading isLoading={isLoading}/> :
                 <div className="flex flex-col">
                     <Filters
                         vegFilter={(type) => applyVegFilter(type)}

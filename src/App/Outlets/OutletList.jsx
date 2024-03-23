@@ -6,7 +6,7 @@ function OutletHtml({ returnToStation, isLoading, outletData, stations, stationC
 
     return (
         <div className="w-full">
-            {isLoading ? <IsLoading /> :
+            {isLoading ? <IsLoading isLoading={isLoading}/> :
                 <div className="flex flex-col w-full">
                     <div className="flex w-11/12 md:w-4/5 justify-between md:mt-16 mt-10 self-center items-center md:mb-5">
                         <hr className="flex-grow border-t border-gray-300" />

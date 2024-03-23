@@ -1,8 +1,8 @@
 import React from "react";
 import { FaCircleNotch } from "react-icons/fa6";
 
-export default function IsLoading({ isLoading }) {
 
+export default function Spinner({ isLoading }) {
 
     return (
         <>
@@ -17,5 +17,4 @@ export default function IsLoading({ isLoading }) {
             }
         </>
     )
-}
-
+} 

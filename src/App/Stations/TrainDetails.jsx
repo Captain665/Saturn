@@ -10,7 +10,7 @@ function TrainHtml({ isLoading, train, error, pnr }) {
     return (
         <div className="flex flex-col w-full">
 
-            {isLoading ? <IsLoading /> : <>
+            {isLoading ? <IsLoading isLoading={isLoading}/> : <>
 
                 <div className="flex w-11/12 md:w-3/4 justify-between mt-5 md:mt-10 self-center items-center">
                     <hr className="flex-grow border-t border-gray-300" />

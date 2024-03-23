@@ -10,7 +10,7 @@ export default function SignupData({ userInfo, handleSubmit, handleOnChange, isl
 
     return (
         <>{
-            isloading ? <IsLoading /> :
+            isloading ? <IsLoading isLoading={isloading}/> :
 
                 <form
                     className="border md:p-10 p-5 md:px-20 px-6 flex flex-col justify-center w-fit m-auto mt-16

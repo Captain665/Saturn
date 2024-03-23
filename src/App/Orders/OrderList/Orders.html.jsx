@@ -7,7 +7,7 @@ export default function OrderHtml({ orderslist, isLoading, handleViewOrderDetail
 
     return (
         <>
-            {isLoading ? <IsLoading /> :
+            {isLoading ? <IsLoading isLoading={isLoading}/> :
                 <div className="w-11/12 m-auto md:w-5/6 md:mt-20 mt-5">
                     <ul >
                         <ul className="md:hidden text-lg flex items-center gap-2 opacity-70 w-fit cursor-pointer mb-2" onClick={handleBack}>

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import ErrorToster from "../../../App/Components/MessageToggle";
-import IsLoading from "../../../App/Components/Loading";
+import IsLoading from "../../../App/Components/Loading"
 import { FaStar, FaHandPointRight, FaTrain } from "react-icons/fa6";
 
 
-export default function HomePage({ handleOnChange, handleOnClick, isLoading, error }) {
+export default function HomePage({ handleOnChange, handleOnClick, error, isLoading }) {
 
     const [dialog, setDialog] = useState(false)
 
@@ -13,7 +13,7 @@ export default function HomePage({ handleOnChange, handleOnClick, isLoading, err
     }
 
     if (isLoading) {
-        return <IsLoading />
+        return <IsLoading isLoading={isLoading}/>
     }
 
 
@@ -43,7 +43,7 @@ export default function HomePage({ handleOnChange, handleOnClick, isLoading, err
                         </button>
                     </li>
                     <li className="md:w-1/2 w-5/12 h-full bg-white text-white items-center self-center">
-                        <img src="/main_images.png" alt="main" className="w-full h-full object-cover object-center"/>
+                        <img src="/main_images.png" alt="main" className="w-full h-full object-cover object-center" />
                     </li>
                 </ul>
 
@@ -232,7 +232,7 @@ export default function HomePage({ handleOnChange, handleOnClick, isLoading, err
                 </ul>
 
                 <dialog open={dialog} id="dialog" className={`top-0 flex justify-center items-center w-full h-screen bg-transparent ${dialog ? "bg-opacity-30 backdrop-blur-sm" : "hidden"}`}>
-                    <form className="md:w-2/6 w-11/12 border-2 px-10 md:py-5 py-2 flex flex-col gap-5 bg-white rounded-xl shadow-2xl z-50" method="post" onSubmit={handleOnClick}>
+                    <form method="" onSubmit={handleOnClick} className="md:w-2/6 w-11/12 border-2 px-10 md:py-5 py-2 flex flex-col gap-5 bg-white rounded-xl shadow-2xl z-50">
                         <ul className="flex border items-center h-12 bg-gray-100 gap-2 mt-5 text-lg">
                             <li className="bg-white md:p-2 h-full px-4 md:px-5 flex justify-center self-center items-center">
                                 <FaTrain />
@@ -260,7 +260,7 @@ export default function HomePage({ handleOnChange, handleOnClick, isLoading, err
 
                             <button type="submit"
                                 className="bg-orange-500 mt-4 px-4 p-2 rounded-lg border-none font-extrabold text-white active:opacity-70">
-                                {isLoading ? "Loading..." : "Submit"}
+                                Submit
                             </button>
 
                         </ul>

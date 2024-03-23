@@ -47,7 +47,7 @@ export default function TrainInfo() {
     }, [train])
 
     if(isLoading){
-        return <IsLoading />
+        return <IsLoading  isLoading={isLoading}/>
     }
 
 

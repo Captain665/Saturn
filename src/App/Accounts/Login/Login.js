@@ -40,7 +40,7 @@ export default function Login() {
         setLoading(false)
     }
 
-    function HandleSubmit(event) {
+    const HandleSubmit = (event) => {
         event.preventDefault()
         fetchData()
     }

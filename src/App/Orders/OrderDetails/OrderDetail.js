@@ -49,7 +49,7 @@ export default function OrderDetails() {
     }
 
     if (isLoading) {
-        return <IsLoading />
+        return <IsLoading isLoading={isLoading}/>
     }
 
 
