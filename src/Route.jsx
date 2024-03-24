@@ -19,7 +19,7 @@ import IsLoading from "../src/App/Components/Loading";
 import Payments from "./App/Payments/Payment";
 import CustomerDetails from "../src/App/Accounts/AccountsInfo/CustomerInfo"
 import OrderList from "./App/Orders/OrderList/Orders";
-import Spinner from "./App/Components/Spinner";
+import WarningDialog from "./App/Cart/WarningDialog";
 
 
 export default function BasePage() {
@@ -49,7 +49,7 @@ export default function BasePage() {
                     <Route path="test" element={<IsLoading />}/>
                     <Route path="login"  element={<Login />}/>
                     <Route path="signup" element={<Signup />} /> 
-                    <Route path="testing" element={<Spinner />}/>
+                    <Route path="testing" element={<WarningDialog />}/>
                 </Route>
             </Routes>
         </BrowserRouter>

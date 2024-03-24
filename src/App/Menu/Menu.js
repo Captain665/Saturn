@@ -5,6 +5,7 @@ import OutletInfo from "./OutletInfo";
 import CartInfo from "./CartInfo";
 import { MenuResponse } from "../ApiCall/MenuApi";
 import Spinner from "../Components/Spinner";
+import WarningDialog from "../Cart/WarningDialog";
 
 export const outletData = createContext();
 export const menuData = createContext();
@@ -12,20 +13,16 @@ export const menuData = createContext();
 export default function MenuItem() {
 
     const { code, id } = useParams();
-    const navigate = useNavigate()
-    // const outletInfo = useContext(JSON.parse(sessionStorage.getItem("outletInfo")));
-
-   
+    const navigate = useNavigate();
 
     const selectedOutletInfo = JSON.parse(sessionStorage.getItem("outletInfo"))
-    // const stationInfo = JSON.parse(sessionStorage.getItem("selectedStation"))
-    // const trainDetail = JSON.parse(sessionStorage.getItem("pnrDetails"))?.trainInfo
+    const outlet = JSON.parse(sessionStorage.getItem("cartOutlet"));
     const selectedItem = JSON.parse(sessionStorage.getItem("selectedItemInfo"))
 
     const [orderItems, setOrderItems] = useState(selectedItem === null ? [] : selectedItem)
     const [menuList, setMenuList] = useState([])
-
     const [isLoading, setIsLoading] = useState(false)
+    const [warningDialog, setWarningDialog] = useState(false)
 
     useEffect(() => {
 
@@ -51,10 +48,19 @@ export default function MenuItem() {
         window.sessionStorage.setItem("selectedItemInfo", JSON.stringify(orderItems))
     }, [orderItems])
 
-    
+    const isValidoutlet = () => {
+        if (!outlet || outlet?.id === selectedOutletInfo?.id) {
+            sessionStorage.setItem("cartOutlet", JSON.stringify(selectedOutletInfo));
+            return true;
+        }
+        else {
+            return false
+        }
+    }
 
 
-    function addItem(menuItem) {
+
+    const addItem = (menuItem) => {
         const data = {
             itemId: menuItem.id,
             quantity: 1,
@@ -64,26 +70,31 @@ export default function MenuItem() {
             isVegeterian: menuItem.isVegeterian
         }
         const existItemIndex = orderItems.findIndex(item => item.itemId === data.itemId)
-
-        setOrderItems((prevData) => {
-            if (existItemIndex !== -1) {
-                const updatedItem = [...prevData]
-                updatedItem[existItemIndex] = {
-                    itemId: prevData[existItemIndex].itemId,
-                    quantity: prevData[existItemIndex].quantity + 1,
-                    name: prevData[existItemIndex].name,
-                    description: prevData[existItemIndex].description,
-                    basePrice: prevData[existItemIndex].basePrice,
-                    isVegeterian: prevData[existItemIndex].isVegeterian
+        const validOutlet = isValidoutlet();
+        if (validOutlet) {
+            setOrderItems((prevData) => {
+                if (existItemIndex !== -1) {
+                    const updatedItem = [...prevData]
+                    updatedItem[existItemIndex] = {
+                        itemId: prevData[existItemIndex].itemId,
+                        quantity: prevData[existItemIndex].quantity + 1,
+                        name: prevData[existItemIndex].name,
+                        description: prevData[existItemIndex].description,
+                        basePrice: prevData[existItemIndex].basePrice,
+                        isVegeterian: prevData[existItemIndex].isVegeterian
+                    }
+                    return updatedItem;
+                } else {
+                    return [...prevData, data]
                 }
-                return updatedItem;
-            } else {
-                return [...prevData, data]
-            }
-        })
+            })
+        } else {
+            setWarningDialog(() => true)
+        }
+
     }
 
-    function removeItem(menuItem) {
+    const removeItem = (menuItem) => {
         const existItem = orderItems.findIndex(a => a.itemId === menuItem.id)
         const existQuantity = orderItems[existItem].quantity;
         setOrderItems(prevData => {
@@ -105,19 +116,30 @@ export default function MenuItem() {
     }
 
 
-    function handleCheckOut() {
+    const handleCheckOut = () => {
         navigate("/cart")
     }
 
-    function backToOutlet() {
+    const backToOutlet = () => {
         navigate(-1, { replace: true })
     }
+
+    const handleCancel = () => {
+        setWarningDialog(() => false)
+    }
+    const handleContiue = () => {
+        setOrderItems(() => [])
+        sessionStorage.removeItem("cartOutlet")
+        setWarningDialog(() => false)
+        
+    }
+    const orderItemsCount = orderItems?.length;
 
 
 
     return (
         <>
-            <outletData.Provider value={{selectedOutletInfo, backToOutlet}}>
+            <outletData.Provider value={{ selectedOutletInfo, backToOutlet }}>
                 <OutletInfo />
             </outletData.Provider>
 
@@ -127,10 +149,21 @@ export default function MenuItem() {
             </menuData.Provider>
 
             <CartInfo
-                orderItems={orderItems}
+                orderItemsCount={orderItemsCount}
                 handleCheckOut={handleCheckOut}
+                outlet={outlet}
             />
             <Spinner isLoading={isLoading} />
+            {
+                warningDialog
+                    ? <WarningDialog
+                        orderItemsCount={orderItemsCount}
+                        handleCancel={handleCancel}
+                        handleContiue={handleContiue}
+                        outlet={outlet}
+                    />
+                    : null
+            }
         </>
     )
 }

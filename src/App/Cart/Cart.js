@@ -2,19 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import CartDetails from "./CartInfo";
 import ErrorToster from "../../App/Components/MessageToggle"
-import Spinner from "../Components/Spinner";
+
 
 export default function CartInfo() {
 
     const navigate = useNavigate()
     const location = useLocation()
 
-    const outletInfo = JSON.parse(window.sessionStorage.getItem("outletInfo"))
-    const stationInfo = JSON.parse(window.sessionStorage.getItem("selectedStation"))
-    const itemInfo = JSON.parse(window.sessionStorage.getItem("selectedItemInfo"))
-    const userInfo = JSON.parse(window.localStorage.getItem("userInfo"))
-    const trainInfo = JSON.parse(window.sessionStorage.getItem("pnrDetails"))?.trainInfo;
-    const seatInfo = JSON.parse(window.sessionStorage.getItem("pnrDetails"))?.seatInfo;
+    const cartOutlet = JSON.parse(sessionStorage.getItem("cartOutlet"))
+    const stationInfo = JSON.parse(sessionStorage.getItem("selectedStation"))
+    const itemInfo = JSON.parse(sessionStorage.getItem("selectedItemInfo"))
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"))
+    const trainInfo = JSON.parse(sessionStorage.getItem("pnrDetails"))?.trainInfo;
+    const seatInfo = JSON.parse(sessionStorage.getItem("pnrDetails"))?.seatInfo;
+    const outletInfo = JSON.parse(sessionStorage.getItem("outletInfo"));
 
 
     const [itemList, setItemList] = useState(itemInfo)
@@ -100,7 +101,7 @@ export default function CartInfo() {
                 stationInfo={stationInfo}
                 seatInfo={seatInfo}
                 itemList={itemList}
-                outletInfo={outletInfo}
+                outletInfo={cartOutlet}
                 makePayment={makePayment}
                 removeItem={removeItem}
                 addItem={addItem}
@@ -109,6 +110,7 @@ export default function CartInfo() {
             <ErrorToster
                 props={error}
             />
+            
         </>
     )
 }
