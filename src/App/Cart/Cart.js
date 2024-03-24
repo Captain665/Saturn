@@ -23,6 +23,12 @@ export default function CartInfo() {
     const [error, setError] = useState(null)
     const path = location.pathname;
 
+
+    const returnToMenu = () => {
+        const url = "/station/" + stationInfo?.code + "/outlet/" + outletInfo?.id + "/menu"
+        navigate(url)
+    }
+
     useEffect(() => {
         
         window.sessionStorage.setItem("selectedItemInfo", JSON.stringify(itemList))
@@ -33,7 +39,9 @@ export default function CartInfo() {
             }
             setIsLoading(() => false)
         }, 2000)
-        
+        if(itemList.length === 0){
+            returnToMenu()
+        }
         return () => { setError(false) }    
     }, [itemList, navigate, path, error, userInfo])
 
@@ -79,12 +87,6 @@ export default function CartInfo() {
                 return prevData.filter(a => a.itemId !== item.itemId)
             }
         })
-    }
-
-
-    function returnToMenu() {
-        const url = "/station/" + stationInfo?.code + "/outlet/" + outletInfo?.id + "/menu"
-        navigate(url)
     }
 
     const makePayment = () => {
