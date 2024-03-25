@@ -37,10 +37,6 @@ export default function OutletList() {
         navigate(route)
     }
 
-    function returnToStation() {
-        navigate(-1, { replace: true })
-    }
-
 
     return (
         <>
@@ -49,7 +45,6 @@ export default function OutletList() {
                 outletData={outletData}
                 stations={station}
                 stationCode={code}
-                returnToStation={() => returnToStation()}
                 handleOnClick={(outlet) => handleOnClick(outlet)}
             />
             <Spinner

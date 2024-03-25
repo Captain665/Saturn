@@ -4,6 +4,7 @@ import CartDetails from "./CartInfo";
 import ErrorToster from "../../App/Components/MessageToggle"
 
 
+
 export default function CartInfo() {
 
     const navigate = useNavigate()
@@ -30,7 +31,7 @@ export default function CartInfo() {
     }
 
     useEffect(() => {
-        
+
         window.sessionStorage.setItem("selectedItemInfo", JSON.stringify(itemList))
         setTimeout(() => {
             if (!userInfo || error?.error === "Not authorize to Access") {
@@ -39,13 +40,16 @@ export default function CartInfo() {
             }
             setIsLoading(() => false)
         }, 2000)
-        if(itemList.length === 0){
-            returnToMenu()
-        }
-        return () => { setError(false) }    
+
+        setTimeout(() => {
+            if (itemList.length === 0) {
+                returnToMenu()
+            }
+        }, 2000)
+        return () => { setError(false) }
     }, [itemList, navigate, path, error, userInfo])
 
-  
+
 
 
     const itemSize = itemList?.length;
@@ -112,7 +116,6 @@ export default function CartInfo() {
             <ErrorToster
                 props={error}
             />
-            
         </>
     )
 }

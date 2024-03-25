@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ErrorToster from "../../../App/Components/MessageToggle";
-// import IsLoading from "../../../App/Components/Loading"
+import disableScroll from 'disable-scroll';
 import { FaStar, FaHandPointRight, FaTrain } from "react-icons/fa6";
 
 
@@ -8,17 +8,23 @@ export default function HomePage({ handleOnChange, handleOnClick, error, isLoadi
 
     const [dialog, setDialog] = useState(false)
 
+    console.log(dialog)
+
     const showDialog = () => {
         setDialog(() => true)
+        window.scrollTo(0,0)
+        disableScroll.on();
     }
 
-    // if (isLoading) {
-    //     return <IsLoading isLoading={isLoading}/>
-    // }
+    const hideDialog = () => {
+        setDialog(() => false);
+        window.scrollTo(0,0)
+        disableScroll.off();
+    }
 
     return (
         <>
-            <div className="md:w-11/12 w-full m-auto">
+            <div className="md:w-11/12 w-full m-auto" >
 
                 <ul className="flex justify-between md:px-10 px-3 w-full h-full mt-5">
                     <li className="justify-center self-center">
@@ -35,7 +41,7 @@ export default function HomePage({ handleOnChange, handleOnClick, error, isLoadi
 
                         <button
                             className="bg-orange-500 md:mt-7 mt-4 text-white md:p-4 p-3 rounded-xl font-extrabold md:text-xl md:px-8 px-4"
-                            onClick={showDialog}>
+                            onClick={showDialog} >
                             Get Started
                         </button>
                     </li>
@@ -228,7 +234,7 @@ export default function HomePage({ handleOnChange, handleOnClick, error, isLoadi
 
                 </ul>
 
-                <dialog open={dialog} id="dialog" className={`top-0 flex justify-center items-center w-full h-screen bg-transparent ${dialog ? "bg-opacity-30 backdrop-blur-sm" : "hidden"}`}>
+                <dialog open={dialog} id="dialog" className={`top-0 flex justify-center items-center w-full h-screen bg-transparent ${dialog ? "backdrop-blur-sm" : "hidden"}`}>
                     <ul className="md:w-2/6 w-11/12 border-2 px-10 md:py-5 py-2 flex flex-col gap-5 bg-white rounded-xl shadow-2xl z-50">
                         <ul className="flex border items-center h-12 bg-gray-100 gap-2 mt-5 text-lg">
                             <li className="bg-white md:p-2 h-full px-4 md:px-5 flex justify-center self-center items-center">
@@ -250,8 +256,8 @@ export default function HomePage({ handleOnChange, handleOnClick, error, isLoadi
 
                         <ul className="flex gap-5 border-t-2 justify-end md:mt-4 mt-2">
                             <li
-                                className="mt-4 px-4 p-2 rounded-lg border-2 font-extrabold cursor-pointer active:opacity-70"
-                                onClick={() => setDialog(() => false)}>
+                                className={`mt-4 px-4 p-2 rounded-lg border-2 font-extrabold cursor-pointer active:opacity-70 ${isLoading && "cursor-no-drop"}`}
+                                onClick={hideDialog}>
                                 Cancel
                             </li>
 
@@ -259,7 +265,7 @@ export default function HomePage({ handleOnChange, handleOnClick, error, isLoadi
                                 disabled={isLoading}
                                 type="submit"
                                 onClick={handleOnClick}
-                                className="bg-orange-500 mt-4 px-4 p-2 rounded-lg border-none font-extrabold text-white active:opacity-70">
+                                className={`bg-orange-500 mt-4 px-4 p-2 rounded-lg border-none font-extrabold text-white active:opacity-70 ${isLoading && "cursor-no-drop"}`}>
                                 Submit
                             </button>
 

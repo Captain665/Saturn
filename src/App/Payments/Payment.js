@@ -11,13 +11,13 @@ export default function Payments() {
     const location = useLocation()
     const path = location.pathname;
 
-    const outletInfo = JSON.parse(window.sessionStorage.getItem("outletInfo"))
-    const stationInfo = JSON.parse(window.sessionStorage.getItem("selectedStation"))
-    const itemInfo = JSON.parse(window.sessionStorage.getItem("selectedItemInfo"))
-    const userInfo = JSON.parse(window.localStorage.getItem("userInfo"))
-    const trainInfo = JSON.parse(window.sessionStorage.getItem("pnrDetails"))?.trainInfo;
-    const seatInfo = JSON.parse(window.sessionStorage.getItem("pnrDetails"))?.seatInfo;
-    const pnr = JSON.parse(window.sessionStorage.getItem("pnr"));
+    const outletInfo = JSON.parse(sessionStorage.getItem("outletInfo"))
+    const stationInfo = JSON.parse(sessionStorage.getItem("selectedStation"))
+    const itemInfo = JSON.parse(sessionStorage.getItem("selectedItemInfo"))
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"))
+    const trainInfo = JSON.parse(sessionStorage.getItem("pnrDetails"))?.trainInfo;
+    const seatInfo = JSON.parse(sessionStorage.getItem("pnrDetails"))?.seatInfo;
+    const pnr = JSON.parse(sessionStorage.getItem("pnr"));
 
     const [paymentSelection, setPaymentSelection] = useState(null)
     const [isLoading, setIsLoading] = useState(false)

@@ -15,11 +15,10 @@ import CartInfo from "./App/Cart/Cart";
 import OrderDetails from "./App/Orders/OrderDetails/OrderDetail";
 import Login from "./App/Accounts/Login/Login";
 import Signup from "./App/Accounts/Signup/Signup";
-import IsLoading from "../src/App/Components/Loading";
 import Payments from "./App/Payments/Payment";
 import CustomerDetails from "../src/App/Accounts/AccountsInfo/CustomerInfo"
 import OrderList from "./App/Orders/OrderList/Orders";
-import WarningDialog from "./App/Cart/WarningDialog";
+import NoProductExist from "./App/Components/EmptyPage";
 
 
 export default function BasePage() {
@@ -46,10 +45,9 @@ export default function BasePage() {
                     <Route path="payments" element={<Payments />} />
                     <Route path="order/:orderId" element={<OrderDetails />} />
                     <Route path="orders" element = {<OrderList />}/>
-                    <Route path="test" element={<IsLoading />}/>
                     <Route path="login"  element={<Login />}/>
                     <Route path="signup" element={<Signup />} /> 
-                    <Route path="testing" element={<WarningDialog />}/>
+                    <Route path="testing" element={<NoProductExist />}/>
                 </Route>
             </Routes>
         </BrowserRouter>

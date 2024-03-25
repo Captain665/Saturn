@@ -1,14 +1,12 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import MenuList from "./MenuList";
 import OutletInfo from "./OutletInfo";
 import CartInfo from "./CartInfo";
 import { MenuResponse } from "../ApiCall/MenuApi";
 import Spinner from "../Components/Spinner";
-import WarningDialog from "../Cart/WarningDialog";
-
-export const outletData = createContext();
-export const menuData = createContext();
+import WarningDialog from "./WarningDialog";
+import disableScroll from 'disable-scroll';
 
 export default function MenuItem() {
 
@@ -18,11 +16,19 @@ export default function MenuItem() {
     const selectedOutletInfo = JSON.parse(sessionStorage.getItem("outletInfo"))
     const outlet = JSON.parse(sessionStorage.getItem("cartOutlet"));
     const selectedItem = JSON.parse(sessionStorage.getItem("selectedItemInfo"))
+    const pnr = JSON.parse(sessionStorage.getItem("pnr"));
+    const stationInfo = JSON.parse(sessionStorage.getItem("selectedStation"))
 
     const [orderItems, setOrderItems] = useState(selectedItem === null ? [] : selectedItem)
     const [menuList, setMenuList] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [warningDialog, setWarningDialog] = useState(false)
+
+    if(warningDialog){
+        disableScroll.on();
+    }else{
+        disableScroll.off();
+    }
 
     useEffect(() => {
 
@@ -89,6 +95,7 @@ export default function MenuItem() {
                 }
             })
         } else {
+
             setWarningDialog(() => true)
         }
 
@@ -121,17 +128,17 @@ export default function MenuItem() {
     }
 
     const backToOutlet = () => {
-        navigate(-1, { replace: true })
+        const outletPath = "/" + pnr + "/stations/outlets/" + stationInfo.code;
+        navigate(outletPath, { replace: true })
     }
 
     const handleCancel = () => {
-        setWarningDialog(() => false)
+        setWarningDialog(() => false);
     }
     const handleContiue = () => {
         setOrderItems(() => [])
         sessionStorage.removeItem("cartOutlet")
         setWarningDialog(() => false)
-        
     }
     const orderItemsCount = orderItems?.length;
 
@@ -139,14 +146,18 @@ export default function MenuItem() {
 
     return (
         <>
-            <outletData.Provider value={{ selectedOutletInfo, backToOutlet }}>
-                <OutletInfo />
-            </outletData.Provider>
+            <OutletInfo
+                outletInfo={selectedOutletInfo}
+                backToOutlet={backToOutlet}
+            />
 
-
-            <menuData.Provider value={{ menuList, isLoading, orderItems, addItem, removeItem }}>
-                <MenuList />
-            </menuData.Provider>
+            <MenuList
+                menuList={menuList}
+                isLoading={isLoading}
+                orderItems={orderItems}
+                addItem={addItem}
+                removeItem={removeItem}
+            />
 
             <CartInfo
                 orderItemsCount={orderItemsCount}

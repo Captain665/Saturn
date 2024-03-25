@@ -3,7 +3,7 @@ import HomePage from "./Home.html";
 import { useNavigate } from "react-router";
 import { PnrResponse } from "../../ApiCall/PnrApi";
 import Spinner from "../../Components/Spinner";
-
+import disableScroll from 'disable-scroll';
 
 
 
@@ -25,20 +25,20 @@ export default function Home() {
             sessionStorage.setItem("pnrDetails", JSON.stringify(result))
             sessionStorage.setItem("pnr", JSON.stringify(pnr.current))
             const route = pnr.current + "/stations";
+            disableScroll.off();
             navigate(route, { state: { result } });
 
         }
         setIsLoading(() => false)
+        
     }
 
-    console.log(pnr.current)
     function handleOnChange(event) {
         const value = event.target.value
         if (value.length <= 10) {
             pnr.current = value
         }
     }
-
 
     return (
         <>
@@ -51,6 +51,7 @@ export default function Home() {
             <Spinner
                 isLoading={isLoading}
             />
+
 
         </>
     )

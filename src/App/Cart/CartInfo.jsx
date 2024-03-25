@@ -3,6 +3,7 @@ import ItemInfo from "./ItemList";
 import IsLoading from "../../App/Components/Loading"
 import { FaArrowLeft } from "react-icons/fa6";
 import CartSummary from "./CartSummary";
+import NoProductExist from "../Components/EmptyPage";
 
 export default function CartDetails({
     isLoading, returnToMenu,
@@ -13,8 +14,14 @@ export default function CartDetails({
 
     const totalItem = itemList?.reduce((a, b) => a + b.quantity, 0)
 
-    if(isLoading){
-        return <IsLoading isLoading={isLoading}/>
+    if (isLoading) {
+        return <IsLoading isLoading={isLoading} />
+    }
+
+    if (!itemList.length > 0) {
+        console.log("run here")
+        const url = "https://iticsystem.com/img/empty-cart.png"
+        return <NoProductExist isLoading={isLoading} logo={url} />
     }
 
 
