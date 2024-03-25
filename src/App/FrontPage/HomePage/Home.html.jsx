@@ -26,7 +26,7 @@ export default function HomePage({ handleOnChange, handleOnClick, error, isLoadi
         <>
             <div className="md:w-11/12 w-full m-auto" >
 
-                <ul className="flex md:justify-between justify-center md:px-10 px-2 w-full h-full mt-5">
+                <ul className="flex md:justify-between justify-center md:px-10 px-2 w-full h-full md:mt-5 mt-10">
                     <li className="justify-center self-center">
                         <ul className="font-extrabold md:text-6xl text-4xl">
                             <li>Meet, Eat &#38;</li>
@@ -34,13 +34,13 @@ export default function HomePage({ handleOnChange, handleOnClick, error, isLoadi
                             <li className="text-orange-500">Taste.</li>
                         </ul>
 
-                        <ul className="md:text-lg text-base opacity-70 md:mt-7 mt-4 md:w-4/5">
+                        <ul className="md:text-lg text-base opacity-70 md:mt-7 mt-5 md:w-4/5">
                             <li>Food Tested Better when you eat it with</li>
                             <li>your family and friends.</li>
                         </ul>
 
                         <button
-                            className="bg-orange-500 md:mt-7 mt-4 text-white md:p-4 p-3 rounded-xl font-extrabold md:text-xl md:px-8 px-4 w-full md:w-fit"
+                            className="bg-orange-500 md:mt-7 mt-10 text-white md:p-4 p-3 rounded-xl font-extrabold md:text-xl md:px-8 px-4 w-full md:w-fit"
                             onClick={showDialog} >
                             Get Started
                         </button>
