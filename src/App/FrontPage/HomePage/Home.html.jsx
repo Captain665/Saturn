@@ -26,26 +26,26 @@ export default function HomePage({ handleOnChange, handleOnClick, error, isLoadi
         <>
             <div className="md:w-11/12 w-full m-auto" >
 
-                <ul className="flex justify-between md:px-10 px-3 w-full h-full mt-5">
+                <ul className="flex md:justify-between justify-center md:px-10 px-2 w-full h-full mt-5">
                     <li className="justify-center self-center">
-                        <ul className="font-extrabold md:text-6xl text-3xl">
+                        <ul className="font-extrabold md:text-6xl text-4xl">
                             <li>Meet, Eat &#38;</li>
                             <li>Enjoy The <span className="text-orange-500">True</span></li>
                             <li className="text-orange-500">Taste.</li>
                         </ul>
 
-                        <ul className="md:text-lg text-sm opacity-70 md:mt-7 mt-4 w-4/5">
+                        <ul className="md:text-lg text-base opacity-70 md:mt-7 mt-4 md:w-4/5">
                             <li>Food Tested Better when you eat it with</li>
                             <li>your family and friends.</li>
                         </ul>
 
                         <button
-                            className="bg-orange-500 md:mt-7 mt-4 text-white md:p-4 p-3 rounded-xl font-extrabold md:text-xl md:px-8 px-4"
+                            className="bg-orange-500 md:mt-7 mt-4 text-white md:p-4 p-3 rounded-xl font-extrabold md:text-xl md:px-8 px-4 w-full md:w-fit"
                             onClick={showDialog} >
                             Get Started
                         </button>
                     </li>
-                    <li className="md:w-1/2 w-5/12 h-full bg-white text-white items-center self-center">
+                    <li className="md:w-1/2 w-5/12 h-full bg-white text-white items-center self-center md:block hidden">
                         <img src="/main_images.png" alt="main" className="w-full h-full object-cover object-center" />
                     </li>
                 </ul>
