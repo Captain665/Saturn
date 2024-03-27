@@ -38,6 +38,14 @@ export default function OrderInfo({ order, backToHome }) {
         }))
     }
 
+    const orderStatus = (orderStatus) => {
+        if(orderStatus === "CANCELLED" || orderStatus === "UNDELIVERED" || orderStatus === "PARTIALLY_DELIVERED"){
+            return "red"
+        }else{
+            return "green"
+        }
+    }
+
     return (
         <>
             <ul className="md:w-3/4 m-auto mt-5 w-full">
@@ -71,7 +79,7 @@ export default function OrderInfo({ order, backToHome }) {
                         </ul>
                         <ul>
                             <li className="opacity-50 font-extrabold">Status</li>
-                            <li className="bg-green-600 font-extrabold px-1 rounded text-white w-fit">{order?.status}</li>
+                            <li className={`${orderStatus(order?.status) === "green" ? "bg-green-600" : "bg-red-600"} font-extrabold px-1 rounded text-white w-fit`}>{order?.status}</li>
                         </ul>
                     </ul>
                     <ul className="w-2/6 p-2 bg-white rounded-md border md:flex hidden justify-center items-center">

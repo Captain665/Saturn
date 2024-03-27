@@ -2,12 +2,13 @@
 export async function CreateOrderResponse(trainInfo, stationInfo, seatInfo, outletInfo, userInfo,itemList, pnr,paymentSelection, device) {
     
 
+    const deliveryDate = stationInfo.departure === "--" ? stationInfo.arrival : stationInfo.departure;
     const body = {
         "trainName": trainInfo.name,
         "trainNo": trainInfo.trainNo,
         "stationCode": stationInfo.code,
         "stationName": stationInfo.name,
-        "deliveryDate": stationInfo.depDate + " " + stationInfo.departure,
+        "deliveryDate": stationInfo.depDate + " " + deliveryDate,
         "coach": seatInfo.coach,
         "berth": seatInfo.berth,
         "outletId": outletInfo.id,
