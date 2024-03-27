@@ -6,7 +6,6 @@ import CartInfo from "./CartInfo";
 import { MenuResponse } from "../ApiCall/MenuApi";
 import Spinner from "../Components/Spinner";
 import WarningDialog from "./WarningDialog";
-import disableScroll from 'disable-scroll';
 
 export default function MenuItem() {
 
@@ -23,12 +22,6 @@ export default function MenuItem() {
     const [menuList, setMenuList] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [warningDialog, setWarningDialog] = useState(false)
-
-    if(warningDialog){
-        disableScroll.on();
-    }else{
-        disableScroll.off();
-    }
 
     useEffect(() => {
 

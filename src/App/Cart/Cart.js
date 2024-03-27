@@ -22,6 +22,7 @@ export default function CartInfo() {
     const [itemList, setItemList] = useState(itemInfo)
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
+    const [redirect, setRedirect] = useState(false)
     const path = location.pathname;
 
 
@@ -43,11 +44,15 @@ export default function CartInfo() {
 
         setTimeout(() => {
             if (itemList.length === 0) {
-                returnToMenu()
+                setRedirect(true)
             }
         }, 2000)
         return () => { setError(false) }
     }, [itemList, navigate, path, error, userInfo])
+
+    if(redirect){
+        returnToMenu()
+    }
 
 
 

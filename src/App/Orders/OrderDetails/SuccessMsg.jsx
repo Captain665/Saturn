@@ -1,13 +1,7 @@
 import React from "react";
 import { FaCheck } from "react-icons/fa6";
-import disableScroll from 'disable-scroll';
 
 export default function SuccessPlacedConfirm({ orderId, shown, handleOnClick }) {
-    if (shown) {
-        disableScroll.on();
-    } else {
-        disableScroll.off();
-    }
 
     return (
         <dialog open={shown} className={`top-0 ${shown ? "w-full h-full m-auto flex bg-transparent backdrop-blur-sm p-5" : null}`}>

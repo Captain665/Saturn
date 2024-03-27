@@ -1,9 +1,8 @@
 import React, { memo } from "react";
 import { FaTrain } from "react-icons/fa6";
-import ErrorToster from "../../App/Components/MessageToggle";
 import { FormatedDateWithWeek } from "../Components/DateTimeFormatChange";
 
-function TrainHtml({ train, error, pnr }) {
+function TrainHtml({ train, pnr }) {
 
 
     return (
@@ -42,8 +41,6 @@ function TrainHtml({ train, error, pnr }) {
                 </ul>
 
             </div>
-
-            {error && <ErrorToster props={error} />}
 
         </div>
     )

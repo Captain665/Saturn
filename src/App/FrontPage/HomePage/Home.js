@@ -3,7 +3,6 @@ import HomePage from "./Home.html";
 import { useNavigate } from "react-router";
 import { PnrResponse } from "../../ApiCall/PnrApi";
 import Spinner from "../../Components/Spinner";
-import disableScroll from 'disable-scroll';
 
 
 
@@ -25,7 +24,6 @@ export default function Home() {
             sessionStorage.setItem("pnrDetails", JSON.stringify(result))
             sessionStorage.setItem("pnr", JSON.stringify(pnr.current))
             const route = pnr.current + "/stations";
-            disableScroll.off();
             navigate(route, { state: { result } });
 
         }
@@ -39,7 +37,7 @@ export default function Home() {
             pnr.current = value
         }
     }
-
+    console.log("Home page");
     return (
         <>
             <HomePage

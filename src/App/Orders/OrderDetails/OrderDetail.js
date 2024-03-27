@@ -6,7 +6,6 @@ import { isMobile } from "react-device-detect";
 import SuccessPlacedConfirm from "./SuccessMsg";
 import IsLoading from "../../Components/Loading";
 import { useSearchParams } from "react-router-dom";
-import disableScroll from 'disable-scroll';
 
 
 export default function OrderDetails() {
@@ -47,7 +46,6 @@ export default function OrderDetails() {
     const handleOnClick = () => {
         setParams()
         setIsShown(() => false)
-        disableScroll.off();
     }
 
     if(isLoading){

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import ErrorToster from "../../../App/Components/MessageToggle";
-import disableScroll from 'disable-scroll';
 import { FaStar, FaHandPointRight, FaTrain } from "react-icons/fa6";
 
 
@@ -12,14 +11,10 @@ export default function HomePage({ handleOnChange, handleOnClick, error, isLoadi
 
     const showDialog = () => {
         setDialog(() => true)
-        window.scrollTo(0,0)
-        disableScroll.on();
     }
 
     const hideDialog = () => {
         setDialog(() => false);
-        window.scrollTo(0,0)
-        disableScroll.off();
     }
 
     return (
