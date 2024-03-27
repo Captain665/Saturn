@@ -84,7 +84,7 @@ function Headers({ name }) {
                 <nav className={`md:hidden relative w-full`} ref={boxRef}>
                     <span className={`float-right text-3xl ${isVisible ? "border-2" : null} border-black p-1 mr-10 cursor-pointer`} onClick={HandleOnClick}><FaBars /></span>
 
-                    <div className={`flex-col bg-white p-5 gap-4 md:hidden ${isVisible ? "flex" : "hidden"} z-[999] absolute right-5 top-12 rounded-lg w-40 border-2 shadow-2xl`}>
+                    <div className={`flex-col bg-white p-5 gap-4 md:hidden ${isVisible ? "flex" : "hidden"} z-[50] absolute right-5 top-12 rounded-lg w-40 border-2 shadow-2xl`}>
                         {links}
                     </div>
                 </nav>

@@ -36,7 +36,7 @@ export default function CartInfo() {
         window.sessionStorage.setItem("selectedItemInfo", JSON.stringify(itemList))
         setTimeout(() => {
             if (!userInfo || error?.error === "Not authorize to Access") {
-                const pathName = `/login?redirectedTo=${path}`
+                const pathName = `/login?redirectedTo=${path}&message=You must log in first.`
                 navigate(pathName)
             }
             setIsLoading(() => false)

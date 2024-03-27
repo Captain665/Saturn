@@ -3,11 +3,9 @@ import { NavLink } from "react-router-dom";
 import { FaCircleUser, FaMobileRetro, FaLock } from "react-icons/fa6";
 
 
-export default function LoginForm({ isLoading, handleChange, HandleSubmit, loginData, redirectedTo }) {
+export default function LoginForm({ isLoading, handleChange, HandleSubmit, loginData, redirectedTo, msg }) {
 
     const path = redirectedTo ? `/signup?redirectedTo=${redirectedTo}` : "/signup"
-
-
 
     return (
 
@@ -19,6 +17,7 @@ export default function LoginForm({ isLoading, handleChange, HandleSubmit, login
                 <ul className="text-9xl text-gray-300 opacity-80">
                     <FaCircleUser />
                 </ul>
+                {msg && <strong className="text-red-500">{msg}</strong>}
 
                 <ul className="flex border items-center h-10 bg-gray-100 gap-2">
                     <li className="bg-white p-2 w-full h-full px-3">
