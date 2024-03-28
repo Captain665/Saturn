@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate, useOutletContext } from "react-router";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import StationData from "./StationList";
+import { PnrDetails } from "./Train";
 
 export default function StationList() {
 
-    const [train] = useOutletContext()
-    const [jourenyData] = useState(train)
+    const PnrResponse = useContext(PnrDetails);
+    console.log(PnrResponse)
+    const [jourenyData] = useState(PnrResponse)
     const navigate = useNavigate();
-    const [stations, setStations] = useState(train?.stations)
+    const [stations, setStations] = useState(PnrResponse?.stations)
 
     useEffect(() => {
-        const data =  train.stations    
+        const data =  PnrResponse.stations    
         setStations(() => data)
-    },[train.stations])
+    },[PnrResponse.stations])
 
 
     function handleOnClick(station) {
@@ -24,7 +26,7 @@ export default function StationList() {
         <>
             <StationData
                 stations={stations}
-                handleOnClick={(station) => handleOnClick(station)}
+                handleOnClick={handleOnClick}
             />
         </>
     )

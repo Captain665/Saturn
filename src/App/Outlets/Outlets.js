@@ -45,7 +45,7 @@ export default function OutletList() {
                 outletData={outletData}
                 stations={station}
                 stationCode={code}
-                handleOnClick={(outlet) => handleOnClick(outlet)}
+                handleOnClick={handleOnClick}
             />
             <Spinner
                 isLoading={isLoading}

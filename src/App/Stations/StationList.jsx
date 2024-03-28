@@ -4,12 +4,13 @@ import { FormatedDate, FormatedTime } from "../Components/DateTimeFormatChange";
 import { memo } from "react";
 
 export function TrainTiming(value) {
+
     const delayTime = JSON.parse(value)
     return delayTime === 0 ? "On Time" : "Late by " + value + " mins"
 }
 
 export function StationCheck(value) {
-    return value === "--" ? "Starting station" : value + " mins halt"
+    return value === "--" ? "Starting station" : value + " mins halt"   
 }
 
 
@@ -33,7 +34,7 @@ function StationData({ stations, handleOnClick }) {
                         <li>{StationCheck(station.halt)}</li>
                     </ul>
                     <ul className="flex text-base md:text-xl">
-                        <ul className="self-center text-center">    
+                        <ul className="self-center text-center">
                             <li
                                 className={`font-bold ${JSON.parse(station.delayArrival) > 0 ? "text-red-500" : "text-green-600"}`}>
                                 {station.departure === "--" ? FormatedTime(station.arrival) : FormatedTime(station.departure)}

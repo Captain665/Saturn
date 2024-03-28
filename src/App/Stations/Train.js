@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { Outlet, useNavigate, useParams } from "react-router";
 import TrainHtml from "./TrainDetails";
 import { PnrResponse } from "../ApiCall/PnrApi";
 import Spinner from "../Components/Spinner";
 import ErrorToster from "../../App/Components/MessageToggle";
 
+export const PnrDetails = createContext();
 
 export default function TrainInfo() {
 
     const navigate = useNavigate()
     const result = JSON.parse(window.sessionStorage.getItem("pnrDetails"))
 
-    const [train, setTrainData] = useState(result ? result : []);
+    const [train, setTrainData] = useState(result ?? []);
     let { pnr } = useParams()
 
     const [isLoading, setIsLoading] = useState(false)
@@ -25,8 +26,8 @@ export default function TrainInfo() {
             const response = await PnrResponse(pnr)
             if (response.status === "failure") {
                 setError(() => response)
-                setRedirected(() => true)
                 setTimeout(() => {
+                    setRedirected(() => true)
                     setIsLoading(() => false)
                 }, 4000)
             }
@@ -47,7 +48,6 @@ export default function TrainInfo() {
         navigate("/")
     }
 
-
     return (
         <>
             <TrainHtml
@@ -55,10 +55,21 @@ export default function TrainInfo() {
                 train={train}
                 pnr={pnr}
             />
-            <Outlet context={[train]} />
-            <Spinner isLoading={isLoading} />
-            
-            {error && <ErrorToster props={error} />}
+
+            <PnrDetails.Provider value={train}>
+                <Outlet />
+            </PnrDetails.Provider>
+
+            <Spinner
+                isLoading={isLoading}
+            />
+
+            {
+                error &&
+                <ErrorToster
+                    props={error}
+                />
+            }
         </>
     )
 }
