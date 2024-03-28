@@ -57,7 +57,7 @@ export default function Payments() {
 
     if(error?.error === "Not authorize to Access"){
         localStorage.clear();
-        const pathName = `/login?redirectedTo=${path}`
+        const pathName = `/login?redirectedTo=${path}&message=You must log in first.`
         navigate(pathName)
     }
 

@@ -12,7 +12,7 @@ export async function CreateOrderResponse(trainInfo, stationInfo, seatInfo, outl
         "coach": seatInfo.coach,
         "berth": seatInfo.berth,
         "outletId": outletInfo.id,
-        "customerId": userInfo.id,
+        "customerId": userInfo?.id,
         "pnr": pnr,
         "paymentType": paymentSelection,
         "deliveryCharge": outletInfo.deliveryCost,
@@ -23,7 +23,7 @@ export async function CreateOrderResponse(trainInfo, stationInfo, seatInfo, outl
     const payload = {
         method: "POST",
         headers: {
-            "Authorization": userInfo.jwt,
+            "Authorization": userInfo?.jwt,
             'Accept': 'application/json',
             'Content-Type': 'application/json'
 
