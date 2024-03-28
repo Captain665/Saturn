@@ -10,11 +10,12 @@ export function TrainTiming(value) {
 }
 
 export function StationCheck(value) {
-    return value === "--" ? "Starting station" : value + " mins halt"   
+    return value === "--" ? "Starting station" : value + " mins halt"
 }
 
 
 function StationData({ stations, handleOnClick }) {
+    console.log("mount")
 
     return (
         <><div className="flex flex-col w-full">

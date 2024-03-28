@@ -5,19 +5,19 @@ import { PnrDetails } from "./Train";
 
 export default function StationList() {
 
-    const PnrResponse = useContext(PnrDetails);
-    console.log(PnrResponse)
-    const [jourenyData] = useState(PnrResponse)
     const navigate = useNavigate();
+    const PnrResponse = useContext(PnrDetails);
+
+    const [jourenyData] = useState(PnrResponse)
     const [stations, setStations] = useState(PnrResponse?.stations)
 
     useEffect(() => {
-        const data =  PnrResponse.stations    
+        const data = PnrResponse.stations
         setStations(() => data)
-    },[PnrResponse.stations])
+    }, [PnrResponse.stations])
 
 
-    function handleOnClick(station) {
+    const handleOnClick = (station) => {
         window.sessionStorage.setItem("selectedStation", JSON.stringify(station))
         navigate("outlets/" + station.code, { state: { jourenyData, station } })
     }
