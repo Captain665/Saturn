@@ -10,9 +10,8 @@ export const PnrDetails = createContext();
 export default function TrainInfo() {
 
     const navigate = useNavigate()
-    const result = JSON.parse(window.sessionStorage.getItem("pnrDetails"))
 
-    const [train, setTrainData] = useState(result ?? []);
+    const [train, setTrainData] = useState(JSON.parse(window.sessionStorage.getItem("pnrDetails")) ?? []);
     let { pnr } = useParams()
 
     const [isLoading, setIsLoading] = useState(false)
@@ -22,18 +21,18 @@ export default function TrainInfo() {
 
     useEffect(() => {
         const fetchData = async () => {
-            setIsLoading(() => true)
+            setIsLoading(true)
             const response = await PnrResponse(pnr)
             if (response.status === "failure") {
-                setError(() => response)
+                setError(response)
                 setTimeout(() => {
-                    setRedirected(() => true)
-                    setIsLoading(() => false)
+                    setRedirected(true)
+                    setIsLoading(false)
                 }, 4000)
             }
             if (response.status === "success") {
-                setTrainData(() => response.result)
-                setIsLoading(() => false)
+                setTrainData(response.result)
+                setIsLoading(false)
             }
         }
         fetchData();
@@ -48,28 +47,16 @@ export default function TrainInfo() {
         navigate("/")
     }
 
+    console.log("train js")
+
     return (
         <>
-            <TrainHtml
-                isLoading={isLoading}
-                train={train}
-                pnr={pnr}
-            />
-
+            <TrainHtml train={train} pnr={pnr} />
             <PnrDetails.Provider value={train}>
                 <Outlet />
             </PnrDetails.Provider>
-
-            <Spinner
-                isLoading={isLoading}
-            />
-
-            {
-                error &&
-                <ErrorToster
-                    props={error}
-                />
-            }
+            <Spinner isLoading={isLoading} />
+            {error && <ErrorToster props={error} />}
         </>
     )
 }

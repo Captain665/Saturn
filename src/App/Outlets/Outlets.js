@@ -7,6 +7,7 @@ import Spinner from "../Components/Spinner";
 export default function OutletList() {
     const navigate = useNavigate()
     const { code } = useParams()
+    
     const station = JSON.parse(sessionStorage.getItem("selectedStation"))
     const [outletData, setOutletData] = useState([])
     const [isLoading, setIsLoading] = useState(false)

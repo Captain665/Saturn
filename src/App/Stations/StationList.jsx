@@ -9,13 +9,18 @@ export function TrainTiming(value) {
     return delayTime === 0 ? "On Time" : "Late by " + value + " mins"
 }
 
-export function StationCheck(value) {
-    return value === "--" ? "Starting station" : value + " mins halt"
+export function StationCheck(halt, arr, dep) {
+    if (halt === "--" && arr === "--") {
+        return "Starting station"
+    } else if (halt === "--" && dep === "--") {
+        return "Last station"
+    } else {
+        return halt + " mins halt"
+    }
 }
 
 
 function StationData({ stations, handleOnClick }) {
-    console.log("mount")
 
     return (
         <><div className="flex flex-col w-full">
@@ -31,8 +36,8 @@ function StationData({ stations, handleOnClick }) {
                     className="flex justify-between shadow-lg w-11/12 md:w-1/2 content-center self-center h-28 px-4 bg-white m-1 rounded-md md:h-36 cursor-pointer">
                     <ul className="self-center text-start text-sm md:text-base">
                         <li className="font-bold text-base md:text-xl">{station.name}<span className="ml-1 font-normal text-xs md:text-base">{station.code}</span></li>
-                        <li>{TrainTiming(station.delayArrival)}</li>
-                        <li>{StationCheck(station.halt)}</li>
+                        <li>{TrainTiming(station?.delayArrival)}</li>
+                        <li>{StationCheck(station?.halt, station?.arrival, station?.departure)}</li>
                     </ul>
                     <ul className="flex text-base md:text-xl">
                         <ul className="self-center text-center">

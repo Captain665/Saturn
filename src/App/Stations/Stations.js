@@ -13,7 +13,7 @@ export default function StationList() {
 
     useEffect(() => {
         const data = PnrResponse.stations
-        setStations(() => data)
+        setStations(data)
     }, [PnrResponse.stations])
 
 

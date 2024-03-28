@@ -37,7 +37,7 @@ export default function Home() {
             pnr.current = value
         }
     }
-    console.log("Home page");
+    
     return (
         <>
             <HomePage

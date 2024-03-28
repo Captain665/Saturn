@@ -4,7 +4,6 @@ import { FormatedDateWithWeek } from "../Components/DateTimeFormatChange";
 
 function TrainHtml({ train, pnr }) {
 
-
     return (
         <div className="flex flex-col w-full">
 
@@ -41,7 +40,6 @@ function TrainHtml({ train, pnr }) {
                 </ul>
 
             </div>
-
         </div>
     )
 
