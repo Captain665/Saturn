@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import StationData from "./StationList";
 import { PnrDetails } from "./Train";
@@ -17,10 +17,10 @@ export default function StationList() {
     }, [PnrResponse.stations])
 
 
-    const handleOnClick = (station) => {
+    const handleOnClick = useCallback((station) => {
         window.sessionStorage.setItem("selectedStation", JSON.stringify(station))
         navigate("outlets/" + station.code, { state: { jourenyData, station } })
-    }
+    }, [])
 
     return (
         <>

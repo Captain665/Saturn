@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { memo, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function ErrorToster({ props }) {
+ function ErrorToster({ props }) {
 
+    console.log("run here")
 
     useEffect(() => {
 
@@ -30,3 +31,4 @@ export default function ErrorToster({ props }) {
 
 }
 
+export default memo(ErrorToster);
