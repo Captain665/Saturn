@@ -4,6 +4,8 @@ import NoProductExist from "../Components/EmptyPage";
 
 function OutletHtml({ outletData, handleOnClick, isLoading }) {
 
+    console.log("Outlet HTML")
+    
     return (
         <>
             {outletData.length > 0 ?
