@@ -6,8 +6,11 @@ import CartInfo from "./CartInfo";
 import { MenuResponse } from "../ApiCall/MenuApi";
 import Spinner from "../Components/Spinner";
 import WarningDialog from "./WarningDialog";
+import Filters from "./Filters";
 
 export default function MenuItem() {
+
+    console.log("Menu JS")
 
     const { code, id } = useParams();
     const navigate = useNavigate();
@@ -16,12 +19,16 @@ export default function MenuItem() {
     const outlet = JSON.parse(sessionStorage.getItem("cartOutlet"));
     const selectedItem = JSON.parse(sessionStorage.getItem("selectedItemInfo"))
     const pnr = JSON.parse(sessionStorage.getItem("pnr"));
-    const stationInfo = JSON.parse(sessionStorage.getItem("selectedStation"))
 
-    const [orderItems, setOrderItems] = useState(selectedItem === null ? [] : selectedItem)
+    const [orderItems, setOrderItems] = useState(selectedItem ?? [])
     const [menuList, setMenuList] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [warningDialog, setWarningDialog] = useState(false)
+
+    
+    const orderItemsCount = orderItems?.length;
+
+    console.log(orderItemsCount)
 
     useEffect(() => {
 
@@ -31,15 +38,15 @@ export default function MenuItem() {
             if (response.status === "success") {
                 const itemList = response.result;
                 setMenuList(itemList)
-                setIsLoading(() => false)
+                setIsLoading(false)
             } else {
                 setMenuList(null)
-                setIsLoading(() => false)
+                setIsLoading(false)
             }
         }
         fetchData()
         return () => {
-            setIsLoading(() => false)
+            setIsLoading(false)
         }
     }, [code, id])
 
@@ -48,7 +55,7 @@ export default function MenuItem() {
     }, [orderItems])
 
     const isValidoutlet = () => {
-        if (!outlet || outlet?.id === selectedOutletInfo?.id) {
+        if (!outlet || outlet?.id === selectedOutletInfo?.id || orderItemsCount === 0) {
             sessionStorage.setItem("cartOutlet", JSON.stringify(selectedOutletInfo));
             return true;
         }
@@ -89,7 +96,7 @@ export default function MenuItem() {
             })
         } else {
 
-            setWarningDialog(() => true)
+            setWarningDialog(true)
         }
 
     }
@@ -121,19 +128,59 @@ export default function MenuItem() {
     }
 
     const backToOutlet = () => {
-        const outletPath = "/" + pnr + "/stations/outlets/" + stationInfo.code;
+        const outletPath = "/" + pnr + "/stations/outlets/" + code;
         navigate(outletPath, { replace: true })
     }
 
     const handleCancel = () => {
-        setWarningDialog(() => false);
+        setWarningDialog(false);
     }
     const handleContiue = () => {
-        setOrderItems(() => [])
+        setOrderItems([])
         sessionStorage.removeItem("cartOutlet")
-        setWarningDialog(() => false)
+        setWarningDialog(false)
     }
-    const orderItemsCount = orderItems?.length;
+
+
+
+    const [itemFilter, setItemFilter] = useState({ isVeg: null, amountSort: null })
+
+    function applyVegFilter(veg) {
+        veg === itemFilter.isVeg
+            ? setItemFilter(prevData => ({
+                ...prevData,
+                isVeg: null
+            }))
+            : setItemFilter(prevData => ({
+                ...prevData,
+                isVeg: veg
+            }))
+    }
+
+    function applyPriceFilter(value) {
+        value === itemFilter.amountSort
+            ? setItemFilter(prevData => ({
+                ...prevData,
+                amountSort: null
+            }))
+            : setItemFilter(prevData => ({
+                ...prevData,
+                amountSort: value
+            }))
+    }
+
+
+    const VegList = itemFilter?.isVeg
+        ? menuList.filter(veg => veg.isVegeterian === (itemFilter.isVeg === "veg") ? true : false)
+        : menuList;
+
+    const menuItemList = itemFilter?.amountSort ?
+        (itemFilter.amountSort === "hightoLow" ?
+            VegList.toSorted((a, b) => b.basePrice - a.basePrice)
+            : VegList.toSorted((a, b) => a.basePrice - b.basePrice)
+        )
+        : VegList
+
 
 
 
@@ -144,8 +191,14 @@ export default function MenuItem() {
                 backToOutlet={backToOutlet}
             />
 
+            <Filters
+                vegFilter={(type) => applyVegFilter(type)}
+                priceFilter={(value) => applyPriceFilter(value)}
+                active={itemFilter}
+            />
+
             <MenuList
-                menuList={menuList}
+                menuList={menuItemList}
                 isLoading={isLoading}
                 orderItems={orderItems}
                 addItem={addItem}

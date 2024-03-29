@@ -3,6 +3,8 @@ import { FaXmark } from "react-icons/fa6";
 
 const WarningDialog = ({ orderItemsCount, handleCancel, handleContiue, outlet }) => {
 
+    console.log("Warning dialog HTML")
+
 
     return (
 

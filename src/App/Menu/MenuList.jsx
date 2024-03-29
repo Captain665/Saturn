@@ -5,43 +5,45 @@ import NoProductExist from "../Components/EmptyPage";
 
 export default function MenuList({ menuList, orderItems, addItem, removeItem, isLoading }) {
 
-    const [itemFilter, setItemFilter] = useState({ isVeg: null, amountSort: null })
+    console.log("Menu List HTML")
 
-    function applyVegFilter(veg) {
-        veg === itemFilter.isVeg
-            ? setItemFilter(prevData => ({
-                ...prevData,
-                isVeg: null
-            }))
-            : setItemFilter(prevData => ({
-                ...prevData,
-                isVeg: veg
-            }))
-    }
+    // const [itemFilter, setItemFilter] = useState({ isVeg: null, amountSort: null })
 
-    function applyPriceFilter(value) {
-        value === itemFilter.amountSort
-            ? setItemFilter(prevData => ({
-                ...prevData,
-                amountSort: null
-            }))
-            : setItemFilter(prevData => ({
-                ...prevData,
-                amountSort: value
-            }))
-    }
+    // function applyVegFilter(veg) {
+    //     veg === itemFilter.isVeg
+    //         ? setItemFilter(prevData => ({
+    //             ...prevData,
+    //             isVeg: null
+    //         }))
+    //         : setItemFilter(prevData => ({
+    //             ...prevData,
+    //             isVeg: veg
+    //         }))
+    // }
+
+    // function applyPriceFilter(value) {
+    //     value === itemFilter.amountSort
+    //         ? setItemFilter(prevData => ({
+    //             ...prevData,
+    //             amountSort: null
+    //         }))
+    //         : setItemFilter(prevData => ({
+    //             ...prevData,
+    //             amountSort: value
+    //         }))
+    // }
 
 
-    const VegList = itemFilter?.isVeg
-        ? menuList.filter(veg => veg.isVegeterian === (itemFilter.isVeg === "veg") ? true : false)
-        : menuList;
+    // const VegList = itemFilter?.isVeg
+    //     ? menuList.filter(veg => veg.isVegeterian === (itemFilter.isVeg === "veg") ? true : false)
+    //     : menuList;
 
-    const menuItemList = itemFilter?.amountSort ?
-        (itemFilter.amountSort === "hightoLow" ?
-            VegList.toSorted((a, b) => b.basePrice - a.basePrice)
-            : VegList.toSorted((a, b) => a.basePrice - b.basePrice)
-        )
-        : VegList
+    // const menuItemList = itemFilter?.amountSort ?
+    //     (itemFilter.amountSort === "hightoLow" ?
+    //         VegList.toSorted((a, b) => b.basePrice - a.basePrice)
+    //         : VegList.toSorted((a, b) => a.basePrice - b.basePrice)
+    //     )
+    //     : VegList
 
 
 
@@ -50,15 +52,15 @@ export default function MenuList({ menuList, orderItems, addItem, removeItem, is
             {menuList.length > 0 ?
                 <div className="flex flex-col">
 
-                    <Filters
+                    {/* <Filters
                         vegFilter={(type) => applyVegFilter(type)}
                         priceFilter={(value) => applyPriceFilter(value)}
                         active={itemFilter}
-                    />
+                    /> */}
 
 
                     <div className="grid md:grid-cols-3 grid-cols-1 self-center items-center md:w-3/4 gap-5 md:p-5 mt-5 mb-5">
-                        {menuItemList?.map(menuItem => (
+                        {menuList?.map(menuItem => (
                             <div key={menuItem.id} className="w-full shadow p-1">
                                 <ul className="flex h-40">
                                     <div className="w-2/5">
