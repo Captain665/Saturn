@@ -24,8 +24,8 @@ export default function MenuItem() {
     const [menuList, setMenuList] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [warningDialog, setWarningDialog] = useState(false)
+    const [itemFilter, setItemFilter] = useState({ isVeg: null, amountSort: null })
 
-    
     const orderItemsCount = orderItems?.length;
 
     console.log(orderItemsCount)
@@ -55,7 +55,7 @@ export default function MenuItem() {
     }, [orderItems])
 
     const isValidoutlet = () => {
-        if (!outlet || outlet?.id === selectedOutletInfo?.id || orderItemsCount === 0) {
+        if (outlet?.id === selectedOutletInfo?.id || orderItemsCount === 0) {
             sessionStorage.setItem("cartOutlet", JSON.stringify(selectedOutletInfo));
             return true;
         }
@@ -143,7 +143,6 @@ export default function MenuItem() {
 
 
 
-    const [itemFilter, setItemFilter] = useState({ isVeg: null, amountSort: null })
 
     function applyVegFilter(veg) {
         veg === itemFilter.isVeg
@@ -183,7 +182,6 @@ export default function MenuItem() {
 
 
 
-
     return (
         <>
             <OutletInfo
@@ -210,7 +208,9 @@ export default function MenuItem() {
                 handleCheckOut={handleCheckOut}
                 outlet={outlet}
             />
+
             <Spinner isLoading={isLoading} />
+
             {
                 warningDialog
                     ? <WarningDialog

@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Filters from "./Filters";
+import React from "react";
 import { FaPlus, FaMinus } from "react-icons/fa6";
 import NoProductExist from "../Components/EmptyPage";
 
