@@ -1,9 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 
-export default function Filters({ vegFilter, priceFilter, active }) {
-
-    console.log("Filter HTML")
-
+function Filters({ vegFilter, priceFilter, active }) {
 
     return (
         <div className="flex flex-col">
@@ -30,3 +27,5 @@ export default function Filters({ vegFilter, priceFilter, active }) {
         </div>
     )
 }
+
+export default memo(Filters);

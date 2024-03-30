@@ -4,8 +4,6 @@ import { FaCartShopping } from "react-icons/fa6";
 
 const CartInfo = ({ orderItemsCount, handleCheckOut }) => {
 
-    console.log("Cart Info HTML")
-
     return (
         <>
             {orderItemsCount > 0 &&
@@ -19,7 +17,7 @@ const CartInfo = ({ orderItemsCount, handleCheckOut }) => {
                     </ul>
                 </div >
             }
-        </>
+        </> 
     )
 }
 
