@@ -1,21 +1,21 @@
 
-export async function CreateOrderResponse(trainInfo, stationInfo, seatInfo, outletInfo, userInfo,itemList, pnr,paymentSelection, device) {
-    
+export async function CreateOrderResponse(trainInfo, stationInfo, seatInfo, outletInfo, userInfo, itemList, pnr, paymentSelection, device) {
 
-    const deliveryDate = stationInfo.departure === "--" ? stationInfo.arrival : stationInfo.departure;
+
+    const deliveryDate = stationInfo?.departure === "--" ? stationInfo?.arrival : stationInfo?.departure;
     const body = {
-        "trainName": trainInfo.name,
-        "trainNo": trainInfo.trainNo,
-        "stationCode": stationInfo.code,
-        "stationName": stationInfo.name,
-        "deliveryDate": stationInfo.depDate + " " + deliveryDate,
-        "coach": seatInfo.coach,
-        "berth": seatInfo.berth,
-        "outletId": outletInfo.id,
+        "trainName": trainInfo?.name,
+        "trainNo": trainInfo?.trainNo,
+        "stationCode": stationInfo?.code,
+        "stationName": stationInfo?.name,
+        "deliveryDate": stationInfo?.depDate + " " + deliveryDate,
+        "coach": seatInfo?.coach,
+        "berth": seatInfo?.berth,
+        "outletId": outletInfo?.id,
         "customerId": userInfo?.id,
         "pnr": pnr,
         "paymentType": paymentSelection,
-        "deliveryCharge": outletInfo.deliveryCost,
+        "deliveryCharge": outletInfo?.deliveryCost,
         "orderFrom": device,
         "orderItem": itemList
     }
