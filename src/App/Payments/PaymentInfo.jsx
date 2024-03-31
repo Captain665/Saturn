@@ -1,8 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import { FaArrowLeft, FaChevronRight, FaWallet, FaCreditCard, FaBuildingColumns, FaMoneyBill1 } from "react-icons/fa6";
-import ErrorToster from "../Components/MessageToggle";
 
-export default function PaymentInfo({ paymentMode, proceedToPay, mode, totalAmount, backToCart, isLoading, error, totalItem }) {
+function PaymentInfo({ paymentMode, proceedToPay, mode, totalAmount, backToCart, isLoading, totalItem }) {
 
     const payMode = () => {
         return mode && mode?.toUpperCase();
@@ -116,8 +115,9 @@ export default function PaymentInfo({ paymentMode, proceedToPay, mode, totalAmou
                 </ul>
             </ul>
 
-            <ErrorToster props={error} />
 
         </>
     )
 }
+
+export default memo(PaymentInfo);

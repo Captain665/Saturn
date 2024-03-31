@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import PaymentInfo from "./PaymentInfo";
 import { useLocation, useNavigate } from "react-router";
 import { CreateOrderResponse } from "../ApiCall/CreateOrderApi";
 import { isMobile } from "react-device-detect";
 import Spinner from "../Components/Spinner";
+import ErrorToster from "../Components/MessageToggle";
 
 
 export default function Payments() {
+    
     const navigate = useNavigate()
     const location = useLocation()
     const path = location.pathname;
@@ -30,13 +32,14 @@ export default function Payments() {
     const payable = Math.round(subTotal + taxes + deliveryCharge)
 
 
-    const selectPaymentMode = (mode) => {
+    const selectPaymentMode = useCallback((mode) => {
         setPaymentSelection((prevData) => (prevData === mode ? null : mode))
-    }
+    }, [])
 
-    const backToCart = () => {
+    const backToCart = useCallback(() => {
         navigate("/cart")
-    }
+    }, [navigate])
+
     const device = isMobile ? "Mobile Web" : "Desktop Web"
 
     const createOrder = async () => {
@@ -55,7 +58,7 @@ export default function Payments() {
         }
     }
 
-    if(error?.error === "Not authorize to Access"){
+    if (error?.error === "Not authorize to Access") {
         localStorage.clear();
         const pathName = `/login?redirectedTo=${path}&message=You must log in first.`
         navigate(pathName)
@@ -64,17 +67,18 @@ export default function Payments() {
 
     return (
         <>
-        <PaymentInfo
-            paymentMode={selectPaymentMode}
-            proceedToPay={createOrder}
-            mode={paymentSelection}
-            totalAmount={payable}
-            backToCart={backToCart}
-            isLoading={isLoading}
-            error={error}
-            totalItem={itemInfo?.length}
-        />
-        <Spinner isLoading={isLoading}/>
+            <PaymentInfo
+                paymentMode={selectPaymentMode}
+                proceedToPay={createOrder}
+                mode={paymentSelection}
+                totalAmount={payable}
+                backToCart={backToCart}
+                isLoading={isLoading}
+                totalItem={itemInfo?.length}
+            />
+            {isLoading && <Spinner isLoading={isLoading} />}
+
+            {error && <ErrorToster props={error} />}
         </>
     )
 }
