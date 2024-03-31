@@ -1,7 +1,14 @@
-import React from "react";
+import React, { memo, useContext } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa6";
+import { cartInfoContext } from "./Cart";
 
-export default function ItemInfo({ itemList, removeItem, addItem }) {
+function ItemInfo() {
+
+    const cartdetails = useContext(cartInfoContext);
+    const itemList = cartdetails.itemList;
+    const removeItem = cartdetails.removeItem;
+    const addItem = cartdetails.addItem;
+    
     return (
         <>
             <div className="md:w-2/3 flex flex-col align-top h-fit md:m-5 m-2 mt-3">
@@ -12,7 +19,7 @@ export default function ItemInfo({ itemList, removeItem, addItem }) {
                             <li className="text-lg line-clamp-1">{item.name}</li>
                             <li className="text-xs opacity-80 w-3/4 line-clamp-1">{item.description}</li>
                             <li className="">&#x20B9;{item.basePrice}</li>
-                        </ul>   
+                        </ul>
                         <ul className="flex w-1/4 justify-around self-center flex-col md:flex-row place-items-center gap-2">
                             <li className="h-fit hidden md:block">&#x20B9;{(item.basePrice * item.quantity).toFixed(2)}</li>
                             <ul className="flex gap-4 border-2 border-green-400 h-fit rounded-md px-2 bg-white m-auto items-center">
@@ -30,3 +37,5 @@ export default function ItemInfo({ itemList, removeItem, addItem }) {
         </>
     )
 }
+
+export default memo(ItemInfo);

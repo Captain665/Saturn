@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
  function ErrorToster({ props }) {
 
-    console.log("run here")
+    console.log("Error toaster running...")
 
     useEffect(() => {
 

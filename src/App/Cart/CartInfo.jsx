@@ -1,29 +1,16 @@
-import React from "react";
+import React, { memo, useContext } from "react";
 import ItemInfo from "./ItemList";
-import IsLoading from "../../App/Components/Loading"
 import { FaArrowLeft } from "react-icons/fa6";
 import CartSummary from "./CartSummary";
-import NoProductExist from "../Components/EmptyPage";
+import { cartInfoContext } from "./Cart";
 
-export default function CartDetails({
-    isLoading, returnToMenu,
-    userInfo, trainInfo, stationInfo, seatInfo,
-    makePayment, outletInfo, itemList, removeItem, addItem
+function CartDetails() {
 
-}) {
+    const cartInfo = useContext(cartInfoContext);
 
-    const totalItem = itemList?.reduce((a, b) => a + b.quantity, 0)
-
-    if (isLoading) {
-        return <IsLoading isLoading={isLoading} />
-    }
-
-    if (!itemList.length > 0) {
-        console.log("run here")
-        const url = "https://iticsystem.com/img/empty-cart.png"
-        return <NoProductExist isLoading={isLoading} logo={url} />
-    }
-
+    const returnToMenu = cartInfo.returnToMenu;
+    const outletInfo = cartInfo.outletInfo;
+    const totalItem = cartInfo.itemSize;
 
     return (
         <>
@@ -38,23 +25,12 @@ export default function CartDetails({
                     <li className="text-gray-600 md:block hidden">Need Help? Call {outletInfo.mobileNo}</li>
                 </ul>
                 <ul className="border-t-2 flex md:flex-row flex-col">
-                    <ItemInfo
-                        outletInfo={outletInfo}
-                        itemList={itemList}
-                        removeItem={removeItem}
-                        addItem={addItem}
-                    />
-                    <CartSummary
-                        outletInfo={outletInfo}
-                        itemList={itemList}
-                        makePayment={makePayment}
-                        userInfo={userInfo}
-                        stationInfo={stationInfo}
-                        trainInfo={trainInfo}
-                        seatInfo={seatInfo}
-                    />
+                    <ItemInfo />
+                    <CartSummary />
                 </ul>
             </ul><br />
         </>
     )
 }
+
+export default memo(CartDetails);
