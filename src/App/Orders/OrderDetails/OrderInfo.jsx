@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { FaArrowLeft, FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { FormatedDateWithTime } from "../../Components/DateTimeFormatChange";
+import { memo } from "react";
 
 
-export default function OrderInfo({ order, backToHome }) {
+function OrderInfo({ order, backToHome }) {
+
+    console.log("order info HTML running...")
 
     const [detailShown, setIsDetailShown] = useState({
         customer: true,
@@ -201,12 +204,12 @@ export default function OrderInfo({ order, backToHome }) {
                             </ul>
                         </ul>
                     </ul>
-
                 </ul>
-
             </ul>
             <br />
             <br />
         </>
     )
 }
+
+export default memo(OrderInfo);

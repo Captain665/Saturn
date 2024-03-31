@@ -1,7 +1,9 @@
-import React from "react";
+import React, { memo } from "react";
 import { FaCheck } from "react-icons/fa6";
 
-export default function SuccessPlacedConfirm({ orderId, shown, handleOnClick }) {
+function SuccessPlacedConfirm({ orderId, shown, handleOnClick }) {
+
+    console.log("success toster running...")
 
     return (
         <dialog open={shown} className={`top-0 ${shown ? "w-full h-full m-auto flex bg-transparent backdrop-blur-sm p-5" : null}`}>
@@ -17,3 +19,5 @@ export default function SuccessPlacedConfirm({ orderId, shown, handleOnClick }) 
 
     )
 }   
+
+export default memo(SuccessPlacedConfirm);
