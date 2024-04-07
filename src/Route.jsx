@@ -19,9 +19,12 @@ import Payments from "./App/Payments/Payment";
 import CustomerDetails from "../src/App/Accounts/AccountsInfo/CustomerInfo"
 import OrderList from "./App/Orders/OrderList/Orders";
 import NoProductExist from "./App/Components/EmptyPage";
+import ReactGA from 'react-ga'
 
 
 export default function BasePage() {
+    const TRACKING_ID = 'G-YX6NGK82FX';
+    ReactGA.initialize(TRACKING_ID);
     
     return (
         <BrowserRouter>

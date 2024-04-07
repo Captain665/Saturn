@@ -1,6 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
+import UseAnalyticsEventTracker from "../Components/useAnalyticsEventTracker";
 
 export default function Contact() {
+    const gaEventTracker = UseAnalyticsEventTracker("Contect Us")
+
+    useEffect(() => {
+        gaEventTracker("Contect Us")
+        console.log("ga event is added")    
+    },[gaEventTracker])
+
     return (
         <div className="flex flex-col">
             <div className="m-2 h-fit shadow md:indent-5 indent-2 px-1 md:w-9/12 self-center md:px-32 md:py-3 text-pretty">
