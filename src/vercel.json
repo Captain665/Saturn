@@ -1,0 +1,8 @@
+{
+    "rewrites": [
+      {
+        "source": "/api/",
+        "destination": "https://9aaf-2405-204-3005-6436-551-3538-3004-497f.ngrok-free.app/api/v2/"
+      }
+    ]
+  }
