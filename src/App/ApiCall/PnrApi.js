@@ -10,7 +10,7 @@ export async function PnrResponse(pnr) {
     const payload = {
         method: "GET"
     }
-    const url = "/api/pnr/" + pnr
+    const url = "/pnr/" + pnr
     const response = await fetch(url, payload);
     const jsonData = await response.json();
     if (response?.ok) {
