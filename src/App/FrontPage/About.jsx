@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import UseAnalyticsEventTracker from "../Components/useAnalyticsEventTracker";
+
+
 
 export default function About() {
+    const gaEventTracker = UseAnalyticsEventTracker("About US")
+
+    console.log(gaEventTracker)
+
+    useEffect(() => {
+        gaEventTracker("About US")
+        console.log("GA event is added for About Page")
+    }, [gaEventTracker])
+
+
     return (
         <div className="flex flex-col">
             <div className="m-2 h-fit shadow md:indent-5 indent-2 md:w-9/12 self-center px-1 md:px-32 md:py-3 text-pretty">

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import UseAnalyticsEventTracker from "../Components/useAnalyticsEventTracker";
 
 export default function Contact() {
-    const gaEventTracker = UseAnalyticsEventTracker("Contect Us")
+    const gaEventTracker = UseAnalyticsEventTracker("Contect Us")   
 
     useEffect(() => {
         gaEventTracker("Contect Us")

@@ -6,6 +6,13 @@ const UseAnalyticsEventTracker = (category = "Blog Category") => {
         ReactGA.event({ category, action, label });
     }
     return eventTracker;
+
+    // return ReactGA.event({
+    //     category : '',
+    //     action : '',
+    //     label : '',
+        
+    // })
 }
 
 export default UseAnalyticsEventTracker;    
