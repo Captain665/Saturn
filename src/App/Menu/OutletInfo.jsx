@@ -4,7 +4,6 @@ import { FaStar, FaArrowLeft, FaPersonBiking } from "react-icons/fa6";
 
 function OutletInfo({ outletInfo, backToOutlet }) {
 
-
     return (
         <ul className=" md:w-3/4 w-full m-auto md:text-lg">
 

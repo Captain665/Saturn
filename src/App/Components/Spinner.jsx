@@ -1,8 +1,10 @@
-import React from "react";
+import React, { memo } from "react";
 import { FaCircleNotch } from "react-icons/fa6";
 
 
-export default function Spinner({ isLoading }) {
+function Spinner({ isLoading }) {
+
+    console.log("Spinner Running...")
 
     return (
         <>
@@ -18,3 +20,5 @@ export default function Spinner({ isLoading }) {
         </>
     )
 } 
+
+export default memo(Spinner);

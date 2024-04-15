@@ -1,42 +1,28 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { FormatedDateWithYear, FormatedTime } from "../Components/DateTimeFormatChange";
+import { cartInfoContext } from "./Cart";
 
-export default function CartSummary({ itemList, makePayment, outletInfo, userInfo, stationInfo, trainInfo, seatInfo }) {
-
-    const [detailsShown, setDetailsShown] = useState({
-        customer: false,
-        delivery: false
-    })
+export default function CartSummary() {
+    
+    const summeryDetails = useContext(cartInfoContext);
+    const itemList = summeryDetails.itemList;
+    const makePayment = summeryDetails.makePayment;
+    const outletInfo = summeryDetails.outletInfo;
+    const userInfo = summeryDetails.userInfo;
+    const stationInfo = summeryDetails.stationInfo;
+    const trainInfo = summeryDetails.trainInfo;
+    const seatInfo = summeryDetails.seatInfo;
+    const customerDetailsShown = summeryDetails.customerDetailsShown;
+    const detailsShown = summeryDetails.detailsShown;
+    const deliveryDetailsShown = summeryDetails.deliveryDetailsShown;
+    const billDetail = summeryDetails.billDetail;
 
     const subTotal = JSON.parse(itemList?.reduce((a, b) => a + (b.basePrice * b.quantity), 0).toFixed(2))
     const taxes = JSON.parse((subTotal * 0.05).toFixed(2))
     const deliveryCharge = outletInfo?.deliveryCost;
     const payable = Math.round(subTotal + taxes + deliveryCharge)
-    
 
-
-    function customerDetailsShown() {
-        setDetailsShown(prevData => ({
-            ...prevData,
-            customer: !prevData.customer
-        }))
-    }
-    function deliveryDetailsShown() {
-        setDetailsShown(prevData => ({
-            ...prevData,
-            delivery: !prevData.delivery
-        }))
-    }
-
-    function billDetail(event) {
-        event.preventDefault()
-        const bill = document.getElementById('bill')
-        bill.scrollIntoView({
-            behavior: 'smooth'
-        })
-
-    }
 
     return (
         <div className="md:w-1/3 md:mt-7 m-0.5 w-11/12 items-center self-center md:self-start">
@@ -45,7 +31,7 @@ export default function CartSummary({ itemList, makePayment, outletInfo, userInf
                 <li>Enter Promo Code</li>
                 <div className="flex items-center gap-3 mt-2">
                     <input type="text" className="border h-8 outline-none pl-2 rounded w-2/3" placeholder="Promo Code" />
-                    <button className="bg-black text-white h-8 px-8">Submit</button>
+                    <button className="bg-black text-white h-8 px-8 rounded">Submit</button>
                 </div>
             </ul>
             <br />

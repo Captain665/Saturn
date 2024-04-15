@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import OrderInfo from "./OrderInfo";
 import { OrderDetailResponse } from "../../ApiCall/OrderInfoAPI";
@@ -9,6 +9,8 @@ import { useSearchParams } from "react-router-dom";
 
 
 export default function OrderDetails() {
+
+    console.log("order details js running...")
 
     const navigate = useNavigate()
     const { orderId } = useParams()
@@ -32,9 +34,6 @@ export default function OrderDetails() {
             setIsLoading(false)
         }
         fetchData()
-        return () => {
-            setIsLoading(() => false)
-        }
     }, [orderId, token])
 
     const backToHome = () => {
@@ -43,12 +42,12 @@ export default function OrderDetails() {
         const path = isMobile ? orders : account
         navigate(path)
     }
-    const handleOnClick = () => {
+    const handleOnClick = useCallback(() => {
         setParams()
         setIsShown(() => false)
-    }
+    }, [setParams])
 
-    if(isLoading){
+    if (isLoading) {
         return <IsLoading />
     }
 
@@ -60,11 +59,14 @@ export default function OrderDetails() {
                 backToHome={backToHome}
             />
 
-            <SuccessPlacedConfirm
-                orderId={order?.id}
-                shown={isShown}
-                handleOnClick={handleOnClick}
-            />
+            {
+                isShown &&
+                <SuccessPlacedConfirm
+                    orderId={order?.id}
+                    shown={isShown}
+                    handleOnClick={handleOnClick}
+                />
+            }
 
         </>
     )

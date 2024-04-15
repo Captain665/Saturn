@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import MenuList from "./MenuList";
 import OutletInfo from "./OutletInfo";
@@ -6,134 +6,156 @@ import CartInfo from "./CartInfo";
 import { MenuResponse } from "../ApiCall/MenuApi";
 import Spinner from "../Components/Spinner";
 import WarningDialog from "./WarningDialog";
+import Filters from "./Filters";
 
 export default function MenuItem() {
 
     const { code, id } = useParams();
     const navigate = useNavigate();
 
-    const selectedOutletInfo = JSON.parse(sessionStorage.getItem("outletInfo"))
+    const [selectedOutletInfo] = useState(JSON.parse(sessionStorage.getItem("outletInfo")))
     const outlet = JSON.parse(sessionStorage.getItem("cartOutlet"));
-    const selectedItem = JSON.parse(sessionStorage.getItem("selectedItemInfo"))
     const pnr = JSON.parse(sessionStorage.getItem("pnr"));
-    const stationInfo = JSON.parse(sessionStorage.getItem("selectedStation"))
 
-    const [orderItems, setOrderItems] = useState(selectedItem === null ? [] : selectedItem)
+    const [orderItems, setOrderItems] = useState(JSON.parse(sessionStorage.getItem("selectedItemInfo")) ?? [])
     const [menuList, setMenuList] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [warningDialog, setWarningDialog] = useState(false)
+    const [filters, setFilters] = useState({ isVeg: null, amountSort: null })
+
+    const orderItemsCount = orderItems?.length;
 
     useEffect(() => {
-
         const fetchData = async () => {
             setIsLoading(true)
             const response = await MenuResponse(id)
             if (response.status === "success") {
                 const itemList = response.result;
                 setMenuList(itemList)
-                setIsLoading(() => false)
+                setIsLoading(false)
             } else {
                 setMenuList(null)
-                setIsLoading(() => false)
+                setIsLoading(false)
             }
         }
         fetchData()
-        return () => {
-            setIsLoading(() => false)
-        }
     }, [code, id])
 
     useEffect(() => {
         window.sessionStorage.setItem("selectedItemInfo", JSON.stringify(orderItems))
     }, [orderItems])
 
-    const isValidoutlet = () => {
-        if (!outlet || outlet?.id === selectedOutletInfo?.id) {
+    const isValidoutlet = useCallback(() => {
+        if (outlet?.id === selectedOutletInfo?.id || orderItemsCount === 0) {
             sessionStorage.setItem("cartOutlet", JSON.stringify(selectedOutletInfo));
             return true;
         }
         else {
             return false
         }
-    }
+    }, [orderItemsCount, selectedOutletInfo, outlet])
 
 
-
-    const addItem = (menuItem) => {
-        const data = {
-            itemId: menuItem.id,
-            quantity: 1,
-            name: menuItem.name,
-            description: menuItem.description,
-            basePrice: menuItem.basePrice,
-            isVegeterian: menuItem.isVegeterian
-        }
-        const existItemIndex = orderItems.findIndex(item => item.itemId === data.itemId)
-        const validOutlet = isValidoutlet();
-        if (validOutlet) {
+    const addItem = useCallback((menuItem) => {
+        const existItemIndex = orderItems.findIndex(a => a.itemId === menuItem.id)
+        if (isValidoutlet()) {
             setOrderItems((prevData) => {
                 if (existItemIndex !== -1) {
                     const updatedItem = [...prevData]
-                    updatedItem[existItemIndex] = {
-                        itemId: prevData[existItemIndex].itemId,
-                        quantity: prevData[existItemIndex].quantity + 1,
-                        name: prevData[existItemIndex].name,
-                        description: prevData[existItemIndex].description,
-                        basePrice: prevData[existItemIndex].basePrice,
-                        isVegeterian: prevData[existItemIndex].isVegeterian
-                    }
+                    updatedItem[existItemIndex].quantity += 1
                     return updatedItem;
                 } else {
-                    return [...prevData, data]
+                    return [...prevData, {
+                        itemId: menuItem.id,
+                        quantity: 1,
+                        name: menuItem.name,
+                        description: menuItem.description,
+                        basePrice: menuItem.basePrice,
+                        isVegeterian: menuItem.isVegeterian
+                    }]
                 }
             })
         } else {
-
-            setWarningDialog(() => true)
+            setWarningDialog(true)
         }
+    }, [orderItems, isValidoutlet])
 
-    }
 
-    const removeItem = (menuItem) => {
-        const existItem = orderItems.findIndex(a => a.itemId === menuItem.id)
+    const removeItem = useCallback((itemId) => {
+        const existItem = orderItems.findIndex(a => a.itemId === itemId)
         const existQuantity = orderItems[existItem].quantity;
         setOrderItems(prevData => {
             if (existQuantity > 1) {
                 const updatedItem = [...prevData]
-                updatedItem[existItem] = {
-                    itemId: menuItem.id,
-                    quantity: updatedItem[existItem].quantity - 1,
-                    name: prevData[existItem].name,
-                    description: prevData[existItem].description,
-                    basePrice: prevData[existItem].basePrice,
-                    isVegeterian: prevData[existItem].isVegeterian
-                }
+                updatedItem[existItem].quantity -= 1
                 return updatedItem
             } else {
-                return prevData.filter(a => a.itemId !== menuItem.id)
+                return prevData.filter(a => a.itemId !== itemId)
             }
         })
-    }
+    }, [orderItems])
 
 
-    const handleCheckOut = () => {
+    const handleCheckOut = useCallback(() => {
         navigate("/cart")
-    }
+    }, [navigate])
 
-    const backToOutlet = () => {
-        const outletPath = "/" + pnr + "/stations/outlets/" + stationInfo.code;
+
+    const backToOutlet = useCallback(() => {
+        const outletPath = "/" + pnr + "/stations/outlets/" + code;
         navigate(outletPath, { replace: true })
-    }
+    }, [navigate, code, pnr])
 
-    const handleCancel = () => {
-        setWarningDialog(() => false);
-    }
-    const handleContiue = () => {
-        setOrderItems(() => [])
+
+    const handleCancel = useCallback(() => {
+        setWarningDialog(false);
+    }, [])
+
+
+    const handleContiue = useCallback(() => {
+        setOrderItems([])
         sessionStorage.removeItem("cartOutlet")
-        setWarningDialog(() => false)
-    }
-    const orderItemsCount = orderItems?.length;
+        setWarningDialog(false)
+    }, [])
+
+
+    const applyVegFilter = useCallback((veg) => {
+        veg === filters.isVeg
+            ? setFilters(prevData => ({
+                ...prevData,
+                isVeg: null
+            }))
+            : setFilters(prevData => ({
+                ...prevData,
+                isVeg: veg
+            }))
+    }, [filters])
+
+
+    const applyPriceFilter = useCallback((value) => {
+        value === filters.amountSort
+            ? setFilters(prevData => ({
+                ...prevData,
+                amountSort: null
+            }))
+            : setFilters(prevData => ({
+                ...prevData,
+                amountSort: value
+            }))
+    }, [filters])
+
+
+    const VegList = filters?.isVeg
+        ? menuList.filter(veg => veg.isVegeterian === (filters.isVeg === "veg") ? true : false)
+        : menuList;
+
+
+    const menuItemList = filters?.amountSort ?
+        (filters.amountSort === "hightoLow" ?
+            VegList.toSorted((a, b) => b.basePrice - a.basePrice)
+            : VegList.toSorted((a, b) => a.basePrice - b.basePrice)
+        )
+        : VegList
 
 
 
@@ -144,8 +166,14 @@ export default function MenuItem() {
                 backToOutlet={backToOutlet}
             />
 
+            <Filters
+                vegFilter={applyVegFilter}
+                priceFilter={applyPriceFilter}
+                active={filters}
+            />
+
             <MenuList
-                menuList={menuList}
+                menuList={menuItemList}
                 isLoading={isLoading}
                 orderItems={orderItems}
                 addItem={addItem}
@@ -155,18 +183,16 @@ export default function MenuItem() {
             <CartInfo
                 orderItemsCount={orderItemsCount}
                 handleCheckOut={handleCheckOut}
-                outlet={outlet}
             />
+
             <Spinner isLoading={isLoading} />
-            {
-                warningDialog
-                    ? <WarningDialog
-                        orderItemsCount={orderItemsCount}
-                        handleCancel={handleCancel}
-                        handleContiue={handleContiue}
-                        outlet={outlet}
-                    />
-                    : null
+
+            {warningDialog ? <WarningDialog
+                orderItemsCount={orderItemsCount}
+                handleCancel={handleCancel}
+                handleContiue={handleContiue}
+                outlet={outlet} />
+                : null
             }
         </>
     )

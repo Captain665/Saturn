@@ -17,8 +17,7 @@ const CartInfo = ({ orderItemsCount, handleCheckOut }) => {
                     </ul>
                 </div >
             }
-        </>
-
+        </> 
     )
 }
 

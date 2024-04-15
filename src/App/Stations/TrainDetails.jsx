@@ -4,7 +4,6 @@ import { FormatedDateWithWeek } from "../Components/DateTimeFormatChange";
 
 function TrainHtml({ train, pnr }) {
 
-
     return (
         <div className="flex flex-col w-full">
 
@@ -36,12 +35,11 @@ function TrainHtml({ train, pnr }) {
                 </ul>
 
                 <ul className="flex justify-between mt-2">
-                    <li className=" text-gray-400">{FormatedDateWithWeek(train?.trainInfo?.dt)}</li>
+                    <li className="text-gray-400">{FormatedDateWithWeek(train?.trainInfo?.dt)}</li>
                     <li>{ }</li>
                 </ul>
 
             </div>
-
         </div>
     )
 

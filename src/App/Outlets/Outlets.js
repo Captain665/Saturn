@@ -1,34 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import OutletHtml from "./OutletList";
 import { OutletResponse } from "../ApiCall/OutletApi";
 import Spinner from "../Components/Spinner";
 
 export default function OutletList() {
+
+    console.log("outlet list JS")
+
     const navigate = useNavigate()
     const { code } = useParams()
-    const station = JSON.parse(sessionStorage.getItem("selectedStation"))
+
     const [outletData, setOutletData] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
 
     useEffect(() => {
-
         const fetchData = async () => {
             setIsLoading(true)
             const response = await OutletResponse(code)
             if (response.status === "success") {
                 setOutletData(response.result)
-                setIsLoading(() => false)
+                setIsLoading(false)
             } else {
-                setIsLoading(() => false)
+                setIsLoading(false)
             }
         }
-
         fetchData()
-        return () => {
-            setIsLoading(() => false)
-        }
     }, [code])
 
     const handleOnClick = (outlet) => {
@@ -43,14 +41,12 @@ export default function OutletList() {
             <OutletHtml
                 isLoading={isLoading}
                 outletData={outletData}
-                stations={station}
-                stationCode={code}
                 handleOnClick={handleOnClick}
             />
+
             <Spinner
                 isLoading={isLoading}
             />
         </>
-
     )
 }
