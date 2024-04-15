@@ -21,7 +21,7 @@ function OutletHtml({ outletData, handleOnClick, isLoading }) {
                             <div className="self-center w-11/12 md:w-4/5 grid md:grid-cols-4 gap-4 md:gap-y-20 gap-y-10 p-1 md:mt-10 mt-5">
                                 {outletData?.map(outlet => (
                                     <div
-                                        className="flex flex-col bg-white h-72 m-1 cursor-pointer hover:p-2 hover:delay-100"
+                                        className="flex flex-col bg-white h-72 m-1 cursor-pointer hover:p-1 hover:delay-100"
                                         key={outlet.id}
                                         onClick={() => handleOnClick(outlet)}
                                     >
