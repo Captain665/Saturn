@@ -120,7 +120,7 @@ export default function MenuItem() {
 
     const handleCheckOut = () => {
         const minOrdeAmount = outlet?.minOrderValue;
-        const itemAmount = orderItems.reduce((a, b) => a + (b.basePrice * b.quantity), 0).toFixed(2);
+        const itemAmount = JSON.parse(orderItems.reduce((a, b) => a + (b.basePrice * b.quantity), 0).toFixed(2));
         if (itemAmount >= minOrdeAmount) {
             navigate("/cart")
         } else {

@@ -35,7 +35,7 @@ export default function CartInfo() {
 
         window.sessionStorage.setItem("selectedItemInfo", JSON.stringify(itemList))
         setTimeout(() => {
-            if (!userInfo || error?.error === "Not authorize to Access") {
+            if (!userInfo) {
                 const pathName = `/login?redirectedTo=${path}&message=You must log in first.`
                 navigate(pathName)
             }
@@ -47,14 +47,11 @@ export default function CartInfo() {
                 setRedirect(true)
             }
         }, 2000)
-        return () => { setError(false) }
     }, [itemList, navigate, path, error, userInfo])
 
-    if(redirect){
+    if (redirect) {
         returnToMenu()
     }
-
-
 
 
     const itemSize = itemList?.length;
@@ -99,7 +96,19 @@ export default function CartInfo() {
     }
 
     const makePayment = () => {
-        navigate("/payments")
+        const minOrderAmount = outletInfo?.minOrderValue;
+        console.log(minOrderAmount)
+        const subTotal = JSON.parse(itemList?.reduce((a, b) => a + (b.basePrice * b.quantity), 0).toFixed(2));
+        if (subTotal >= minOrderAmount) {
+            navigate("/payments")
+        } else {
+            const msg = {
+                status: "failure",
+                error: "Your order amount is less than minimum order value of selected outlet",
+                result: null
+            }
+            setError(msg)
+        }
     }
 
 
