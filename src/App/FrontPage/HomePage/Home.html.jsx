@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import ErrorToster from "../../../App/Components/MessageToggle";
-import { FaStar, FaHandPointRight, FaTrain } from "react-icons/fa6";
+import { FaStar, FaHandPointRight, FaTrain, FaCircleNotch } from "react-icons/fa6";
 
 
 export default function HomePage({ handleOnChange, handleOnClick, error, isLoading }) {
 
     const [dialog, setDialog] = useState(false)
 
-    console.log(dialog)
 
     const showDialog = () => {
         setDialog(() => true)
@@ -260,8 +259,8 @@ export default function HomePage({ handleOnChange, handleOnClick, error, isLoadi
                                 disabled={isLoading}
                                 type="submit"
                                 onClick={handleOnClick}
-                                className={`bg-orange-500 mt-4 px-4 p-2 rounded-lg border-none font-extrabold text-white active:opacity-70 ${isLoading && "cursor-no-drop"}`}>
-                                Submit
+                                className={`bg-orange-500 mt-4 text-center px-4 p-2 rounded-lg border-none font-extrabold text-white active:opacity-70 ${isLoading && "cursor-no-drop opacity-50"}`}>
+                                {isLoading ? <FaCircleNotch className=" animate-spin text-center text-xl w-full px-4" /> : "Submit"}
                             </button>
 
                         </ul>
@@ -270,29 +269,6 @@ export default function HomePage({ handleOnChange, handleOnClick, error, isLoadi
 
                 {error && <ErrorToster props={error} />}
             </div>
-
-
-
-
-
-
-
-            {/* {isLoading
-                ? <IsLoading />
-                : <div className="bg-cover bg-center opacity-90 bg-[url('https://www.prideofindia.co/cdn/shop/articles/Best-Cuisines_800x.jpg?v=1690289606')] h-svh bg-no-repeat w-full">
-                    <div className="h-screen flex justify-center items-center flex-col">
-                        <form className="self-center shadow-xl rounded-xl items-center place-content-center bg-white md:p-10 p-5 flex flex-col md:gap-2 md:flex-row"
-                            method="post" onSubmit={handleOnClick}>
-                            <input type="number" name="pnr" maxLength={10} minLength={10} onChange={handleOnChange} required
-                                className="border-2 rounded-md h-14 outline-none pl-5 text-xl text-start font-medium" placeholder="Enter PNR Number" /><br />
-
-                            <button type="submit"
-                                className="px-6 md:p-3 p-2 border-none font-bold rounded-lg text-xl cursor-pointer bg-[#60b246]">Submit</button>
-                        </form>
-                    </div>
-                    {}
-                </div>
-            } */}
         </>
     )
 }
