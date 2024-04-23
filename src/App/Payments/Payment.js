@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import PaymentInfo from "./PaymentInfo";
 import { useLocation, useNavigate } from "react-router";
 import { CreateOrderResponse } from "../ApiCall/CreateOrderApi";
@@ -8,7 +8,7 @@ import ErrorToster from "../Components/MessageToggle";
 
 
 export default function Payments() {
-    
+
     const navigate = useNavigate()
     const location = useLocation()
     const path = location.pathname;
@@ -21,10 +21,11 @@ export default function Payments() {
     const seatInfo = JSON.parse(sessionStorage.getItem("pnrDetails"))?.seatInfo;
     const pnr = JSON.parse(sessionStorage.getItem("pnr"));
 
+    const [paymentOption, setPaymentOption] = useState();
     const [paymentSelection, setPaymentSelection] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
-
     const [error, setError] = useState(null)
+
 
     const subTotal = JSON.parse(itemInfo?.reduce((a, b) => a + (b.basePrice * b.quantity), 0).toFixed(2))
     const taxes = JSON.parse((subTotal * 0.05).toFixed(2))
@@ -35,6 +36,7 @@ export default function Payments() {
     const selectPaymentMode = useCallback((mode) => {
         setPaymentSelection((prevData) => (prevData === mode ? null : mode))
     }, [])
+    console.log(paymentSelection)
 
     const backToCart = useCallback(() => {
         navigate("/cart")
@@ -64,6 +66,30 @@ export default function Payments() {
         navigate(pathName)
     }
 
+    useEffect(() => {
+        const fetchPaymentDetails = async () => {
+            const url = "/payment/available"
+            const payload = {
+                method: "GET",
+                headers: {
+                    "Authorization": userInfo?.jwt,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+
+                }
+            }
+            const response = await fetch(url, payload);
+            const data = await response.json();
+            if (response.ok) {
+                setPaymentOption(data.result);
+            } else {
+                setError(data)
+            }
+            console.log(data)
+        }
+        fetchPaymentDetails();
+    }, [])
+
 
     return (
         <>
@@ -75,6 +101,7 @@ export default function Payments() {
                 backToCart={backToCart}
                 isLoading={isLoading}
                 totalItem={itemInfo?.length}
+                paymentOption={paymentOption}
             />
             {isLoading && <Spinner isLoading={isLoading} />}
 

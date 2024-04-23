@@ -1,8 +1,9 @@
 import React, { memo } from "react";
 import { FaArrowLeft, FaChevronRight, FaWallet, FaCreditCard, FaBuildingColumns, FaMoneyBill1 } from "react-icons/fa6";
 
-function PaymentInfo({ paymentMode, proceedToPay, mode, totalAmount, backToCart, isLoading, totalItem }) {
+function PaymentInfo({ paymentMode, proceedToPay, mode, totalAmount, backToCart, isLoading, totalItem, paymentOption }) {
 
+    console.log(paymentOption)
     const payMode = () => {
         return mode && mode?.toUpperCase();
     }
@@ -21,9 +22,19 @@ function PaymentInfo({ paymentMode, proceedToPay, mode, totalAmount, backToCart,
                         </ul>
                     </ul>
                 </ul>
-                <ul className="m-auto mt-10 flex flex-col gap-2">
 
-                    <ul className={`border flex items-center justify-between px-2 h-16 p-2 rounded cursor-pointer 
+                <ul className="m-auto mt-10 flex flex-col gap-2">
+                    {paymentOption?.paymentGateways?.map(option => (
+                        <ul className={`border flex items-center justify-between px-2 h-16 p-2 rounded cursor-pointer 
+                        ${mode === option?.name ? "bg-green-200" : null}`} onClick={() => paymentMode(option?.name)} key={option?.id}>
+                            <li className="w-1/5 ml-5">
+                                <img src={option?.gatewayLogo} alt="" className="h-full w-full" />
+                            </li>
+                            <li><FaChevronRight /></li>
+                        </ul>
+                    ))}
+
+                    {/* <ul className={`border flex items-center justify-between px-2 h-16 p-2 rounded cursor-pointer 
                 ${mode === "Razorpay" ? "bg-green-200" : null}`} onClick={() => paymentMode("Razorpay")}>
                         <li className="w-1/5 ml-5">
                             <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Razorpay_logo.svg" alt="" className="h-full w-full" />
@@ -45,12 +56,12 @@ function PaymentInfo({ paymentMode, proceedToPay, mode, totalAmount, backToCart,
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSK36JZxT4uTNuzmYyLMi6SD0vEH14dNLWKBA&usqp=CAU" alt="" className="h-full w-full" />
                         </li>
                         <li><FaChevronRight /></li>
-                    </ul>
+                    </ul> */}
 
                 </ul>
 
                 <ul className="mt-10 mb-20">
-                    <li className="font-bold text-xl">• More Payment Options</li>
+                    <li className="font-bold text-xl">• {paymentOption?.title}</li>
 
                     <ul className="m-auto mt-10 flex flex-col gap-2">
 
