@@ -55,7 +55,7 @@ export default function Payments() {
         }
     }
 
-    if(error?.error === "Not authorize to Access"){
+    if (error?.error === "Not authorize to Access") {
         localStorage.clear();
         const pathName = `/login?redirectedTo=${path}&message=You must log in first.`
         navigate(pathName)
@@ -64,17 +64,17 @@ export default function Payments() {
 
     return (
         <>
-        <PaymentInfo
-            paymentMode={selectPaymentMode}
-            proceedToPay={createOrder}
-            mode={paymentSelection}
-            totalAmount={payable}
-            backToCart={backToCart}
-            isLoading={isLoading}
-            error={error}
-            totalItem={itemInfo?.length}
-        />
-        <Spinner isLoading={isLoading}/>
+            <PaymentInfo
+                paymentMode={selectPaymentMode}
+                proceedToPay={createOrder}
+                mode={paymentSelection}
+                totalAmount={payable}
+                backToCart={backToCart}
+                isLoading={isLoading}
+                error={error}
+                totalItem={itemInfo?.length}
+            />
+            <Spinner isLoading={isLoading} />
         </>
     )
 }
