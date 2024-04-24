@@ -6,7 +6,7 @@ function SuccessPlacedConfirm({ orderId, shown, handleOnClick }) {
     console.log("success toster running...")
 
     return (
-        <dialog open={shown} className="flex m-auto h-full justify-center w-full fixed z-50 bg-opacity-20 top-0 bg-transparent backdrop-blur-sm p-2">
+        <dialog open={shown} className="flex m-auto h-full justify-center w-full fixed z-50 bg-opacity-20 top-0 bg-transparent backdrop-blur-sm p-5">
             <ul className="w-fit bg-white z-50 border-2 shadow-2xl m-auto h-fit flex flex-col justify-center place-content-center text-center md:p-5 md:px-10 rounded-lg">
                 <strong className="md:text-3xl font-extrabold mt-8 text-xl">Your order has been received</strong>
                 <p className="bg-green-600 md:mt-10 mt-5 flex justify-center m-auto w-12 h-12 rounded-full items-center text-white font-extrabold text-3xl"><FaCheck /></p>
