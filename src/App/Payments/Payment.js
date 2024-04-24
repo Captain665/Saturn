@@ -36,7 +36,6 @@ export default function Payments() {
     const selectPaymentMode = useCallback((mode) => {
         setPaymentSelection((prevData) => (prevData === mode ? null : mode))
     }, [])
-    console.log(paymentSelection)
 
     const backToCart = useCallback(() => {
         navigate("/cart")
@@ -46,8 +45,9 @@ export default function Payments() {
 
     const createOrder = async () => {
         setIsLoading(() => true)
+        const paymentType = paymentSelection === "Pay on Delivery" ? "CASH" : paymentSelection;
         const response = await CreateOrderResponse(trainInfo,
-            stationInfo, seatInfo, outletInfo, userInfo, itemInfo, pnr, paymentSelection, device);
+            stationInfo, seatInfo, outletInfo, userInfo, itemInfo, pnr, paymentType, device);
         if (response.status === "success") {
             sessionStorage.clear();
             const orderId = response?.result.id;
@@ -68,6 +68,7 @@ export default function Payments() {
 
     useEffect(() => {
         const fetchPaymentDetails = async () => {
+            setIsLoading(true)
             const url = "/payment/available"
             const payload = {
                 method: "GET",
@@ -85,7 +86,7 @@ export default function Payments() {
             } else {
                 setError(data)
             }
-            console.log(data)
+            setIsLoading(false)
         }
         fetchPaymentDetails();
     }, [])
