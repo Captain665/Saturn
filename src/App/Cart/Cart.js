@@ -41,7 +41,7 @@ export default function CartInfo() {
 
         window.sessionStorage.setItem("selectedItemInfo", JSON.stringify(itemList))
         setTimeout(() => {
-            if (!userInfo || error?.error === "Not authorize to Access") {
+            if (!userInfo) {
                 const pathName = `/login?redirectedTo=${path}&message=You must log in first.`
                 navigate(pathName)
             }
@@ -52,9 +52,9 @@ export default function CartInfo() {
             if (itemList?.length === 0) {
                 setRedirect(true)
             }
-        }, 3000)
-        return () => { setError(false) }
-    }, [itemList, path, error, userInfo, navigate])
+
+        }, 2000)
+    }, [itemList, navigate, path, error, userInfo])
 
     if (redirect) {
         returnToMenu()
@@ -81,7 +81,6 @@ export default function CartInfo() {
             behavior: 'smooth'
         })
     }
-
     const itemSize = itemList?.length;
     if (itemList === 0 || itemSize === undefined) {
         returnToMenu()
@@ -110,9 +109,6 @@ export default function CartInfo() {
         })
     }, [itemList])
 
-    const makePayment = useCallback(() => {
-        navigate("/payments")
-    }, [navigate])
 
     if (isLoading) {
         return <IsLoading isLoading={isLoading} />
@@ -121,6 +117,22 @@ export default function CartInfo() {
     if (!itemList?.length > 0) {
         const url = "https://iticsystem.com/img/empty-cart.png"
         return <NoProductExist isLoading={isLoading} logo={url} />
+    }
+
+    const makePayment = () => {
+        const minOrderAmount = outletInfo?.minOrderValue;
+        console.log(minOrderAmount)
+        const subTotal = JSON.parse(itemList?.reduce((a, b) => a + (b.basePrice * b.quantity), 0).toFixed(2));
+        if (subTotal >= minOrderAmount) {
+            navigate("/payments")
+        } else {
+            const msg = {
+                status: "failure",
+                error: "Your order amount is less than minimum order value of selected outlet",
+                result: null
+            }
+            setError(msg)
+        }
     }
 
 

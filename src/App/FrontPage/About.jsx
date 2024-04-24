@@ -1,27 +1,40 @@
-import React from "react";
+import React, { useEffect } from "react";
+import UseAnalyticsEventTracker from "../Components/useAnalyticsEventTracker";
+
+
 
 export default function About() {
+    const gaEventTracker = UseAnalyticsEventTracker("About US")
+
+    console.log(gaEventTracker)
+
+    useEffect(() => {
+        gaEventTracker("About US")
+        console.log("GA event is added for About Page")
+    }, [gaEventTracker])
+
+
     return (
         <div className="flex flex-col">
             <div className="m-2 h-fit shadow md:indent-5 indent-2 md:w-9/12 self-center px-1 md:px-32 md:py-3 text-pretty">
                 <br />
                 <header>
                     <h1 className="md:text-4xl text-2xl font-bold">About Us</h1><hr /><br />
-                    <p className="text-sm md:text-base">Welcome to [Your Website Name], where passion for food meets culinary excellence! We are a team of dedicated
+                    <p className="text-sm md:text-base">Welcome to Meal Monkey, where passion for food meets culinary excellence! We are a team of dedicated
                         food enthusiasts committed to bringing you a delightful culinary experience.</p>
                 </header><br />
 
                 <section>
                     <h2 className="md:text-xl font-bold text-lg">Our Mission</h2>
-                    <p className="text-sm md:text-base">At [Your Website Name], our mission is simple yet profound — to create a space where food becomes an adventure.
+                    <p className="text-sm md:text-base">At Meal Monkey, our mission is simple yet profound — to create a space where food becomes an adventure.
                         We believe in the power of exceptional ingredients, innovative recipes, and the joy of sharing delicious
                         meals with loved ones. Our goal is to inspire and elevate your culinary journey.</p><br />
                 </section>
 
                 <section>
                     <h2 className="font-bold md:text-xl text-lg">Our Story</h2>
-                    <p className="text-sm md:text-base">[Your Website Name] began as a shared dream among friends who bonded over a love for flavors and the magic
-                        that happens in the kitchen. Our journey started in [Year], and since then, we've embarked on a quest to
+                    <p className="text-sm md:text-base">Meal Monkey began as a shared dream among friends who bonded over a love for flavors and the magic
+                        that happens in the kitchen. Our journey started in 2024, and since then, we've embarked on a quest to
                         explore the world of gastronomy, bringing you a curated selection of recipes, cooking tips, and food
                         stories.</p><br />
                 </section>
@@ -33,7 +46,7 @@ export default function About() {
                         <h3 className="font-bold md:text-xl text-lg">Quality Ingredients</h3>
                         <p className="text-sm md:text-base">We believe that the foundation of every great dish lies in the quality of its ingredients. That's why we
                             source only the finest, freshest produce, spices, and other culinary treasures to ensure that each recipe
-                            on [Your Website Name] meets the highest standards of taste and nutrition.</p><br />
+                            on Meal Monkey meets the highest standards of taste and nutrition.</p><br />
                     </div>
 
                     <div>
@@ -56,17 +69,17 @@ export default function About() {
                     <h2 className="font-bold text-xl md:text-2xl">Meet the Team</h2><hr /><br />
 
                     <div>
-                        <h3 className="font-bold">[Founder/Name]</h3>
+                        <h3 className="font-bold">Lohar&Son's Group 👍</h3>
                         <p className="text-sm md:text-base">*Title and Brief Bio*</p>
                     </div>
 
                     <div>
-                        <h3 className="font-bold">[Chef/Name]</h3>
+                        <h3 className="font-bold">Henry Noah 🙋‍♂️</h3>
                         <p className="text-sm md:text-base">*Title and Brief Bio*</p>
                     </div>
 
                     <div>
-                        <h3 className="font-bold">[Food Enthusiast/Name]</h3>
+                        <h3 className="font-bold">Oliver Jha 🙎‍♂️</h3>
                         <p className="text-sm md:text-base">*Title and Brief Bio*</p>
                     </div>
 
@@ -76,7 +89,7 @@ export default function About() {
                     <p className="text-sm md:text-base">Thank you for being part of the [Your Website Name] family. Get ready to embark on a culinary journey filled
                         with flavor, creativity, and a whole lot of deliciousness!</p><br />
                     <p>Happy Cooking,</p>
-                    <p>The [Your Website Name] Team</p>
+                    <p>The Meal Monkey Team</p>
                 </footer>
             </div>
         </div>

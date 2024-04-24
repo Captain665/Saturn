@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { FaTrain } from "react-icons/fa6";
+import { FaTrain, FaCircleNotch } from "react-icons/fa6";
 
 
 function ActionDialog({ dialog, handleOnChange, hideDialog, isLoading, handleOnClick }) {
@@ -38,7 +38,7 @@ function ActionDialog({ dialog, handleOnChange, hideDialog, isLoading, handleOnC
                             type="submit"
                             onClick={handleOnClick}
                             className={`bg-orange-500 mt-4 px-4 p-2 rounded-lg border-none font-extrabold text-white active:opacity-70 ${isLoading && "cursor-no-drop"}`}>
-                            Submit
+                            {isLoading ? <FaCircleNotch className=" animate-spin text-center text-xl w-full px-4" /> : "Submit"}
                         </button>
 
                     </ul>

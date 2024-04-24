@@ -7,6 +7,7 @@ import { MenuResponse } from "../ApiCall/MenuApi";
 import Spinner from "../Components/Spinner";
 import WarningDialog from "./WarningDialog";
 import Filters from "./Filters";
+import ErrorToster from "../Components/MessageToggle";
 
 export default function MenuItem() {
 
@@ -24,6 +25,7 @@ export default function MenuItem() {
     const [filters, setFilters] = useState({ isVeg: null, amountSort: null })
 
     const orderItemsCount = orderItems?.length;
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -95,10 +97,21 @@ export default function MenuItem() {
         })
     }, [orderItems])
 
+    const handleCheckOut = () => {
+        const minOrdeAmount = outlet?.minOrderValue;
+        const itemAmount = JSON.parse(orderItems.reduce((a, b) => a + (b.basePrice * b.quantity), 0).toFixed(2));
+        if (itemAmount >= minOrdeAmount) {
+            navigate("/cart")
+        } else {
+            const msg = {
+                status: "failure",
+                error: "Your order amount is less than minimum order value of selected outlet",
+                result: null
+            }
+            setError(msg)
+        }
 
-    const handleCheckOut = useCallback(() => {
-        navigate("/cart")
-    }, [navigate])
+    }
 
 
     const backToOutlet = useCallback(() => {
@@ -159,6 +172,7 @@ export default function MenuItem() {
 
 
 
+
     return (
         <>
             <OutletInfo
@@ -194,6 +208,7 @@ export default function MenuItem() {
                 outlet={outlet} />
                 : null
             }
+            <ErrorToster props={error} />
         </>
     )
 }

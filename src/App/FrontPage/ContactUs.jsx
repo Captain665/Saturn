@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
+import UseAnalyticsEventTracker from "../Components/useAnalyticsEventTracker";
 
 export default function Contact() {
+    const gaEventTracker = UseAnalyticsEventTracker("Contect Us")   
+
+    useEffect(() => {
+        gaEventTracker("Contect Us")
+        console.log("ga event is added")    
+    },[gaEventTracker])
+
     return (
         <div className="flex flex-col">
             <div className="m-2 h-fit shadow md:indent-5 indent-2 px-1 md:w-9/12 self-center md:px-32 md:py-3 text-pretty">
                 <br />
                 <header>
                     <h1 className="md:text-4xl text-2xl font-bold" >Contact Us</h1><hr /><br />
-                    <p className="text-sm md:text-base">Welcome to [Your Website Name]! We're thrilled to hear from you.</p>
+                    <p className="text-sm md:text-base">Welcome to Meal Monkey! We're thrilled to hear from you.</p>
                 </header><br />
 
                 <section>
@@ -16,7 +24,7 @@ export default function Contact() {
                     <div>
                         <h3 className="font-bold md:text-xl text-lg">Email</h3>
                         <p className="text-sm md:text-base">For general inquiries, reach out to us via email at <a href="mailto:your@email.com">your@email.com</a>. We aim
-                            to respond to emails within [X] business days.</p>
+                            to respond to emails within 1 business days.</p>
                     </div><br />
 
                     <div>
@@ -34,10 +42,10 @@ export default function Contact() {
                         <h3 className="font-bold md:text-xl text-lg">Mailing Address</h3>
                         <p className="text-sm md:text-base">If you prefer traditional mail, you can send us letters or packages to our mailing address:</p>
                         <ul><br />
-                            <li>[Your Company Name]</li>
-                            <li>[Street Address]</li>
-                            <li>[City, State, ZIP Code]</li>
-                            <li>[Country]</li>
+                            <li>Lohar&Sons PVT. LTD.</li>
+                            <li>91 SpringBoard, C2</li>
+                            <li>Noida Sector 1</li>
+                            <li>India</li>
                         </ul>
                     </div>
 
@@ -50,14 +58,14 @@ export default function Contact() {
                         <h3 className="font-bold md:text-xl text-lg">Customer Support</h3>
                         <p className="text-sm md:text-base">If you need assistance with an order, have a product-related question, or encounter any issues on our
                             website, our customer support team is here to help. Please email <a
-                                href="mailto:support@email.com">support@email.com</a> for prompt assistance.</p>
+                                href="mailto:support@email.com">support@mealMonkey.com</a> for prompt assistance.</p>
                     </div>
 
                     <div>
                         <h3 className="font-bold md:text-xl text-lg">Feedback</h3>
-                        <p className="text-sm md:text-base">We value your feedback! Let us know what you love about [Your Website Name] or how we can enhance your
+                        <p className="text-sm md:text-base">We value your feedback! Let us know what you love about Meal Monkey or how we can enhance your
                             experience. Your insights help us continually improve. Send your feedback to <a
-                                href="mailto:feedback@email.com">feedback@email.com</a>.</p>
+                                href="mailto:feedback@email.com">feedback@mealMonkey.com</a>.</p>
                     </div>
 
                 </section><br />
@@ -67,7 +75,7 @@ export default function Contact() {
 
                     <p className="text-sm md:text-base">We're open to collaborations and partnerships with fellow food enthusiasts, chefs, and brands. If you're
                         interested in working with us, please contact our partnerships team at <a
-                            href="mailto:partnerships@email.com">partnerships@email.com</a>.</p>
+                            href="mailto:partnerships@email.com">partnerships@mealMonkey.com</a>.</p>
 
                 </section><br />
 
@@ -75,7 +83,7 @@ export default function Contact() {
                     <h2 className="md:text-2xl text-xl font-bold">Stay Connected</h2>
 
                     <p className="text-sm md:text-base">Subscribe to our newsletter to receive the latest recipes, cooking tips, and exclusive offers directly to
-                        your inbox. Join our growing community of food lovers and stay connected with [Your Website Name]. <br />
+                        your inbox. Join our growing community of food lovers and stay connected with Meal Monkey. <br />
                         <br /><a href="[Subscribe Now Link]">Subscribe Now</a></p>
 
                 </section><br />
@@ -84,7 +92,7 @@ export default function Contact() {
                     <p className="text-sm md:text-base">Thank you for being a part of our culinary journey. We look forward to hearing from you and sharing the joy
                         of food!</p><br />
                     <p>Happy Cooking,</p>
-                    <p>The [Your Website Name] Team</p>
+                    <p>The Meal Monkey Team</p>
                 </footer>
             </div >
         </div>

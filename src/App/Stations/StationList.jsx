@@ -33,7 +33,7 @@ function StationData({ stations, handleOnClick }) {
 
             {stations?.map(station => (
                 <ul key={station.code} onClick={() => handleOnClick(station)}
-                    className="flex justify-between shadow-lg w-11/12 md:w-1/2 content-center self-center h-28 px-4 bg-white m-1 rounded-md md:h-36 cursor-pointer">
+                    className="flex justify-between shadow-lg  w-11/12 md:w-1/2 content-center self-center h-28 px-4 bg-white border m-1 rounded-md md:h-36 cursor-pointer">
                     <ul className="self-center text-start text-sm md:text-base">
                         <li className="font-bold text-base md:text-xl">{station.name}<span className="ml-1 font-normal text-xs md:text-base">{station.code}</span></li>
                         <li>{TrainTiming(station?.delayArrival)}</li>

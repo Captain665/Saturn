@@ -21,8 +21,11 @@ import OrderList from "./App/Orders/OrderList/Orders";
 import NoProductExist from "./App/Components/EmptyPage";
 
 
+
+
 export default function BasePage() {
-    
+
+
     return (
         <BrowserRouter>
             <Routes>
@@ -32,22 +35,22 @@ export default function BasePage() {
                     <Route path="contact" element={<Contact />} />
                     <Route path="account" element={<Account />} />
                     <Route path="customer/details" element={<CustomerDetails />} />
-                        
-                    
+
+
                     <Route path="*" element={<NonExistPath />} />
 
                     <Route path=":pnr/stations" element={<TrainInfo />}>
                         <Route index element={<StationList />} />
                         <Route path="outlets/:code" element={<OutletList />} />
-                    </Route>    
+                    </Route>
                     <Route path="/station/:code/outlet/:id/menu" element={<MenuItem />} />
                     <Route path="cart" element={<CartInfo />} />
                     <Route path="payments" element={<Payments />} />
                     <Route path="order/:orderId" element={<OrderDetails />} />
-                    <Route path="orders" element = {<OrderList />}/>
-                    <Route path="login"  element={<Login />}/>
-                    <Route path="signup" element={<Signup />} /> 
-                    <Route path="testing" element={<NoProductExist />}/>
+                    <Route path="orders" element={<OrderList />} />
+                    <Route path="login" element={<Login />} />
+                    <Route path="signup" element={<Signup />} />
+                    <Route path="testing" element={<NoProductExist />} />
                 </Route>
             </Routes>
         </BrowserRouter>

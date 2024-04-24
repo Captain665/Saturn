@@ -107,6 +107,7 @@ export default function Payments() {
             {isLoading && <Spinner isLoading={isLoading} />}
 
             {error && <ErrorToster props={error} />}
+
         </>
     )
 }
