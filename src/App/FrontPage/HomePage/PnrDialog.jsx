@@ -6,8 +6,8 @@ function ActionDialog({ dialog, handleOnChange, hideDialog, isLoading, handleOnC
 
     return (
         <>
-            <dialog open id="dialog" className={`top-0 flex justify-center items-center w-full h-full bg-transparent ${dialog ? "backdrop-blur-sm" : "hidden"}`}>
-                <ul className="md:w-2/6 w-11/12 border-2 px-10 md:py-5 py-2 flex flex-col gap-5 bg-white rounded-xl shadow-2xl z-50">
+            <dialog open id="dialog" className="flex m-auto h-full justify-center w-full fixed z-50 bg-opacity-20 top-0 bg-transparent backdrop-blur-sm p-2">
+                <ul className="justify-end w-fit h-fit m-auto border px-10 md:py-5 py-2 flex flex-col gap-5 bg-white rounded-md shadow-2xl z-50">
                     <ul className="flex border items-center h-12 bg-gray-100 gap-2 mt-5 text-lg">
                         <li className="bg-white md:p-2 h-full px-4 md:px-5 flex justify-center self-center items-center">
                             <FaTrain />
@@ -37,7 +37,7 @@ function ActionDialog({ dialog, handleOnChange, hideDialog, isLoading, handleOnC
                             disabled={isLoading}
                             type="submit"
                             onClick={handleOnClick}
-                            className={`bg-orange-500 mt-4 px-4 p-2 rounded-lg border-none font-extrabold text-white active:opacity-70 ${isLoading && "cursor-no-drop"}`}>
+                            className={`bg-orange-500 mt-4 px-4 p-2 rounded-lg border-none font-extrabold text-white active:opacity-70 ${isLoading && "cursor-no-drop opacity-60"}`}>
                             {isLoading ? <FaCircleNotch className=" animate-spin text-center text-xl w-full px-4" /> : "Submit"}
                         </button>
 
