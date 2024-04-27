@@ -7,6 +7,7 @@ import SuccessPlacedConfirm from "./SuccessMsg";
 import IsLoading from "../../Components/Loading";
 import { useSearchParams } from "react-router-dom";
 import Spinner from "../../Components/Spinner";
+import ErrorToaster from "../../Components/MessageToggle";
 
 
 export default function OrderDetails() {
@@ -20,7 +21,7 @@ export default function OrderDetails() {
 
     const [isLoading, setIsLoading] = useState(false)
     const [order, setOrder] = useState()
-
+    const [error, setError] = useState();
     const [isShown, setIsShown] = useState(params.get("type") ? true : false)
 
 
@@ -31,6 +32,8 @@ export default function OrderDetails() {
             const response = await OrderDetailResponse(token, orderId)
             if (response.status === "success") {
                 setOrder(response.result)
+            }else{
+                setError(response)
             }
             setIsLoading(false)
         }
@@ -74,6 +77,8 @@ export default function OrderDetails() {
                     handleOnClick={handleOnClick}
                 />
             }
+
+            <ErrorToaster props = {error} />
 
         </>
     )

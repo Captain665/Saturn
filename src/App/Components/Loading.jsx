@@ -10,7 +10,7 @@ export default function IsLoading({ isLoading }) {
         } else {
             setText("Loading")
         }
-    }, 1000)
+    }, 2000)
 
 
     return (
