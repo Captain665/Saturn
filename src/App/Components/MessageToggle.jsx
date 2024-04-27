@@ -1,5 +1,5 @@
 import React, { memo, useEffect } from "react";
-import { Bounce, Flip, Slide, ToastContainer, Zoom, toast } from "react-toastify";
+import { ToastContainer, Zoom, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
 const contextClass = {

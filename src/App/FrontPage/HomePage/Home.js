@@ -23,7 +23,7 @@ export default function Home() {
                 result: null
             })
         }
-        if (pnr.current != '') {
+        if (pnr.current !== '') {
             setIsLoading(true)
             const response = await PnrResponse(pnr.current)
             if (response.status === "failure") {
