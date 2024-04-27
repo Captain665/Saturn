@@ -13,8 +13,6 @@ const contextClass = {
 
 function ErrorToster({ props }) {
 
-    console.log("Error toaster running...")
-
     useEffect(() => {
 
         const status = props?.status;

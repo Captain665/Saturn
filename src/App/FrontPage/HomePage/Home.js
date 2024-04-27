@@ -16,20 +16,29 @@ export default function Home() {
     const [dialog, setDialog] = useState(false)
 
     const GetData = useCallback(async (pnr) => {
-        setIsLoading(true)
-        const response = await PnrResponse(pnr.current)
-        if (response.status === "failure") {
-            setError(response)
+        if (pnr.current === '') {
+            setError({
+                status: "failure",
+                error: "Please Enter PNR Number",
+                result: null
+            })
         }
-        if (response.status === "success") {
-            const result = response.result;
-            sessionStorage.setItem("pnrDetails", JSON.stringify(result))
-            sessionStorage.setItem("pnr", JSON.stringify(pnr.current))
-            const route = pnr.current + "/stations";
-            navigate(route, { state: { result } });
+        if (pnr.current != '') {
+            setIsLoading(true)
+            const response = await PnrResponse(pnr.current)
+            if (response.status === "failure") {
+                setError(response)
+            }
+            if (response.status === "success") {
+                const result = response.result;
+                sessionStorage.setItem("pnrDetails", JSON.stringify(result))
+                sessionStorage.setItem("pnr", JSON.stringify(pnr.current))
+                const route = pnr.current + "/stations";
+                navigate(route, { state: { result } });
 
+            }
+            setIsLoading(false)
         }
-        setIsLoading(false)
     }, [])
 
     const handleOnChange = (event) => {

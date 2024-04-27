@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import LoginForm from "./Login.html";
 import { LoginResponse } from "../../ApiCall/LoginApi";
@@ -13,8 +13,17 @@ export default function Login() {
     const [loginData, setloginData] = useState({ mobileNumber: "", password: "" })
     const [isLoading, setLoading] = useState(false)
     const [error, setError] = useState(null)
-    
+
     const msg = param.get("message");
+
+    useEffect(() => {
+        const messages = {
+            status: "failure",
+            error: msg,
+            result: null
+        }
+        setError(messages)
+    }, [msg])
 
     function handleChange(event) {
         const name = event.target.name;
@@ -48,9 +57,6 @@ export default function Login() {
         fetchData()
     }
 
-    console.log(param.get("message"))
-    console.log(param.get("redirectedTo"))  
-
 
 
     return (
@@ -61,7 +67,6 @@ export default function Login() {
                 HandleSubmit={HandleSubmit}
                 loginData={loginData}
                 redirectedTo={param.get("redirectedTo")}
-                msg={msg}
             />
 
             <Spinner
