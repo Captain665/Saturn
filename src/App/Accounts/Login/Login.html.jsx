@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { FaCircleUser, FaMobileRetro, FaLock } from "react-icons/fa6";
+import { ImSpinner2 } from "react-icons/im";
 
 
 export default function LoginForm({ isLoading, handleChange, HandleSubmit, loginData, redirectedTo, msg }) {
@@ -56,10 +57,10 @@ export default function LoginForm({ isLoading, handleChange, HandleSubmit, login
                 </ul>
 
                 <button type="submit"
-                    className="bg-[#60b246] w-full text-white hover:opacity-90
-                    font-extrabold h-10 inline-flex justify-center text-xl cursor-pointer items-center"
+                    className={`bg-primary-green w-full text-white active:opacity-50
+                    font-extrabold h-10 inline-flex justify-center text-xl cursor-pointer items-center ${isLoading ? " opacity-70" : null}`}
                     disabled={isLoading} >
-                    LOGIN
+                    {isLoading ? <ImSpinner2 className=" animate-spin"/> : "LOGIN"}
                 </button>
 
 

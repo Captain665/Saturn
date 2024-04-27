@@ -6,6 +6,7 @@ import { isMobile } from "react-device-detect";
 import SuccessPlacedConfirm from "./SuccessMsg";
 import IsLoading from "../../Components/Loading";
 import { useSearchParams } from "react-router-dom";
+import Spinner from "../../Components/Spinner";
 
 
 export default function OrderDetails() {
@@ -48,7 +49,13 @@ export default function OrderDetails() {
     }, [setParams])
 
     if (isLoading) {
-        return <IsLoading />
+        return <> 
+        <IsLoading />
+    
+        <Spinner isLoading={isLoading} />
+        </> 
+        
+        
     }
 
 

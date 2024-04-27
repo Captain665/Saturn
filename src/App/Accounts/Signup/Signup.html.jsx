@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { FaUser, FaMobileRetro, FaEnvelope, FaLock } from "react-icons/fa6";
+import { ImSpinner2 } from "react-icons/im";
 
 export default function SignupData({ userInfo, handleSubmit, handleOnChange, isloading, redirectedTo }) {
 
@@ -109,11 +110,11 @@ export default function SignupData({ userInfo, handleSubmit, handleOnChange, isl
 
                 <button
                     type="submit"
-                    className="bg-[#60b246] w-full text-white
-                        font-extrabold h-10 inline-flex justify-center text-xl cursor-pointer items-center"
+                    className={`bg-primary-green w-full text-white active:opacity-60
+                        font-extrabold h-10 inline-flex justify-center text-xl cursor-pointer items-center ${isloading ? "opacity-70" : null}`}
                     disabled={isloading}
                 >
-                    Get OTP
+                    {isloading ? <ImSpinner2 className="animate-spin"/> : "Get OTP" }
                 </button>
 
                 <ul className="flex gap-1 text-sm">

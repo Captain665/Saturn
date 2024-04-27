@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { FaEnvelope, FaKey } from "react-icons/fa6";
+import { ImSpinner2 } from "react-icons/im";
 
 export default function ValidateHtml({ handleOtpChange, handleOtpSubmit, isLoading, emailId, otp, redirectedTo }) {
 
@@ -56,10 +57,12 @@ export default function ValidateHtml({ handleOtpChange, handleOtpSubmit, isLoadi
 
                 <button
                     type="submit"
-                    className="bg-[#60b246] w-full text-white
-                        font-extrabold h-10 inline-flex justify-center text-xl cursor-pointer items-center"
+                    className={`bg-primary-green w-full text-white active:opacity-70 ${isLoading ? "opacity-60" : null}
+                        font-extrabold h-10 inline-flex justify-center text-xl cursor-pointer items-center`}
                     disabled={isLoading}
-                >Submit</button>
+                >
+                    { isLoading ? <ImSpinner2 className="animate-spin"/> :"Submit"}
+                </button>
 
 
                 <ul className="flex gap-1 text-sm">

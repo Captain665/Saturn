@@ -19,7 +19,8 @@ import Payments from "./App/Payments/Payment";
 import CustomerDetails from "../src/App/Accounts/AccountsInfo/CustomerInfo"
 import OrderList from "./App/Orders/OrderList/Orders";
 // import NoProductExist from "./App/Components/EmptyPage";
-import Spinner from "../src/App/Components/Spinner";
+// import Spinner from "../src/App/Components/Spinner";
+import IsLoading from "./App/Components/Loading";
 
 
 
@@ -51,7 +52,7 @@ export default function BasePage() {
                     <Route path="orders" element={<OrderList />} />
                     <Route path="login" element={<Login />} />
                     <Route path="signup" element={<Signup />} />
-                    <Route path="testing" element={<Spinner />} />
+                    <Route path="testing" element={<IsLoading />} />
                 </Route>
             </Routes>
         </BrowserRouter>

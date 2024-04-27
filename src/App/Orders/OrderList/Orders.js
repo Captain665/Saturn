@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import OrderHtml from "./Orders.html";
 import { OrderListResponse } from "../../ApiCall/OrderListApi";
 import Spinner from "../../Components/Spinner";
+import IsLoading from "../../Components/Loading";
 
 export default function OrderList({ token }) {
     const navigate = useNavigate()
@@ -37,6 +38,16 @@ export default function OrderList({ token }) {
 
     function HandleBack() {
         navigate("/account", { replace: true })
+    }
+
+    if (isLoading) {
+        return <>
+            <Spinner
+                isLoading={isLoading}
+            />
+            <IsLoading />
+
+        </>
     }
 
     return (

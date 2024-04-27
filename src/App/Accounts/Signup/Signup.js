@@ -91,12 +91,14 @@ export default function SignUp() {
                     emailId={userInfo.emailId}
                     otp={otp}
                     redirectedTo={params.get("redirectedTo")}
+                    isLoading={isloading}
                 />
                 : <SignupData
                     userInfo={userInfo}
                     handleSubmit={handleSignupSubmit}
                     handleOnChange={handleSignupOnChange}
                     redirectedTo={params.get("redirectedTo")}
+                    isloading={isloading}
                 />
             }
             <Spinner 

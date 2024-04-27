@@ -5,6 +5,8 @@ import { CreateOrderResponse } from "../ApiCall/CreateOrderApi";
 import { isMobile } from "react-device-detect";
 import Spinner from "../Components/Spinner";
 import ErrorToster from "../Components/MessageToggle";
+import IsLoading from "../Components/Loading";
+
 
 
 export default function Payments() {
@@ -90,6 +92,15 @@ export default function Payments() {
         }
         fetchPaymentDetails();
     }, [])
+
+    if(isLoading){
+        return <>
+        <IsLoading />
+    
+        <Spinner isLoading={isLoading} />
+        </>
+        
+    }
 
 
     return (

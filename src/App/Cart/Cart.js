@@ -4,6 +4,7 @@ import CartDetails from "./CartInfo";
 import IsLoading from "../../App/Components/Loading"
 import ErrorToster from "../../App/Components/MessageToggle"
 import NoProductExist from "../Components/EmptyPage";
+import Spinner from "../../App/Components/Spinner";
 
 export const cartInfoContext = createContext();
 
@@ -111,7 +112,14 @@ export default function CartInfo() {
 
 
     if (isLoading) {
-        return <IsLoading isLoading={isLoading} />
+        return <>
+            <IsLoading isLoading={isLoading} />
+            <Spinner
+                isLoading={isLoading}
+            />
+        </>
+
+
     }
 
     if (!itemList?.length > 0) {
