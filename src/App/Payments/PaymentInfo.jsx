@@ -73,7 +73,7 @@ function PaymentInfo({ paymentMode, proceedToPay, mode, totalAmount, backToCart,
             </div >
 
             <ul className="flex justify-center">
-                <ul className={`self-center flex justify-center fixed bottom-0 content-center bg-[#60b646] md:w-2/5 w-full h-16 md:h-auto font-extrabold text-lg
+                <ul className={`self-center flex justify-center fixed bottom-0 content-center bg-primary-green md:w-2/5 w-full h-16 md:h-auto font-extrabold text-lg
             cursor-pointer text-center z-50 text-white ${mode ? "block" : "hidden"} md:rounded-md`}
                     onClick={proceedToPay}>
                     <button

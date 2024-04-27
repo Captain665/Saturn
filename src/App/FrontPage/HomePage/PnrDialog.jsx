@@ -1,5 +1,6 @@
 import React, { memo } from "react";
-import { FaTrain, FaCircleNotch } from "react-icons/fa6";
+import { FaTrain } from "react-icons/fa6";
+import { ImSpinner2 } from "react-icons/im";
 
 
 function ActionDialog({ dialog, handleOnChange, hideDialog, isLoading, handleOnClick }) {
@@ -37,8 +38,8 @@ function ActionDialog({ dialog, handleOnChange, hideDialog, isLoading, handleOnC
                             disabled={isLoading}
                             type="submit"
                             onClick={handleOnClick}
-                            className={`bg-orange-500 mt-4 px-4 p-2 rounded-lg border-none font-extrabold text-white active:opacity-70 ${isLoading && "cursor-no-drop opacity-60"}`}>
-                            {isLoading ? <FaCircleNotch className=" animate-spin text-center text-xl w-full px-4" /> : "Submit"}
+                            className={`bg-primary-green mt-4 px-4 p-2 rounded-lg border-none font-extrabold text-white active:opacity-70 ${isLoading && "cursor-no-drop opacity-60"}`}>
+                            {isLoading ? <ImSpinner2 className="animate-spin text-center text-xl w-full px-4 text-black" /> : "Submit"}
                         </button>
 
                     </ul>

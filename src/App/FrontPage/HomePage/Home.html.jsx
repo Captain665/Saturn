@@ -11,8 +11,8 @@ function HomePage({ showDialog }) {
                     <li className="justify-center self-center">
                         <ul className="font-extrabold md:text-6xl text-4xl">
                             <li>Meet, Eat &#38;</li>
-                            <li>Enjoy The <span className="text-orange-500">True</span></li>
-                            <li className="text-orange-500">Taste.</li>
+                            <li>Enjoy The <span className="text-primary-green">True</span></li>
+                            <li className="text-primary-green">Taste.</li>
                         </ul>
 
                         <ul className="md:text-lg text-base opacity-70 md:mt-7 mt-5 md:w-4/5">
@@ -21,7 +21,7 @@ function HomePage({ showDialog }) {
                         </ul>
 
                         <button
-                            className="bg-orange-500 md:mt-7 mt-10 text-white md:p-4 p-3 rounded-xl font-extrabold md:text-xl md:px-8 px-4 w-full md:w-fit"
+                            className="bg-primary-green md:mt-7 mt-10 text-white md:p-4 p-3 rounded-xl font-extrabold md:text-xl md:px-8 px-4 w-full md:w-fit"
                             onClick={showDialog} >
                             Get Started
                         </button>
@@ -67,7 +67,7 @@ function HomePage({ showDialog }) {
                                 </ul>
                                 <ul className="flex justify-center gap-2 items-center mt-3">
                                     <li className="font-extrabold">&#8377;120</li>
-                                    <a href="#dialog" className="bg-orange-500 text-white p-1 px-2 py-2 rounded-3xl font-extralight text-sm" onClick={showDialog}>Order Now</a>
+                                    <a href="#dialog" className="bg-primary-green text-white p-1 px-2 py-2 rounded-3xl font-extralight text-sm" onClick={showDialog}>Order Now</a>
                                 </ul>
                             </ul>
                         </ul>
@@ -94,7 +94,7 @@ function HomePage({ showDialog }) {
                                 </ul>
                                 <ul className="flex justify-center gap-2 items-center mt-3 mb-2">
                                     <li className="font-extrabold">&#8377;66</li>
-                                    <a href="#dialog" className="bg-orange-500 text-white p-1 px-2 py-2 rounded-3xl font-extralight text-sm" onClick={showDialog}>Order Now</a>
+                                    <a href="#dialog" className="bg-primary-green text-white p-1 px-2 py-2 rounded-3xl font-extralight text-sm" onClick={showDialog}>Order Now</a>
                                 </ul>
                             </ul>
                         </ul>
@@ -121,7 +121,7 @@ function HomePage({ showDialog }) {
                                 </ul>
                                 <ul className="flex justify-center gap-2 items-center mt-3">
                                     <li className="font-extrabold">&#8377;236</li>
-                                    <a href="#dialog" className="bg-orange-500 text-white p-1 px-2 py-2 rounded-3xl font-extralight text-sm" onClick={showDialog}>Order Now</a>
+                                    <a href="#dialog" className="bg-primary-green text-white p-1 px-2 py-2 rounded-3xl font-extralight text-sm" onClick={showDialog}>Order Now</a>
                                 </ul>
                             </ul>
                         </ul>
@@ -129,7 +129,7 @@ function HomePage({ showDialog }) {
 
                     <ul className="mt-10 flex md:justify-between md:p-10 p-1 justify-center gap-1">
                         <ul className="md:w-1/2 w-2/5 md:p-16 items-center self-center">
-                            <img src="/many_dish.jpg" alt="many dish" className="w-full h-full object-cover object-center rounded-3xl shadow-2xl bg-orange-300" />
+                            <img src="/many_dish.jpg" alt="many dish" className="w-full h-full object-cover object-center rounded-3xl shadow-2xl bg-primary-green" />
                         </ul>
                         <ul className="md:w-1/2 w-1/2 p-2 items-start self-center flex flex-col md:gap-5 text-start">
                             <ul className="md:text-4xl text-lg font-extrabold">
@@ -141,7 +141,7 @@ function HomePage({ showDialog }) {
                                 <li className="md:block hidden">available, but the majarity have suffered alteration There</li>
                                 <li className="md:block hidden">are many variations of passanger at available.</li>
                             </ul>
-                            <ul className="bg-orange-500 text-white md:p-4 p-2 rounded-3xl font-extralight md:text-lg text-sm md:px-6 px-2 flex md:gap-2 gap-1 items-center" onClick={showDialog}>
+                            <ul className="bg-primary-green text-white md:p-4 p-2 rounded-3xl font-extralight md:text-lg text-sm md:px-6 px-2 flex md:gap-2 gap-1 items-center" onClick={showDialog}>
                                 <a href="#dialog">Explore Story</a>
                                 <FaHandPointRight />
                             </ul>
@@ -160,7 +160,7 @@ function HomePage({ showDialog }) {
                             </ul>
                             <ul className="flex flex-col md:gap-3 gap-2 opacity-90">
                                 <ul className="flex md:gap-4 gap-2 items-center">
-                                    <li className="bg-green-600 text-white px-1 md:rounded-md rounded md:w-6 md:h-6 w-4 h-4 md:text-lg text-center text-xs">&#x2713;</li>
+                                    <li className="bg-primary-green text-white px-1 md:rounded-md rounded md:w-6 md:h-6 w-4 h-4 md:text-lg text-center text-xs">&#x2713;</li>
                                     <li className="md:text-lg text-xs">A guaranted delicious meal.</li>
                                 </ul>
                                 <ul className="flex md:gap-4 gap-2 items-center">
@@ -186,7 +186,7 @@ function HomePage({ showDialog }) {
                                 <li className="md:block hidden">have suffered alteration, but the majarity, but the majarity</li>
                             </ul>
                         </ul>
-                        <ul className="border-2 border-orange-400 md:mt-5 mt-2 m-auto md:w-2/5 w-11/12 md:py-10 py-5 flex flex-col md:gap-5 gap-2 rounded-3xl">
+                        <ul className="border-2 border-primary-green md:mt-5 mt-2 m-auto md:w-2/5 w-11/12 md:py-10 py-5 flex flex-col md:gap-5 gap-2 rounded-3xl">
                             <ul className="md:text-base text-xs opacity-80">
                                 <li>We help our clients make realize their most important business We</li>
                                 <li>help our clients make realize their help our clients</li>
@@ -210,7 +210,7 @@ function HomePage({ showDialog }) {
                                 </ul>
                             </ul>
                         </ul>
-                        <li className="w-5 bg-orange-500 h-2 text-center m-auto mt-5 rounded-3xl"></li>
+                        <li className="w-5 bg-primary-green h-2 text-center m-auto mt-5 rounded-3xl"></li>
                     </ul>
 
                 </ul>

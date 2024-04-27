@@ -13,7 +13,7 @@ function SuccessPlacedConfirm({ orderId, shown, handleOnClick }) {
                 <p className="md:text-xl text-lg mt-3 font-medium">Thank you for your purchase !</p>
                 <p className="mt-1">Your order ID is : {orderId}</p>
                 <p className="text-sm mt-1 px-5">You will receive an order confirmation email with details of your order.</p>
-                <button className="bg-orange-500 mt-6 mb-8 text-white font-extralight p-2 w-fit m-auto px-5 rounded-xl" onClick={handleOnClick}>CONTINUE SHOPPING</button>
+                <button className="bg-primary-green mt-6 mb-8 text-white font-extralight p-2 w-fit m-auto px-5 rounded-xl" onClick={handleOnClick}>CONTINUE SHOPPING</button>
             </ul>
         </dialog>
 

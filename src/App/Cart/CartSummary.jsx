@@ -97,7 +97,7 @@ export default function CartSummary() {
                         <li className="text-lg">&#x20B9;{payable}</li>
                         <a href="#bill" className="text-blue-500 text-sm font-extralight" onClick={(event) => billDetail(event)}>VIEW DETAILED BILL</a>
                     </ul>
-                    <ul className="flex items-center cursor-pointer bg-[#60b646] text-white p-1 md:p-4 px-5 w-1/2 text-center"
+                    <ul className="flex items-center cursor-pointer bg-primary-green text-white p-1 md:p-4 px-5 w-1/2 text-center"
                         onClick={makePayment}>
                         <li>MAKE PAYMENT</li>
                     </ul>
