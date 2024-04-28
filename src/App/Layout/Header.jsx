@@ -15,20 +15,20 @@ function Headers({ name }) {
     const boxRef = useRef(null)
 
     useEffect(() => {
-        const handleDocumentClick = (event) =>{
-            if(boxRef.current && !boxRef.current.contains(event.target)){
+        const handleDocumentClick = (event) => {
+            if (boxRef.current && !boxRef.current.contains(event.target)) {
                 setIsvisible(() => false)
             }
         }
 
-        document.addEventListener("click",handleDocumentClick)
+        document.addEventListener("click", handleDocumentClick)
 
         return () => {
-            document.removeEventListener("click",handleDocumentClick)
+            document.removeEventListener("click", handleDocumentClick)
         }
-    },[])
+    }, [])
 
-    
+
 
     function isActiveCheck({ isActive }) {
         return isActive ? "underline font-bold" : null
@@ -37,7 +37,7 @@ function Headers({ name }) {
     function HandleOnClick() {
         setIsvisible(() => !isVisible)
     }
-    
+
 
     function NavBarInvisible() {
         setIsvisible(false)
@@ -55,26 +55,20 @@ function Headers({ name }) {
     const linkValue = userInfo ? "Logout" : "Login"
     const pathName = userInfo ? "/" : "/login"
 
-    // const account = name ? name.split(" ")[0] : "Account"
-    // const home = <p className="flex gap-1 items-center"><FaHouse className="" />Home</p>
-    // const contact = <p className="flex gap-1 items-center"><FaPhone /> Contact Us</p>
-    // const about = <p className="flex gap-1 items-center"><FaInfo /> About</p>
-    // const accounts = <p className="flex gap-1 items-center"><FaUser /> {name}</p>
-    
     const links = <>
         <NavLink to="/" end className={(isActive) => isActiveCheck(isActive)} onClick={NavBarInvisible}>Home</NavLink>
         <NavLink to="about" className={(isActive) => isActiveCheck(isActive)} onClick={NavBarInvisible}>About</NavLink>
         <NavLink to="contact" className={(isActive) => isActiveCheck(isActive)} onClick={NavBarInvisible}>Contact Us</NavLink>
         <NavLink to="account" className={(isActive) => isActiveCheck(isActive)} onClick={NavBarInvisible}>{name}</NavLink>
-            
+
         <NavLink to={pathName}
-            className="bg-sky-500 text-center p-1 rounded-md border:none md:hidden text-white" onClick={LogOut}>{linkValue}</NavLink>
+            className="bg-primary-green text-center p-1 rounded-md border:none md:hidden text-white" onClick={LogOut}>{linkValue}</NavLink>
     </>
 
 
     return (
         <>
-            <header className={`sticky flex w-full flex-row justify-between items-center md:mt-5 mt-3 ${path === "/" ? null : "shadow-xl bg-white" } `}>
+            <header className={`flex w-full flex-row justify-between items-center md:mt-5 mt-3 ${path === "/" ? null : "shadow-xl bg-white"} `}>
                 <NavLink to="/" className="flex items-center">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShl9AxBvXhrjACetW1Gbwauif23ndcwWW94Q&usqp=CAU" alt="logo" className="p-1 h-16 object-content ml-4 md:ml-28 rounded-2xl" />
                 </NavLink>
