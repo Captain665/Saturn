@@ -17,7 +17,7 @@ export default function CartInfo() {
     const [userInfo] = useState(JSON.parse(localStorage.getItem("userInfo")))
     const [trainInfo] = useState(JSON.parse(sessionStorage.getItem("pnrDetails"))?.trainInfo);
     const [seatInfo] = useState(JSON.parse(sessionStorage.getItem("pnrDetails"))?.seatInfo);
-    const [outletInfo] = useState(JSON.parse(sessionStorage.getItem("outletInfo")));
+    const [outletInfo] = useState(JSON.parse(sessionStorage.getItem("cartOutlet")) ?? JSON.parse(sessionStorage.getItem("outletInfo")));
     const [itemList, setItemList] = useState(JSON.parse(sessionStorage.getItem("selectedItemInfo")))
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
