@@ -8,7 +8,6 @@ const TRACKING_ID = 'G-YX6NGK82FX';
 ReactGA.initialize(TRACKING_ID);
 
 const usePageViews = (location) => {
-    console.log(location.key)
     useEffect(() => {
         ReactGA.pageview(location.pathname + location.key)
     }, [location])

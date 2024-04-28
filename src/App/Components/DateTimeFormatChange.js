@@ -71,7 +71,7 @@ export function FormatedDateWithTime(date){
         hour12: true,
     });
      
-    const dateTime = time + " " + year;
+    const dateTime = time + ", " + year;
 
     return dateTime;
 

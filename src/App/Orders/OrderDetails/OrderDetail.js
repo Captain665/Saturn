@@ -12,8 +12,6 @@ import ErrorToaster from "../../Components/MessageToggle";
 
 export default function OrderDetails() {
 
-    console.log("order details js running...")
-
     const navigate = useNavigate()
     const { orderId } = useParams()
     const [params, setParams] = useSearchParams();

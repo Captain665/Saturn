@@ -6,8 +6,6 @@ import { memo } from "react";
 
 function OrderInfo({ order, backToHome }) {
 
-    console.log("order info HTML running...")
-
     const [detailShown, setIsDetailShown] = useState({
         customer: true,
         delivery: true,
@@ -42,9 +40,9 @@ function OrderInfo({ order, backToHome }) {
     }
 
     const orderStatus = (orderStatus) => {
-        if(orderStatus === "CANCELLED" || orderStatus === "UNDELIVERED" || orderStatus === "PARTIALLY_DELIVERED"){
+        if (orderStatus === "CANCELLED" || orderStatus === "UNDELIVERED" || orderStatus === "PARTIALLY_DELIVERED") {
             return "red"
-        }else{
+        } else {
             return "green"
         }
     }
@@ -57,11 +55,11 @@ function OrderInfo({ order, backToHome }) {
                     <li className="flex items-center gap-2 opacity-70 cursor-pointer w-fit ml-2 md:ml-0" onClick={backToHome}>
                         <FaArrowLeft /> Back
                     </li>
-                    <li className="mt-10 font-extrabold text-2xl ml-2 md:ml-0">Order Details</li>
+                    <li className="mt-4 font-extrabold text-2xl ml-2 md:ml-0">Order Details</li>
                 </ul>
 
                 <ul className="flex md:flex-row flex-col gap-2 m-2">
-                    <ul className="flex md:flex-row flex-col md:w-4/6 w-full justify-between p-2 bg-white md:border rounded-md gap-2">
+                    <ul className="md:flex md:flex-row grid grid-cols-3 md:w-4/6 w-full justify-between p-2 bg-white md:border rounded-md gap-2">
                         <ul>
                             <li className="opacity-50 font-extrabold">Order ID</li>
                             <li className="font-bold">#{order?.id}</li>
@@ -74,7 +72,7 @@ function OrderInfo({ order, backToHome }) {
                             <li className="opacity-50 font-extrabold">Payment</li>
                             <ul className="flex flex-col md:flex-row gap-1">
                                 <li>{order?.paymentType}</li>
-                                <ul className={`gap-1 bg-green-100 items-center rounded-2xl px-1 w-fit ${order?.paymentType === "CASH" ? "hidden" : "flex" }`}>
+                                <ul className={`gap-1 bg-green-100 items-center rounded-2xl px-1 w-fit ${order?.paymentType === "CASH" ? "hidden" : "flex"}`}>
                                     <li className="bg-green-600 text-white rounded-full w-5 h-fit text-center text-sm">&#x2713;</li>
                                     <li className="text-green-600">Paid</li>
                                 </ul>
@@ -92,7 +90,7 @@ function OrderInfo({ order, backToHome }) {
 
                 <ul className="flex md:flex-row flex-col gap-2 mt-5">
                     <ul className="md:w-4/6 w-full p-2 bg-white">
-                        <ul className="flex justify-between px-1 border-b-2 border-b-black md:text-base text-xs" >
+                        <ul className="flex justify-between px-1 border-b-2 border-b-black border-opacity-60 md:text-base text-xs" >
                             <ul className="md:w-4/6 w-3/5">
                                 <li className="opacity-50 font-extrabold">Ordered Items</li>
                             </ul>
@@ -120,7 +118,7 @@ function OrderInfo({ order, backToHome }) {
                         </div><br />
 
                         <ul className="">
-                            <li className="border-b-black border-b-2 opacity-70 pl-2">#BILL DETAILS</li>
+                            <li className="border-b-2 border-b-gray-400 border-dashed opacity-80 pl-2">#BILL DETAILS</li>
                             <ul className="flex justify-end gap-10 mt-5">
                                 <ul className="flex flex-col gap-2 opacity-90">
                                     <li className="font-bold">Item Total : </li>
@@ -137,7 +135,7 @@ function OrderInfo({ order, backToHome }) {
 
                             </ul>
 
-                            <ul className={`${order?.paymentType === "CASH" ? "hidden" : "flex" } gap-1 bg-green-100 w-fit px-2 rounded-xl float-right mt-2 mr-5 items-center`}>
+                            <ul className={`${order?.paymentType === "CASH" ? "hidden" : "flex"} gap-1 bg-green-100 w-fit px-2 rounded-xl float-right mt-2 mr-5 items-center`}>
                                 <li className="bg-green-600 text-white rounded-full w-5 h-fit text-center text-sm">&#x2713;</li>
                                 <li className="text-green-600">Paid</li>
                             </ul>
@@ -177,7 +175,7 @@ function OrderInfo({ order, backToHome }) {
                                 </ul>
                                 <ul className="">
                                     <li>{order?.stationName},{order?.stationCode}</li>
-                                    <li>{order?.deliveryDate}</li>
+                                    <li>{FormatedDateWithTime(order?.deliveryDate)}</li>
                                     <li>{order?.coach}</li>
                                     <li>{order?.berth}</li>
                                 </ul>
