@@ -19,10 +19,10 @@ function ErrorToster({ props }) {
         const msg = props?.error;
         const result = props?.result;
 
-        const fail = "failure"
+        const fail = "failure" 
 
-        if (status === fail) {
-            toast.error(msg, { autoClose: 3000 })
+        if (status === fail ) {
+            toast.error(msg, { autoClose: 1000 })
         } else {
             toast.success(result, { autoClose: 3000 })
         }

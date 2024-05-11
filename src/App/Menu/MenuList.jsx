@@ -24,9 +24,9 @@ function MenuList({ menuList, orderItems, addItem, removeItem, isLoading }) {
                                             {
                                                 (orderItems?.find(item => item.itemId === menuItem.id)) ?
                                                     <ul className="flex flex-row items-center gap-4">
-                                                        <li className="cursor-pointer" onClick={() => removeItem(menuItem?.id)} ><FaMinus className="text-xs" /></li>
+                                                        <li className="cursor-pointer" onClick={() => removeItem(menuItem?.id)} ><FaMinus className="text-xs font-extrabold" /></li>
                                                         <li>{orderItems[orderItems.findIndex(id => id.itemId === menuItem.id)].quantity}</li>
-                                                        <li onClick={() => addItem(menuItem)} className="cursor-pointer"><FaPlus className="text-xs" /></li>
+                                                        <li onClick={() => addItem(menuItem)} className="cursor-pointer"><FaPlus className="text-xs font-extrabold" /></li>
                                                     </ul>
                                                     : <li className="cursor-pointer font-extrabold text-primary-green" onClick={() => addItem(menuItem)}>ADD</li>
                                             }
