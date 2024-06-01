@@ -1,24 +1,29 @@
-import React, { memo, useEffect, useRef, useState } from "react";
+import React, { MouseEvent, memo, useEffect, useRef, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-
 import { FaBars } from "react-icons/fa6";
 
 
-function Headers({ name }) {
+function Headers({ name }: { name: string }) {
     const navigate = useNavigate();
     const location = useLocation();
-    const path = location.pathname;
+    const path: string = location.pathname;
 
-    const [userInfo] = useState(JSON.parse(localStorage.getItem("userInfo")) || null)
+    const localStorageuserInfo: string | null = localStorage.getItem("userInfo");
+    const userInfoString = typeof localStorageuserInfo === "string" ? JSON.parse(localStorageuserInfo) : "";
+    const [userInfo] = useState<string>(userInfoString);
 
-    const [isVisible, setIsvisible] = useState(false)
+    const [isVisible, setIsvisible] = useState<boolean>(false)
     const boxRef = useRef(null)
 
     useEffect(() => {
-        const handleDocumentClick = (event) => {
-            if (boxRef.current && !boxRef.current.contains(event.target)) {
+        const handleDocumentClick = (event: MouseEvent<HTMLBodyElement>): void => {
+            const boxRefValue = boxRef.current;
+            if (boxRefValue && !boxRefValue.contains(event.target as Node)) {
                 setIsvisible(() => false)
             }
+            // if (boxRef.current && !boxRef.current.contains(event.target)) {
+            //     setIsvisible(() => false)
+            // }
         }
 
         document.addEventListener("click", handleDocumentClick)
@@ -30,36 +35,37 @@ function Headers({ name }) {
 
 
 
-    function isActiveCheck({ isActive }) {
-        return isActive ? "underline font-bold" : null
+    function isActiveCheck({ isActive }: { isActive: boolean }): string {
+        return isActive ? "underline font-bold" : ""
     }
 
-    function HandleOnClick() {
+
+    function HandleOnClick(): void {
         setIsvisible(() => !isVisible)
     }
 
 
-    function NavBarInvisible() {
+    function NavBarInvisible(): void {
         setIsvisible(false)
     }
 
-    function LogOut() {
+    function LogOut(): void {
         setIsvisible(false)
         if (userInfo) {
             localStorage.clear();
             navigate("/")
-            window.location.reload(true)
+            window.location.reload();
         }
     }
 
-    const linkValue = userInfo ? "Logout" : "Login"
-    const pathName = userInfo ? "/" : "/login"
+    const linkValue: string = userInfo ? "Logout" : "Login"
+    const pathName: string = userInfo ? "/" : "/login"
 
     const links = <>
-        <NavLink to="/" end className={(isActive) => isActiveCheck(isActive)} onClick={NavBarInvisible}>Home</NavLink>
-        <NavLink to="about" className={(isActive) => isActiveCheck(isActive)} onClick={NavBarInvisible}>About</NavLink>
-        <NavLink to="contact" className={(isActive) => isActiveCheck(isActive)} onClick={NavBarInvisible}>Contact Us</NavLink>
-        <NavLink to="account" className={(isActive) => isActiveCheck(isActive)} onClick={NavBarInvisible}>{name}</NavLink>
+        <NavLink to="/" end className={isActiveCheck} onClick={NavBarInvisible}>Home</NavLink>
+        <NavLink to="about" className={isActiveCheck} onClick={NavBarInvisible}>About</NavLink>
+        <NavLink to="contact" className={isActiveCheck} onClick={NavBarInvisible}>Contact Us</NavLink>
+        <NavLink to="account" className={isActiveCheck} onClick={NavBarInvisible}>{name}</NavLink>
 
         <NavLink to={pathName}
             className="bg-primary-green text-center p-1 rounded-md border:none md:hidden text-white" onClick={LogOut}>{linkValue}</NavLink>

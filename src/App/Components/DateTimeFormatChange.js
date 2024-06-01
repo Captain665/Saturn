@@ -12,7 +12,7 @@ export function FormatedDateWithWeek(date) {
             day: 'numeric',
             month: 'short'
         })
-    }else{
+    } else {
         return null;
     }
 
@@ -44,33 +44,33 @@ export function FormatedTime(time) {
 
 }
 
-export function FormatedDateWithYear(date){
+export function FormatedDateWithYear(date) {
 
     const newDate = new Date(date)
 
     return newDate.toLocaleDateString('en-GB', {
         day: 'numeric',
         month: 'long',
-        year : 'numeric'
+        year: 'numeric'
     })
 }
 
-export function FormatedDateWithTime(date){
+export function FormatedDateWithTime(date) {
 
     const newDate = new Date(date)
 
-    const year =  newDate.toLocaleDateString('en-GB', {
+    const year = newDate.toLocaleDateString('en-GB', {
         day: 'numeric',
         month: 'long',
-        year : 'numeric'
+        year: 'numeric'
     })
 
-    const time =  newDate.toLocaleTimeString('en-US', {
+    const time = newDate.toLocaleTimeString('en-US', {
         hour: 'numeric',
         minute: 'numeric',
         hour12: true,
     });
-     
+
     const dateTime = time + ", " + year;
 
     return dateTime;

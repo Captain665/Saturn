@@ -17,10 +17,10 @@ function Footers() {
                 </div>
                 <div className="flex md:space-x-14 pt-6 text-white justify-center md:gap-5 gap-3">
                     <NavLink to="/" >Home</NavLink>
-                    <NavLink>News</NavLink>
+                    <NavLink to="">News</NavLink>
                     <NavLink to="about" >About</NavLink>
                     <NavLink to="contact" >Contact Us</NavLink>
-                    <NavLink>Our Team</NavLink>
+                    <NavLink to="">Our Team</NavLink>
                 </div>
                 <div className="flex justify-center pt-6">
                     <p className="text-white align-bottom">Copyright &copy;2024 Designed By <i>MANISH</i></p>
