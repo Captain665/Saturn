@@ -6,11 +6,8 @@ import UseAnalyticsEventTracker from "../Components/useAnalyticsEventTracker";
 export default function About() {
     const gaEventTracker = UseAnalyticsEventTracker("About US")
 
-    console.log(gaEventTracker)
-
     useEffect(() => {
         gaEventTracker("About US")
-        console.log("GA event is added for About Page")
     }, [gaEventTracker])
 
 

@@ -5,8 +5,7 @@ export default function Contact() {
     const gaEventTracker = UseAnalyticsEventTracker("Contect Us")   
 
     useEffect(() => {
-        gaEventTracker("Contect Us")
-        console.log("ga event is added")    
+        gaEventTracker("Contect Us");
     },[gaEventTracker])
 
     return (

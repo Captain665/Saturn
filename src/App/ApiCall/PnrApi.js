@@ -4,7 +4,8 @@ export async function PnrResponse(pnr) {
 
     const message = {
         status: "failure",
-        error: "Sorry, Restaurant are not available in your journey"
+        error: "Sorry, Restaurant are not available in your journey",
+        result: null
     }
 
     const payload = {

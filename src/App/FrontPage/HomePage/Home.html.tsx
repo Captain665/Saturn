@@ -1,7 +1,8 @@
-import React, { memo } from "react";
+import React, { MouseEventHandler, memo } from "react";
 import { FaStar, FaHandPointRight } from "react-icons/fa6";
 
-function HomePage({ showDialog }) {
+
+function HomePage({ showDialog }: { showDialog: MouseEventHandler<HTMLElement> }) {
 
     return (
         <>

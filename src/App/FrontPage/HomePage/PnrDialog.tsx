@@ -1,13 +1,19 @@
-import React, { memo } from "react";
+import React, { ChangeEventHandler, MouseEventHandler, memo } from "react";
 import { FaTrain } from "react-icons/fa6";
 import { ImSpinner2 } from "react-icons/im";
 
 
-function ActionDialog({ dialog, handleOnChange, hideDialog, isLoading, handleOnClick }) {
+function ActionDialog({ dialog, handleOnChange, hideDialog, isLoading, handleOnClick }: {
+    dialog: boolean;
+    handleOnChange: ChangeEventHandler<HTMLInputElement>;
+    hideDialog: MouseEventHandler<HTMLElement>;
+    isLoading: boolean;
+    handleOnClick: MouseEventHandler<HTMLElement>;
+}) {
 
     return (
         <>
-            <dialog open id="dialog" className="flex m-auto h-full justify-center w-full fixed z-50 bg-opacity-20 top-0 bg-transparent backdrop-blur-sm p-2">
+            <dialog open={dialog} id="dialog" className="flex m-auto h-full justify-center w-full fixed z-50 bg-opacity-20 top-0 bg-transparent backdrop-blur-sm p-2">
                 <ul className="justify-end w-fit h-fit m-auto border px-10 md:py-5 py-2 flex flex-col gap-5 bg-white rounded-md shadow-2xl z-50">
                     <ul className="flex border items-center h-12 bg-gray-100 gap-2 mt-5 text-lg">
                         <li className="bg-white md:p-2 h-full px-4 md:px-5 flex justify-center self-center items-center">
@@ -18,8 +24,6 @@ function ActionDialog({ dialog, handleOnChange, hideDialog, isLoading, handleOnC
                                 className="bg-gray-100 outline-none w-full"
                                 placeholder="Enter PNR Number"
                                 required
-                                maxLength="10"
-                                minLength="10"
                                 name="pnr"
                                 id="pnr"
                                 onChange={handleOnChange}

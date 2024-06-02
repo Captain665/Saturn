@@ -15,7 +15,6 @@ const usePageViews = (location: any) => {
     }, [location])
 }
 
-
 export default function LayOut() {
 
     const location = useLocation();
@@ -23,8 +22,6 @@ export default function LayOut() {
 
     const [userName, setUserName] = useState<string>('')
     const userdata: userInfo = GetLocalData("userInfo");
-
-    console.log(userdata)
 
     useEffect(() => {
         if (userdata) {
@@ -36,7 +33,6 @@ export default function LayOut() {
             setUserName(account);
         }
     }, [userdata])
-
 
     return (
         <div className="flex flex-col">
