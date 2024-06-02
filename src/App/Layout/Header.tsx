@@ -1,6 +1,8 @@
-import React, { MouseEvent, memo, useEffect, useRef, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { FaBars } from "react-icons/fa6";
+import { GetLocalData } from "../Components/CustomHooks"
+import { userInfo } from "../CommonTypes/CommonType"
 
 
 function Headers({ name }: { name: string }) {
@@ -8,22 +10,16 @@ function Headers({ name }: { name: string }) {
     const location = useLocation();
     const path: string = location.pathname;
 
-    const localStorageuserInfo: string | null = localStorage.getItem("userInfo");
-    const userInfoString = typeof localStorageuserInfo === "string" ? JSON.parse(localStorageuserInfo) : "";
-    const [userInfo] = useState<string>(userInfoString);
-
+    const [userInfo] = useState<userInfo>(GetLocalData("userInfo"));
     const [isVisible, setIsvisible] = useState<boolean>(false)
-    const boxRef = useRef(null)
+    const boxRef: any = useRef(null)
 
     useEffect(() => {
-        const handleDocumentClick = (event: MouseEvent<HTMLBodyElement>): void => {
+        const handleDocumentClick = (event: any) => {
             const boxRefValue = boxRef.current;
-            if (boxRefValue && !boxRefValue.contains(event.target as Node)) {
+            if (boxRefValue && !boxRefValue.contains(event.target)) {
                 setIsvisible(() => false)
             }
-            // if (boxRef.current && !boxRef.current.contains(event.target)) {
-            //     setIsvisible(() => false)
-            // }
         }
 
         document.addEventListener("click", handleDocumentClick)
@@ -34,16 +30,13 @@ function Headers({ name }: { name: string }) {
     }, [])
 
 
-
     function isActiveCheck({ isActive }: { isActive: boolean }): string {
         return isActive ? "underline font-bold" : ""
     }
 
-
     function HandleOnClick(): void {
         setIsvisible(() => !isVisible)
     }
-
 
     function NavBarInvisible(): void {
         setIsvisible(false)
