@@ -1,4 +1,3 @@
-import React from "react";
 
 export interface userInfo {
     createdAt: string;
@@ -16,7 +15,7 @@ export interface userInfo {
 
 export interface errorState {
     status: string;
-    error: string;
+    error: string | null;
     result: null;
 }
 
@@ -66,4 +65,12 @@ export interface pnrResponseResult {
     seatInfo: SeatInfo;
     passengerInfo: PassengerInfo[];
 
+}
+
+export interface profileInfo {
+    fullName: string;
+    mobileNumber: string;
+    emailId: string;
+    password: string;
+    gender: string;
 }

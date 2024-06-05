@@ -3,9 +3,16 @@ import { NavLink } from "react-router-dom";
 import { FaEnvelope, FaKey } from "react-icons/fa6";
 import { ImSpinner2 } from "react-icons/im";
 
-export default function ValidateHtml({ handleOtpChange, handleOtpSubmit, isLoading, emailId, otp, redirectedTo }) {
+export default function ValidateHtml({ handleOtpChange, handleOtpSubmit, isLoading, emailId, otp, redirectedTo }: {
+    handleOtpChange: any;
+    handleOtpSubmit: any;
+    isLoading: boolean;
+    emailId: string;
+    otp: number | undefined;
+    redirectedTo: string | null;
+}) {
 
-    const path = redirectedTo ? `/login?redirectedTo=${redirectedTo}` : "/login"
+    const path: string = redirectedTo ? `/login?redirectedTo=${redirectedTo}` : "/login"
 
     return (
         <>
@@ -61,7 +68,7 @@ export default function ValidateHtml({ handleOtpChange, handleOtpSubmit, isLoadi
                         font-extrabold h-10 inline-flex justify-center text-xl cursor-pointer items-center`}
                     disabled={isLoading}
                 >
-                    { isLoading ? <ImSpinner2 className="animate-spin"/> :"Submit"}
+                    {isLoading ? <ImSpinner2 className="animate-spin" /> : "Submit"}
                 </button>
 
 

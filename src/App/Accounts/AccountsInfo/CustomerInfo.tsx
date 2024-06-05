@@ -1,21 +1,23 @@
 import React, { useState } from "react";
 import { FaCircleUser, FaArrowLeft } from "react-icons/fa6";
 import { useNavigate } from "react-router";
+import { GetLocalData } from "../../Components/CustomHooks";
+import { userInfo } from "../../CommonTypes/CommonType";
 
 export default function CustomerDetails() {
 
     const navigate = useNavigate();
 
-    const [info] = useState(JSON.parse(localStorage.getItem("userInfo")) || null)
+    const [info] = useState<userInfo>(GetLocalData("userInfo"));
 
 
-    const LogOut = () => {
+    const LogOut = (): void => {
         localStorage.clear();
         navigate("/")
-        window.location.reload(true)
+        window.location.reload();
     }
 
-    const HandleBack = () => {
+    const HandleBack = (): void => {
         navigate("/account")
     }
 
@@ -61,7 +63,7 @@ export default function CustomerDetails() {
 
 
             </ul>
-            <hr className="md:hidden"/>
+            <hr className="md:hidden" />
 
             <ul
                 onClick={LogOut}

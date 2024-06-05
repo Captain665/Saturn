@@ -3,18 +3,21 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import OrderList from "../../Orders/OrderList/Orders";
 import { FaArrowLeft, FaChevronRight, FaCircleUser, FaCaretRight } from "react-icons/fa6";
 import CustomerDetails from "./CustomerInfo";
+import { GetLocalData } from "../../Components/CustomHooks";
+import { userInfo } from "../../CommonTypes/CommonType";
+
 
 export default function Account() {
     const location = useLocation()
     const navigate = useNavigate()
 
-    const info = JSON.parse(localStorage.getItem("userInfo"));
-    const [data, setData] = useState("profile")
-    const path = location.pathname;
+    const info: userInfo = GetLocalData("userInfo");
+    const [data, setData] = useState<string>("profile")
+    const path: string = location.pathname;
 
     useEffect(() => {
         if (!info) {
-            const pathName = `/login?redirectedTo=${path}`
+            const pathName: string = `/login?redirectedTo=${path}`
             navigate(pathName)
         }
     }, [info, path, navigate])
@@ -23,17 +26,16 @@ export default function Account() {
     const LogOut = () => {
         localStorage.clear();
         navigate("/")
-        window.location.reload(true)
+        window.location.reload()
     }
 
-    function HandleOnClick(value) {
+    function HandleOnClick(value: string): void {
         setData(value)
     }
 
-    const backToHome = () => {
+    const backToHome = (): void => {
         navigate("/")
     }
-
 
 
     return (

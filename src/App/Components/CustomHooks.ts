@@ -7,7 +7,7 @@ export function GetLocalData(getLocalItem: string): userInfo {
     return localData;
 }
 
-export function SetLocalData(setLocalItemName: string, setLocalItemValue: string): void {
+export function SetLocalData(setLocalItemName: string, setLocalItemValue: userInfo): void {
     const data = JSON.stringify(setLocalItemValue);
     window.localStorage.setItem(setLocalItemName, data);
 }

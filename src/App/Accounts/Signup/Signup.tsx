@@ -6,12 +6,14 @@ import { SignupResponse, OtpValidateReponse } from "../../ApiCall/SignupApi";
 import ValidateHtml from "./Validate.html";
 import { useSearchParams } from "react-router-dom";
 import Spinner from "../../Components/Spinner";
+import { errorState, profileInfo, userInfo } from "../../CommonTypes/CommonType";
+import { SetLocalData } from "../../Components/CustomHooks";
 
 export default function SignUp() {
     const navigate = useNavigate()
     const [params] = useSearchParams()
 
-    const [userInfo, setUserInfo] = useState({
+    const [userInfo, setUserInfo] = useState<profileInfo>({
         fullName: "",
         mobileNumber: "",
         emailId: "",
@@ -19,15 +21,15 @@ export default function SignUp() {
         gender: ""
     });
 
-    const [isloading, setIsLoading] = useState(false)
-    const [error, setError] = useState(null)
-    const [isValidate, setIsValidate] = useState(false);
-    const [otp, setOtp] = useState("")
+    const [isloading, setIsLoading] = useState<boolean>(false)
+    const [error, setError] = useState<errorState>()
+    const [isValidate, setIsValidate] = useState<boolean>(false);
+    const [otp, setOtp] = useState<number | undefined>()
 
 
     // Sign Up js
 
-    function handleSignupOnChange(event) {
+    function handleSignupOnChange(event: any): void {
         const target = event.target;
         setUserInfo((prevData) => ({
             ...prevData,
@@ -36,49 +38,46 @@ export default function SignUp() {
     }
 
 
-    const fetchSignUp = async () => {
+    const fetchSignUp = async (): Promise<void> => {
         setIsLoading(() => true)
         const response = await SignupResponse(userInfo);
 
         if (response.status === "success") {
-            setIsValidate(() => true)
-            setError(() => response)
+            setIsValidate(true)
+            setError(response)
         } else {
-            setError(() => response)
+            setError(response)
         }
-        setIsLoading(() => false)
+        setIsLoading(false)
     }
 
-    function handleSignupSubmit(event) {
+    function handleSignupSubmit(event: any): void {
         event.preventDefault()
-        setError(null)
         fetchSignUp()
     }
 
     // otp validate js
 
-    function handleOtpChange(event) {
+    function handleOtpChange(event: any): void {
         setOtp(event.target.value)
     }
 
-    const fetchOtp = async () => {
+    const fetchOtp = async (): Promise<void> => {
         setIsLoading(() => true)
         const response = await OtpValidateReponse(userInfo.mobileNumber, otp)
         if (response.status === "success") {
-            const data = JSON.stringify(response.result)
-            localStorage.setItem("userInfo", data)
-            const path = params.get("redirectedTo") || "/"
+            const data: userInfo = response?.result;
+            SetLocalData("userInfo", data)
+            const path: string = params.get("redirectedTo") || "/"
             navigate(path, { replace: true })
-            window.location.reload(path)
         } else {
             setError(() => response)
         }
         setIsLoading(false)
     }
 
-    function handleOtpSubmit(event) {
+    function handleOtpSubmit(event: any): void {
         event.preventDefault()
-        setError(null)
         fetchOtp()
     }
 
@@ -101,8 +100,8 @@ export default function SignUp() {
                     isloading={isloading}
                 />
             }
-            <Spinner 
-            isLoading={isloading}
+            <Spinner
+                isLoading={isloading}
             />
             {error && <ErrorToster props={error} />}
         </>

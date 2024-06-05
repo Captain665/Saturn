@@ -4,20 +4,25 @@ import LoginForm from "./Login.html";
 import { LoginResponse } from "../../ApiCall/LoginApi";
 import ErrorToster from "../../Components/MessageToggle";
 import Spinner from "../../Components/Spinner";
+import { errorState, userInfo } from "../../CommonTypes/CommonType"
+import { SetLocalData } from "../../Components/CustomHooks";
 
 export default function Login() {
     const [param] = useSearchParams()
     const navigate = useNavigate()
 
 
-    const [loginData, setloginData] = useState({ mobileNumber: "", password: "" })
-    const [isLoading, setLoading] = useState(false)
-    const [error, setError] = useState(null)
+    const [loginData, setloginData] = useState<{
+        mobileNumber: string;
+        password: string
+    }>({ mobileNumber: "", password: "" })
+    const [isLoading, setLoading] = useState<boolean>(false)
+    const [error, setError] = useState<errorState>()
 
-    const msg = param.get("message");
+    const msg: string | null = param.get("message");
 
     useEffect(() => {
-        const messages = {
+        const messages: errorState = {
             status: "failure",
             error: msg,
             result: null
@@ -25,7 +30,7 @@ export default function Login() {
         setError(messages)
     }, [msg])
 
-    function handleChange(event) {
+    function handleChange(event: any): void {
         const name = event.target.name;
         const value = event.target.value;
         if (value?.length <= 10) {
@@ -37,13 +42,14 @@ export default function Login() {
     }
 
 
-    const fetchData = async () => {
+    const fetchData = async (): Promise<void> => {
         setLoading(true)
         const response = await LoginResponse(loginData)
 
         if (response.status === "success") {
-            localStorage.setItem("userInfo", JSON.stringify(response.result));
-            const path = param.get("redirectedTo") || "/";
+            const loginResult: userInfo = response?.result;
+            SetLocalData("userInfo", loginResult);
+            const path: string = param.get("redirectedTo") || "/";
             navigate(path, { replace: true })
         } else {
 
@@ -52,7 +58,7 @@ export default function Login() {
         setLoading(false)
     }
 
-    const HandleSubmit = (event) => {
+    const HandleSubmit = (event: any): void => {
         event.preventDefault()
         fetchData()
     }

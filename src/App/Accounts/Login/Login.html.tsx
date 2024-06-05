@@ -4,9 +4,18 @@ import { FaCircleUser, FaMobileRetro, FaLock } from "react-icons/fa6";
 import { ImSpinner2 } from "react-icons/im";
 
 
-export default function LoginForm({ isLoading, handleChange, HandleSubmit, loginData, redirectedTo, msg }) {
+export default function LoginForm({ isLoading, handleChange, HandleSubmit, loginData, redirectedTo }: {
+    isLoading: boolean;
+    handleChange: any;
+    HandleSubmit: any;
+    loginData: {
+        mobileNumber: string;
+        password: string
+    };
+    redirectedTo: string | null;
+}) {
 
-    const path = redirectedTo ? `/signup?redirectedTo=${redirectedTo}` : "/signup"
+    const path: string = redirectedTo ? `/signup?redirectedTo=${redirectedTo}` : "/signup"
 
     return (
 
@@ -18,7 +27,6 @@ export default function LoginForm({ isLoading, handleChange, HandleSubmit, login
                 <ul className="text-9xl text-gray-300 opacity-80">
                     <FaCircleUser />
                 </ul>
-                {msg && <strong className="text-red-500">{msg}</strong>}
 
                 <ul className="flex border items-center h-10 bg-gray-100 gap-2">
                     <li className="bg-white p-2 w-full h-full px-3">
@@ -60,7 +68,7 @@ export default function LoginForm({ isLoading, handleChange, HandleSubmit, login
                     className={`bg-primary-green w-full text-white active:opacity-50
                     font-extrabold h-10 inline-flex justify-center text-xl cursor-pointer items-center ${isLoading ? " opacity-70" : null}`}
                     disabled={isLoading} >
-                    {isLoading ? <ImSpinner2 className=" animate-spin"/> : "LOGIN"}
+                    {isLoading ? <ImSpinner2 className=" animate-spin" /> : "LOGIN"}
                 </button>
 
 
@@ -70,8 +78,6 @@ export default function LoginForm({ isLoading, handleChange, HandleSubmit, login
                 </ul>
 
             </form>
-
-
         </>
     )
 }

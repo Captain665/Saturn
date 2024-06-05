@@ -4,12 +4,13 @@ import OrderHtml from "./Orders.html";
 import { OrderListResponse } from "../../ApiCall/OrderListApi";
 import Spinner from "../../Components/Spinner";
 import IsLoading from "../../Components/Loading";
+import { GetLocalData } from "../../Components/CustomHooks";
 
-export default function OrderList({ token }) {
+export default function OrderList() {
     const navigate = useNavigate()
-    const jwt = JSON.parse(localStorage.getItem("userInfo"))?.jwt;
+    const userInfo = GetLocalData("userInfo");
 
-    const auth = token === undefined ? jwt : token
+    const auth = userInfo.jwt;
 
     const [orderslist, setOrderList] = React.useState([])
     const [isLoading, setIsLoading] = React.useState(false)
@@ -30,7 +31,7 @@ export default function OrderList({ token }) {
         return () => {
             setIsLoading(() => false)
         };
-    }, [token, navigate, auth])
+    }, [navigate, auth])
 
     function handleViewOrderDetail(order) {
         navigate("/order/" + order.id)
