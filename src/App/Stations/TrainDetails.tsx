@@ -1,8 +1,9 @@
 import React, { memo } from "react";
 import { FaTrain } from "react-icons/fa6";
 import { FormatedDateWithWeek } from "../Components/DateTimeFormatChange";
+import { pnrResponseResult } from "../CommonTypes/CommonType";
 
-function TrainHtml({ train, pnr }) {
+function TrainHtml({ train, pnr } : { train : pnrResponseResult, pnr : string | undefined}) {
 
     return (
         <div className="flex flex-col w-full">

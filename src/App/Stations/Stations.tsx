@@ -2,23 +2,25 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import StationData from "./StationList";
 import { PnrDetails } from "./Train";
+import { Station, pnrResponseResult } from "../CommonTypes/CommonType";
+import { SetSessionData } from "../Components/CustomHooks";
 
 export default function StationList() {
 
     const navigate = useNavigate();
-    const PnrResponse = useContext(PnrDetails);
+    const PnrResponse: any = useContext(PnrDetails);
 
-    const [jourenyData] = useState(PnrResponse)
-    const [stations, setStations] = useState(PnrResponse?.stations)
+    const [jourenyData] = useState<pnrResponseResult>(PnrResponse)
+    const [stations, setStations] = useState<Station[]>(PnrResponse?.stations)
 
     useEffect(() => {
-        const data = PnrResponse.stations
+        const data: Station[] = PnrResponse?.stations;
         setStations(data)
-    }, [PnrResponse.stations])
+    }, [PnrResponse?.stations])
 
 
-    const handleOnClick = useCallback((station) => {
-        window.sessionStorage.setItem("selectedStation", JSON.stringify(station))
+    const handleOnClick = useCallback((station: Station) => {
+        SetSessionData("selectedStation", station);
         navigate("outlets/" + station.code, { state: { jourenyData, station } })
     }, [])
 

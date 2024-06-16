@@ -12,7 +12,7 @@ export function SetLocalData(setLocalItemName: string, setLocalItemValue: userIn
     window.localStorage.setItem(setLocalItemName, data);
 }
 
-export function GetSessionData(getSessionItem: string): object {
+export function GetSessionData(getSessionItem: string): any {
     const data: string | null = window.sessionStorage.getItem(getSessionItem);
     const sessionData: object = JSON.parse(data!);
     return sessionData;
