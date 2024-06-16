@@ -30,17 +30,18 @@ export default function SignUp() {
     // Sign Up js
 
     function handleSignupOnChange(event: any): void {
-        const target = event.target;
+        const name: string = event.target.name;
+        const value: string = event.target.value
         setUserInfo((prevData) => ({
             ...prevData,
-            [target.name]: target.value
+            [name]: value
         }))
     }
 
 
     const fetchSignUp = async (): Promise<void> => {
         setIsLoading(() => true)
-        const response = await SignupResponse(userInfo);
+        const response: errorState = await SignupResponse(userInfo);
 
         if (response.status === "success") {
             setIsValidate(true)
@@ -64,8 +65,8 @@ export default function SignUp() {
 
     const fetchOtp = async (): Promise<void> => {
         setIsLoading(() => true)
-        const response = await OtpValidateReponse(userInfo.mobileNumber, otp)
-        if (response.status === "success") {
+        const response = await OtpValidateReponse(userInfo?.mobileNumber, otp)
+        if (response?.status === "success") {
             const data: userInfo = response?.result;
             SetLocalData("userInfo", data)
             const path: string = params.get("redirectedTo") || "/"
@@ -87,7 +88,7 @@ export default function SignUp() {
                 ? <ValidateHtml
                     handleOtpChange={handleOtpChange}
                     handleOtpSubmit={handleOtpSubmit}
-                    emailId={userInfo.emailId}
+                    emailId={userInfo?.emailId}
                     otp={otp}
                     redirectedTo={params.get("redirectedTo")}
                     isLoading={isloading}
@@ -103,7 +104,7 @@ export default function SignUp() {
             <Spinner
                 isLoading={isloading}
             />
-            {error && <ErrorToster props={error} />}
+            {error && <ErrorToster props={error} />}    
         </>
     )
 }

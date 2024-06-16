@@ -4,11 +4,10 @@ import NoProductExist from "../Components/EmptyPage";
 
 function OutletHtml({ outletData, handleOnClick, isLoading }) {
 
-    console.log("Outlet HTML")
     
     return (
         <>
-            {outletData.length > 0 ?
+            {outletData?.length > 0 ?
                 <div className="w-full">
                     <div className="flex flex-col w-full">
                         <div className="flex w-11/12 md:w-4/5 justify-between md:mt-16 mt-10 self-center items-center md:mb-5">
@@ -21,17 +20,17 @@ function OutletHtml({ outletData, handleOnClick, isLoading }) {
                                 {outletData?.map(outlet => (
                                     <div
                                         className="flex flex-col bg-white h-72 m-1 cursor-pointer hover:p-1 hover:delay-100"
-                                        key={outlet.id}
+                                        key={outlet?.id}
                                         onClick={() => handleOnClick(outlet)}
-                                    >
+                                    >   
                                         <ul className="h-3/4">
                                             <img
-                                                src={outlet.logoImage}
+                                                src={outlet?.logoImage}
                                                 alt=""
                                                 className="object-cover w-full h-full object-center rounded-2xl"
                                             />
                                             {
-                                                outlet.deliveryCost === 0
+                                                outlet?.deliveryCost === 0
                                                 && <li className="z-50 -mt-10 text-white font-extrabold text-center text-4xl">
                                                     Free Delivery
                                                 </li>
@@ -39,21 +38,21 @@ function OutletHtml({ outletData, handleOnClick, isLoading }) {
                                         </ul>
                                         <ul className="flex justify-between pt-2">
                                             <ul className="pl-3 w-2/3">
-                                                <li className="font-semibold text-lg line-clamp-1">{outlet.outletName}</li>
+                                                <li className="font-semibold text-lg line-clamp-1">{outlet?.outletName}</li>
                                                 <ul className="flex">
                                                     <li className="bg-green-600 p-1 rounded-full"><FaStar className="text-white" /></li>
-                                                    <li className="pl-1 font-semibold">{outlet.ratingValue}</li>
+                                                    <li className="pl-1 font-semibold">{outlet?.ratingValue}</li>
                                                     {
-                                                        outlet.ratingCount > 0 &&
+                                                        outlet?.ratingCount > 0 &&
                                                         <li className="text-xs pl-0.5 pt-1">
-                                                            {`(${outlet.ratingCount}k+)`}
+                                                            {`(${outlet?.ratingCount}k+)`}
                                                         </li>
                                                     }
                                                 </ul>
-                                                <li className="text-gray-500 text-sm line-clamp-1">{outlet.tags}</li>
+                                                <li className="text-gray-500 text-sm line-clamp-1">{outlet?.tags}</li>
                                             </ul>
                                             <ul className="text-gray-600 md:self-center flex flex-col">
-                                                <li>Min &#x20B9;{outlet.minOrderValue}</li>
+                                                <li>Min &#x20B9;{outlet?.minOrderValue}</li>
                                                 <li className="md:hidden block self-center mt-5 text-lg text-gray-4 00"><FaChevronRight /></li>
                                             </ul>
                                         </ul>

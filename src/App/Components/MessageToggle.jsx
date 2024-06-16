@@ -43,8 +43,8 @@ function ErrorToster({ props }) {
                 stacked={true}
                 hideProgressBar={true}
                 toastClassName={(context) =>
-                    contextClass[context?.type || "default"] + " relative flex p-1 rounded-md justify-between overflow-hidden cursor-pointer"}
-                bodyClassName={() => "text-lg font-white font-med block p-2 m-auto text-center"}
+                    contextClass[context?.type || "default"] + " relative flex p-0.5 rounded-md justify-between overflow-hidden"}
+                bodyClassName={() => "text-base font-white font-med block p-1 m-auto text-center"}
             />
         </div>
     )

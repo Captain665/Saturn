@@ -60,8 +60,10 @@ export default function Account() {
                     <ul className="">
                         <li className="text-lg font-semibold tracking-wide">{info?.fullName}</li>
                         <li className="opacity-80">{info?.emailId}</li>
-                        <ul className={`items-center flex gap-1 ${data === "profile" ? "text-green-500" : ""} text-lg cursor-pointer`}>
-                            <li className="text-xl font-medium hidden md:block" onClick={() => HandleOnClick("profile")}>
+                        <ul className={`items-center flex gap-1 ${data === "profile" ? "text-green-500" : ""} text-lg cursor-pointer`}
+                            onClick={() => HandleOnClick("profile")}
+                        >
+                            <li className="text-xl font-medium hidden md:block" >
                                 View details
                             </li>
                             <NavLink to="/customer/details" className="md:hidden">View details </NavLink>
@@ -73,10 +75,12 @@ export default function Account() {
 
                 <ul className="flex flex-col mt-10 gap-4 tracking-wide">
 
-                    <ul className={`flex items-center justify-between px-5 cursor-pointer ${data === "history" ? "text-green-500" : ""}`}>
+                    <ul className={`flex items-center justify-between px-5 cursor-pointer ${data === "history" ? "text-green-500" : ""}`}
+                        onClick={() => HandleOnClick("history")}
+                    >
                         <li
                             className="text-xl font-medium hidden md:block"
-                            onClick={() => HandleOnClick("history")}
+
                         >
                             Order History
                         </li>

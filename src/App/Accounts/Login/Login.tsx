@@ -31,8 +31,8 @@ export default function Login() {
     }, [msg])
 
     function handleChange(event: any): void {
-        const name = event.target.name;
-        const value = event.target.value;
+        const name: string = event.target.name;
+        const value: string = event.target.value;
         if (value?.length <= 10) {
             setloginData((prevData) => ({
                 ...prevData,
@@ -51,6 +51,7 @@ export default function Login() {
             SetLocalData("userInfo", loginResult);
             const path: string = param.get("redirectedTo") || "/";
             navigate(path, { replace: true })
+
         } else {
 
             setError(response)

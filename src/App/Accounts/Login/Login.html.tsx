@@ -68,7 +68,7 @@ export default function LoginForm({ isLoading, handleChange, HandleSubmit, login
                     className={`bg-primary-green w-full text-white active:opacity-50
                     font-extrabold h-10 inline-flex justify-center text-xl cursor-pointer items-center ${isLoading ? " opacity-70" : null}`}
                     disabled={isLoading} >
-                    {isLoading ? <ImSpinner2 className=" animate-spin" /> : "LOGIN"}
+                    {isLoading ? <ImSpinner2 className="animate-spin" /> : "LOGIN"}
                 </button>
 
 

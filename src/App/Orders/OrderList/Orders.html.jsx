@@ -17,18 +17,18 @@ export default function OrderHtml({ orderslist, handleViewOrderDetail, handleBac
                 <br /><br />
                 <div className=" grid md:grid-cols-2 gap-5 w-full">
                     {orderslist?.map(item => (
-                        <div className="w-full p-5 flex flex-col gap-y-10 rounded-lg border" key={item.id}>
+                        <div className="w-full p-5 flex flex-col gap-y-10 rounded-lg border" key={item?.id}>
                             <ul className="top-40">
                                 <div className="flex">
                                     <div className="flex justify-start items-center w-4/6">
-                                        <img src={item.outlets.logoImage} alt="outlet" className="object-cover overflow-hidden" width={50} height={50} />
-                                        <li className="font-bold ml-2">{item.outlets.outletName}</li>
+                                        <img src={item?.outlets?.logoImage} alt="outlet" className="object-cover overflow-hidden" width={50} height={50} />
+                                        <li className="font-bold ml-2">{item?.outlets?.outletName}</li>
                                     </div>
                                     <div className=" w-2/6 text-end">
-                                        <li>{item.paymentType === "CASH_ON_DELIVERY" ? "COD" : item.paymentType}</li>
+                                        <li>{item?.paymentType === "CASH_ON_DELIVERY" ? "COD" : item?.paymentType}</li>
                                     </div>
                                 </div>
-                                <li className="font-[1] text-[#9c9c9c] text-xs"><span className="text-base">{item.stationName},   </span> {item.stationCode}</li>
+                                <li className="font-[1] text-[#9c9c9c] text-xs"><span className="text-base">{item?.stationName},   </span> {item?.stationCode}</li>
                                 <hr />
                                 <li><span className="uppercase text-[#696969] text-xs">Order Number</span> <br />{item.id}</li>
                                 <li><span className="uppercase text-[#696969] text-xs">Status </span> <br />{item.status}</li>

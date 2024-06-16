@@ -40,7 +40,7 @@ export default function SignupData({ userInfo, handleSubmit, handleOnChange, isl
                             placeholder="Name"
                             required
                             onChange={handleOnChange}
-                            value={userInfo.fullName}
+                            value={userInfo?.fullName}
                             className="bg-gray-100 outline-none"
                         />
                     </li>
@@ -58,7 +58,7 @@ export default function SignupData({ userInfo, handleSubmit, handleOnChange, isl
                             placeholder="Mobile Number"
                             required
                             onChange={handleOnChange}
-                            value={userInfo.mobileNumber}
+                            value={userInfo?.mobileNumber}
                             className="bg-gray-100 outline-none"
                         />
                     </li>
@@ -76,7 +76,7 @@ export default function SignupData({ userInfo, handleSubmit, handleOnChange, isl
                             placeholder="Email Id"
                             required
                             onChange={handleOnChange}
-                            value={userInfo.emailId}
+                            value={userInfo?.emailId}
                             className="bg-gray-100 outline-none"
                         />
                     </li>
@@ -94,19 +94,19 @@ export default function SignupData({ userInfo, handleSubmit, handleOnChange, isl
                             placeholder="Password"
                             required
                             onChange={handleOnChange}
-                            value={userInfo.password}
+                            value={userInfo?.password}
                             className="bg-gray-100 outline-none"
                         />
                     </li>
                 </ul>
 
                 <select
-                    className="flex border items-center h-10 bg-gray-100 gap-2 w-full px-2 outline-none"
+                    className="flex border items-center h-10 bg-gray-100 gap-2 w-full px-2"
                     name="gender"
                     id="gender"
                     required
                     onChange={handleOnChange}
-                    value={userInfo.gender}
+                    value={userInfo?.gender}
                 >
                     <option value="" >Please select one...</option>
                     <option value="Male">Male</option>

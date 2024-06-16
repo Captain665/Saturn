@@ -17,7 +17,7 @@ function TrainHtml({ train, pnr }) {
 
                 <ul className="mt-2 font-semibold border-b-2 border-dashed">
                     <li>PNR: {pnr}</li>
-                </ul>
+                </ul>   
 
                 <ul className="flex justify-between mt-2">
                     <li className=" text-gray-400">{train?.trainInfo?.name}</li>

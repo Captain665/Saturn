@@ -14,7 +14,7 @@ export default function ValidateHtml({ handleOtpChange, handleOtpSubmit, isLoadi
 
     const path: string = redirectedTo ? `/login?redirectedTo=${redirectedTo}` : "/login"
 
-    return (
+    return (    
         <>
             <form
                 className="border md:p-10 p-5 md:px-12 px-6 flex flex-col justify-center w-fit m-auto mt-20

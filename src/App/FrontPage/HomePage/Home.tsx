@@ -28,13 +28,13 @@ export default function Home() {
         if (pnr !== '') {
             setIsLoading(true)
             const response = await PnrResponse(pnr)
-            const status: string = response.status;
+            const status: string = response?.status;
             if (status === "failure") {
                 const responseData: errorState = response;
                 setError(responseData)
             }
             if (status === "success") {
-                const result: pnrResponseResult = response.result;
+                const result: pnrResponseResult = response?.result;
                 SetSessionData("pnrDetails", result);
                 SetSessionData("pnr", pnr);
                 const route: string = pnr + "/stations";
@@ -68,7 +68,7 @@ export default function Home() {
             {dialog &&
                 <ActionDialog
                     handleOnChange={(event: any) => handleOnChange(event)}
-                    handleOnClick={() => GetData(pnr.current)}
+                    handleOnClick={() => GetData(pnr?.current)}
                     isLoading={isLoading}
                     dialog={dialog}
                     hideDialog={hideDialog}
