@@ -20,11 +20,11 @@ export default function TrainInfo() {
     const [redirected, setRedirected] = useState<boolean>(false);
 
 
-    useEffect(() => {
+    useEffect((): void => {
         const fetchData = async (): Promise<void> => {
             setIsLoading(true)
-            const response = await PnrResponse(pnr);    
-            if (response.status === "failure") {
+            const response = await PnrResponse(pnr);
+            if (response?.status === "failure") {
                 setError(response);
                 setTimeout((): void => {
                     setRedirected(true)

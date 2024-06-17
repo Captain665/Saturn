@@ -17,7 +17,7 @@ function TrainHtml({ train, pnr } : { train : pnrResponseResult, pnr : string | 
             <div className="self-center shadow w-11/12 md:w-3/4 px-2 md:px-10 rounded text-sm md:text-lg bg-opacity-1">
 
                 <ul className="mt-2 font-semibold border-b-2 border-dashed">
-                    <li>PNR: {pnr}</li>
+                    <li>PNR: {train?.pnrNumber}</li>
                 </ul>   
 
                 <ul className="flex justify-between mt-2">
@@ -37,7 +37,7 @@ function TrainHtml({ train, pnr } : { train : pnrResponseResult, pnr : string | 
 
                 <ul className="flex justify-between mt-2">
                     <li className="text-gray-400">{FormatedDateWithWeek(train?.trainInfo?.dt)}</li>
-                    <li>{ }</li>
+                    <li>{}</li>
                 </ul>
 
             </div>

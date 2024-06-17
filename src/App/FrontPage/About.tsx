@@ -83,7 +83,7 @@ export default function About() {
                 </section><br />
 
                 <footer><hr />
-                    <p className="text-sm md:text-base">Thank you for being part of the [Your Website Name] family. Get ready to embark on a culinary journey filled
+                    <p className="text-sm md:text-base">Thank you for being part of the The Meal Monkey family. Get ready to embark on a culinary journey filled
                         with flavor, creativity, and a whole lot of deliciousness!</p><br />
                     <p>Happy Cooking,</p>
                     <p>The Meal Monkey Team</p>
