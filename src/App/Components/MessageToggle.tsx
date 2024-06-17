@@ -1,6 +1,7 @@
 import React, { memo, useEffect } from "react";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { errorState } from "../CommonTypes/CommonType";
 
 const contextClass = {
     success: "bg-blue-600",
@@ -11,7 +12,7 @@ const contextClass = {
     dark: "bg-white-600 font-gray-300",
 };
 
-function ErrorToster({ props }) {
+function ErrorToster({ props }: { props: errorState }) {
 
     useEffect(() => {
 
@@ -19,9 +20,9 @@ function ErrorToster({ props }) {
         const msg = props?.error;
         const result = props?.result;
 
-        const fail = "failure" 
+        const fail = "failure"
 
-        if (status === fail ) {
+        if (status === fail) {
             toast.error(msg, { autoClose: 1000 })
         } else {
             toast.success(result, { autoClose: 3000 })

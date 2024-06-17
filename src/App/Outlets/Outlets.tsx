@@ -4,7 +4,8 @@ import OutletHtml from "./OutletList";
 import { OutletResponse } from "../ApiCall/OutletApi";
 import Spinner from "../Components/Spinner";
 import { SetSessionData } from "../Components/CustomHooks";
-import { outletInfo } from "../CommonTypes/CommonType";
+import { errorState, outletInfo } from "../CommonTypes/CommonType";
+import ErrorToster from "../Components/MessageToggle"
 
 export default function OutletList() {
 
@@ -13,6 +14,7 @@ export default function OutletList() {
 
     const [outletData, setOutletData] = useState<outletInfo[] | []>([])
     const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [error, setError] = useState<errorState>();
 
 
     useEffect((): void => {
@@ -24,6 +26,7 @@ export default function OutletList() {
                 setOutletData(response?.result)
                 setIsLoading(false)
             } else {
+                setError(response)
                 setIsLoading(false)
             }
         }
@@ -48,6 +51,9 @@ export default function OutletList() {
             <Spinner
                 isLoading={isLoading}
             />
+            {error && <ErrorToster props={error} />}
+
+
         </>
     )
 }
