@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function NoProductExist({ isLoading, logo }) {
+export default function NoProductExist({ isLoading, logo }: { isLoading : boolean; logo : string | null}) {
 
     const url = "https://cliffclimbers.in/assets/img/nodatafound.png";
     return (

@@ -56,3 +56,17 @@ export interface profileInfo {
     password: string;
     gender: string;
 }
+
+export interface outletInfo {
+    id: number;
+    outletName: string;
+    minOrderValue: number;
+    orderTiming: number;
+    deliveryCost: number;
+    prepaid: boolean;
+    logoImage: string;
+    tags: string;
+    ratingValue: number;
+    ratingCount: number;
+    stationCode: string;
+}
