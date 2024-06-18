@@ -2,11 +2,12 @@ import React, { useContext } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { FormatedDateWithYear, FormatedTime } from "../Components/DateTimeFormatChange";
 import { cartInfoContext } from "./Cart";
+import { orderItems } from "../CommonTypes/CommonType";
 
 export default function CartSummary() {
     
-    const summeryDetails = useContext(cartInfoContext);
-    const itemList = summeryDetails.itemList;
+    const summeryDetails: any = useContext(cartInfoContext);
+    const itemList: orderItems[] = summeryDetails.itemList;
     const makePayment = summeryDetails.makePayment;
     const outletInfo = summeryDetails.outletInfo;
     const userInfo = summeryDetails.userInfo;

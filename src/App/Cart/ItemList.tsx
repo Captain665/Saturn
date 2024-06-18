@@ -1,14 +1,15 @@
 import React, { memo, useContext } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa6";
 import { cartInfoContext } from "./Cart";
+import { orderItems } from "../CommonTypes/CommonType";
 
 function ItemInfo() {
 
-    const cartdetails = useContext(cartInfoContext);
-    const itemList = cartdetails.itemList;
-    const removeItem = cartdetails.removeItem;
-    const addItem = cartdetails.addItem;
-    
+    const cartdetails: any = useContext(cartInfoContext);
+    const itemList: orderItems[] = cartdetails.itemList;
+    const removeItem: any = cartdetails.removeItem;
+    const addItem: any = cartdetails.addItem;
+
     return (
         <>
             <div className="md:w-2/3 flex flex-col align-top h-fit md:m-5 m-2 mt-3">
