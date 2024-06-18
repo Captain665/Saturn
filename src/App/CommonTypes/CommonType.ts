@@ -70,3 +70,21 @@ export interface outletInfo {
     ratingCount: number;
     stationCode: string;
 }
+
+export interface menuInfo {
+    id: number;
+    name: string;
+    description: string;
+    basePrice: number;
+    isVegeterian: boolean;
+    image: string;
+}
+
+export interface orderItems{
+    itemId: number;
+    name: string;
+    description: string;
+    basePrice: number;
+    isVegeterian: boolean;
+    quantity : number;
+}

@@ -1,6 +1,11 @@
 import React, { memo } from "react";
 
-function Filters({ vegFilter, priceFilter, active }) {
+function Filters({ vegFilter, priceFilter, active }:
+    {
+        vegFilter: any;
+        priceFilter: any;
+        active: { isVeg: string | null, amountSort: string| null }
+    }) {
 
     return (
         <div className="flex flex-col">

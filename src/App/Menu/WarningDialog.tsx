@@ -1,7 +1,13 @@
 import React from "react";
 import { FaXmark } from "react-icons/fa6";
+import { outletInfo } from "../CommonTypes/CommonType";
 
-const WarningDialog = ({ orderItemsCount, handleCancel, handleContiue, outlet }) => {
+const WarningDialog = ({ orderItemsCount, handleCancel, handleContiue, outlet }: {
+    orderItemsCount: number;
+    handleCancel: any;
+    handleContiue: any;
+    outlet: outletInfo;
+}) => {
 
     return (
 

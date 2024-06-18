@@ -1,8 +1,12 @@
 import React, { memo } from "react";
 import { FaStar, FaArrowLeft, FaPersonBiking } from "react-icons/fa6";
+import { outletInfo } from "../CommonTypes/CommonType";
 
 
-function OutletInfo({ outletInfo, backToOutlet }) {
+function OutletInfo({ outletInfo, backToOutlet }: {
+    outletInfo: outletInfo;
+    backToOutlet: any;
+}) {
 
     return (
         <ul className=" md:w-3/4 w-full m-auto md:text-lg">

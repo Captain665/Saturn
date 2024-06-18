@@ -2,7 +2,8 @@ import React, { memo } from "react";
 import { FaCartShopping } from "react-icons/fa6";
 
 
-const CartInfo = ({ orderItemsCount, handleCheckOut }) => {
+const CartInfo = ({ orderItemsCount, handleCheckOut }:
+    { orderItemsCount: number; handleCheckOut: any }) => {
 
     return (
         <>
@@ -17,7 +18,7 @@ const CartInfo = ({ orderItemsCount, handleCheckOut }) => {
                     </ul>
                 </div >
             }
-        </> 
+        </>
     )
 }
 
