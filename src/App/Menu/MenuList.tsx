@@ -1,8 +1,15 @@
 import React, { memo } from "react";
 import { FaPlus, FaMinus } from "react-icons/fa6";
 import NoProductExist from "../Components/EmptyPage";
+import { menuInfo, orderItems } from "../CommonTypes/CommonType";
 
-function MenuList({ menuList, orderItems, addItem, removeItem, isLoading }) {
+function MenuList({ menuList, orderItems, addItem, removeItem, isLoading }: {
+    menuList: menuInfo[];
+    orderItems: orderItems[];
+    addItem: any;
+    removeItem: any;
+    isLoading: boolean;
+}) {
 
     return (
         <>
@@ -38,7 +45,7 @@ function MenuList({ menuList, orderItems, addItem, removeItem, isLoading }) {
                     </div>
                 </div>
                 :
-                <NoProductExist isLoading={isLoading} />
+                <NoProductExist isLoading={isLoading} logo={null} />
             }
 
         </>

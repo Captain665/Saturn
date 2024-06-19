@@ -1,28 +1,28 @@
 import React, { useContext } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { FormatedDateWithYear, FormatedTime } from "../Components/DateTimeFormatChange";
-import { cartInfoContext } from "./Cart";
-import { orderItems } from "../CommonTypes/CommonType";
+import { cartInfoContext, detailsExpend } from "./Cart";
+import { SeatInfo, Station, TrainInfo, orderItems, outletInfo, userInfo } from "../CommonTypes/CommonType";
 
 export default function CartSummary() {
     
     const summeryDetails: any = useContext(cartInfoContext);
-    const itemList: orderItems[] = summeryDetails.itemList;
-    const makePayment = summeryDetails.makePayment;
-    const outletInfo = summeryDetails.outletInfo;
-    const userInfo = summeryDetails.userInfo;
-    const stationInfo = summeryDetails.stationInfo;
-    const trainInfo = summeryDetails.trainInfo;
-    const seatInfo = summeryDetails.seatInfo;
-    const customerDetailsShown = summeryDetails.customerDetailsShown;
-    const detailsShown = summeryDetails.detailsShown;
-    const deliveryDetailsShown = summeryDetails.deliveryDetailsShown;
-    const billDetail = summeryDetails.billDetail;
+    const itemList: orderItems[] = summeryDetails?.itemList;
+    const makePayment:any = summeryDetails?.makePayment;
+    const outletInfo:outletInfo = summeryDetails?.outletInfo;
+    const userInfo:userInfo = summeryDetails?.userInfo;
+    const stationInfo:Station = summeryDetails?.stationInfo;
+    const trainInfo:TrainInfo = summeryDetails?.trainInfo;
+    const seatInfo:SeatInfo = summeryDetails?.seatInfo;
+    const customerDetailsShown:any = summeryDetails?.customerDetailsShown;
+    const detailsShown:detailsExpend = summeryDetails?.detailsShown;
+    const deliveryDetailsShown:any = summeryDetails?.deliveryDetailsShown;
+    const billDetail:any = summeryDetails?.billDetail;
 
-    const subTotal = JSON.parse(itemList?.reduce((a, b) => a + (b.basePrice * b.quantity), 0).toFixed(2))
-    const taxes = JSON.parse((subTotal * 0.05).toFixed(2))
-    const deliveryCharge = outletInfo?.deliveryCost;
-    const payable = Math.round(subTotal + taxes + deliveryCharge)
+    const subTotal:number = JSON.parse(itemList?.reduce((a, b) => a + (b.basePrice * b.quantity), 0).toFixed(2))
+    const taxes:number = JSON.parse((subTotal * 0.05).toFixed(2))
+    const deliveryCharge:number = outletInfo?.deliveryCost;
+    const payable:number = Math.round(subTotal + taxes + deliveryCharge)
 
 
     return (
@@ -60,33 +60,33 @@ export default function CartSummary() {
 
             <ul className="flex items-center justify-between cursor-pointer mt-10" onClick={customerDetailsShown}>
                 <li className="font-bold text-lg">Customer Details</li>
-                <li className="text-gray-500">{detailsShown.customer ? <FaChevronUp /> : <FaChevronDown />}</li>
+                <li className="text-gray-500">{detailsShown?.customer ? <FaChevronUp /> : <FaChevronDown />}</li>
             </ul>
-            <ul className={`${detailsShown.customer ? "block" : "hidden"} m-2 bg-white p-2`}>
+            <ul className={`${detailsShown?.customer ? "block" : "hidden"} m-2 bg-white p-2`}>
                 {userInfo && <ul className="bg-white rounded-md">
                     <li className="font-semibold text-lg">Passanger Details</li>
-                    <li>Name : {userInfo.fullName}</li>
-                    <li>Mobile Number : {userInfo.mobileNumber}</li>
-                    <li>Email : {userInfo.emailId}</li>
+                    <li>Name : {userInfo?.fullName}</li>
+                    <li>Mobile Number : {userInfo?.mobileNumber}</li>
+                    <li>Email : {userInfo?.emailId}</li>
                 </ul>}
             </ul>
 
             <ul className="flex items-center justify-between mt-5 cursor-pointer" onClick={deliveryDetailsShown}>
                 <li className="font-bold text-lg">Delivery Details</li>
-                <li className="text-gray-500">{detailsShown.delivery ? <FaChevronUp /> : <FaChevronDown />}</li>
+                <li className="text-gray-500">{detailsShown?.delivery ? <FaChevronUp /> : <FaChevronDown />}</li>
             </ul>
-            <ul className={`${detailsShown.delivery ? "block" : "hidden"} m-2 bg-white p-2`}>
+            <ul className={`${detailsShown?.delivery ? "block" : "hidden"} m-2 bg-white p-2`}>
                 {trainInfo && <ul>
                     <li className="font-semibold text-lg">Journey Details</li>
-                    <li>Train : {trainInfo.trainNo} - {trainInfo.name}</li>
-                    <li>From : {trainInfo.boarding} to {trainInfo.destination} on {FormatedDateWithYear(trainInfo.dt)}</li>
+                    <li>Train : {trainInfo?.trainNo} - {trainInfo?.name}</li>
+                    <li>From : {trainInfo?.boarding} to {trainInfo?.destination} on {FormatedDateWithYear(trainInfo?.dt)}</li>
                 </ul>}<br />
                 {stationInfo && <ul>
                     <li className="font-semibold text-lg">Delivery Details</li>
-                    <li className="">Station : {stationInfo.name} {stationInfo.code}</li>
-                    <li>Time :  {FormatedTime(stationInfo.departure)} | {FormatedDateWithYear(stationInfo.depDate)} </li>
-                    <li>Coach : {seatInfo.coach}</li>
-                    <li>Berth : {seatInfo.berth}</li>
+                    <li className="">Station : {stationInfo?.name} {stationInfo?.code}</li>
+                    <li>Time :  {FormatedTime(stationInfo?.departure)} | {FormatedDateWithYear(stationInfo?.depDate)} </li>
+                    <li>Coach : {seatInfo?.coach}</li>
+                    <li>Berth : {seatInfo?.berth}</li>
                 </ul>}
             </ul>
             <br />

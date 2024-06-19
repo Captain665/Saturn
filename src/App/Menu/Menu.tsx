@@ -16,11 +16,11 @@ export default function MenuItem() {
     const { code, id }: Readonly<Params<string>> = useParams();
     const navigate = useNavigate();
 
-    const [selectedOutletInfo] = useState<outletInfo>(GetSessionData("outletInfo"))
-    const outlet: outletInfo = GetSessionData("CartOutlet");
+    const [selectedOutletInfo] = useState<outletInfo>(GetSessionData("outletInfo"));
+    const outlet: outletInfo = GetSessionData("cartOutlet");
     const pnr: string = GetSessionData("pnr");
 
-    const [orderItems, setOrderItems] = useState<orderItems[]>(GetSessionData("selectedItemInfo"));
+    const [orderItems, setOrderItems] = useState<orderItems[] | []>(GetSessionData("selectedItemInfo") ?? []);
     const [menuList, setMenuList] = useState<menuInfo[] | []>([]);
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [warningDialog, setWarningDialog] = useState<boolean>(false)
@@ -32,7 +32,7 @@ export default function MenuItem() {
     useEffect((): void => {
         const fetchData = async (): Promise<void> => {
             setIsLoading(true)
-            const response = await MenuResponse(id)
+            const response = await MenuResponse(id);
             if (response?.status === "success") {
                 const itemList: menuInfo[] = response?.result;
                 setMenuList(itemList)
@@ -61,7 +61,8 @@ export default function MenuItem() {
 
 
     const addItem = useCallback((menuItem: menuInfo): void => {
-        const existItemIndex: number = orderItems.findIndex(a => a.itemId === menuItem.id)
+        const existItemIndex = orderItems?.findIndex(a => a.itemId === menuItem.id)
+
         if (isValidoutlet()) {
             setOrderItems((prevData): orderItems[] => {
                 if (existItemIndex !== -1) {
@@ -101,7 +102,9 @@ export default function MenuItem() {
 
     const handleCheckOut = (): void => {
         const minOrdeAmount: number = outlet?.minOrderValue;
-        const itemAmount: number = JSON.parse(orderItems.reduce((a, b) => a + (b.basePrice * b.quantity), 0).toFixed(2));
+        let itemAmount = 0;
+        orderItems.forEach(item => itemAmount += (item.basePrice * item.quantity))
+        // const itemAmount: number = parseInt(orderItems?.reduce((a: any, b: any) => a + (b.basePrice * b.quantity), 0).toFixed(2));
         if (itemAmount >= minOrdeAmount) {
             navigate("/cart")
         } else {
@@ -113,7 +116,6 @@ export default function MenuItem() {
             setError(msg)
         }
     }
-
 
     const backToOutlet = useCallback((): void => {
         const outletPath: string = "/" + pnr + "/stations/outlets/" + code;
@@ -164,13 +166,19 @@ export default function MenuItem() {
         : menuList;
 
 
+    // const menuItemList2: menuInfo[] = filters?.amountSort ?
+    //     (filters.amountSort === "hightoLow" ?
+    //         VegList.toSorted((a: menuInfo, b: menuInfo) => b.basePrice - a.basePrice)
+    //         : VegList.toSorted((a: menuInfo, b: menuInfo) => a.basePrice - b.basePrice)
+    //     )
+    //     : VegList
+
     const menuItemList: menuInfo[] = filters?.amountSort ?
         (filters.amountSort === "hightoLow" ?
-            VegList.toSorted((a, b) => b.basePrice - a.basePrice)
-            : VegList.toSorted((a, b) => a.basePrice - b.basePrice)
+            VegList.slice().sort((a: menuInfo, b: menuInfo) => b.basePrice - a.basePrice)
+            : VegList.slice().sort((a: menuInfo, b: menuInfo) => a.basePrice - b.basePrice)
         )
         : VegList
-
 
 
 

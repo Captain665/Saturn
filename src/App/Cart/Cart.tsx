@@ -36,6 +36,7 @@ export default function CartInfo() {
 
     const path: string = location.pathname;
 
+
     const returnToMenu = useCallback((): void => {
         if (stationInfo === null || outletInfo === null) {
             navigate("/")
@@ -125,11 +126,11 @@ export default function CartInfo() {
                 isLoading={isLoading}
             />
         </>
-
-
     }
 
-    if (itemSize > 0) {
+
+    if (itemSize < 1) {
+        console.log(itemSize)
         const url: string = "https://iticsystem.com/img/empty-cart.png"
         return <NoProductExist isLoading={isLoading} logo={url} />
     }
