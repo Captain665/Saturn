@@ -24,8 +24,6 @@ export default function CartSummary() {
     const deliveryCharge:number = outletInfo?.deliveryCost;
     const payable:number = Math.round(subTotal + taxes + deliveryCharge)
 
-    console.log(FormatedDateWithYear(trainInfo.dt))
-
 
     return (
         <div className="md:w-1/3 md:mt-7 m-0.5 w-11/12 items-center self-center md:self-start">
