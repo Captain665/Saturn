@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
-import { FormatedDateWithYear, FormatedTime } from "../Components/DateTimeFormatChange";
+import { FormatedDateWithYear, FormatedTime, FormatedDateWithYearForDt } from "../Components/DateTimeFormatChange";
 import { cartInfoContext, detailsExpend } from "./Cart";
 import { SeatInfo, Station, TrainInfo, orderItems, outletInfo, userInfo } from "../CommonTypes/CommonType";
 
@@ -23,6 +23,8 @@ export default function CartSummary() {
     const taxes:number = JSON.parse((subTotal * 0.05).toFixed(2))
     const deliveryCharge:number = outletInfo?.deliveryCost;
     const payable:number = Math.round(subTotal + taxes + deliveryCharge)
+
+    console.log(FormatedDateWithYear(trainInfo.dt))
 
 
     return (
@@ -79,7 +81,7 @@ export default function CartSummary() {
                 {trainInfo && <ul>
                     <li className="font-semibold text-lg">Journey Details</li>
                     <li>Train : {trainInfo?.trainNo} - {trainInfo?.name}</li>
-                    <li>From : {trainInfo?.boarding} to {trainInfo?.destination} on {FormatedDateWithYear(trainInfo?.dt)}</li>
+                    <li>From : {trainInfo?.boarding} to {trainInfo?.destination} on {FormatedDateWithYearForDt(trainInfo?.dt)}</li>
                 </ul>}<br />
                 {stationInfo && <ul>
                     <li className="font-semibold text-lg">Delivery Details</li>

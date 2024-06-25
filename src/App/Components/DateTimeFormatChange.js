@@ -55,6 +55,21 @@ export function FormatedDateWithYear(date) {
     })
 }
 
+export function FormatedDateWithYearForDt(dt) {
+    const [date, month, year] = dt.split("-");
+
+    const newDate = new Date()
+    newDate.setDate(date)
+    newDate.setMonth(month)
+    newDate.setFullYear(year)
+
+    return newDate.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+    })
+}
+
 export function FormatedDateWithTime(date) {
 
     const newDate = new Date(date)
