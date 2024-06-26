@@ -69,6 +69,7 @@ export interface outletInfo {
     ratingValue: number;
     ratingCount: number;
     stationCode: string;
+    mobile: string;
 }
 
 export interface menuInfo {
@@ -80,11 +81,61 @@ export interface menuInfo {
     image: string;
 }
 
-export interface orderItems{
+export interface orderItems {
     itemId: number;
     name: string;
     description: string;
     basePrice: number;
     isVegeterian: boolean;
-    quantity : number;
+    quantity: number;
+}
+
+
+export interface orderDetails {
+    id: number;
+    bookingDate: string;
+    status: string;
+    pnr: string;
+    orderFrom: string;
+    delivery: {
+        trainName: string;
+        trainNo: string;
+        stationCode: string;
+        stationName: string;
+        coach: string;
+        berth: string;
+        deliveryDate: string;
+
+    };
+    payments: {
+        paymentType: string;
+        totalAmount: number;
+        gst: number;
+        deliveryCharge: number;
+        payable_amount: number;
+
+    };
+    orderItems: {
+        id: number;
+        itemName: string;
+        veg: boolean;
+        description: string;
+        basePrice: number;
+        quantity: number;
+    }[];
+    outlet: {
+        id: number;
+        outletName: string;
+        mobileNo: string;
+        fssaiNo: string;
+        city: string;
+    };
+    customer: {
+        id: number;
+        fullName: string;
+        mobileNumber: string;
+        emailId: string;
+
+    };
+
 }

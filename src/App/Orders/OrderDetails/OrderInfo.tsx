@@ -2,44 +2,45 @@ import React, { useState } from "react";
 import { FaArrowLeft, FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { FormatedDateWithTime } from "../../Components/DateTimeFormatChange";
 import { memo } from "react";
+import { orderDetails } from "../../CommonTypes/CommonType";
 
 
-function OrderInfo({ order, backToHome }) {
+function OrderInfo({ order, backToHome }: { order: orderDetails; backToHome: any }) {
 
-    const [detailShown, setIsDetailShown] = useState({
+    const [detailShown, setIsDetailShown] = useState<{ customer: boolean; delivery: boolean; restaurant: boolean }>({
         customer: true,
         delivery: true,
         restaurant: true
     })
 
 
-    const totalPrice = (a, b) => {
-        const totalValue = a * b;
+    const totalPrice = (a: number, b: number): number => {
+        const totalValue: number = a * b;
         return JSON.parse(totalValue.toFixed(2))
     }
 
-    const customer = () => {
+    const customer = (): void => {
         setIsDetailShown(prevData => ({
             ...prevData,
             customer: !prevData.customer
         }))
     }
 
-    const delivery = () => {
+    const delivery = (): void => {
         setIsDetailShown(prevData => ({
             ...prevData,
             delivery: !prevData.delivery
         }))
     }
 
-    const restaurant = () => {
+    const restaurant = (): void => {
         setIsDetailShown(prevData => ({
             ...prevData,
             restaurant: !prevData.restaurant
         }))
     }
 
-    const orderStatus = (orderStatus) => {
+    const orderStatus = (orderStatus: string): string => {
         if (orderStatus === "CANCELLED" || orderStatus === "UNDELIVERED" || orderStatus === "PARTIALLY_DELIVERED") {
             return "red"
         } else {
@@ -71,8 +72,8 @@ function OrderInfo({ order, backToHome }) {
                         <ul>
                             <li className="opacity-50 font-extrabold">Payment</li>
                             <ul className="flex flex-col md:flex-row gap-1">
-                                <li>{order?.paymentType}</li>
-                                <ul className={`gap-1 bg-green-100 items-center rounded-2xl px-1 w-fit ${order?.paymentType === "CASH" ? "hidden" : "flex"}`}>
+                                <li>{order?.payments?.paymentType}</li>
+                                <ul className={`gap-1 bg-green-100 items-center rounded-2xl px-1 w-fit ${order?.payments?.paymentType === "CASH" ? "hidden" : "flex"}`}>
                                     <li className="bg-green-600 text-white rounded-full w-5 h-fit text-center text-sm">&#x2713;</li>
                                     <li className="text-green-600">Paid</li>
                                 </ul>
@@ -127,15 +128,15 @@ function OrderInfo({ order, backToHome }) {
                                     <li className="opacity-100 text-lg font-extrabold">Paid : </li>
                                 </ul>
                                 <ul className="flex flex-col gap-2 opacity-90">
-                                    <li>&#x20B9;{order?.totalAmount}</li>
-                                    <li>&#x20B9;{order?.gst}</li>
-                                    <li>&#x20B9;{order?.deliveryCharge}</li>
-                                    <li className="opacity-100 text-lg font-extrabold">&#x20B9;{order?.payable_amount}</li>
+                                    <li>&#x20B9;{order?.payments?.totalAmount}</li>
+                                    <li>&#x20B9;{order?.payments?.gst}</li>
+                                    <li>&#x20B9;{order?.payments?.deliveryCharge}</li>
+                                    <li className="opacity-100 text-lg font-extrabold">&#x20B9;{order?.payments?.payable_amount}</li>
                                 </ul>
 
                             </ul>
 
-                            <ul className={`${order?.paymentType === "CASH" ? "hidden" : "flex"} gap-1 bg-green-100 w-fit px-2 rounded-xl float-right mt-2 mr-5 items-center`}>
+                            <ul className={`${order?.payments?.paymentType === "CASH" ? "hidden" : "flex"} gap-1 bg-green-100 w-fit px-2 rounded-xl float-right mt-2 mr-5 items-center`}>
                                 <li className="bg-green-600 text-white rounded-full w-5 h-fit text-center text-sm">&#x2713;</li>
                                 <li className="text-green-600">Paid</li>
                             </ul>
@@ -155,9 +156,9 @@ function OrderInfo({ order, backToHome }) {
                                     <li>Email : </li>
                                 </ul>
                                 <ul className="">
-                                    <li>{order?.customerDetail?.fullName}</li>
-                                    <li>{order?.customerDetail?.mobileNumber}</li>
-                                    <li>{order?.customerDetail?.emailId}</li>
+                                    <li>{order?.customer?.fullName}</li>
+                                    <li>{order?.customer?.mobileNumber}</li>
+                                    <li>{order?.customer?.emailId}</li>
                                 </ul>
                             </ul>
                         </ul>
@@ -174,10 +175,10 @@ function OrderInfo({ order, backToHome }) {
                                     <li>Berth :</li>
                                 </ul>
                                 <ul className="">
-                                    <li>{order?.stationName},{order?.stationCode}</li>
-                                    <li>{FormatedDateWithTime(order?.deliveryDate)}</li>
-                                    <li>{order?.coach}</li>
-                                    <li>{order?.berth}</li>
+                                    <li>{order?.delivery?.stationName},{order?.delivery?.stationCode}</li>
+                                    <li>{FormatedDateWithTime(order?.delivery?.deliveryDate)}</li>
+                                    <li>{order?.delivery?.coach}</li>
+                                    <li>{order?.delivery?.berth}</li>
                                 </ul>
                             </ul>
                         </ul>
@@ -194,10 +195,10 @@ function OrderInfo({ order, backToHome }) {
                                     <li>fssai:</li>
                                 </ul>
                                 <ul className="">
-                                    <li>{order?.outlets?.outletName}</li>
-                                    <li>{order?.outlets?.city}</li>
-                                    <li>{order?.outlets?.mobileNo}</li>
-                                    <li>{order?.outlets?.fssaiNo}</li>
+                                    <li>{order?.outlet?.outletName}</li>
+                                    <li>{order?.outlet?.city}</li>
+                                    <li>{order?.outlet?.mobileNo}</li>
+                                    <li>{order?.outlet?.fssaiNo}</li>
                                 </ul>
                             </ul>
                         </ul>

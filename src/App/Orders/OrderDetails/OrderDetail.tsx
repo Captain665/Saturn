@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { NavigateFunction, Params, useNavigate, useParams } from "react-router";
 import OrderInfo from "./OrderInfo";
 import { OrderDetailResponse } from "../../ApiCall/OrderInfoAPI";
 import { isMobile } from "react-device-detect";
@@ -8,29 +8,33 @@ import IsLoading from "../../Components/Loading";
 import { useSearchParams } from "react-router-dom";
 import Spinner from "../../Components/Spinner";
 import ErrorToaster from "../../Components/MessageToggle";
+import { GetLocalData } from "../../Components/CustomHooks";
+import { errorState, orderDetails } from "../../CommonTypes/CommonType";
 
 
 export default function OrderDetails() {
 
-    const navigate = useNavigate()
-    const { orderId } = useParams()
+    const navigate: NavigateFunction = useNavigate()
+    const { orderId }: Readonly<Params<string>> | undefined = useParams()
     const [params, setParams] = useSearchParams();
-    const token = JSON.parse(localStorage.getItem("userInfo"))?.jwt;
 
-    const [isLoading, setIsLoading] = useState(false)
-    const [order, setOrder] = useState()
-    const [error, setError] = useState();
-    const [isShown, setIsShown] = useState(params.get("type") ? true : false)
+    const token: string = GetLocalData("userInfo").jwt;
+
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [order, setOrder] = useState<orderDetails>();
+    const [error, setError] = useState<errorState>();
+    const [isShown, setIsShown] = useState<boolean>(params.get("type") ? true : false)
 
 
 
-    useEffect(() => {
-        const fetchData = async () => {
+    useEffect((): void => {
+        const fetchData = async (): Promise<void> => {
             setIsLoading(true)
             const response = await OrderDetailResponse(token, orderId)
-            if (response.status === "success") {
+            const status: string = response.status;
+            if (status === "success") {
                 setOrder(response.result)
-            }else{
+            } else {
                 setError(response)
             }
             setIsLoading(false)
@@ -38,34 +42,32 @@ export default function OrderDetails() {
         fetchData()
     }, [orderId, token])
 
-    const backToHome = () => {
-        const orders = "/orders"
-        const account = "/account"
-        const path = isMobile ? orders : account
+    const backToHome = (): void => {
+        const path: string = isMobile ? "/orders" : "/account"
         navigate(path)
     }
-    const handleOnClick = useCallback(() => {
+    const handleOnClick = useCallback((): void => {
         setParams()
         setIsShown(() => false)
     }, [setParams])
 
     if (isLoading) {
-        return <> 
-        <IsLoading />
-    
-        <Spinner isLoading={isLoading} />
-        </> 
-        
-        
+        return <>
+            <IsLoading isLoading={isLoading} />
+
+            <Spinner isLoading={isLoading} />
+        </>
+
+
     }
 
 
     return (
         <>
-            <OrderInfo
+            {order && <OrderInfo
                 order={order}
                 backToHome={backToHome}
-            />
+            />}
 
             {
                 isShown &&
@@ -76,7 +78,7 @@ export default function OrderDetails() {
                 />
             }
 
-            <ErrorToaster props = {error} />
+            {error && <ErrorToaster props={error} />}
 
         </>
     )

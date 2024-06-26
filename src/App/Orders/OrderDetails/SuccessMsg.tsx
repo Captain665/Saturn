@@ -1,9 +1,7 @@
 import React, { memo } from "react";
 import { FaCheck } from "react-icons/fa6";
 
-function SuccessPlacedConfirm({ orderId, shown, handleOnClick }) {
-
-    console.log("success toster running...")
+function SuccessPlacedConfirm({ orderId, shown, handleOnClick }: { orderId: number | undefined; shown: boolean; handleOnClick: any }) {
 
     return (
         <dialog open={shown} className="flex m-auto h-full justify-center w-full fixed z-50 bg-opacity-20 top-0 bg-transparent backdrop-blur-sm p-5">
