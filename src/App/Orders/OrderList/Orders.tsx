@@ -1,43 +1,41 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router";
+import React, { useEffect, useState } from "react";
+import { NavigateFunction, useNavigate } from "react-router";
 import OrderHtml from "./Orders.html";
 import { OrderListResponse } from "../../ApiCall/OrderListApi";
 import Spinner from "../../Components/Spinner";
 import IsLoading from "../../Components/Loading";
 import { GetLocalData } from "../../Components/CustomHooks";
+import { orderDetails, userInfo } from "../../CommonTypes/CommonType";
 
 export default function OrderList() {
-    const navigate = useNavigate()
-    const userInfo = GetLocalData("userInfo");
+    const navigate: NavigateFunction = useNavigate()
+    const userInfo: userInfo = GetLocalData("userInfo");
 
-    const auth = userInfo.jwt;
+    const auth: string = userInfo?.jwt;
 
-    const [orderslist, setOrderList] = React.useState([])
-    const [isLoading, setIsLoading] = React.useState(false)
+    const [orderslist, setOrderList] = useState<orderDetails[]>([])
+    const [isLoading, setIsLoading] = useState<boolean>(false)
 
 
-    useEffect(() => {
-        const fetchData = async () => {
+    useEffect((): void => {
+        const fetchData = async (): Promise<void> => {
             setIsLoading(true)
             const response = await OrderListResponse(auth)
             if (response.status === "success") {
 
             }
 
-            setOrderList(response.result)
+            setOrderList(response?.result)
             setIsLoading(false)
         }
         fetchData()
-        return () => {
-            setIsLoading(() => false)
-        };
     }, [navigate, auth])
 
-    function handleViewOrderDetail(order) {
+    function handleViewOrderDetail(order: orderDetails): void {
         navigate("/order/" + order.id)
     }
 
-    function HandleBack() {
+    function HandleBack(): void {
         navigate("/account", { replace: true })
     }
 
@@ -46,7 +44,9 @@ export default function OrderList() {
             <Spinner
                 isLoading={isLoading}
             />
-            <IsLoading />
+            <IsLoading
+                isLoading={isLoading}
+            />
 
         </>
     }
@@ -55,7 +55,7 @@ export default function OrderList() {
         <>
             <OrderHtml
                 orderslist={orderslist}
-                handleViewOrderDetail={(item) => handleViewOrderDetail(item)}
+                handleViewOrderDetail={(item: orderDetails) => handleViewOrderDetail(item)}
                 handleBack={HandleBack}
             />
 

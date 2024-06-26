@@ -129,6 +129,7 @@ export interface orderDetails {
         mobileNo: string;
         fssaiNo: string;
         city: string;
+        logoImage : string;
     };
     customer: {
         id: number;

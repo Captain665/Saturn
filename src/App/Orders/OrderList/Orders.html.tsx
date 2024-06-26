@@ -1,7 +1,12 @@
 import React from "react";
 import { FaArrowLeft } from "react-icons/fa6";
+import { orderDetails } from "../../CommonTypes/CommonType";
 
-export default function OrderHtml({ orderslist, handleViewOrderDetail, handleBack }) {
+export default function OrderHtml({ orderslist, handleViewOrderDetail, handleBack }: {
+    orderslist: orderDetails[];
+    handleViewOrderDetail: any;
+    handleBack: any;
+}) {
 
 
     return (
@@ -21,18 +26,18 @@ export default function OrderHtml({ orderslist, handleViewOrderDetail, handleBac
                             <ul className="top-40">
                                 <div className="flex">
                                     <div className="flex justify-start items-center w-4/6">
-                                        <img src={item?.outlets?.logoImage} alt="outlet" className="object-cover overflow-hidden" width={50} height={50} />
-                                        <li className="font-bold ml-2">{item?.outlets?.outletName}</li>
+                                        <img src={item?.outlet?.logoImage} alt="outlet" className="object-cover overflow-hidden" width={50} height={50} />
+                                        <li className="font-bold ml-2">{item?.outlet?.outletName}</li>
                                     </div>
                                     <div className=" w-2/6 text-end">
-                                        <li>{item?.paymentType === "CASH_ON_DELIVERY" ? "COD" : item?.paymentType}</li>
+                                        <li>{item?.payments?.paymentType === "CASH_ON_DELIVERY" ? "COD" : item?.payments?.paymentType}</li>
                                     </div>
                                 </div>
-                                <li className="font-[1] text-[#9c9c9c] text-xs"><span className="text-base">{item?.stationName},   </span> {item?.stationCode}</li>
+                                <li className="font-[1] text-[#9c9c9c] text-xs"><span className="text-base">{item?.delivery?.stationName},   </span> {item?.delivery?.stationCode}</li>
                                 <hr />
                                 <li><span className="uppercase text-[#696969] text-xs">Order Number</span> <br />{item.id}</li>
                                 <li><span className="uppercase text-[#696969] text-xs">Status </span> <br />{item.status}</li>
-                                <li><span className="uppercase text-[#696969] text-xs">Total Amount </span><br /> &#x20B9; {item.payable_amount}</li>
+                                <li><span className="uppercase text-[#696969] text-xs">Total Amount </span><br /> &#x20B9; {item?.payments?.payable_amount}</li>
                                 <li><span className="uppercase text-[#696969] text-xs">Ordered On </span><br />{item.bookingDate}</li><br />
                                 <li className="p-2 w-fit cursor-pointer float-right border-none rounded-xl bg-[#60b246] text-white font-extrabold" onClick={() => handleViewOrderDetail(item)}>
                                     <span>View details</span>
