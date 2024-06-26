@@ -1,14 +1,25 @@
 import React, { memo } from "react";
 import { FaArrowLeft, FaChevronRight, FaWallet, FaCreditCard, FaBuildingColumns, FaMoneyBill1 } from "react-icons/fa6";
+import { paymentOptions } from "../CommonTypes/CommonType";
+import { JsxElement } from "typescript";
 
-function PaymentInfo({ paymentMode, proceedToPay, mode, totalAmount, backToCart, isLoading, totalItem, paymentOption }) {
+function PaymentInfo({ paymentMode, proceedToPay, mode, totalAmount, backToCart, isLoading, totalItem, paymentOption }: {
+    paymentMode: any;
+    proceedToPay: any;
+    mode: string;
+    totalAmount: number;
+    backToCart: any;
+    isLoading: boolean;
+    totalItem: number;
+    paymentOption: paymentOptions | undefined;
 
-    console.log(paymentOption)
-    const payMode = () => {
+}) {
+
+    const payMode = (): string => {
         return mode && mode?.toUpperCase();
     }
 
-    const iconForMethod = (methodLogo) => {
+    const iconForMethod = (methodLogo: string): JSX.Element | undefined => {
         if (methodLogo === "FaWallet") {
             return <FaWallet />
         }

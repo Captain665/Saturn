@@ -139,3 +139,21 @@ export interface orderDetails {
     };
 
 }
+
+export interface paymentOptions {
+    paymentGateways: {
+        id: number;
+        name: string;
+        gatewayLogo: string;
+        available: boolean;
+    }[];
+    title: string;
+    paymentMethods: {
+        id: number;
+        methodLogo: string;
+        name: string;
+        description: string;
+        available: boolean;
+    }[];
+
+}
