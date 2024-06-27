@@ -1,5 +1,5 @@
 
-export function FormatedDateWithWeek(date) {
+export function FormatedDateWithWeek(date: string) {
     if (date) {
         const [day, month, year] = date?.split('-');
 
@@ -18,7 +18,7 @@ export function FormatedDateWithWeek(date) {
 
 }
 
-export function FormatedDate(date) {
+export function FormatedDate(date: string) {
 
     const newDate = new Date(date)
 
@@ -28,7 +28,7 @@ export function FormatedDate(date) {
     })
 }
 
-export function FormatedTime(time) {
+export function FormatedTime(time: any) {
 
     const [hours, minutes] = time.split(':');
 
@@ -44,7 +44,7 @@ export function FormatedTime(time) {
 
 }
 
-export function FormatedDateWithYear(date) {
+export function FormatedDateWithYear(date: string) {
 
     const newDate = new Date(date)
 
@@ -55,7 +55,7 @@ export function FormatedDateWithYear(date) {
     })
 }
 
-export function FormatedDateWithYearForDt(dt) {
+export function FormatedDateWithYearForDt(dt: any) {
     const [date, month, year] = dt.split("-");
 
     const newDate = new Date()
@@ -70,7 +70,7 @@ export function FormatedDateWithYearForDt(dt) {
     })
 }
 
-export function FormatedDateWithTime(date) {
+export function FormatedDateWithTime(date: string) {
 
     const newDate = new Date(date)
 

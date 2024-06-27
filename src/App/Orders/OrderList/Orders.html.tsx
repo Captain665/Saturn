@@ -1,6 +1,7 @@
 import React from "react";
 import { FaArrowLeft } from "react-icons/fa6";
 import { orderDetails } from "../../CommonTypes/CommonType";
+import { FormatedDateWithTime } from "../../Components/DateTimeFormatChange";
 
 export default function OrderHtml({ orderslist, handleViewOrderDetail, handleBack }: {
     orderslist: orderDetails[];
@@ -38,7 +39,7 @@ export default function OrderHtml({ orderslist, handleViewOrderDetail, handleBac
                                 <li><span className="uppercase text-[#696969] text-xs">Order Number</span> <br />{item.id}</li>
                                 <li><span className="uppercase text-[#696969] text-xs">Status </span> <br />{item.status}</li>
                                 <li><span className="uppercase text-[#696969] text-xs">Total Amount </span><br /> &#x20B9; {item?.payments?.payable_amount}</li>
-                                <li><span className="uppercase text-[#696969] text-xs">Ordered On </span><br />{item.bookingDate}</li><br />
+                                <li><span className="uppercase text-[#696969] text-xs">Ordered On </span><br /> {FormatedDateWithTime(item.bookingDate)}</li><br />
                                 <li className="p-2 w-fit cursor-pointer float-right border-none rounded-xl bg-[#60b246] text-white font-extrabold" onClick={() => handleViewOrderDetail(item)}>
                                     <span>View details</span>
                                 </li>
