@@ -26,7 +26,7 @@ export default function OrderHtml({ orderslist, handleViewOrderDetail, handleBac
                         <div className="w-full p-5 flex flex-col gap-y-10 rounded-lg border" key={item?.id}>
                             <ul className="top-40">
                                 <div className="flex">
-                                    <div className="flex justify-start items-center w-4/6">
+                                    <div className="flex justify-start items-center w-4/6 h-12">
                                         <img src={item?.outlet?.logoImage} alt="outlet" className="object-cover overflow-hidden" width={50} height={50} />
                                         <li className="font-bold ml-2">{item?.outlet?.outletName}</li>
                                     </div>
