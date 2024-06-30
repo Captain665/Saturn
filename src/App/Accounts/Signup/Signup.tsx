@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import SignupData from "./Signup.html";
 import { useNavigate } from "react-router";
-import ErrorToster from "../../Components/MessageToggle";
-import { SignupResponse, OtpValidateReponse } from "../../ApiCall/SignupApi";
 import ValidateHtml from "./Validate.html";
 import { useSearchParams } from "react-router-dom";
 import Spinner from "../../Components/Spinner";
 import { errorState, profileInfo, userInfo } from "../../CommonTypes/CommonType";
 import { SetLocalData } from "../../Components/CustomHooks";
+import { PostRequest } from "../../ApiCall/ApiCall";
 
 export default function SignUp() {
     const navigate = useNavigate()
-    const [params] = useSearchParams()
+    const [params, setSearchParams] = useSearchParams()
+
 
     const [userInfo, setUserInfo] = useState<profileInfo>({
         fullName: "",
@@ -22,7 +22,6 @@ export default function SignUp() {
     });
 
     const [isloading, setIsLoading] = useState<boolean>(false)
-    const [error, setError] = useState<errorState>()
     const [isValidate, setIsValidate] = useState<boolean>(false);
     const [otp, setOtp] = useState<number | undefined>()
 
@@ -40,15 +39,24 @@ export default function SignUp() {
 
 
     const fetchSignUp = async (): Promise<void> => {
-        setIsLoading(() => true)
-        const response: errorState = await SignupResponse(userInfo);
+        setIsLoading(true)
+        const response = await PostRequest(userInfo, "/signup")
 
-        if (response.status === "success") {
-            setIsValidate(true)
-            setError(response)
+        if (response.status != 200) {
+            setSearchParams(param => {
+                param.set("error", response.data.error)
+                param.set("status", JSON.stringify(response.status))
+                return param;
+            })
         } else {
-            setError(response)
+            setSearchParams(param => {
+                param.set("status", JSON.stringify(response.status))
+                param.set("message", response.data.result)
+                return param;
+            })
+            setIsValidate(true)
         }
+
         setIsLoading(false)
     }
 
@@ -64,15 +72,24 @@ export default function SignUp() {
     }
 
     const fetchOtp = async (): Promise<void> => {
-        setIsLoading(() => true)
-        const response = await OtpValidateReponse(userInfo?.mobileNumber, otp)
-        if (response?.status === "success") {
-            const data: userInfo = response?.result;
+        setIsLoading(true)
+        const payload = {
+            mobileNumber: userInfo?.mobileNumber,
+            otp: otp
+        }
+        const response = await PostRequest(payload, "/otp-validate")
+
+        if (response.status != 201) {
+            setSearchParams(param => {
+                param.set("error", response.data.error)
+                param.set("status", JSON.stringify(response.status))
+                return param;
+            })
+        } else {
+            const data: userInfo = response?.data.result;
             SetLocalData("userInfo", data)
             const path: string = params.get("redirectedTo") || "/"
             navigate(path, { replace: true })
-        } else {
-            setError(() => response)
         }
         setIsLoading(false)
     }
@@ -101,10 +118,9 @@ export default function SignUp() {
                     isloading={isloading}
                 />
             }
-            {/* <Spinner
+            <Spinner
                 isLoading={isloading}
-            /> */}
-            {/* {error && <ErrorToster props={error} />}     */}
+            />
         </>
     )
 }

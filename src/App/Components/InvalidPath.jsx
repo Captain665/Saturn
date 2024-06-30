@@ -5,7 +5,7 @@ export default function NonExistPath() {
     const navigate = useNavigate();
 
     function onClickHandle() {
-        navigate("/", { replace: true})
+        navigate("/", { replace: true })
     }
 
     return (
