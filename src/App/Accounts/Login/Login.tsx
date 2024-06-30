@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import LoginForm from "./Login.html";
-import { LoginResponse } from "../../ApiCall/LoginApi";
-import ErrorToster from "../../Components/MessageToggle";
 import Spinner from "../../Components/Spinner";
 import { errorState, userInfo } from "../../CommonTypes/CommonType"
 import { SetLocalData, SetSessionData } from "../../Components/CustomHooks";
