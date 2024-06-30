@@ -13,24 +13,8 @@ export default function Login() {
     const [param, setSearchParams] = useSearchParams()
     const navigate = useNavigate()
 
-
-    const [loginData, setloginData] = useState<{
-        mobileNumber: string;
-        password: string
-    }>({ mobileNumber: "", password: "" })
+    const [loginData, setloginData] = useState<{ mobileNumber: string; password: string }>({ mobileNumber: "", password: "" })
     const [isLoading, setLoading] = useState<boolean>(false)
-    const [error, setError] = useState<errorState>()
-
-    const msg: string | null = param.get("message");
-
-    useEffect(() => {
-        const messages: errorState = {
-            status: "failure",
-            error: msg,
-            result: null
-        }
-        setError(messages)
-    }, [msg])
 
     function handleChange(event: any): void {
         const name: string = event.target.name;
@@ -42,7 +26,6 @@ export default function Login() {
             }))
         }
     }
-
 
     const fetchData = async (): Promise<void> => {
         setLoading(true)
@@ -85,7 +68,6 @@ export default function Login() {
                 isLoading={isLoading}
             />
 
-            {/* {error && <ErrorToster props={error} />} */}
         </>
     )
 }
