@@ -1,10 +1,8 @@
 import React, { useCallback, useRef, useState } from "react";
 import HomePage from "./Home.html";
 import { useNavigate } from "react-router";
-import { PnrResponse } from "../../ApiCall/PnrApi";
 import Spinner from "../../Components/Spinner";
 import ActionDialog from "./PnrDialog"
-import ErrorToster from "../../Components/MessageToggle";
 import { errorState, pnrResponseResult } from "../../CommonTypes/CommonType"
 import { SetSessionData } from "../../Components/CustomHooks"
 import { useSearchParams } from "react-router-dom";
