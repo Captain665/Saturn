@@ -7,47 +7,48 @@ import ActionDialog from "./PnrDialog"
 import ErrorToster from "../../Components/MessageToggle";
 import { errorState, pnrResponseResult } from "../../CommonTypes/CommonType"
 import { SetSessionData } from "../../Components/CustomHooks"
+import { useSearchParams } from "react-router-dom";
+import { GetRequest, PostRequest } from "../../ApiCall/ApiCall";
 
 
 export default function Home() {
 
     const navigate = useNavigate();
-    const pnr = useRef<string>('');
+    const [searchParam, setSearchParam] = useSearchParams();
+    const [pnr, setPnr] = useState<string>('');
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [error, setError] = useState<errorState>();
     const [dialog, setDialog] = useState<boolean>(false);
 
     const GetData = useCallback(async (pnr: string): Promise<void> => {
+        setIsLoading(true)
         if (pnr === '') {
-            setError({
-                status: "failure",
-                error: "Please Enter PNR Number",
-                result: null
+            setSearchParam(param => {
+                param.set("error", "Please Enter PNR Number");
+                param.set("status", "400")
+                return param;
             })
-        }
-        if (pnr !== '') {
-            setIsLoading(true)
-            const response = await PnrResponse(pnr)
-            const status: string = response?.status;
-            if (status === "failure") {
-                const responseData: errorState = response;
-                setError(responseData)
-            }
-            if (status === "success") {
-                const result: pnrResponseResult = response?.result;
+        } else {
+            const response = await GetRequest(`/pnr/${pnr}`);
+            if (response.status != 200) {
+                setSearchParam(param => {
+                    param.set("error", response.data.error);
+                    param.set("status", response.status)
+                    return param;
+                })
+            } else {
+                const result: pnrResponseResult = response?.data.result;
                 SetSessionData("pnrDetails", result);
                 SetSessionData("pnr", pnr);
                 const route: string = pnr + "/stations";
                 navigate(route, { state: { result } });
-
             }
-            setIsLoading(false)
         }
+        setIsLoading(false)
     }, [])
 
     const handleOnChange = (event: any): void => {
         const value: string = event.target.value
-        pnr.current = value
+        setPnr(value);
     }
 
     const showDialog = useCallback((): void => {
@@ -68,21 +69,15 @@ export default function Home() {
             {dialog &&
                 <ActionDialog
                     handleOnChange={(event: any) => handleOnChange(event)}
-                    handleOnClick={() => GetData(pnr?.current)}
+                    handleOnClick={() => GetData(pnr)}
                     isLoading={isLoading}
                     dialog={dialog}
                     hideDialog={hideDialog}
                 />}
 
-            {/* <Spinner
+            <Spinner
                 isLoading={isLoading}
-            /> */}
-
-            {/* {error &&
-                <ErrorToster
-                    props={error}
-                />} */}
-
+            />
         </>
     )
 

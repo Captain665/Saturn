@@ -7,6 +7,7 @@ import NoProductExist from "../Components/EmptyPage";
 import Spinner from "../Components/Spinner";
 import { SeatInfo, Station, TrainInfo, errorState, orderItems, outletInfo, userInfo } from "../CommonTypes/CommonType";
 import { GetLocalData, GetSessionData, SetSessionData } from "../Components/CustomHooks";
+import { useSearchParams } from "react-router-dom";
 
 export const cartInfoContext: any = createContext("");
 
@@ -19,6 +20,7 @@ export default function CartInfo() {
 
     const navigate = useNavigate()
     const location = useLocation()
+    const [param, setSearchParams] = useSearchParams();
 
     const [stationInfo] = useState<Station>(GetSessionData("selectedStation"))
     const [userInfo] = useState<userInfo>(GetLocalData("userInfo"));
@@ -27,7 +29,6 @@ export default function CartInfo() {
     const [outletInfo] = useState<outletInfo>(GetSessionData("cartOutlet") ?? GetSessionData("outletInfo"));
     const [itemList, setItemList] = useState<orderItems[]>(GetSessionData("selectedItemInfo"));
     const [isLoading, setIsLoading] = useState<boolean>(true)
-    const [error, setError] = useState<errorState>()
     const [redirect, setRedirect] = useState<boolean>(false)
     const [detailsShown, setDetailsShown] = useState<detailsExpend>({
         customer: false,
@@ -51,7 +52,7 @@ export default function CartInfo() {
         SetSessionData("selectedItemInfo", itemList);
         setTimeout((): void => {
             if (!userInfo) {
-                const pathName: string = `/login?redirectedTo=${path}&message=You must log in first.`
+                const pathName: string = `/login?redirectedTo=${path}&error=You must log in first&status=400`
                 navigate(pathName)
             }
             setIsLoading(false)
@@ -63,7 +64,7 @@ export default function CartInfo() {
             }
 
         }, 2000)
-    }, [itemList, navigate, path, error, userInfo])
+    }, [itemList, navigate, path, userInfo])
 
     if (redirect) {
         returnToMenu()
@@ -122,9 +123,9 @@ export default function CartInfo() {
     if (isLoading) {
         return <>
             <IsLoading isLoading={isLoading} />
-            {/* <Spinner
+            <Spinner
                 isLoading={isLoading}
-            /> */}
+            />
         </>
     }
 
@@ -141,12 +142,11 @@ export default function CartInfo() {
         if (subTotal >= minOrderAmount) {
             navigate("/payments")
         } else {
-            const msg: errorState = {
-                status: "failure",
-                error: "Your order amount is less than minimum order value of selected outlet",
-                result: null
-            }
-            setError(msg)
+            setSearchParams(param => {
+                param.set("error", "Your order amount is less than minimum order value of selected outlet")
+                param.set("status", "400")
+                return param;
+            })
         }
     }
 
@@ -160,12 +160,6 @@ export default function CartInfo() {
             }}>
                 <CartDetails />
             </cartInfoContext.Provider>
-
-            {/* {error &&
-                <ErrorToster
-                    props={error}
-                />
-            } */}
         </>
     )
 }   

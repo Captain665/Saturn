@@ -23,14 +23,14 @@ function ErrorToster() {
         } else {
             toast.success(param.get("message"), { autoClose: 3000 })
         }
-        // setTimeout(() => {
-        //     setSearchParams(param => {
-        //         param.delete("error");
-        //         param.delete("status");
-        //         param.delete("message")
-        //         return param;
-        //     })
-        // }, 1000)
+        setTimeout(() => {
+            setSearchParams(param => {
+                param.delete("error");
+                param.delete("status");
+                param.delete("message")
+                return param;
+            })
+        }, 2000)
 
     }, [param])
 

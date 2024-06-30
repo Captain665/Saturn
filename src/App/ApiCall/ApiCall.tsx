@@ -13,6 +13,16 @@ export async function PostRequest(requestBody: any, url: string) {
             });
 }
 
-export function GetRequest() {
-    return ""
+export function GetRequest(url: string) {
+    return axios.get(url)
+        .then(
+            response => {
+                return response;
+            }
+        )
+        .catch(
+            error => {
+                return error.response;
+            }
+        )
 }
