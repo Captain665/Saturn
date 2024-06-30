@@ -10,7 +10,7 @@ export interface userInfo {
 
 export interface errorState {
     status: string;
-    error: string | null;
+    error: string | null | any;
     result: string | null;
 }
 

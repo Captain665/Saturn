@@ -48,10 +48,10 @@ export default function OutletList() {
                 handleOnClick={handleOnClick}
             />
 
-            <Spinner
+            {/* <Spinner
                 isLoading={isLoading}
-            />
-            {error && <ErrorToster props={error} />}
+            /> */}
+            {/* {error && <ErrorToster props={error} />} */}
 
 
         </>

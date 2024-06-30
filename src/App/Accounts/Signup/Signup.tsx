@@ -101,10 +101,10 @@ export default function SignUp() {
                     isloading={isloading}
                 />
             }
-            <Spinner
+            {/* <Spinner
                 isLoading={isloading}
-            />
-            {error && <ErrorToster props={error} />}    
+            /> */}
+            {/* {error && <ErrorToster props={error} />}     */}
         </>
     )
 }

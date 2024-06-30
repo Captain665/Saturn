@@ -208,7 +208,7 @@ export default function MenuItem() {
                 handleCheckOut={handleCheckOut}
             />
 
-            <Spinner isLoading={isLoading} />
+            {/* <Spinner isLoading={isLoading} /> */}
 
             {warningDialog ? <WarningDialog
                 orderItemsCount={orderItemsCount}
@@ -217,7 +217,7 @@ export default function MenuItem() {
                 outlet={outlet} />
                 : null
             }
-            {error && <ErrorToster props={error} />}
+            {/* {error && <ErrorToster props={error} />} */}
         </>
     )
 }

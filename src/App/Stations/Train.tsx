@@ -58,10 +58,10 @@ export default function TrainInfo() {
                 <Outlet />
             </PnrDetails.Provider>
 
-            <Spinner
+            {/* <Spinner
                 isLoading={isLoading}
-            />
-            {error && <ErrorToster props={error} />}
+            /> */}
+            {/* {error && <ErrorToster props={error} />} */}
         </>
     )
 }

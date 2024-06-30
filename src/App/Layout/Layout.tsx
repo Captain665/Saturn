@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useSearchParams } from "react-router-dom";
 import Footers from "./Footer";
 import Headers from "./Header";
 import ReactGA from 'react-ga'
 import { GetLocalData } from "../Components/CustomHooks"
 import { userInfo } from "../CommonTypes/CommonType"
+import ErrorToster from "../Components/MessageToggle"
+import Spinner from "../Components/Spinner";
 
-const TRACKING_ID = 'G-YX6NGK82FX';
+const TRACKING_ID = 'G-1YNT583Y31';
 ReactGA.initialize(TRACKING_ID);
 
 const usePageViews = (location: any) => {
@@ -19,6 +21,7 @@ export default function LayOut() {
 
     const location = useLocation();
     usePageViews(location);
+    const [param] = useSearchParams();
 
     const [userName, setUserName] = useState<string>('')
     const userdata: userInfo = GetLocalData("userInfo");
@@ -40,6 +43,8 @@ export default function LayOut() {
             <main className="min-h-screen w-full">
                 <Outlet />
             </main>
+            <ErrorToster />
+            <Spinner />
             <Footers />
         </div>
     )

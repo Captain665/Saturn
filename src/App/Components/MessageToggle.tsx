@@ -2,6 +2,7 @@ import React, { memo, useEffect } from "react";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { errorState } from "../CommonTypes/CommonType";
+import { useSearchParams } from "react-router-dom";
 
 const contextClass = {
     success: "bg-blue-600",
@@ -12,23 +13,27 @@ const contextClass = {
     dark: "bg-white-600 font-gray-300",
 };
 
-function ErrorToster({ props }: { props: errorState }) {
+function ErrorToster() {
+    const [param, setSearchParams] = useSearchParams();
 
     useEffect(() => {
+        const status = param.get("status");
 
-        const status = props?.status;
-        const msg = props?.error;
-        const result = props?.result;
-
-        const fail = "failure"
-
-        if (status === fail) {
-            toast.error(msg, { autoClose: 1000 })
+        if (status != "200") {
+            toast.error(param.get("error"), { autoClose: 1000 })
         } else {
-            toast.success(result, { autoClose: 3000 })
+            toast.success(param.get("message"), { autoClose: 3000 })
         }
+        setTimeout(() => {
+            setSearchParams(param => {
+                param.delete("error");
+                param.delete("status");
+                param.delete("message")
+                return param;
+            })
+        }, 1000)
+    }, [param])
 
-    }, [props])
 
 
     return (

@@ -122,9 +122,9 @@ export default function CartInfo() {
     if (isLoading) {
         return <>
             <IsLoading isLoading={isLoading} />
-            <Spinner
+            {/* <Spinner
                 isLoading={isLoading}
-            />
+            /> */}
         </>
     }
 
@@ -161,11 +161,11 @@ export default function CartInfo() {
                 <CartDetails />
             </cartInfoContext.Provider>
 
-            {error &&
+            {/* {error &&
                 <ErrorToster
                     props={error}
                 />
-            }
+            } */}
         </>
     )
 }   

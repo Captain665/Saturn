@@ -41,9 +41,9 @@ export default function OrderList() {
 
     if (isLoading) {
         return <>
-            <Spinner
+            {/* <Spinner
                 isLoading={isLoading}
-            />
+            /> */}
             <IsLoading
                 isLoading={isLoading}
             />
@@ -59,9 +59,9 @@ export default function OrderList() {
                 handleBack={HandleBack}
             />
 
-            <Spinner
+            {/* <Spinner
                 isLoading={isLoading}
-            />
+            /> */}
         </>
     )
 }

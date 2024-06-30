@@ -74,14 +74,14 @@ export default function Home() {
                     hideDialog={hideDialog}
                 />}
 
-            <Spinner
+            {/* <Spinner
                 isLoading={isLoading}
-            />
+            /> */}
 
-            {error &&
+            {/* {error &&
                 <ErrorToster
                     props={error}
-                />}
+                />} */}
 
         </>
     )

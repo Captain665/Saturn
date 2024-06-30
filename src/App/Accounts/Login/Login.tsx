@@ -6,9 +6,11 @@ import ErrorToster from "../../Components/MessageToggle";
 import Spinner from "../../Components/Spinner";
 import { errorState, userInfo } from "../../CommonTypes/CommonType"
 import { SetLocalData } from "../../Components/CustomHooks";
+import { PostRequest } from "../../ApiCall/ApiCall";
+import { AxiosResponse } from "axios";
 
 export default function Login() {
-    const [param] = useSearchParams()
+    const [param, setSearchParams] = useSearchParams()
     const navigate = useNavigate()
 
 
@@ -43,27 +45,49 @@ export default function Login() {
 
 
     const fetchData = async (): Promise<void> => {
-        setLoading(true)
-        const response = await LoginResponse(loginData)
+        setSearchParams(param => {
+            param.set("loader", "true");
+            return param
+        })
+        // const response = await LoginResponse(loginData)
 
-        if (response.status === "success") {
-            const loginResult: userInfo = response?.result;
+        const respone: AxiosResponse<any, any> = await PostRequest(loginData, "/auth/login");
+        
+        setSearchParams(param => {
+            param.delete("loader");
+            return param
+        })
+
+        if (respone.status != 200) {
+            setSearchParams(param => {
+                param.set("error", respone.data.error)
+                param.set("status", JSON.stringify(respone.status))
+                return param;
+            })
+        } else {
+            const loginResult: userInfo = respone?.data.result;
             SetLocalData("userInfo", loginResult);
             const path: string = param.get("redirectedTo") || "/";
             navigate(path, { replace: true })
-
-        } else {
-
-            setError(response)
         }
-        setLoading(false)
+
+
+        // if (response.status === "success") {
+        //     const loginResult: userInfo = response?.result;
+        //     SetLocalData("userInfo", loginResult);
+        //     const path: string = param.get("redirectedTo") || "/";
+        //     navigate(path, { replace: true })
+
+        // } else {
+
+        //     // setError(response)
+        // }
     }
 
     const HandleSubmit = (event: any): void => {
         event.preventDefault()
         fetchData()
     }
-
 
 
     return (
@@ -76,11 +100,11 @@ export default function Login() {
                 redirectedTo={param.get("redirectedTo")}
             />
 
-            <Spinner
+            {/* <Spinner
                 isLoading={isLoading}
-            />
+            /> */}
 
-            {error && <ErrorToster props={error} />}
+            {/* {error && <ErrorToster props={error} />} */}
         </>
     )
 }

@@ -102,7 +102,7 @@ export default function Payments() {
         return <>
             <IsLoading isLoading={isLoading} />
 
-            <Spinner isLoading={isLoading} />
+            {/* <Spinner isLoading={isLoading} /> */}
         </>
     }
 
@@ -119,9 +119,9 @@ export default function Payments() {
                 totalItem={itemInfo?.length}
                 paymentOption={paymentOption}
             />
-            {isLoading && <Spinner isLoading={isLoading} />}
+            {/* {isLoading && <Spinner isLoading={isLoading} />} */}
 
-            {error && <ErrorToster props={error} />}
+            {/* {error && <ErrorToster props={error} />} */}
 
         </>
     )
