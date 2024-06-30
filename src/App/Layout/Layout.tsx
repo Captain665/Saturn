@@ -6,7 +6,7 @@ import ReactGA from 'react-ga'
 import { GetLocalData } from "../Components/CustomHooks"
 import { userInfo } from "../CommonTypes/CommonType"
 
-const TRACKING_ID = 'G-YX6NGK82FX';
+const TRACKING_ID = 'G-1YNT583Y31';
 ReactGA.initialize(TRACKING_ID);
 
 const usePageViews = (location: any) => {
