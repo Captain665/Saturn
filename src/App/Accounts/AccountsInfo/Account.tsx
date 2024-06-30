@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import OrderList from "../../Orders/OrderList/Orders";
 import { FaArrowLeft, FaChevronRight, FaCircleUser, FaCaretRight } from "react-icons/fa6";
 import CustomerDetails from "./CustomerInfo";
@@ -10,9 +10,10 @@ import { userInfo } from "../../CommonTypes/CommonType";
 export default function Account() {
     const location = useLocation()
     const navigate = useNavigate()
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const info: userInfo = GetLocalData("userInfo");
-    const [data, setData] = useState<string>("profile")
+    const [data, setData] = useState<string | null>();
     const path: string = location.pathname;
 
     useEffect(() => {
@@ -20,7 +21,8 @@ export default function Account() {
             const pathName: string = `/login?redirectedTo=${path}`
             navigate(pathName)
         }
-    }, [info, path, navigate])
+        setData(searchParams.get("data"))
+    }, [info, path, navigate, searchParams])
 
 
     const LogOut = () => {
@@ -30,12 +32,18 @@ export default function Account() {
     }
 
     function HandleOnClick(value: string): void {
-        setData(value)
+        setSearchParams(param => {
+            param.set("data", value)
+            return param;
+        })
+        // setData(value)
     }
 
     const backToHome = (): void => {
         navigate("/")
     }
+
+    console.log(searchParams.get("data"))
 
 
     return (
@@ -60,7 +68,7 @@ export default function Account() {
                     <ul className="">
                         <li className="text-lg font-semibold tracking-wide">{info?.fullName}</li>
                         <li className="opacity-80">{info?.emailId}</li>
-                        <ul className={`items-center flex gap-1 ${data === "profile" ? "text-green-500" : ""} text-lg cursor-pointer`}
+                        <ul className={`items-center flex gap-1 ${data != "history" ? "text-green-500" : ""} text-lg cursor-pointer`}
                             onClick={() => HandleOnClick("profile")}
                         >
                             <li className="text-xl font-medium hidden md:block" >

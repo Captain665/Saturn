@@ -5,7 +5,7 @@ import { LoginResponse } from "../../ApiCall/LoginApi";
 import ErrorToster from "../../Components/MessageToggle";
 import Spinner from "../../Components/Spinner";
 import { errorState, userInfo } from "../../CommonTypes/CommonType"
-import { SetLocalData } from "../../Components/CustomHooks";
+import { SetLocalData, SetSessionData } from "../../Components/CustomHooks";
 import { PostRequest } from "../../ApiCall/ApiCall";
 import { AxiosResponse } from "axios";
 
@@ -45,18 +45,9 @@ export default function Login() {
 
 
     const fetchData = async (): Promise<void> => {
-        setSearchParams(param => {
-            param.set("loader", "true");
-            return param
-        })
-        // const response = await LoginResponse(loginData)
+        setLoading(true)
 
         const respone: AxiosResponse<any, any> = await PostRequest(loginData, "/auth/login");
-        
-        setSearchParams(param => {
-            param.delete("loader");
-            return param
-        })
 
         if (respone.status != 200) {
             setSearchParams(param => {
@@ -71,17 +62,7 @@ export default function Login() {
             navigate(path, { replace: true })
         }
 
-
-        // if (response.status === "success") {
-        //     const loginResult: userInfo = response?.result;
-        //     SetLocalData("userInfo", loginResult);
-        //     const path: string = param.get("redirectedTo") || "/";
-        //     navigate(path, { replace: true })
-
-        // } else {
-
-        //     // setError(response)
-        // }
+        setLoading(false)
     }
 
     const HandleSubmit = (event: any): void => {
@@ -100,9 +81,9 @@ export default function Login() {
                 redirectedTo={param.get("redirectedTo")}
             />
 
-            {/* <Spinner
+            <Spinner
                 isLoading={isLoading}
-            /> */}
+            />
 
             {/* {error && <ErrorToster props={error} />} */}
         </>

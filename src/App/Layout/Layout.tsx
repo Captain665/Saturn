@@ -44,7 +44,6 @@ export default function LayOut() {
                 <Outlet />
             </main>
             <ErrorToster />
-            <Spinner />
             <Footers />
         </div>
     )
