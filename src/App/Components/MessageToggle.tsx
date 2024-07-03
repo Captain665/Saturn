@@ -1,7 +1,6 @@
 import React, { memo, useEffect } from "react";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { useSearchParams } from "react-router-dom";
 import { errorState } from "../CommonTypes/CommonType";
 
 const contextClass = {
@@ -18,7 +17,7 @@ function ErrorToster({ props }: { props: errorState }) {
     useEffect(() => {
         const status: number = props.status;
 
-        if (status != 200) {
+        if (status !== 200) {
             toast.error(props.error, { autoClose: 1000 })
         } else {
             toast.success(props.result, { autoClose: 3000 })

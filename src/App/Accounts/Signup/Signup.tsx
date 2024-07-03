@@ -6,7 +6,7 @@ import { useSearchParams } from "react-router-dom";
 import Spinner from "../../Components/Spinner";
 import { errorState, profileInfo, userInfo } from "../../CommonTypes/CommonType";
 import { SetLocalData } from "../../Components/CustomHooks";
-import { PostRequest } from "../../ApiCall/ApiCall";
+import { PostRequest } from "../../ApiCall/AxiosRequest";
 import ErrorToster from "../../Components/MessageToggle";
 
 export default function SignUp() {
@@ -44,7 +44,7 @@ export default function SignUp() {
         setIsLoading(true)
         const response = await PostRequest(userInfo, "/signup")
 
-        if (response.status != 200) {
+        if (response.status !== 200) {
             const errorMessage: errorState = {
                 status: response.status,
                 error: response.data.error,
@@ -82,7 +82,7 @@ export default function SignUp() {
         }
         const response = await PostRequest(payload, "/otp-validate")
 
-        if (response.status != 201) {
+        if (response.status !== 201) {
             setSearchParams(param => {
                 param.set("error", response.data.error)
                 param.set("status", JSON.stringify(response.status))

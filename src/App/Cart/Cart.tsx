@@ -7,7 +7,6 @@ import NoProductExist from "../Components/EmptyPage";
 import Spinner from "../Components/Spinner";
 import { SeatInfo, Station, TrainInfo, errorState, orderItems, outletInfo, userInfo } from "../CommonTypes/CommonType";
 import { GetLocalData, GetSessionData, SetSessionData } from "../Components/CustomHooks";
-import { useSearchParams } from "react-router-dom";
 
 export const cartInfoContext: any = createContext("");
 
@@ -20,7 +19,6 @@ export default function CartInfo() {
 
     const navigate = useNavigate()
     const location = useLocation()
-    const [param, setSearchParams] = useSearchParams();
 
     const [stationInfo] = useState<Station>(GetSessionData("selectedStation"))
     const [userInfo] = useState<userInfo>(GetLocalData("userInfo"));
@@ -53,7 +51,7 @@ export default function CartInfo() {
         SetSessionData("selectedItemInfo", itemList);
         setTimeout((): void => {
             if (!userInfo) {
-                const pathName: string = `/login?redirectedTo=${path}&error=You must log in first&status=400`
+                const pathName: string = `/login?redirectedTo=${path}&message=You must log in first&status=400`
                 navigate(pathName)
             }
             setIsLoading(false)

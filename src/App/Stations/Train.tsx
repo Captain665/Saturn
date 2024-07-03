@@ -5,7 +5,7 @@ import Spinner from "../Components/Spinner";
 import ErrorToster from "../Components/MessageToggle";
 import { GetSessionData, SetSessionData } from "../Components/CustomHooks";
 import { errorState, pnrResponseResult } from "../CommonTypes/CommonType";
-import { GetRequest } from "../ApiCall/ApiCall";
+import { GetRequest } from "../ApiCall/AxiosRequest";
 
 export const PnrDetails: any = createContext("");
 
@@ -24,7 +24,7 @@ export default function TrainInfo() {
         const fetchData = async (): Promise<void> => {
             setIsLoading(true)
             const response = await GetRequest(`/pnr/${pnr}`);
-            if (response?.status != 200) {
+            if (response?.status !== 200) {
                 setError(response);
                 setTimeout((): void => {
                     setRedirected(true)

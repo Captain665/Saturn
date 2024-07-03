@@ -1,11 +1,11 @@
-import React, { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import HomePage from "./Home.html";
 import { useNavigate } from "react-router";
 import Spinner from "../../Components/Spinner";
 import ActionDialog from "./PnrDialog"
 import { errorState, pnrResponseResult } from "../../CommonTypes/CommonType"
 import { SetSessionData } from "../../Components/CustomHooks"
-import { GetRequest } from "../../ApiCall/ApiCall";
+import { GetRequest } from "../../ApiCall/AxiosRequest";
 import ErrorToster from "../../Components/MessageToggle";
 
 
@@ -29,7 +29,7 @@ export default function Home() {
         } else {
             const response = await GetRequest(`/pnr/${pnr}`);
 
-            if (response.status != 200) {
+            if (response.status !== 200) {
                 const errorMessage: errorState = {
                     status: response.status,
                     error: response.data.error,

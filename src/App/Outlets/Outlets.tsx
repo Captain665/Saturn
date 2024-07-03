@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Params, useNavigate, useParams } from "react-router";
 import OutletHtml from "./OutletList";
 import { OutletResponse } from "../ApiCall/OutletApi";

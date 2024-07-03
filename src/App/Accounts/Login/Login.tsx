@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import LoginForm from "./Login.html";
 import Spinner from "../../Components/Spinner";
 import { errorState, userInfo } from "../../CommonTypes/CommonType"
 import { SetLocalData } from "../../Components/CustomHooks";
-import { PostRequest } from "../../ApiCall/ApiCall";
+import { PostRequest } from "../../ApiCall/AxiosRequest";
 import { AxiosResponse } from "axios";
 import ErrorToster from "../../Components/MessageToggle";
 
@@ -26,22 +26,23 @@ export default function Login() {
             }))
         }
     }
+    const msg: string | null = param.get("message");
 
-    // if (param.get("status") === "400") {
-    //     const errorMessage: errorState = {
-    //         status: 400,
-    //         error: param.get("error"),
-    //         result: null
-    //     }
-    //     setError(errorMessage)
-    // }
+    useEffect(() => {
+        const messages: errorState = {
+            status: 400,
+            error: msg,
+            result: null
+        }
+        setError(messages)
+    }, [msg])
 
     const fetchData = async (): Promise<void> => {
         setLoading(true)
 
         const respone: AxiosResponse<any, any> = await PostRequest(loginData, "/auth/login");
 
-        if (respone.status != 200) {
+        if (respone.status !== 200) {
             const errorMessage: errorState = {
                 status: respone.status,
                 error: respone.data.error,
