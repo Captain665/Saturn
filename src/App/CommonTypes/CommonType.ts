@@ -9,8 +9,8 @@ export interface userInfo {
 }
 
 export interface errorState {
-    status: string;
-    error: string | null | any;
+    status: number;
+    error: string | null;
     result: string | null;
 }
 

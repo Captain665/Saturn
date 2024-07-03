@@ -55,7 +55,7 @@ export default function OrderDetails() {
         return <>
             <IsLoading isLoading={isLoading} />
 
-            {/* <Spinner isLoading={isLoading} /> */}
+            <Spinner isLoading={isLoading} />
         </>
 
 
@@ -78,7 +78,7 @@ export default function OrderDetails() {
                 />
             }
 
-            {/* {error && <ErrorToaster props={error} />} */}
+            {error && <ErrorToaster props={error} />}
 
         </>
     )

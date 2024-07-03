@@ -1,11 +1,11 @@
-import React, { createContext, useCallback, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 import { Outlet, Params, useNavigate, useParams } from "react-router";
 import TrainHtml from "./TrainDetails";
-import { PnrResponse } from "../ApiCall/PnrApi";
 import Spinner from "../Components/Spinner";
 import ErrorToster from "../Components/MessageToggle";
 import { GetSessionData, SetSessionData } from "../Components/CustomHooks";
 import { errorState, pnrResponseResult } from "../CommonTypes/CommonType";
+import { GetRequest } from "../ApiCall/ApiCall";
 
 export const PnrDetails: any = createContext("");
 
@@ -23,18 +23,17 @@ export default function TrainInfo() {
     useEffect((): void => {
         const fetchData = async (): Promise<void> => {
             setIsLoading(true)
-            const response = await PnrResponse(pnr);
-            if (response?.status === "failure") {
+            const response = await GetRequest(`/pnr/${pnr}`);
+            if (response?.status != 200) {
                 setError(response);
                 setTimeout((): void => {
                     setRedirected(true)
                     setIsLoading(false)
                 }, 4000)
-            }
-            if (response.status === "success") {
-                setTrainData(response?.result);
+            } else {
+                setTrainData(response?.data.result);
                 setIsLoading(false)
-                updatePnrDetails(response?.result)
+                updatePnrDetails(response?.data.result)
             }
         }
         fetchData();
@@ -58,10 +57,10 @@ export default function TrainInfo() {
                 <Outlet />
             </PnrDetails.Provider>
 
-            {/* <Spinner
+            <Spinner
                 isLoading={isLoading}
-            /> */}
-            {/* {error && <ErrorToster props={error} />} */}
+            />
+            {error && <ErrorToster props={error} />}
         </>
     )
 }

@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import LoginForm from "./Login.html";
 import Spinner from "../../Components/Spinner";
 import { errorState, userInfo } from "../../CommonTypes/CommonType"
-import { SetLocalData, SetSessionData } from "../../Components/CustomHooks";
+import { SetLocalData } from "../../Components/CustomHooks";
 import { PostRequest } from "../../ApiCall/ApiCall";
 import { AxiosResponse } from "axios";
+import ErrorToster from "../../Components/MessageToggle";
 
 export default function Login() {
-    const [param, setSearchParams] = useSearchParams()
+    const [param] = useSearchParams()
     const navigate = useNavigate()
 
     const [loginData, setloginData] = useState<{ mobileNumber: string; password: string }>({ mobileNumber: "", password: "" })
     const [isLoading, setLoading] = useState<boolean>(false)
+    const [error, setError] = useState<errorState>();
 
     function handleChange(event: any): void {
         const name: string = event.target.name;
@@ -25,17 +27,27 @@ export default function Login() {
         }
     }
 
+    // if (param.get("status") === "400") {
+    //     const errorMessage: errorState = {
+    //         status: 400,
+    //         error: param.get("error"),
+    //         result: null
+    //     }
+    //     setError(errorMessage)
+    // }
+
     const fetchData = async (): Promise<void> => {
         setLoading(true)
 
         const respone: AxiosResponse<any, any> = await PostRequest(loginData, "/auth/login");
 
         if (respone.status != 200) {
-            setSearchParams(param => {
-                param.set("error", respone.data.error)
-                param.set("status", JSON.stringify(respone.status))
-                return param;
-            })
+            const errorMessage: errorState = {
+                status: respone.status,
+                error: respone.data.error,
+                result: respone.data.result
+            }
+            setError(errorMessage)
         } else {
             const loginResult: userInfo = respone?.data.result;
             SetLocalData("userInfo", loginResult);
@@ -66,6 +78,7 @@ export default function Login() {
                 isLoading={isLoading}
             />
 
+            {error && <ErrorToster props={error} />}
         </>
     )
 }

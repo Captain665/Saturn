@@ -5,34 +5,37 @@ import Spinner from "../../Components/Spinner";
 import ActionDialog from "./PnrDialog"
 import { errorState, pnrResponseResult } from "../../CommonTypes/CommonType"
 import { SetSessionData } from "../../Components/CustomHooks"
-import { useSearchParams } from "react-router-dom";
-import { GetRequest, PostRequest } from "../../ApiCall/ApiCall";
+import { GetRequest } from "../../ApiCall/ApiCall";
+import ErrorToster from "../../Components/MessageToggle";
 
 
 export default function Home() {
 
     const navigate = useNavigate();
-    const [searchParam, setSearchParam] = useSearchParams();
     const [pnr, setPnr] = useState<string>('');
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [dialog, setDialog] = useState<boolean>(false);
+    const [error, setError] = useState<errorState>()
 
     const GetData = useCallback(async (pnr: string): Promise<void> => {
         setIsLoading(true)
         if (pnr === '') {
-            setSearchParam(param => {
-                param.set("error", "Please Enter PNR Number");
-                param.set("status", "400")
-                return param;
-            })
+            const errorMessage: errorState = {
+                status: 400,
+                error: "Please Enter PNR Number",
+                result: null
+            }
+            setError(errorMessage)
         } else {
             const response = await GetRequest(`/pnr/${pnr}`);
+
             if (response.status != 200) {
-                setSearchParam(param => {
-                    param.set("error", response.data.error);
-                    param.set("status", response.status)
-                    return param;
-                })
+                const errorMessage: errorState = {
+                    status: response.status,
+                    error: response.data.error,
+                    result: null
+                }
+                setError(errorMessage);
             } else {
                 const result: pnrResponseResult = response?.data.result;
                 SetSessionData("pnrDetails", result);
@@ -76,7 +79,10 @@ export default function Home() {
             <Spinner
                 isLoading={isLoading}
             />
+            {error && <ErrorToster props={error} />}
+
         </>
+
     )
 
 }

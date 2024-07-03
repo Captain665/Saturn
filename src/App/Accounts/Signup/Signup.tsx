@@ -7,6 +7,7 @@ import Spinner from "../../Components/Spinner";
 import { errorState, profileInfo, userInfo } from "../../CommonTypes/CommonType";
 import { SetLocalData } from "../../Components/CustomHooks";
 import { PostRequest } from "../../ApiCall/ApiCall";
+import ErrorToster from "../../Components/MessageToggle";
 
 export default function SignUp() {
     const navigate = useNavigate()
@@ -24,6 +25,7 @@ export default function SignUp() {
     const [isloading, setIsLoading] = useState<boolean>(false)
     const [isValidate, setIsValidate] = useState<boolean>(false);
     const [otp, setOtp] = useState<number | undefined>()
+    const [error, setError] = useState<errorState>()
 
 
     // Sign Up js
@@ -43,20 +45,21 @@ export default function SignUp() {
         const response = await PostRequest(userInfo, "/signup")
 
         if (response.status != 200) {
-            setSearchParams(param => {
-                param.set("error", response.data.error)
-                param.set("status", JSON.stringify(response.status))
-                return param;
-            })
+            const errorMessage: errorState = {
+                status: response.status,
+                error: response.data.error,
+                result: response.data.result
+            }
+            setError(errorMessage);
         } else {
-            setSearchParams(param => {
-                param.set("status", JSON.stringify(response.status))
-                param.set("message", response.data.result)
-                return param;
-            })
+            const errorMessage: errorState = {
+                status: response.status,
+                error: response.data.error,
+                result: response.data.result
+            }
+            setError(errorMessage);
             setIsValidate(true)
         }
-
         setIsLoading(false)
     }
 
@@ -121,6 +124,8 @@ export default function SignUp() {
             <Spinner
                 isLoading={isloading}
             />
+
+            {error && <ErrorToster props={error} />}
         </>
     )
 }

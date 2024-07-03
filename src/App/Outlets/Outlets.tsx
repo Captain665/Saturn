@@ -38,6 +38,9 @@ export default function OutletList() {
         SetSessionData("outletInfo", outlet);
         navigate(route)
     }
+    const backToStations = () : void => {
+        navigate(-1);
+    }
 
 
     return (
@@ -46,14 +49,13 @@ export default function OutletList() {
                 isLoading={isLoading}
                 outletData={outletData}
                 handleOnClick={handleOnClick}
+                back = {backToStations}
             />
 
-            {/* <Spinner
+            <Spinner
                 isLoading={isLoading}
-            /> */}
-            {/* {error && <ErrorToster props={error} />} */}
-
-
+            />
+            {error && <ErrorToster props={error} />}
         </>
     )
 }

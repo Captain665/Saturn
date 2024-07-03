@@ -34,6 +34,7 @@ export default function CartInfo() {
         customer: false,
         delivery: false
     })
+    const [error, setError] = useState<errorState>()
 
     const path: string = location.pathname;
 
@@ -142,11 +143,12 @@ export default function CartInfo() {
         if (subTotal >= minOrderAmount) {
             navigate("/payments")
         } else {
-            setSearchParams(param => {
-                param.set("error", "Your order amount is less than minimum order value of selected outlet")
-                param.set("status", "400")
-                return param;
-            })
+            const errormessage = {
+                status: 400,
+                error: "Your order amount is less than minimum order value of selected outlet",
+                result: null
+            }
+            setError(errormessage)
         }
     }
 
@@ -160,6 +162,9 @@ export default function CartInfo() {
             }}>
                 <CartDetails />
             </cartInfoContext.Provider>
+
+            {error && <ErrorToster props={error} />}
         </>
+
     )
 }   

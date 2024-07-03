@@ -13,7 +13,8 @@ export async function PostRequest(requestBody: any, url: string) {
             });
 }
 
-export function GetRequest(url: string) {
+
+export async function GetRequest(url: string) {
     return axios.get(url)
         .then(
             response => {

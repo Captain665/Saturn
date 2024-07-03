@@ -3,8 +3,8 @@ import { FaStar, FaChevronRight } from "react-icons/fa6";
 import NoProductExist from "../Components/EmptyPage";
 import { outletInfo } from "../CommonTypes/CommonType";
 
-function OutletHtml({ outletData, handleOnClick, isLoading }:
-    { outletData: outletInfo[]; handleOnClick: any; isLoading: boolean }) {
+function OutletHtml({ outletData, handleOnClick, isLoading, back }:
+    { outletData: outletInfo[]; handleOnClick: any; isLoading: boolean; back: any }) {
 
 
     return (
@@ -64,7 +64,10 @@ function OutletHtml({ outletData, handleOnClick, isLoading }:
                     </div>
                 </div>
                 :
-                <NoProductExist isLoading={isLoading} logo={null} />
+                <>
+                    <NoProductExist isLoading={isLoading} logo={null} />
+                </>
+
             }
 
         </>
