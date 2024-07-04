@@ -1,20 +1,20 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import LoginForm from "./Login.html";
 import Spinner from "../../Components/Spinner";
-import { errorState, userInfo } from "../../CommonTypes/CommonType"
+import { userInfo } from "../../CommonTypes/CommonType"
 import { SetLocalData } from "../../Components/CustomHooks";
-import { PostRequest } from "../../ApiCall/AxiosRequest";
-import { AxiosResponse } from "axios";
 import ErrorToster from "../../Components/MessageToggle";
+import usePostRequest from "../../ApiCall/PostRequest";
 
 export default function Login() {
+
     const [param] = useSearchParams()
     const navigate = useNavigate()
 
     const [loginData, setloginData] = useState<{ mobileNumber: string; password: string }>({ mobileNumber: "", password: "" })
-    const [isLoading, setLoading] = useState<boolean>(false)
-    const [error, setError] = useState<errorState>();
+    const { data, isLoading, error, fetch } = usePostRequest();
+    // const [errorMsg, setError] = useState<errorState>();
 
     function handleChange(event: any): void {
         const name: string = event.target.name;
@@ -26,42 +26,30 @@ export default function Login() {
             }))
         }
     }
-    const msg: string | null = param.get("message");
+    // const msg: string | null = param.get("error");
+
+    // useEffect(() => {
+    //     const messages: errorState = {
+    //         status: 400,
+    //         error: msg,
+    //         result: null
+    //     }
+    //     setError(messages)
+
+    // }, [msg])
 
     useEffect(() => {
-        const messages: errorState = {
-            status: 400,
-            error: msg,
-            result: null
-        }
-        setError(messages)
-    }, [msg])
-
-    const fetchData = async (): Promise<void> => {
-        setLoading(true)
-
-        const respone: AxiosResponse<any, any> = await PostRequest(loginData, "/auth/login");
-
-        if (respone.status !== 200) {
-            const errorMessage: errorState = {
-                status: respone.status,
-                error: respone.data.error,
-                result: respone.data.result
-            }
-            setError(errorMessage)
-        } else {
-            const loginResult: userInfo = respone?.data.result;
+        if (data) {
+            const loginResult: userInfo = data;
             SetLocalData("userInfo", loginResult);
             const path: string = param.get("redirectedTo") || "/";
             navigate(path, { replace: true })
         }
-
-        setLoading(false)
-    }
+    }, [data])
 
     const HandleSubmit = (event: any): void => {
         event.preventDefault()
-        fetchData()
+        fetch("/auth/login", loginData)
     }
 
 

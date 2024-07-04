@@ -12,13 +12,15 @@ const contextClass = {
     dark: "bg-white-600 font-gray-300",
 };
 
-function ErrorToster({ props }: { props: errorState }) {
+function ErrorToster({ props }: { props: any }) {
+
 
     useEffect(() => {
         const status: number = props.status;
+        const error = props.data.error;
 
         if (status !== 200) {
-            toast.error(props.error, { autoClose: 1000 })
+            toast.error(error, { autoClose: 1000 })
         } else {
             toast.success(props.result, { autoClose: 3000 })
         }
