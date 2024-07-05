@@ -5,7 +5,7 @@ import { userInfo } from "../CommonTypes/CommonType";
 const usePostRequest = () => {
     const [error, setError] = useState();
     const [isLoading, setLoading] = useState<boolean>(false);
-    const [data, setData] = useState<userInfo>();
+    const [data, setData] = useState<any>();
 
 
     const fetch = async (url: string, payload: any): Promise<void> => {

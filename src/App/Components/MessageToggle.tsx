@@ -2,6 +2,7 @@ import React, { memo, useEffect } from "react";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { errorState } from "../CommonTypes/CommonType";
+import { error } from "console";
 
 const contextClass = {
     success: "bg-blue-600",
@@ -14,10 +15,10 @@ const contextClass = {
 
 function ErrorToster({ props }: { props: any }) {
 
-
     useEffect(() => {
+
         const status: number = props.status;
-        const error = props.data.error;
+        const error = props.data === undefined ? props.error : props.data.error
 
         if (status !== 200) {
             toast.error(error, { autoClose: 1000 })

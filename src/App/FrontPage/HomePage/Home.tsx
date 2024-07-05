@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import HomePage from "./Home.html";
 import { useNavigate } from "react-router";
 import Spinner from "../../Components/Spinner";
@@ -7,45 +7,45 @@ import { errorState, pnrResponseResult } from "../../CommonTypes/CommonType"
 import { SetSessionData } from "../../Components/CustomHooks"
 import { GetRequest } from "../../ApiCall/AxiosRequest";
 import ErrorToster from "../../Components/MessageToggle";
+import useGetRequest from "../../ApiCall/GetRequest";
 
 
 export default function Home() {
 
     const navigate = useNavigate();
     const [pnr, setPnr] = useState<string>('');
-    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [dialog, setDialog] = useState<boolean>(false);
-    const [error, setError] = useState<errorState>()
+    const [errorMsg, setError] = useState<errorState>()
+    const { data, isLoading, error, fetch } = useGetRequest();
 
-    const GetData = useCallback(async (pnr: string): Promise<void> => {
-        setIsLoading(true)
-        if (pnr === '') {
-            const errorMessage: errorState = {
+    const GetData = useCallback((pnr: string) => {
+
+        if (pnr !== '') {
+            fetch(`/pnr/${pnr}`);
+        } else {
+            const errorMessage = {
                 status: 400,
                 error: "Please Enter PNR Number",
                 result: null
             }
             setError(errorMessage)
-        } else {
-            const response = await GetRequest(`/pnr/${pnr}`);
-
-            if (response.status !== 200) {
-                const errorMessage: errorState = {
-                    status: response.status,
-                    error: response.data.error,
-                    result: null
-                }
-                setError(errorMessage);
-            } else {
-                const result: pnrResponseResult = response?.data.result;
-                SetSessionData("pnrDetails", result);
-                SetSessionData("pnr", pnr);
-                const route: string = pnr + "/stations";
-                navigate(route, { state: { result } });
-            }
         }
-        setIsLoading(false)
     }, [])
+
+    useEffect(() => {
+
+        if (data) {
+            SetSessionData("pnrDetails", data);
+            SetSessionData("pnr", pnr);
+            const route: string = pnr + "/stations";
+            navigate(route, { state: { data } });
+        }
+
+        if (error) {
+            setError(error)
+        }
+
+    }, [data, error])
 
     const handleOnChange = (event: any): void => {
         const value: string = event.target.value
@@ -79,7 +79,7 @@ export default function Home() {
             <Spinner
                 isLoading={isLoading}
             />
-            {error && <ErrorToster props={error} />}
+            {errorMsg && <ErrorToster props={errorMsg} />}
 
         </>
 
