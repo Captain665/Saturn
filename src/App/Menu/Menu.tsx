@@ -3,13 +3,13 @@ import { Params, useNavigate, useParams } from "react-router";
 import MenuList from "./MenuList";
 import OutletInfo from "./OutletInfo";
 import CartInfo from "./CartInfo";
-import { MenuResponse } from "../ApiCall/MenuApi";
 import Spinner from "../Components/Spinner";
 import WarningDialog from "./WarningDialog";
 import Filters from "./Filters";
 import ErrorToster from "../Components/MessageToggle";
 import { GetSessionData, SetSessionData } from "../Components/CustomHooks";
 import { errorState, menuInfo, orderItems, outletInfo } from "../CommonTypes/CommonType";
+import useGetRequest from "../ApiCall/GetRequest";
 
 export default function MenuItem() {
 
@@ -19,31 +19,33 @@ export default function MenuItem() {
     const [selectedOutletInfo] = useState<outletInfo>(GetSessionData("outletInfo"));
     const outlet: outletInfo = GetSessionData("cartOutlet");
     const pnr: string = GetSessionData("pnr");
+    const { data, isLoading, error, fetch } = useGetRequest()
 
     const [orderItems, setOrderItems] = useState<orderItems[] | []>(GetSessionData("selectedItemInfo") ?? []);
     const [menuList, setMenuList] = useState<menuInfo[] | []>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(false)
     const [warningDialog, setWarningDialog] = useState<boolean>(false)
     const [filters, setFilters] = useState<{ isVeg: string | null, amountSort: string | null }>({ isVeg: "", amountSort: "" })
 
     const orderItemsCount: number = orderItems?.length;
-    const [error, setError] = useState<errorState>();
+    const [errorMsg, setError] = useState<errorState>();
 
     useEffect((): void => {
-        const fetchData = async (): Promise<void> => {
-            setIsLoading(true)
-            const response = await MenuResponse(id);
-            if (response?.status === "success") {
-                const itemList: menuInfo[] = response?.result;
-                setMenuList(itemList)
-                setIsLoading(false)
-            } else {
-                setMenuList([])
-                setIsLoading(false)
-            }
-        }
-        fetchData()
+
+        fetch(`/outlet/${id}/menu`);
+
     }, [code, id])
+
+    useEffect(() => {
+        if (data) {
+            setMenuList(data);
+        } else {
+            setMenuList([])
+        }
+        if (error) {
+            setError(error)
+        }
+
+    }, [data, error])
 
     useEffect((): void => {
         SetSessionData("selectedItemInfo", orderItems)
@@ -104,7 +106,6 @@ export default function MenuItem() {
         const minOrdeAmount: number = outlet?.minOrderValue;
         let itemAmount = 0;
         orderItems.forEach(item => itemAmount += (item.basePrice * item.quantity))
-        // const itemAmount: number = parseInt(orderItems?.reduce((a: any, b: any) => a + (b.basePrice * b.quantity), 0).toFixed(2));
         if (itemAmount >= minOrdeAmount) {
             navigate("/cart")
         } else {
@@ -165,14 +166,6 @@ export default function MenuItem() {
         ? menuList.filter(veg => veg.isVegeterian === (filters.isVeg === "veg") ? true : false)
         : menuList;
 
-
-    // const menuItemList2: menuInfo[] = filters?.amountSort ?
-    //     (filters.amountSort === "hightoLow" ?
-    //         VegList.toSorted((a: menuInfo, b: menuInfo) => b.basePrice - a.basePrice)
-    //         : VegList.toSorted((a: menuInfo, b: menuInfo) => a.basePrice - b.basePrice)
-    //     )
-    //     : VegList
-
     const menuItemList: menuInfo[] = filters?.amountSort ?
         (filters.amountSort === "hightoLow" ?
             VegList.slice().sort((a: menuInfo, b: menuInfo) => b.basePrice - a.basePrice)
@@ -217,7 +210,7 @@ export default function MenuItem() {
                 outlet={outlet} />
                 : null
             }
-            {error && <ErrorToster props={error} />}
+            {errorMsg && <ErrorToster props={errorMsg} />}
         </>
     )
 }
