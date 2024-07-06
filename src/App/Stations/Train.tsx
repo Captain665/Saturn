@@ -1,11 +1,10 @@
-import { createContext, useCallback, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { Outlet, Params, useNavigate, useParams } from "react-router";
 import TrainHtml from "./TrainDetails";
 import Spinner from "../Components/Spinner";
 import ErrorToster from "../Components/MessageToggle";
 import { GetSessionData, SetSessionData } from "../Components/CustomHooks";
 import { errorState, pnrResponseResult } from "../CommonTypes/CommonType";
-import { GetRequest } from "../ApiCall/AxiosRequest";
 import useGetRequest from "../ApiCall/GetRequest";
 
 export const PnrDetails: any = createContext("");
