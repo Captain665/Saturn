@@ -6,6 +6,7 @@ import ErrorToster from "../Components/MessageToggle";
 import { GetSessionData, SetSessionData } from "../Components/CustomHooks";
 import { errorState, pnrResponseResult } from "../CommonTypes/CommonType";
 import { GetRequest } from "../ApiCall/AxiosRequest";
+import useGetRequest from "../ApiCall/GetRequest";
 
 export const PnrDetails: any = createContext("");
 
@@ -15,37 +16,28 @@ export default function TrainInfo() {
     const navigate = useNavigate()
 
     const [train, setTrainData] = useState<pnrResponseResult>(GetSessionData("pnrDetails") ?? []);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [error, setError] = useState<errorState>();
-    const [redirected, setRedirected] = useState<boolean>(false);
-
+    const [errorMsg, setError] = useState<errorState>();
+    const { data, isLoading, error, fetch } = useGetRequest();
 
     useEffect((): void => {
-        const fetchData = async (): Promise<void> => {
-            setIsLoading(true)
-            const response = await GetRequest(`/pnr/${pnr}`);
-            if (response?.status !== 200) {
-                setError(response);
-                setTimeout((): void => {
-                    setRedirected(true)
-                    setIsLoading(false)
-                }, 4000)
-            } else {
-                setTrainData(response?.data.result);
-                setIsLoading(false)
-                updatePnrDetails(response?.data.result)
-            }
-        }
-        fetchData();
+
+        fetch(`/pnr/${pnr}`)
+
     }, [pnr])
 
-    const updatePnrDetails = useCallback((train: pnrResponseResult): void => {
-        SetSessionData("pnrDetails", train)
-    }, [])
-
-    if (redirected) {
-        navigate("/")
-    }
+    useEffect(() => {
+        if (data) {
+            setTrainData(data)
+            SetSessionData("pnrDetails", data)
+            SetSessionData("pnr", pnr)
+        }
+        if (error) {
+            setError(error)
+            setTimeout(() => {
+                navigate("/")
+            }, 2000)
+        }
+    }, [data, error])
 
     return (
         <>
@@ -60,7 +52,7 @@ export default function TrainInfo() {
             <Spinner
                 isLoading={isLoading}
             />
-            {error && <ErrorToster props={error} />}
+            {errorMsg && <ErrorToster props={errorMsg} />}
         </>
     )
 }

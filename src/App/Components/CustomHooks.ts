@@ -18,7 +18,7 @@ export function GetSessionData(getSessionItem: string): any {
     return sessionData;
 }
 
-export function SetSessionData(setSessionItemName: string, setSessionItemValue: string | object): void {
+export function SetSessionData(setSessionItemName: string, setSessionItemValue: any): void {
     const data = JSON.stringify(setSessionItemValue);
     window.sessionStorage.setItem(setSessionItemName, data);
 }

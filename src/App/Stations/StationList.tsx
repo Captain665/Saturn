@@ -41,9 +41,9 @@ function StationData({ stations, handleOnClick }: { stations: Station[], handleO
             </div>
 
             {stations?.map(station => (
-                <div className={`shadow-lg w-11/12 md:w-1/2 content-center self-center h-28 px-4 bg-white border m-1 rounded-md md:h-36 cursor-pointer`}>
+                <div className={`${!station.serviceable ? "shadow-none" : "shadow-lg"} w-11/12 md:w-1/2 content-center self-center h-28 px-4 bg-white border m-1 rounded-md md:h-34 cursor-pointer`}>
                     <ul key={station?.code} onClick={() => stationClicked(station)}
-                        className={`flex justify-between md:mb-4 mb-3 ${!station.serviceable ? "opacity-60" : null}`}>
+                        className={`flex justify-between md:mb-4 mb-2 ${!station.serviceable ? "opacity-60" : null}`}>
                         <ul className="self-center text-start text-sm md:text-base">
                             <li className="font-bold text-base md:text-xl">{station?.name}<span className="ml-1 font-normal text-xs md:text-base">{station?.code}</span></li>
                             <li>{TrainTiming(station?.delayArrival)}</li>
@@ -65,7 +65,7 @@ function StationData({ stations, handleOnClick }: { stations: Station[], handleO
                     {station.message && <p className="text-center text-xs md:-mb-5 -mb-3 content-end self-end align-bottom text-red-600 line-clamp-1">
                         {station.message}
                     </p>}
-                </div>  
+                </div>
             ))}
         </div>
             <br />
