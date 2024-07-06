@@ -130,7 +130,6 @@ export default function CartInfo() {
 
 
     if (itemSize < 1) {
-        console.log(itemSize)
         const url: string = "https://iticsystem.com/img/empty-cart.png"
         return <NoProductExist isLoading={isLoading} logo={url} />
     }

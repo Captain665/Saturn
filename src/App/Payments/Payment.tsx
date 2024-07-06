@@ -7,7 +7,8 @@ import Spinner from "../Components/Spinner";
 import ErrorToster from "../Components/MessageToggle";
 import IsLoading from "../Components/Loading";
 import { GetLocalData, GetSessionData } from "../Components/CustomHooks";
-import { SeatInfo, Station, TrainInfo, errorState, orderItems, outletInfo, paymentOptions, userInfo } from "../CommonTypes/CommonType";
+import { SeatInfo, Station, TrainInfo, orderItems, outletInfo, paymentOptions, userInfo } from "../CommonTypes/CommonType";
+import useGetRequest from "../ApiCall/GetRequest";
 
 
 
@@ -16,6 +17,7 @@ export default function Payments() {
     const navigate = useNavigate()
     const location = useLocation()
     const path: string = location.pathname;
+    const { data, isLoading, error, fetch } = useGetRequest();
 
     const outletInfo: outletInfo = GetSessionData("outletInfo");
     const stationInfo: Station = GetSessionData("selectedStation");
@@ -27,13 +29,10 @@ export default function Payments() {
 
     const [paymentOption, setPaymentOption] = useState<paymentOptions | undefined>();
     const [paymentSelection, setPaymentSelection] = useState<string>("")
-    const [isLoading, setIsLoading] = useState<boolean>(false)
-    const [error, setError] = useState<errorState>();
 
 
     let subTotal: number = 0;
     itemInfo.forEach(item => subTotal += (item.basePrice * item.quantity));
-    // const subTotal = JSON.parse(itemInfo?.reduce((a, b) => a + (b.basePrice * b.quantity), 0).toFixed(2))
     const taxes: number = JSON.parse((subTotal * 0.05).toFixed(2))
     const deliveryCharge: number = outletInfo?.deliveryCost;
     const payable: number = Math.round(subTotal + taxes + deliveryCharge)
@@ -49,60 +48,50 @@ export default function Payments() {
 
     const device: string = isMobile ? "Mobile Web" : "Desktop Web"
 
-    const createOrder = async (): Promise<void> => {
-        setIsLoading(() => true)
-        const paymentType: string = paymentSelection === "Pay on Delivery" ? "CASH" : paymentSelection;
-        const response = await CreateOrderResponse(trainInfo,
-            stationInfo, seatInfo, outletInfo, userInfo, itemInfo, pnr, paymentType, device);
-        const status: string = response.status;
-        if (status === "success") {
-            sessionStorage.clear();
-            const orderId: number = response?.result?.id;
-            const path: string = "/order/" + orderId + "?type=new"
-            navigate(path)
-            setIsLoading(false)
-        } else {
-            setError(response)
-            setIsLoading(false)
-        }
-    }
+    const createOrder =
 
-    if (error?.error === "Not authorize to Access") {
+        async (): Promise<void> => {
+            // setIsLoading(() => true)
+            const paymentType: string = paymentSelection === "Pay on Delivery" ? "CASH" : paymentSelection;
+            const response = await CreateOrderResponse(trainInfo,
+                stationInfo, seatInfo, outletInfo, userInfo, itemInfo, pnr, paymentType, device);
+            const status: string = response.status;
+            if (status === "success") {
+                sessionStorage.clear();
+                const orderId: number = response?.result?.id;
+                const path: string = "/order/" + orderId + "?type=new"
+                navigate(path)
+                // setIsLoading(false)
+            } else {
+                // setError(response)
+                // setIsLoading(false)
+            }
+        }
+
+    if (error) {
         localStorage.clear();
         const pathName: string = `/login?redirectedTo=${path}&message=You must log in first.`
         navigate(pathName)
     }
 
     useEffect((): void => {
-        const fetchPaymentDetails = async (): Promise<void> => {
-            setIsLoading(true)
-            const url: string = "/payment/available"
-            const payload = {
-                method: "GET",
-                headers: {
-                    "Authorization": userInfo?.jwt,
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
 
-                }
-            }
-            const response = await fetch(url, payload);
-            const data = await response.json();
-            if (response.ok) {
-                setPaymentOption(data.result);
-            } else {
-                setError(data)
-            }
-            setIsLoading(false)
-        }
-        fetchPaymentDetails();
+        fetch("/payment/available")
+
     }, [])
+
+    useEffect(() => {
+        if (data) {
+            setPaymentOption(data)
+        }
+    }, [data, error])
+
 
     if (isLoading) {
         return <>
             <IsLoading isLoading={isLoading} />
 
-            {/* <Spinner isLoading={isLoading} /> */}
+            <Spinner isLoading={isLoading} />
         </>
     }
 
@@ -119,9 +108,9 @@ export default function Payments() {
                 totalItem={itemInfo?.length}
                 paymentOption={paymentOption}
             />
-            {/* {isLoading && <Spinner isLoading={isLoading} />} */}
+            {isLoading && <Spinner isLoading={isLoading} />}
 
-            {/* {error && <ErrorToster props={error} />} */}
+            {error && <ErrorToster props={error} />}
 
         </>
     )
