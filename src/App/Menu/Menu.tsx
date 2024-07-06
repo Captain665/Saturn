@@ -182,11 +182,11 @@ export default function MenuItem() {
                 backToOutlet={backToOutlet}
             />
 
-            <Filters
+            {menuItemList.length !== 0 && <Filters
                 vegFilter={applyVegFilter}
                 priceFilter={applyPriceFilter}
                 active={filters}
-            />
+            />}
 
             <MenuList
                 menuList={menuItemList}
