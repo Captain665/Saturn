@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import SignupData from "./Signup.html";
 import { useNavigate } from "react-router";
 import ValidateHtml from "./Validate.html";
 import { useSearchParams } from "react-router-dom";
 import Spinner from "../../Components/Spinner";
-import { errorState, profileInfo, userInfo } from "../../CommonTypes/CommonType";
+import { profileInfo } from "../../CommonTypes/CommonType";
 import { SetLocalData } from "../../Components/CustomHooks";
-import { PostRequest } from "../../ApiCall/AxiosRequest";
 import ErrorToster from "../../Components/MessageToggle";
+import usePostRequest from "../../ApiCall/PostRequest";
 
 export default function SignUp() {
     const navigate = useNavigate()
-    const [params, setSearchParams] = useSearchParams()
+    const [params] = useSearchParams()
+    const { data, isLoading, error, fetch } = usePostRequest();
 
 
     const [userInfo, setUserInfo] = useState<profileInfo>({
@@ -22,10 +23,9 @@ export default function SignUp() {
         gender: ""
     });
 
-    const [isloading, setIsLoading] = useState<boolean>(false)
     const [isValidate, setIsValidate] = useState<boolean>(false);
     const [otp, setOtp] = useState<number | undefined>()
-    const [error, setError] = useState<errorState>()
+    const [errorMsg, setError] = useState<any>();
 
 
     // Sign Up js
@@ -39,33 +39,30 @@ export default function SignUp() {
         }))
     }
 
+    useEffect(() => {
 
-    const fetchSignUp = async (): Promise<void> => {
-        setIsLoading(true)
-        const response = await PostRequest(userInfo, "/signup")
-
-        if (response.status !== 200) {
-            const errorMessage: errorState = {
-                status: response.status,
-                error: response.data.error,
-                result: response.data.result
+        if (data === "Otp sent to the Register Email Id") {
+            const message = {
+                status: 200,
+                error: null,
+                result: data
             }
-            setError(errorMessage);
-        } else {
-            const errorMessage: errorState = {
-                status: response.status,
-                error: response.data.error,
-                result: response.data.result
-            }
-            setError(errorMessage);
+            setError(message)
             setIsValidate(true)
         }
-        setIsLoading(false)
-    }
+        else if (data) {
+            SetLocalData("userInfo", data)
+            const path: string = params.get("redirectedTo") || "/"
+            navigate(path, { replace: true })
+        }
+        if (error) {
+            setError(error)
+        }
+    }, [data, error])
 
     function handleSignupSubmit(event: any): void {
         event.preventDefault()
-        fetchSignUp()
+        fetch("/signup", userInfo);
     }
 
     // otp validate js
@@ -74,32 +71,13 @@ export default function SignUp() {
         setOtp(event.target.value)
     }
 
-    const fetchOtp = async (): Promise<void> => {
-        setIsLoading(true)
+    function handleOtpSubmit(event: any): void {
+        event.preventDefault()
         const payload = {
             mobileNumber: userInfo?.mobileNumber,
             otp: otp
         }
-        const response = await PostRequest(payload, "/otp-validate")
-
-        if (response.status !== 201) {
-            setSearchParams(param => {
-                param.set("error", response.data.error)
-                param.set("status", JSON.stringify(response.status))
-                return param;
-            })
-        } else {
-            const data: userInfo = response?.data.result;
-            SetLocalData("userInfo", data)
-            const path: string = params.get("redirectedTo") || "/"
-            navigate(path, { replace: true })
-        }
-        setIsLoading(false)
-    }
-
-    function handleOtpSubmit(event: any): void {
-        event.preventDefault()
-        fetchOtp()
+        fetch("/otp-validate", payload)
     }
 
     return (
@@ -111,21 +89,21 @@ export default function SignUp() {
                     emailId={userInfo?.emailId}
                     otp={otp}
                     redirectedTo={params.get("redirectedTo")}
-                    isLoading={isloading}
+                    isLoading={isLoading}
                 />
                 : <SignupData
                     userInfo={userInfo}
                     handleSubmit={handleSignupSubmit}
                     handleOnChange={handleSignupOnChange}
                     redirectedTo={params.get("redirectedTo")}
-                    isloading={isloading}
+                    isloading={isLoading}
                 />
             }
             <Spinner
-                isLoading={isloading}
+                isLoading={isLoading}
             />
 
-            {error && <ErrorToster props={error} />}
+            {errorMsg && <ErrorToster props={errorMsg} />}
         </>
     )
 }

@@ -17,13 +17,14 @@ function ErrorToster({ props }: { props: any }) {
 
     useEffect(() => {
 
-        const status: number = props.status;
-        const error = props.data === undefined ? props.error : props.data.error
+        const status: number = props?.status;
+        const error = props?.data === undefined ? props?.error : props?.data?.error
+        const success = props?.result;
 
         if (status !== 200) {
             toast.error(error, { autoClose: 1000 })
         } else {
-            toast.success(props.result, { autoClose: 3000 })
+            toast.success(success, { autoClose: 2000 })
         }
 
     }, [props])
