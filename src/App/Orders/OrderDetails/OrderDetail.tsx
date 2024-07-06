@@ -1,15 +1,15 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { NavigateFunction, Params, useNavigate, useParams } from "react-router";
 import OrderInfo from "./OrderInfo";
-import { OrderDetailResponse } from "../../ApiCall/OrderInfoAPI";
 import { isMobile } from "react-device-detect";
 import SuccessPlacedConfirm from "./SuccessMsg";
 import IsLoading from "../../Components/Loading";
 import { useSearchParams } from "react-router-dom";
 import Spinner from "../../Components/Spinner";
 import ErrorToaster from "../../Components/MessageToggle";
-import { GetLocalData } from "../../Components/CustomHooks";
-import { errorState, orderDetails } from "../../CommonTypes/CommonType";
+import { orderDetails } from "../../CommonTypes/CommonType";
+import useGetRequest from "../../ApiCall/GetRequest";
+import NoProductExist from "../../Components/EmptyPage";
 
 
 export default function OrderDetails() {
@@ -18,29 +18,22 @@ export default function OrderDetails() {
     const { orderId }: Readonly<Params<string>> | undefined = useParams()
     const [params, setParams] = useSearchParams();
 
-    const token: string = GetLocalData("userInfo").jwt;
+    const { data, isLoading, error, fetch } = useGetRequest();
 
-    const [isLoading, setIsLoading] = useState<boolean>(false)
     const [order, setOrder] = useState<orderDetails>();
-    const [error, setError] = useState<errorState>();
     const [isShown, setIsShown] = useState<boolean>(params.get("type") ? true : false)
 
 
 
     useEffect((): void => {
-        const fetchData = async (): Promise<void> => {
-            setIsLoading(true)
-            const response = await OrderDetailResponse(token, orderId)
-            const status: string = response.status;
-            if (status === "success") {
-                setOrder(response.result)
-            } else {
-                setError(response)
-            }
-            setIsLoading(false)
+        fetch(`/order/${orderId}`)
+    }, [orderId])
+
+    useEffect(() => {
+        if (data) {
+            setOrder(data)
         }
-        fetchData()
-    }, [orderId, token])
+    }, [data])
 
     const backToHome = (): void => {
         const path: string = isMobile ? "/orders" : "/account"
@@ -57,8 +50,10 @@ export default function OrderDetails() {
 
             <Spinner isLoading={isLoading} />
         </>
+    }
 
-
+    if (error) {
+        return <NoProductExist isLoading={isLoading} logo={null} />
     }
 
 

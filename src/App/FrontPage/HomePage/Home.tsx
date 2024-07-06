@@ -3,9 +3,8 @@ import HomePage from "./Home.html";
 import { useNavigate } from "react-router";
 import Spinner from "../../Components/Spinner";
 import ActionDialog from "./PnrDialog"
-import { errorState, pnrResponseResult } from "../../CommonTypes/CommonType"
+import { errorState } from "../../CommonTypes/CommonType"
 import { SetSessionData } from "../../Components/CustomHooks"
-import { GetRequest } from "../../ApiCall/AxiosRequest";
 import ErrorToster from "../../Components/MessageToggle";
 import useGetRequest from "../../ApiCall/GetRequest";
 

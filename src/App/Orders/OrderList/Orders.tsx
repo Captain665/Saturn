@@ -1,38 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { NavigateFunction, useNavigate } from "react-router";
 import OrderHtml from "./Orders.html";
-import { OrderListResponse } from "../../ApiCall/OrderListApi";
 import Spinner from "../../Components/Spinner";
 import IsLoading from "../../Components/Loading";
-import { GetLocalData } from "../../Components/CustomHooks";
-import { orderDetails, userInfo } from "../../CommonTypes/CommonType";
+import { orderDetails } from "../../CommonTypes/CommonType";
+import useGetRequest from "../../ApiCall/GetRequest";
+import ErrorToaster from "../../Components/MessageToggle";
+import NoProductExist from "../../Components/EmptyPage";
 
 export default function OrderList() {
     const navigate: NavigateFunction = useNavigate()
-    const userInfo: userInfo = GetLocalData("userInfo");
 
-    const auth: string = userInfo?.jwt;
-
+    const { data, isLoading, error, fetch } = useGetRequest();
     const [orderslist, setOrderList] = useState<orderDetails[]>([])
-    const [isLoading, setIsLoading] = useState<boolean>(false)
 
 
     useEffect((): void => {
-        const fetchData = async (): Promise<void> => {
-            setIsLoading(true)
-            const response = await OrderListResponse(auth)
-            if (response.status === "success") {
+        fetch("/orders")
+    }, [])
 
-            }
-
-            setOrderList(response?.result)
-            setIsLoading(false)
+    useEffect(() => {
+        if (data) {
+            setOrderList(data)
         }
-        fetchData()
-    }, [navigate, auth])
+    }, [data])
 
     function handleViewOrderDetail(order: orderDetails): void {
-        navigate("/order/" + order.id)
+        navigate("/order/" + order?.id)
     }
 
     function HandleBack(): void {
@@ -47,8 +41,10 @@ export default function OrderList() {
             <IsLoading
                 isLoading={isLoading}
             />
-
         </>
+    }
+    if (orderslist?.length === 0) {
+        return <NoProductExist isLoading={isLoading} logo={null} />
     }
 
     return (
@@ -62,6 +58,8 @@ export default function OrderList() {
             <Spinner
                 isLoading={isLoading}
             />
+            
+            {error && <ErrorToaster props={error} />}
         </>
     )
 }
