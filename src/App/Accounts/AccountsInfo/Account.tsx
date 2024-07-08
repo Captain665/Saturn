@@ -23,13 +23,13 @@ export default function Account() {
     }, [info, path, navigate])
 
 
-    const LogOut = () => {
+    const LogOut = (): void => {
         localStorage.clear();
         navigate("/")
         window.location.reload()
     }
 
-    function HandleOnClick(value: string): void {
+    const HandleOnClick = (value: string): void => {
         setData(value)
     }
 

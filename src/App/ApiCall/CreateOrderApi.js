@@ -1,5 +1,6 @@
 
-export async function CreateOrderResponse(trainInfo, stationInfo, seatInfo, outletInfo, userInfo, itemList, pnr, paymentSelection, device) {
+export async function CreateOrderResponse(trainInfo, stationInfo, seatInfo, outletInfo,
+    userInfo, itemList, pnr, paymentSelection, device) {
 
 
     const deliveryDate = stationInfo?.departure === "--" ? stationInfo?.arrival : stationInfo?.departure;

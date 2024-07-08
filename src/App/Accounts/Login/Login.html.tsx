@@ -6,8 +6,8 @@ import { ImSpinner2 } from "react-icons/im";
 
 export default function LoginForm({ isLoading, handleChange, HandleSubmit, loginData, redirectedTo }: {
     isLoading: boolean;
-    handleChange: any;
-    HandleSubmit: any;
+    handleChange: React.ChangeEventHandler<HTMLInputElement>;
+    HandleSubmit: React.FormEventHandler<HTMLFormElement>;
     loginData: {
         mobileNumber: string;
         password: string

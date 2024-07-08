@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import ValidateHtml from "./Validate.html";
 import { useSearchParams } from "react-router-dom";
 import Spinner from "../../Components/Spinner";
-import { profileInfo } from "../../CommonTypes/CommonType";
+import { errorState, profileInfo, userInfo } from "../../CommonTypes/CommonType";
 import { SetLocalData } from "../../Components/CustomHooks";
 import ErrorToster from "../../Components/MessageToggle";
 import usePostRequest from "../../ApiCall/PostRequest";
@@ -25,7 +25,7 @@ export default function SignUp() {
 
     const [isValidate, setIsValidate] = useState<boolean>(false);
     const [otp, setOtp] = useState<number | undefined>()
-    const [errorMsg, setError] = useState<any>();
+    const [errorMsg, setError] = useState<errorState>();
 
 
     // Sign Up js
@@ -39,10 +39,10 @@ export default function SignUp() {
         }))
     }
 
-    useEffect(() => {
+    useEffect((): void => {
 
         if (data === "Otp sent to the Register Email Id") {
-            const message = {
+            const message: errorState = {
                 status: 200,
                 error: null,
                 result: data
@@ -51,7 +51,8 @@ export default function SignUp() {
             setIsValidate(true)
         }
         else if (data) {
-            SetLocalData("userInfo", data)
+            const userData: userInfo = data;
+            SetLocalData("userInfo", userData)
             const path: string = params.get("redirectedTo") || "/"
             navigate(path, { replace: true })
         }
@@ -73,7 +74,9 @@ export default function SignUp() {
 
     function handleOtpSubmit(event: any): void {
         event.preventDefault()
-        const payload = {
+        const payload: {
+            mobileNumber: string; otp: number | undefined
+        } = {
             mobileNumber: userInfo?.mobileNumber,
             otp: otp
         }

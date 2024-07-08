@@ -4,8 +4,8 @@ import { FaEnvelope, FaKey } from "react-icons/fa6";
 import { ImSpinner2 } from "react-icons/im";
 
 export default function ValidateHtml({ handleOtpChange, handleOtpSubmit, isLoading, emailId, otp, redirectedTo }: {
-    handleOtpChange: any;
-    handleOtpSubmit: any;
+    handleOtpChange: React.ChangeEventHandler<HTMLInputElement>;
+    handleOtpSubmit: React.FormEventHandler<HTMLFormElement>;
     isLoading: boolean;
     emailId: string;
     otp: number | undefined;
@@ -14,7 +14,7 @@ export default function ValidateHtml({ handleOtpChange, handleOtpSubmit, isLoadi
 
     const path: string = redirectedTo ? `/login?redirectedTo=${redirectedTo}` : "/login"
 
-    return (    
+    return (
         <>
             <form
                 className="border md:p-10 p-5 md:px-12 px-6 flex flex-col justify-center w-fit m-auto mt-20

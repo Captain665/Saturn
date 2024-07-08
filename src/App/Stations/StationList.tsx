@@ -41,7 +41,7 @@ function StationData({ stations, handleOnClick }: { stations: Station[], handleO
             </div>
 
             {stations?.map(station => (
-                <div className={`${!station.serviceable ? "shadow-none" : "shadow-lg"} w-11/12 md:w-1/2 content-center self-center h-28 px-4 bg-white border m-1 rounded-md md:h-34 cursor-pointer`}>
+                <div className={`${!station.serviceable ? "shadow-none" : "shadow-lg"} w-11/12 md:w-1/2 content-center self-center h-28 px-4 bg-white border m-1 rounded-md md:h-36 cursor-pointer`}>
                     <ul key={station?.code} onClick={() => stationClicked(station)}
                         className={`flex justify-between md:mb-4 mb-2 ${!station.serviceable ? "opacity-60" : null}`}>
                         <ul className="self-center text-start text-sm md:text-base">

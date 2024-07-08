@@ -28,7 +28,7 @@ export default function Login() {
     }
     const msg: string | null = param.get("message");
 
-    useEffect(() => {
+    useEffect((): void => {
         const messages: errorState = {
             status: 400,
             error: msg,
@@ -38,7 +38,7 @@ export default function Login() {
 
     }, [msg])
 
-    useEffect(() => {
+    useEffect((): void => {
 
         if (data) {
             const loginResult: userInfo = data;

@@ -1,12 +1,10 @@
 import React, { memo, useEffect } from "react";
 import { ToastContainer, Zoom, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { errorState } from "../CommonTypes/CommonType";
-import { error } from "console";
 
 const contextClass = {
-    success: "bg-blue-600",
-    error: "bg-red-600",
+    success: "bg-green-100 text-green-600 font-extrabold ",
+    error: "text-red-600 bg-red-100 ",
     info: "bg-gray-600",
     warning: "bg-orange-400",
     default: "bg-indigo-600",
@@ -44,11 +42,11 @@ function ErrorToster({ props }: { props: any }) {
                 stacked={true}
                 hideProgressBar={true}
                 toastClassName={(context) =>
-                    contextClass[context?.type || "default"] + " relative flex p-0.5 rounded-md justify-between overflow-hidden"}
-                bodyClassName={() => "text-base font-white font-med block p-1 m-auto text-center"}
+                    contextClass[context?.type || "default"] + "m-auto p-0.5 rounded overflow-hidden shadow-lg"}
+                bodyClassName={() => "text-base font-white font-base block p-0.5 m-auto text-center"}   
             />
         </div>
-    )
+    )   
 
 }
 

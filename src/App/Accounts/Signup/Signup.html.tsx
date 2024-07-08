@@ -6,8 +6,8 @@ import { profileInfo } from "../../CommonTypes/CommonType";
 
 export default function SignupData({ userInfo, handleSubmit, handleOnChange, isloading, redirectedTo }: {
     userInfo: profileInfo;
-    handleSubmit: any;
-    handleOnChange: any;
+    handleSubmit: React.FormEventHandler<HTMLFormElement>;
+    handleOnChange: React.ChangeEventHandler<any>;
     isloading: boolean;
     redirectedTo: string | null;
 }) {
