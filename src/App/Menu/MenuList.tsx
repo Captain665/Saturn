@@ -27,17 +27,20 @@ function MenuList({ menuList, orderItems, addItem, removeItem, isLoading }: {
                                         <li className="pt-2 text-lg font-medium line-clamp-1">{menuItem.name}</li>
                                         <li className="text-sm font-thin opacity-90 pl-1 line-clamp-2">{menuItem.description}</li>
                                         <li>&#x20B9; {menuItem.basePrice}</li>
-                                        <ul className="border-2 w-2/4 p-0.5 rounded-lg float-end align-bottom border-primary-green inline-flex justify-center">
-                                            {
-                                                (orderItems?.find(item => item.itemId === menuItem.id)) ?
+                                        {
+                                            (orderItems?.find(item => item.itemId === menuItem.id)) ?
+                                                <ul className="border-2 w-2/4 p-0.5 rounded-lg float-end align-bottom border-primary-green inline-flex justify-center">
                                                     <ul className="flex flex-row items-center gap-4">
                                                         <li className="cursor-pointer" onClick={() => removeItem(menuItem?.id)} ><FaMinus className="text-xs font-extrabold" /></li>
                                                         <li>{orderItems[orderItems.findIndex(id => id.itemId === menuItem.id)].quantity}</li>
                                                         <li onClick={() => addItem(menuItem)} className="cursor-pointer"><FaPlus className="text-xs font-extrabold" /></li>
                                                     </ul>
-                                                    : <li className="cursor-pointer font-extrabold text-primary-green" onClick={() => addItem(menuItem)}>ADD</li>
-                                            }
-                                        </ul>
+                                                </ul>
+                                                :
+                                                <ul className="border-2 w-2/4 p-0.5 rounded-lg float-end align-bottom border-primary-green inline-flex justify-center" onClick={() => addItem(menuItem)}>
+                                                    <li className="cursor-pointer font-extrabold text-primary-green">ADD</li>
+                                                </ul>
+                                        }
                                     </div>
                                 </ul>
                             </div>

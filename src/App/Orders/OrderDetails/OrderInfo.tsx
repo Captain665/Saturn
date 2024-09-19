@@ -60,7 +60,7 @@ function OrderInfo({ order, backToHome }: { order: orderDetails; backToHome: any
                 </ul>
 
                 <ul className="flex md:flex-row flex-col gap-2 m-2">
-                    <ul className="md:flex md:flex-row grid grid-cols-3 md:w-4/6 w-full justify-between p-2 bg-white md:border rounded-md gap-2">
+                    <ul className="md:flex shadow md:flex-row grid grid-cols-3 md:w-4/6 w-full justify-between p-2 bg-white md:border rounded-md gap-2">
                         <ul>
                             <li className="opacity-50 font-extrabold">Order ID</li>
                             <li className="font-bold">#{order?.id}</li>
@@ -84,14 +84,14 @@ function OrderInfo({ order, backToHome }: { order: orderDetails; backToHome: any
                             <li className={`${orderStatus(order?.status) === "green" ? "bg-green-600" : "bg-red-600"} font-extrabold px-1 rounded text-white w-fit`}>{order?.status}</li>
                         </ul>
                     </ul>
-                    <ul className="w-2/6 p-2 bg-white rounded-md border md:flex hidden justify-center items-center">
+                    <ul className="w-2/6 p-2 shadow bg-white rounded-md border md:flex hidden justify-center items-center">
                         <li className="font-bold text-lg">Order Summary</li>
                     </ul>
                 </ul>
 
                 <ul className="flex md:flex-row flex-col gap-2 mt-5">
-                    <ul className="md:w-4/6 w-full p-2 bg-white">
-                        <ul className="flex justify-between px-1 border-b-2 border-b-black border-opacity-60 md:text-base text-xs" >
+                    <ul className="md:w-4/6 w-full p-2 bg-white shadow-md">
+                        <ul className="flex justify-between px-1 shadow border-b-2 border-b-black border-opacity-60 md:text-base text-xs" >
                             <ul className="md:w-4/6 w-3/5">
                                 <li className="opacity-50 font-extrabold">Ordered Items</li>
                             </ul>
@@ -103,7 +103,7 @@ function OrderInfo({ order, backToHome }: { order: orderDetails; backToHome: any
                         </ul>
                         <div className="">
                             {order && order?.orderItems?.map((itemData) => (
-                                <ul className="flex justify-between border md:p-5 p-3 mt-2 items-center" key={itemData.id}>
+                                <ul className="flex justify-between border md:p-5 p-3 mt-2 items-center shadow" key={itemData.id}>
                                     <ul className="md:w-4/6 mt-2 w-3/5">
                                         <img src={itemData.veg ? "/veg.png" : "/nonveg.png"} alt="item logo" className="md:w-3 w-2" />
                                         <li className="md:text-lg">{itemData.itemName}</li>
@@ -143,8 +143,8 @@ function OrderInfo({ order, backToHome }: { order: orderDetails; backToHome: any
                         </ul>
                     </ul>
 
-                    <ul className="md:w-2/6 w-full p-2 bg-white flex md:border flex-col h-fit mt-10">
-                        <ul>
+                    <ul className="md:w-2/6 w-full p-2 bg-white flex md:border flex-col h-fit mt-10 shadow">
+                        <ul className="">
                             <ul className="flex items-center justify-between px-2 border-b-2 cursor-pointer" onClick={customer}>
                                 <li className="font-bold md:text-lg">User</li>
                                 <li>{detailShown.customer ? <FaChevronUp /> : <FaChevronDown />}</li>

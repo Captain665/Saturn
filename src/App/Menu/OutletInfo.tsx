@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { FaStar, FaArrowLeft, FaPersonBiking } from "react-icons/fa6";
+import { FaStar, FaArrowLeft, FaPersonBiking, FaBuilding } from "react-icons/fa6";
 import { outletInfo } from "../CommonTypes/CommonType";
 
 
@@ -32,9 +32,9 @@ function OutletInfo({ outletInfo, backToOutlet }: {
 
                 <li className=" truncate">{outletInfo?.tags}</li>
 
-                <ul className="flex gap-3">
-                    <li className="text-gray-500">•</li>
-                    <li className="font-bold">Outlet</li>
+                <ul className="flex gap-2 items-center">
+                    <li className=""><FaBuilding /></li>
+                    {/* <li className="font-bold"></li> */}
                     <li className="text-gray-500">{outletInfo?.stationCode}</li>
                 </ul>
 
